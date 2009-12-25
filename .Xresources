@@ -1,0 +1,30 @@
+! see "font5" in /etc/X11/app-defaults/XTerm
+*font                       : -*-fixed-medium-r-*-*-15-*-*-*-*-*-*-*
+
+! make Xft fonts beautiful on LCD monitors
+Xft.dpi                     : 100
+Xft.hinting                 : true
+Xft.hintstyle               : hintfull
+
+!-------------------------------------------------------------------------------
+! XTerm
+!-------------------------------------------------------------------------------
+
+! interaction
+XTerm*vt100.metaSendsEscape : True
+XTerm*vt100.saveLines       : 9999
+
+! appearance
+XTerm*vt100.faceName        : Monospace:pixelsize=15
+XTerm*vt100.showBlinkAsBold : True
+XTerm*vt100.colorBDMode     : True
+XTerm*vt100.colorULMode     : True
+XTerm*vt100.veryBoldColors  : 6
+
+! The following colors are from the Wombat color scheme for Vim:
+! http://dengmao.wordpress.com/2007/01/22/vim-color-scheme-wombat/
+XTerm*vt100.background      : #242424
+XTerm*vt100.foreground      : #f6f3e8
+XTerm*vt100.cursorColor     : #e5786d
+XTerm*vt100.colorBD         : #8ac6f2
+XTerm*vt100.colorUL         : #95e454
