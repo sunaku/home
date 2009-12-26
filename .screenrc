@@ -1,0 +1,71 @@
+# http://wiki.linuxquestions.org/wiki/Screen
+# http://xtermin.us/code/screenconfig/
+
+#------------------------------------------------------------------------------
+# appearance
+#------------------------------------------------------------------------------
+
+# skip the copyright message
+startup_message off
+
+# tab & status bar
+hardstatus lastline "%{= .w}%H %=%-w%{= BW}%n %t%{-}%+w %-= %c"
+
+# do not name tabs by default
+shelltitle ""
+
+# Support alternate screens so that, for example, when you quit out of
+# vi, the display is redrawn as it was before vi redrew the full screen.
+altscreen on
+
+# don't flash the screen
+vbell off
+
+# enable Unicode support
+defutf8 on
+
+#------------------------------------------------------------------------------
+# interaction
+#------------------------------------------------------------------------------
+
+# prefix for all screen shortcuts
+escape ^ss
+defflow off # let screen capture Control-S
+
+# switch tabs with Control-Left/Right
+bindkey "^[[1;5D" prev
+bindkey "^[[1;5C" next
+
+# only allow Shift-K to close a tab
+bind k
+bind ^k
+bind K kill
+
+# enable mouse wheel and terminal scrollbar
+termcapinfo rxvt ti@:te@
+termcapinfo rxvt 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+#------------------------------------------------------------------------------
+# tabs
+#------------------------------------------------------------------------------
+
+# start tabs in home directory
+chdir
+
+# length of scrollback buffer
+defscrollback 9999
+
+#------------------------------------------------------------------------------
+# connection
+#------------------------------------------------------------------------------
+
+# detach on hangup - if my dial-up
+# session fails, screen will simply
+# detach and let me re-attach later.
+autodetach on
+
+# continue receiving output from tabs even
+# if the terminal we are displaying on is
+# not accepting new content (because the
+# user paused it with SrollLock/Control-S)
+nonblock on
