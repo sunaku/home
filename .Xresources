@@ -1,3 +1,7 @@
+!-------------------------------------------------------------------------------
+! appearance
+!-------------------------------------------------------------------------------
+
 ! see "font5" in /etc/X11/app-defaults/XTerm
 *font                       : -*-fixed-medium-r-*-*-15-*-*-*-*-*-*-*
 
@@ -5,6 +9,11 @@
 Xft.dpi                     : 100
 Xft.hinting                 : true
 Xft.hintstyle               : hintfull
+
+! load color-specific resources for clients that have them
+#ifdef COLOR
+*customization              : -color
+#endif
 
 !-------------------------------------------------------------------------------
 ! XTerm
