@@ -10,10 +10,13 @@ Xft.dpi                     : 100
 Xft.hinting                 : true
 Xft.hintstyle               : hintfull
 
-! load color-specific resources for clients that have them
+! enable colors in native X applications
 #ifdef COLOR
 *customization              : -color
 #endif
+
+! use the Human cursor theme from Ubuntu
+Xcursor.theme               : Human
 
 !-------------------------------------------------------------------------------
 ! XTerm
