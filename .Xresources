@@ -37,3 +37,62 @@ XTerm*vt100.foreground      : #f6f3e8
 XTerm*vt100.cursorColor     : #e5786d
 XTerm*vt100.colorBD         : #8ac6f2
 XTerm*vt100.colorUL         : #95e454
+
+/*
+
+! The following colors are from the Tango color scheme in GNOME Terminal:
+! http://uwstopia.nl/blog/2006/07/tango-terminal
+XTerm*vt100.color0          : #000000
+XTerm*vt100.color1          : #CC0000
+XTerm*vt100.color2          : #4E9A06
+XTerm*vt100.color3          : #C4A000
+XTerm*vt100.color4          : #3465A4
+XTerm*vt100.color5          : #75507B
+XTerm*vt100.color6          : #06989A
+XTerm*vt100.color7          : #D3D7CF
+XTerm*vt100.color8          : #555753
+XTerm*vt100.color9          : #EF2929
+XTerm*vt100.color10         : #8AE234
+XTerm*vt100.color11         : #FCE94F
+XTerm*vt100.color12         : #729FCF
+XTerm*vt100.color13         : #AD7FA8
+XTerm*vt100.color14         : #34E2E2
+XTerm*vt100.color15         : #EEEEEC
+
+! XTerm color scheme from GNOME Terminal:
+XTerm*vt100.color0          : #000000
+XTerm*vt100.color1          : #CD0000
+XTerm*vt100.color2          : #00CD00
+XTerm*vt100.color3          : #CDCD00
+XTerm*vt100.color4          : #1E90FF
+XTerm*vt100.color5          : #CD00CD
+XTerm*vt100.color6          : #00CDCD
+XTerm*vt100.color7          : #E5E5E5
+XTerm*vt100.color8          : #4C4C4C
+XTerm*vt100.color9          : #FF0000
+XTerm*vt100.color10         : #00FF00
+XTerm*vt100.color11         : #FFFF00
+XTerm*vt100.color12         : #4682B4
+XTerm*vt100.color13         : #FF00FF
+XTerm*vt100.color14         : #00FFFF
+XTerm*vt100.color15         : #FFFFFF
+
+! Linux Console color scheme from GNOME Terminal:
+XTerm*vt100.color0          : #000000
+XTerm*vt100.color1          : #AA0000
+XTerm*vt100.color2          : #00AA00
+XTerm*vt100.color3          : #AA5500
+XTerm*vt100.color4          : #0000AA
+XTerm*vt100.color5          : #AA00AA
+XTerm*vt100.color6          : #00AAAA
+XTerm*vt100.color7          : #AAAAAA
+XTerm*vt100.color8          : #555555
+XTerm*vt100.color9          : #FF5555
+XTerm*vt100.color10         : #55FF55
+XTerm*vt100.color11         : #FFFF55
+XTerm*vt100.color12         : #5555FF
+XTerm*vt100.color13         : #FF55FF
+XTerm*vt100.color14         : #55FFFF
+XTerm*vt100.color15         : #FFFFFF
+
+*/
