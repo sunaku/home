@@ -24,6 +24,7 @@ XTerm*vt100.metaSendsEscape : True
 XTerm*vt100.saveLines       : 9999
 
 ! appearance
+XTerm*termName              : xterm-256color
 XTerm*vt100.faceName        : Monospace:pixelsize=15
 XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.colorBDMode     : True
