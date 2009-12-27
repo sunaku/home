@@ -24,6 +24,9 @@ vbell off
 # enable Unicode support
 defutf8 on
 
+# support 256 color terminals
+term screen-256color
+
 #------------------------------------------------------------------------------
 # interaction
 #------------------------------------------------------------------------------
