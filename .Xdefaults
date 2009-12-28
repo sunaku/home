@@ -44,8 +44,8 @@ XTerm*vt100.colorBD         : #8ac6f2
 XTerm*vt100.colorUL         : #95e454
 
 ! black
-XTerm*vt100.color0          : #242424
-XTerm*vt100.color8          : #242424
+XTerm*vt100.color0          : #343434
+XTerm*vt100.color8          : #343434
 
 ! red
 XTerm*vt100.color1          : #e5786d
