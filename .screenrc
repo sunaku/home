@@ -35,9 +35,13 @@ term screen-256color
 escape ^ss
 defflow off # let screen capture Control-S
 
-# switch tabs with Control-Left/Right
+# switch between tabs with Control-Left/Right
 bindkey "^[[1;5D" prev
 bindkey "^[[1;5C" next
+
+# access scrollback buffer with Control-Up/Down
+bindkey "^[[1;5A" copy
+bindkey "^[[1;5B" paste .
 
 # only allow Shift-K to close a tab
 bind k
