@@ -64,13 +64,13 @@ XTerm*vt100.color11         : khaki
 XTerm*vt100.color4          : #8ac6f2
 XTerm*vt100.color12         : #8ac6f2
 
-! magenta (blue at hue 300)
-XTerm*vt100.color5          : #f28af2
-XTerm*vt100.color13         : #f28af2
+! magenta (green at hue 300)
+XTerm*vt100.color5          : #e682e6
+XTerm*vt100.color13         : #e682e6
 
-! cyan (blue at hue 180)
-XTerm*vt100.color6          : #8af2f2
-XTerm*vt100.color14         : #8af2f2
+! cyan (green at hue 180)
+XTerm*vt100.color6          : #82e6e6
+XTerm*vt100.color14         : #82e6e6
 
 ! white
 XTerm*vt100.color7          : #f6f3e8
