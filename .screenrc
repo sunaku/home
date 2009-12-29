@@ -32,8 +32,7 @@ term screen-256color
 #-----------------------------------------------------------------------------
 
 # prefix for all screen shortcuts
-escape ^ss
-defflow off # let screen capture Control-S
+escape ^oo
 
 # switch between tabs with Control-Left/Right
 bindkey "^[[1;5D" prev
