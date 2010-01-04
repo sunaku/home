@@ -9,7 +9,7 @@
 startup_message off
 
 # tab & status bar
-hardstatus lastline "%{= .w}%H %=%-w%{= .c}%n %t%{-}%+w %-= %c"
+caption always "%{= .w}%H %=%-w%{= .c}%n %t%{-}%+w %-= %c"
 
 # do not name tabs by default
 shelltitle ""
