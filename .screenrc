@@ -25,7 +25,20 @@ vbell off
 defutf8 on
 
 # support 256 color terminals
-term screen-256color
+# http://push.cx/2008/256-color-xterms-in-ubuntu
+
+  # terminfo and termcap for nice 256 color terminal
+  # allow bold colors - necessary for some reason
+  attrcolor b ".I"
+
+  # tell screen how to set colors. AB = background, AF=foreground
+  termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+  # erase background with current bg color
+  defbce "on"
+
+  # set TERM
+  term screen-256color-bce
 
 #-----------------------------------------------------------------------------
 # interaction
