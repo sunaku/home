@@ -1,9 +1,13 @@
 #!/bin/sh
+set -x
 
 cd # start in home directory
 
-# X server
+# appearance
 xrdb -merge ~/.Xdefaults
+
+# hardware
+thunar --daemon &
 
 # encryption
 eval $(gpg-agent --daemon)
@@ -28,11 +32,12 @@ mpc || mpd &
 sonata &
 
 # window manager
-xterm -e tail -f ~/.wmii-hg/wmiirc.log &
+xterm -e tail -f ~/.wmii/wmiirc.log &
 
-while true
-do
-  wmii
+while true; do
+  # the ck-launch-session is for proper automounting of USB drives
+  # see http://bbs.archlinux.org/viewtopic.php?id=84635&p=3
+  ck-launch-session wmii
   xmessage 'Restart the Window Manager?' \
            -buttons 'Yes:1,No:0' -center \
            -default 'Yes' -timeout 30    \
