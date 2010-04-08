@@ -19,6 +19,62 @@ Xft.hintstyle               : hintfull
 Xcursor.theme               : Human
 
 !-----------------------------------------------------------------------------
+! rxvt
+!-----------------------------------------------------------------------------
+
+! interaction
+Rxvt.saveLines              : 9999
+Rxvt.scrollTtyOutput        : False
+Rxvt.scrollTtyKeypress      : True
+Rxvt.scrollWithBuffer       : True
+
+! appearance
+Rxvt.scrollBar_floating     : True
+Rxvt.scrollBar_right        : True
+Rxvt.font                   : xft:Monospace:pixelsize=15
+
+! The following colors are from the Wombat color scheme for Vim:
+! http://dengmao.wordpress.com/2007/01/22/vim-color-scheme-wombat/
+Rxvt.background             : #242424
+Rxvt.foreground             : #f6f3e8
+Rxvt.cursorColor            : #e5786d
+Rxvt.colorBD                : #8ac6f2
+Rxvt.colorUL                : #95e454
+
+! black
+Rxvt.color0                 : #343434
+Rxvt.color8                 : #343434
+
+! red
+Rxvt.color1                 : #e5786d
+Rxvt.color9                 : #e5786d
+
+! green
+Rxvt.color2                 : #cae682
+Rxvt.color10                : #cae682
+
+! yellow (from the Desert color scheme for Vim:
+!         http://fugal.net/vim/colors/desert.html)
+Rxvt.color3                 : khaki
+Rxvt.color11                : khaki
+
+! blue
+Rxvt.color4                 : #8ac6f2
+Rxvt.color12                : #8ac6f2
+
+! magenta (green at hue 300)
+Rxvt.color5                 : #e682e6
+Rxvt.color13                : #e682e6
+
+! cyan (green at hue 180)
+Rxvt.color6                 : #82e6e6
+Rxvt.color14                : #82e6e6
+
+! white
+Rxvt.color7                 : #f6f3e8
+Rxvt.color15                : #f6f3e8
+
+!-----------------------------------------------------------------------------
 ! XTerm
 !-----------------------------------------------------------------------------
 
