@@ -7,6 +7,7 @@ cd # start in home directory
 xrdb -merge ~/.Xdefaults
 
 # hardware
+left-mouse # left-handed mouse
 thunar --daemon &
 
 # encryption
