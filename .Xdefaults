@@ -36,6 +36,7 @@ Rxvt.keysym.Control-Right   : \033[1;5C
 Rxvt.scrollBar_floating     : True
 Rxvt.scrollBar_right        : True
 Rxvt.font                   : xft:Monospace:pixelsize=15
+Rxvt.termName               : xterm-256color
 
 ! The following colors are from the Wombat color scheme for Vim:
 ! http://dengmao.wordpress.com/2007/01/22/vim-color-scheme-wombat/
