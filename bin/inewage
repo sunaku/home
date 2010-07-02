@@ -1,0 +1,5 @@
+#!/bin/sh
+mplayer -vo null $(
+  curl -s 'http://inewage.com/listen.pls' |
+  sed -n 's,^File[0-9]*=,,p'
+)

@@ -1,0 +1,2 @@
+#!/bin/sh
+xrandr -o left

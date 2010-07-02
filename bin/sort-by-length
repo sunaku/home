@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+puts readlines.sort_by {|s| s.length }

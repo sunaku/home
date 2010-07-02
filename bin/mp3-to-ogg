@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+# Converts MP3 files into Ogg Vorbis files.
+# @param	...	files to be converted
+#--
+# Written in 2006 by Suraj N. Kurapati
+
+require 'tempfile'
+require 'rubygems'
+require 'mp3info'
+
+TMP_FILE = Tempfile.new($$.to_s).path
+
+ARGV.each do |src|
+  if File.file? src
+    begin
+      puts "source: #{src}" #if $DEBUG
+
+      Mp3Info.open(src) do |m|
+        dst = src.slice(0...-File.extname(src).length) << ".ogg"
+
+        # generate conversion command
+          oggenc_args = {
+            '-a' => m.tag.artist,
+            '-t' => m.tag.title,
+            '-l' => m.tag.album,
+            '-d' => m.tag.year,
+            '-N' => m.tag.tracknum,
+            '-G' => m.tag1.genre_s,
+            '-b' => m.bitrate,
+            # '-q' => 5,
+            '-o' => dst,
+          }.inject([]) do |memo, pair|
+            opt, arg = pair.map {|x| x.to_s}
+            memo.push opt, arg unless arg.empty?
+            memo
+          end << TMP_FILE
+
+        # perform conversion
+          if File.exist? dst
+            puts "- skipping source because #{dst} exists" #if $DEBUG
+          else
+            puts "- converting source into #{dst}", oggenc_args.join(' ') #if $DEBUG
+
+            if system('mpg321', src, '-w', TMP_FILE) && system('oggenc', *oggenc_args)
+              puts "- deleting source because conversion successful" #if $DEBUG
+              File.delete src
+            end
+          end
+      end
+    rescue => e
+      puts "- error: #{e}" #if $DEBUG
+    end
+  end
+end

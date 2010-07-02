@@ -1,0 +1,2 @@
+#!/bin/sh
+w3m -T text/html -dump -cols 60 "$@"

@@ -1,0 +1,12 @@
+#!/bin/sh
+# Take a video capture, in GIF format, of a single window.
+# @param	...	arguments for byzanz-record
+
+echo Select the window you want to video capture.
+byzanz-record `xwininfo | awk '
+	/Absolute upper-left X/ {x = $4}
+	/Absolute upper-left Y/ {y = $4}
+	/Width/ {w = $2}
+	/Height/ {h = $2}
+	END {print "-x", x, "-y", y, "-w", w, "-h", h}
+'` -v "$@"

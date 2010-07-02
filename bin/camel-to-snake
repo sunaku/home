@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+# Converts camelCase to snake_case in the given input.
+
+input = ARGF.read
+
+# remove the 'a' argument prefix
+input.gsub!(/\ba([A-Z])([a-z]+)/) { $1.downcase + $2 }
+
+# convert camel case to snake case
+while input.gsub!(/\b([a-z_]+)([A-Z])([a-z]+)/) { $1 + '_' + $2.downcase + $3 }
+end
+
+print input

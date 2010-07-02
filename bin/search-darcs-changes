@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+query = Regexp.new(ARGV.shift)
+
+`darcs whatsnew`.split(/^hunk /).each do |hunk|
+  head, body = hunk.split(/$/, 2)
+
+  if body =~ query
+    puts head
+  end
+end

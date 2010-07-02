@@ -1,0 +1,98 @@
+#!/usr/bin/env ruby
+# Vertically aligns columns, which are delimited (separated) by a user-defined
+# regular expression, that are present in the input given on STDIN.
+#
+# For example, the following input:
+#
+#   short text    =            foo
+#   really long text = bar
+#   wide operator  <=>  moz
+#
+# yields the following output:
+#
+#   short text        =  foo
+#   really long text  =  bar
+#   wide operator    <=> moz
+#
+#--
+# Written in 2007 by Suraj N. Kurapati
+
+Column = Struct.new :left, :delim, :right
+
+class Column
+  def to_s
+    mid = delim.empty? ? ' ' : " #{delim} "
+    left + mid + right
+  end
+end
+
+def align_columns aLines, aDelimiter, aSelector, aRejector
+  # determine columns widths
+    leftWidth  = 0
+    delimWidth = 0
+
+    cols = aLines.map do |line|
+      if line =~ aSelector and
+         line !~ aRejector and
+         line =~ /^(.*?)(#{aDelimiter})(.*?)$/o
+      then
+        left       = $1.to_s.rstrip
+        delim      = $2.to_s.strip
+        right      = $3.to_s.lstrip
+
+        leftWidth  = [leftWidth, left.length].max
+        delimWidth = [delimWidth, delim.length].max
+
+        Column.new(left, delim, right)
+      else
+        line.chomp
+      end
+    end
+
+  # equalize column widths
+    cols.each do |col|
+      if col.is_a? Column
+        col.left  = col.left.ljust(leftWidth)
+        col.delim = col.delim.center(delimWidth)
+      end
+    end
+
+  cols.join("\n")
+end
+
+
+if $0 == __FILE__
+  require 'optparse'
+  require 'rdoc/usage'
+
+  opts = OptionParser.new
+
+  opts.banner = "Usage: #{File.basename $0} [options]"
+  opts.separator ''
+
+  opts.on '-h', '--help',
+          "show this help message\n" do
+            RDoc.usage_no_exit
+            puts opts
+            exit
+          end
+
+  opts.on '-d', '--delimiter REGEXP',
+          'column delimiter',
+          "(default value: #{(delimiter = /[[:punct:]]*=[[:punct:]]*/).inspect})\n",
+          String do |delimiter| end
+
+  opts.on '-m', '--select REGEXP',
+          'only align lines that match REGEXP',
+          "(default value: #{(selector = //).inspect})\n",
+          Regexp do |selector| end
+
+  opts.on '-M', '--reject REGEXP',
+          'do not align lines that match REGEXP',
+          "(default value: #{(rejector = nil).inspect})\n",
+          Regexp do |rejector| end
+
+  opts.parse ARGV
+
+  print align_columns(STDIN.readlines, delimiter, selector, rejector)
+end

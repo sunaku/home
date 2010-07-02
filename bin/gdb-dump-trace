@@ -1,0 +1,5 @@
+#!/bin/sh
+# Dumps the full backtrace from the given GDB invocation.
+echo "bt full" > $$ &&
+trap "rm -f $$" INT TERM &&
+gdb -batch -x $$ "$@" < /dev/null

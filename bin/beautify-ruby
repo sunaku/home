@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+print ARGF.read.
+
+# put space after comma
+gsub(/(\S,)[ \t]*(\S)/, '\1 \2').
+
+# put space after single colon
+gsub(/(\w+:)[ \t]*([^:])/, '\1 \2').
+
+# put spaces around operators
+gsub(/(\S)[ \t]*([!<>=*&\|^%\/~+-]*=>?)[ \t]*(\S)/, '\1 \2 \3').
+
+# strip excess whitespace at end of lines
+gsub(/[ \t]+$/, '')

@@ -1,0 +1,37 @@
+#!/bin/sh -x
+# Somewhat secure editing via GPG encryption.
+# @param  ...  Files to securely edit.
+#--
+# Written in 2005 by Suraj N. Kurapati
+
+ENCRYPT='gpg2 --no-use-agent --encrypt --sign --armor'
+DECRYPT='gpg2 --no-use-agent --decrypt' # also verifies signature if found
+DESTROY='shred --force --zero --remove'
+EDIT='vim -n' # -n turns off swap file
+
+tmp=$$${RANDOM}${RANDOM}${RANDOM}$$
+trap "$DESTROY ${tmp}*" 0 2 15
+
+for src
+do
+  # create new source file if necessary.  this
+  # is useful when securely editing a new file
+  if ! test -e "$src"
+  then
+    touch "$src"
+    $ENCRYPT < /dev/null > "$src"
+  fi
+
+  tmp1="${tmp}-1"
+  tmp2="${tmp}-2"
+
+  echo creating temporary files: "$tmp1" and "$tmp2"
+
+  touch "$tmp1" "$tmp2"         &&
+  chmod 0600 "$tmp1" "$tmp2"    &&
+
+  $DECRYPT < "$src" > "$tmp1"   &&
+  $EDIT "$tmp1"                 &&
+  $ENCRYPT < "$tmp1" > "$tmp2"  &&
+  mv "$tmp2" "$src" # keeps source intact if we fail to encrypt our changes
+done

@@ -1,0 +1,3 @@
+#!/bin/sh
+curl -s 'http://inewage.com/happyday/php/winamp_info_mb_songlist_ez.php' |
+tail -1 | sed 's,</.*,,; s,.*>,,'

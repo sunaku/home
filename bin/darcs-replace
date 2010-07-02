@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby -w
+# Performs a Darcs token replacement on the given files or 
+# directories. Paths of affected files are printed to stdout.
+#
+# @param  .   token to search for
+# @param  .   replacement for token
+# @param  ... files & dirs to search in
+#--
+# Written in 2006 by Suraj N. Kurapati
+
+raise ArgumentError unless ARGV.length > 2
+
+token, subst = ARGV.shift, ARGV.shift
+needle = Regexp.new(token)
+targets = []
+
+
+require 'find'
+
+Find.find(*ARGV) do |f|
+  if f =~ /_darcs/
+    Find.prune
+  elsif File.file?( f ) && File.read(f) =~ needle
+    targets << f
+  end
+end
+
+
+puts targets
+system 'darcs', 'replace', token, subst, *targets

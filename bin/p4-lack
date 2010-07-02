@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# Lists all files in the current working directory that p4 doesn't know about.
+# This is analagous to:  svn status | awk '/^\?/ {print $2}'  # in Subversion
+
+everything = Dir.glob(Dir.pwd + '/**/*', File::FNM_DOTMATCH).
+             reject {|s| s =~ /\.{1,2}$/ }
+
+# do not list the ancestors of an unknown file/dir
+# (since they are already implied in the unknown's path)
+everything.reject! do |s|
+  File.directory? s and everything.select {|i| i.include? s }.length > 1
+end
+
+recognized = `p4 have ...`.gsub(/^.*\#\d+\s+-\s+/, '').split(/\n+/)
+
+unknown = everything - recognized
+puts unknown

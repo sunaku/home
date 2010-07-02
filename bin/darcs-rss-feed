@@ -1,0 +1,78 @@
+#!/usr/bin/env ruby
+# Emits an RSS feed from the current Darcs repository log to STDOUT.
+#
+# Usage: darcs-log-rss url-prefix num-entries
+#
+# url-prefix:: the published location of the current
+#              Darcs repository (expressed as a URL)
+#
+# num-entries:: the number of newest log entries you
+#               want to include in the RSS feed
+#--
+# Written in 2008 by Suraj N. Kurapati
+
+require 'time'
+require 'erb'
+include ERB::Util
+
+module Darcs
+  Entry = Struct.new :date, :author, :name, :body
+
+  def self.rss_log aRepoDir, aRepoUrl, aRepoName = nil, aNumEntries = nil
+    aRepoName ||= `darcs show repo --repodir=#{aRepoDir}`[%r{Root:.*/(\S+)}]
+
+    cmd = "darcs changes --repodir=#{aRepoDir} --summary"
+    cmd << " --last #{aNumEntries}" if aNumEntries
+
+    # parse log entries
+      entries = `#{cmd}`.split(/(?=^\S)/).map do |para|
+        lines = para.split(/^/)
+
+        lines[0] =~ /^.*\d{4}/
+        date = Time.parse($&)
+        author = $'.strip
+
+        name = lines[1].chomp.sub(/^\s+\*?\s+/, '')
+        body = lines[1..-1].join.strip
+
+        Entry.new date, author, name, body
+      end
+
+    date = entries.first.date unless entries.empty?
+
+    result = <<-EOS.lstrip
+    <?xml version="1.0"?>
+    <rss version="2.0">
+      <channel>
+        <title>#{h aRepoName} repository</title>
+        <link>#{aRepoUrl}</link>
+        <description>A changelog-style summary of the #{h aRepoName} repository.</description>
+        <language>en-us</language>
+        <pubDate>#{(date || Time.now).rfc822}</pubDate>
+        <lastBuildDate>#{Time.now.rfc822}</lastBuildDate>
+    EOS
+
+    entries.each do |e|
+      result << <<-EOS
+        <item>
+          <title>#{h e.name}</title>
+          <author>#{h e.author}</author>
+          <pubDate>#{e.date.rfc822}</pubDate>
+          <description>&lt;pre&gt;#{h e.body}&lt;/pre&gt;</description>
+        </item>
+      EOS
+    end
+
+    result << <<-EOS
+      </channel>
+    </rss>
+    EOS
+
+    result
+  end
+end
+
+
+if $0 == __FILE__
+  puts Darcs.rss_log('.', ARGV[0], nil, ARGV[1])
+end

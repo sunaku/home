@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# Tags all commits that have a version number in their message.
+# Usage: git-tag-versions ARGUMENTS_FOR_GIT_LOG
+
+require 'shellwords'
+
+`git log #{ARGV.shelljoin} --format=oneline`.lines.reverse_each do |line|
+  commit, *message = line.split
+
+  if version = message.grep(/Version \d+(?:\.\d+)+/i).first
+    system 'git', 'tag', '-f', version, commit
+    p version => commit
+  end
+end

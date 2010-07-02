@@ -1,0 +1,111 @@
+#!/usr/bin/env ruby
+# Performs word wrapping for the input given on STDIN,
+# with smarter handling of crown margins than `fmt -c`.
+#
+# The first word (a sequence of printable, non-whitespace characters:
+# /\S+/) of a paragraph (a sequence delimited by two newline
+# characters with optional whitespace between them:  /\r?\n\s*\r?\n/)
+# is considered to be a crown if (1) it contains a punctuation mark:
+# /[[:punct:]]/ or (2) it is entirely composed of whitespace:  /\s+/.
+#--
+# Written in 2007 by Suraj N. Kurapati
+
+$: << File.dirname(__FILE__)
+require 'wrap'
+
+
+def wrap_line aLine, aWidth, aTwoSpace, aWrapper = :wrap
+  aLine = aLine.sub /^(\r?\n)+/, ''
+
+  # determine crown and margin
+    aLine  =~ /^(\s*)(\S*\s*)/
+    margin =  $1.to_s
+    crown  =  $2.to_s
+    rest   =  $'.to_s
+
+    if crown =~ /[[:punct:]]/ && crown !~ /,\s*/
+      aLine = rest
+    else
+      crown = ''
+    end
+
+    crown  = margin + crown
+    margin = crown.gsub(/\S/, ' ')
+
+  # wrap the input in isolation
+    aLine.gsub! /\r?\n/, ' '
+    aLine.squeeze! ' '
+    aLine.gsub! %r/([.?!])(?![[:graph:]])/, '\1 ' if aTwoSpace
+
+    lines = aLine.send(aWrapper, aWidth - margin.length)
+
+  # add crown and margin to result
+    unless lines.empty?
+      lines.first.insert(0, crown)
+    end
+
+    lines.join("\n" + margin)
+end
+
+def wrap_text aText, aWidth, aSelector, aRejector, aRefill, aBalanced, aTwoSpace
+  delim   = aRefill ? /\r?\n\s*\r?\n/ : /\r?\n/
+  newline = aRefill ? "\n\n" : "\n"
+  wrapper = aBalanced ? :balanced_wrap : :wrap
+
+  aText.split(delim).map do |line|
+    if line =~ aSelector and line !~ aRejector
+      wrap_line(line, aWidth, aTwoSpace, wrapper)
+    else
+      line
+    end
+  end.flatten.compact.join(newline).chomp
+end
+
+
+if $0 == __FILE__
+  require 'optparse'
+  require 'rdoc/usage'
+
+  opts = OptionParser.new
+
+  opts.banner = "Usage: #{File.basename $0} [options]"
+  opts.separator ''
+
+  opts.on '-h', '--help',
+          "show this help message\n" do
+            RDoc.usage_no_exit
+            puts opts
+            exit
+          end
+
+  opts.on '-w', '--width WIDTH',
+          'maximum line width',
+          "(default value: #{width = 80})\n",
+          Integer do |width| end
+
+  opts.on '-s', '--split-only',
+          'split long lines, but do not refill',
+          "(default value: #{split = false})\n" do |split| end
+
+  opts.on '-2', '--two-space',
+          'two spaces after sentences',
+          "(default value: #{twoSpace = false})\n" do |twoSpace| end
+
+  opts.on '-b', '--balance',
+          'prefer equal line widths',
+          "(default value: #{balanced = false})\n" do |balanced| end
+
+  opts.on '-m', '--select REGEXP',
+          'only wrap lines that match REGEXP',
+          "(default value: #{(selector = //).inspect})\n",
+          Regexp do |selector| end
+
+  opts.on '-M', '--reject REGEXP',
+          'do not wrap lines that match REGEXP',
+          "(default value: #{(rejector = nil).inspect})\n",
+          Regexp do |rejector| end
+
+  opts.parse ARGV
+
+  print wrap_text(STDIN.read, width, selector, rejector, !split, balanced, twoSpace)
+end

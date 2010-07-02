@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+delay = (ENV['DELAY'] || 0.03).to_f
+ARGV.each {|f| IO.foreach(f) {|l| puts l; sleep delay } }

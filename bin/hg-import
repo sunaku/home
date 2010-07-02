@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+# Imports revisions exported from mercurial.
+# @param  .   path to manifest file. diffs should also be in the same place.
+# @param  ... arguments for `hg import`
+#--
+# Written in 2006 by Suraj N. Kurapati
+
+if manifest = ARGV.shift
+  diffDir = File.dirname(manifest)
+
+  File.readlines(manifest).reverse!.each do |r|
+    r.chomp!
+
+    args = %w(hg import).concat(ARGV)
+    args << File.join(diffDir, "#{r}.diff")
+
+    system(*args)
+  end
+end

@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# Truncates the Fish shell history to the given number of commands so that
+# the shell's performance is not hampered by history lookups and insertions.
+
+HISTORY_SIZE = 9999
+HISTORY_FILE = File.expand_path('~/.config/fish/fish_history')
+ARCHIVE_FILE = HISTORY_FILE + '_archive'
+
+history_lines = File.readlines(HISTORY_FILE)
+
+# x2 because history file has 1 extra ID line per command
+retained_lines = history_lines.pop(HISTORY_SIZE * 2)
+archived_lines = history_lines
+
+File.open(ARCHIVE_FILE, 'a') do |archive|
+  archive << archived_lines.join
+end
+
+File.open(HISTORY_FILE, 'w') do |history|
+  history << retained_lines.join
+end

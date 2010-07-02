@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+#
+# Outputs a list of HTTP GET and PUT requests to STDOUT.
+#
+# Usage:
+#
+#   sudo tshark-http INTERFACE
+#
+# Parameters:
+#
+#   INTERFACE is the name of the network interface to listen on.
+#
+iface = ARGV.shift or raise ArgumentError
+
+IO.popen %{tshark -i #{iface} -f 'tcp port http' -l -T pdml | egrep '<field name="http.(host|request.uri)"'} do |stream|
+  while line = stream.gets
+    case line
+    when /Host: (.*?)\\r\\n/
+      host = $1
+
+    when /Request URI: ([^"]*)/
+      if host
+        uri = $1
+        puts "http://#{host}#{uri}"
+
+        # prepare to detect next link
+        host = uri = nil
+      end
+    end
+  end
+end

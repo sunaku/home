@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Sources the given file inside TCSH and
+# immediately runs FISH as a sub-shell.
+#
+# Usage:  tcsh-source FILE_TO_SOURCE
+
+fish=$(which fish)
+
+# prevent "word too long" error in tcsh
+export PATH=/bin:/usr/bin
+
+# prevent "undefined $LD_LIBRARY_PATH" error in tcsh
+test -z "$LD_LIBRARY_PATH" && export LD_LIBRARY_PATH=""
+
+exec tcsh -c "source $* && echo '** STARTING fish INSIDE tcsh **' && $fish"

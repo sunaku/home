@@ -1,0 +1,77 @@
+#!/usr/bin/env ruby
+# Performs word wrapping, in a symmetrically balanced fashion, on the
+# source code comments given on STDIN.  All lines are expected to have
+# a common prefix, composed of a variable amount of whitespace followed
+# by a comment marker (which denotes the start of a comment line).  If
+# there is no such common prefix, then the leading whitespace of the
+# first line is assumed to be the common prefix for subsequent lines.
+#--
+# Written in 2007 by Suraj N. Kurapati
+
+$: << File.dirname(__FILE__)
+load 'wrap-text'
+
+
+def wrap_comment aLines, aWidth, *aArgs
+  # determine comment margin
+  aLines.first =~ /^(\s*)(\S*)/
+  margin       =  $~.to_s
+  space        =  $1.to_s
+  marker       =  $2.to_s
+
+  unless aLines.all? {|line| line[/\S+/] == marker}
+    margin = space
+    marker = ''
+  end
+
+  # parse raw comment (without margin)
+  comment = aLines.join.gsub(/^\s*#{Regexp.escape marker}/, '')
+
+  # format raw comment in isolation
+  width  = aWidth - margin.length
+  output = wrap_text(comment, width, *aArgs)
+
+  # add margin to formatted comment
+  output.gsub(/^/, margin)
+end
+
+
+if $0 == __FILE__
+  require 'optparse'
+  require 'rdoc/usage'
+
+  opts = OptionParser.new
+
+  opts.banner = "Usage: #{File.basename $0} [options]"
+  opts.separator ''
+
+  opts.on '-h', '--help',
+          "show this help message\n" do
+            RDoc.usage_no_exit
+            puts opts
+            exit
+          end
+
+  opts.on '-w', '--width WIDTH',
+          'maximum width of output lines',
+          "(default value: #{width = 80})\n",
+          Integer do |width| end
+
+  opts.on '-2', '--two-space',
+          'two spaces after sentences',
+          "(default value: #{twoSpace = false})\n" do |twoSpace| end
+
+  opts.on '-m', '--select REGEXP',
+          'only wrap lines that match REGEXP',
+          "(default value: #{(selector = //).inspect})\n",
+          Regexp do |selector| end
+
+  opts.on '-M', '--reject REGEXP',
+          'do not wrap lines that match REGEXP',
+          "(default value: #{(rejector = nil).inspect})\n",
+          Regexp do |rejector| end
+
+  opts.parse ARGV
+
+  print wrap_comment(STDIN.readlines, width, selector, rejector, true, true, twoSpace)
+end

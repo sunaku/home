@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# Exports revisions from mercurial.
+# @param  ... arguments for `hg log`
+#--
+# Written in 2006 by Suraj N. Kurapati
+
+revs = `hg log #{ARGV.join(' ')}`.scan(/changeset:\s+(\d+):/)
+revs.flatten!
+
+File.open('manifest', 'w') do |f|
+  f.puts revs
+end
+
+revs.each do |r|
+  system 'hg', 'export', '-o', "#{r}.diff", r
+end

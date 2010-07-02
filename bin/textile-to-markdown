@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+#
+# Converts Textile into Markdown for the given input
+# (files or STDIN), and prints the result to STDOUT.
+#
+
+print ARGF.read.
+
+  # links
+  gsub(/"([^"]+)":(\S+)(?=[,\.]\s)/, '[\1]( \2 )').
+  gsub(/"([^"]+)":(\S+)/, '[\1]( \2 )').
+
+  # code
+  gsub(/@(.+?)@/, '`\1`').
+
+  # bold
+  gsub(/\*[^\*]+\*/, '*\&*').
+
+  # list items
+  gsub(/^([ \t]*)(\*){2,}/) { $1 + ('  ' * $2.length) + $2 }

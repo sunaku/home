@@ -1,0 +1,83 @@
+#!/usr/bin/env ruby
+# Vertically aligns columns, which are delimited (separated) by a user-defined
+# regular expression, that are present in the input given on STDIN.
+#
+# For example, the following input:
+#
+#   short text    =            foo
+#   really long text = bar
+#   wide operator  <=>  moz
+#
+# yields the following output:
+#
+#   short text        =  foo
+#   really long text  =  bar
+#   wide operator    <=> moz
+#
+#--
+# Written in 2007 by Suraj N. Kurapati
+
+def align_columns lines, delimiter, selector, rejector, alignment
+  delim_regexp = /#{delimiter}/
+
+  # determine columns widths
+    widths = Hash.new(0)
+
+    rows = lines.map do |line|
+      line.chomp!
+
+      if line =~ selector and line !~ rejector and line =~ delim_regexp
+        fields = line.split(delim_regexp)
+        fields.each {|f| f.strip! }
+        fields.unshift line[/\A[ \t]*/] # whitespace margin
+
+        delims = line.scan(delim_regexp)
+        delims[0..-2].each {|d| d << ' ' }
+        delims[1..-1].each {|d| d.insert(0, ' ') }
+        #delims.each {|d| d.insert(0, ' ') << ' ' }
+        delims.unshift nil
+
+        cols = fields.zip(delims).flatten.compact
+        cols.each_with_index do |c, i|
+          widths[i] = [c.length, widths[i]].max
+        end
+      else
+        line
+      end
+    end
+
+  # equalize column widths
+    rows.map! do |row|
+      if row.is_a? Array
+        cols = []
+
+        row.each_with_index do |col, i|
+          cols[i] = col.send(alignment, widths[i])
+        end
+
+        cols.join.rstrip
+      else
+        row
+      end
+    end
+
+  rows.join("\n")
+end
+
+
+if $0 == __FILE__
+  require 'trollop'
+  opts = Trollop.options do
+    opt :alignment, 'ljust, rjust, or center', :default => 'center'
+    opt :delimiter, 'column delimiter', :default => '[:punct:<>]*=[:punct:<>]*'
+    opt :select, 'only align lines that match REGEXP', :type => :string
+    opt :reject, 'do not align lines that match REGEXP', :type => :string
+  end
+
+  alignment = opts[:alignment]
+  delimiter = opts[:delimiter]
+  selector = opts[:selector] ? /#{opts[:selector]}/ : //
+  rejector = opts[:rejector] ? /#{opts[:rejector]}/ : nil
+
+  print align_columns(STDIN.readlines, delimiter, selector, rejector, alignment)
+end

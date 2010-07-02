@@ -1,0 +1,11 @@
+#!/usr/bin/ruby
+#
+# Performs conversion of simple Bourne shell into Fish.
+# Only variable assignments and exporting are converted.
+#
+
+puts STDIN.read.
+  gsub(/([A-Z0-9_]+)=/, 'set \1 ').
+  gsub(/\bunset\b/, 'set -e').
+  gsub(/\bexport\b\s+(\w+)/, 'set -x \1 $\1').
+  gsub(/\bdone\b/, 'end')

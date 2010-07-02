@@ -1,0 +1,4 @@
+#!/bin/sh
+# This file prevents the real ps2png (which
+# truncates large images) from being used.
+convert "$@"

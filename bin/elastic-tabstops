@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+# Grounds elastic tabstops globally for visual presentation.
+# ARGV or STDIN:: input files to be processed
+#--
+# Written in 2006 by Suraj N. Kurapati
+
+class String
+  def expand_elastic_tabstops
+    table = []
+    maxCellWidths = []
+
+    split(/\n/).each do |line|
+      row = line.split(/\t/)
+
+      if row.length > 1
+        row.each_with_index do |cell, i|
+          maxCellWidths[i] ||= 0
+
+          if cell.length > maxCellWidths[i]
+            maxCellWidths[i] = cell.length
+          end
+        end
+      end
+
+      table << row
+    end
+
+    result = ''
+
+    table.each do |row|
+      if row.length > 1
+        row[0..-2].each_with_index do |cell, i|
+          result << cell.ljust(maxCellWidths[i])
+        end
+
+        result << row.last
+      elsif row.length > 0
+        result << row.join
+      end
+
+      result << "\n"
+    end
+
+    result
+  end
+end
+
+if $0 == __FILE__
+  # ARGF.read.scan(/\{.*?\}/m) do |s|
+  #   print s.expand_elastic_tabstops
+  # end
+
+  print ARGF.read.expand_elastic_tabstops
+end

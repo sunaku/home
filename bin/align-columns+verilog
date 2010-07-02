@@ -1,0 +1,4 @@
+#!/bin/sh
+align-columns |                  # normal assignments
+align-columns -d '\s(?=\[)' |    # array ranges in variable declarations
+align-columns -d '\s(?=\S+\s*$)' # variable names in variable declarations

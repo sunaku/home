@@ -1,0 +1,12 @@
+#!/bin/sh
+# Searches the Fish shell history for the given term.
+# If no term is given, then lists the entire history.
+
+cat ~/.config/fish/fish_history* |
+if test $# -gt 0
+then
+  egrep -hi "$@"
+else
+  grep -v '^#'
+fi |
+sort | uniq -c | sort -n

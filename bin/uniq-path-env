@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+# Removes redundant elements from PATH environment variables
+# (whose values are specified as command-line arguments).
+
+print ARGV.map {|s| s.split(/:+/) }.flatten.uniq.join(':')

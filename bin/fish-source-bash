@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# Sources the given file inside BASH and
+# immediately runs FISH as a sub-shell.
+#
+# Usage:  bash-source FILE_TO_SOURCE
+
+fish=$(which fish)
+
+source "$@" &&
+echo '** STARTING fish INSIDE bash **' &&
+$fish

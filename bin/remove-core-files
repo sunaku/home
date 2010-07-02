@@ -1,0 +1,2 @@
+#!/bin/sh
+locate -b '^core\.?[0-9]*$' --regex | xargs file | fgrep ELF | awk '{print $1}' | sed 's,:$,,' | xargs rm -vf

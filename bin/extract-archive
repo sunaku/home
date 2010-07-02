@@ -1,0 +1,141 @@
+#!/usr/bin/env ruby
+# Extracts various compressed and uncompressed file archives (see
+# http://en.wikipedia.org/wiki/List_of_archive_formats) into their
+# *own* output directories so that they do not make a mess by
+# extracting directly into your working directory.
+#--
+# Written in 2003-2006 by Suraj N. Kurapati
+
+require 'tempfile'
+require 'fileutils'
+
+include FileUtils
+
+
+# Returns a unique, temporary, nonexistent path.
+def gen_temp_path *a
+  p = Tempfile.new($$, *a).path
+  rm_f p
+  p
+end
+
+# Extracts the given source archive relative to the given destination path,
+# and returns the path of the directory containing the extracted contents.
+def extract aSrcPath, aDstPath = '.'
+  srcPath = File.expand_path(aSrcPath)
+  srcName = File.basename(srcPath)
+  srcSuffix = File.extname(srcName)
+  srcPrefix = File.basename(srcName, srcSuffix)
+
+  # decompress the archive
+    tmpDir = gen_temp_path(aDstPath)
+    mkdir tmpDir, :mode => 0700
+
+    cd tmpDir do
+      case srcName
+        when /\.(tar\.gz|tar\.Z|tgz|taz)$/i
+          system 'tar', '-zxf', srcPath
+
+        when /\.(gz)$/i
+          system "gunzip -c #{srcPath.inspect} > #{srcPrefix.inspect}"
+
+        when /\.(tar\.bz|tar\.bz2|tbz|tbz2)$/i
+          system 'tar', '-jxf', srcPath
+
+        when /\.(bz|bz2)$/i
+          system "bunzip2 -c #{srcPath.inspect} > #{srcPrefix.inspect}"
+
+        when /\.(tar.lzo|tzo)$/i
+          system "lzop -xc #{srcPath.inspect} | tar -xf -"
+
+        when /\.(lzo)$/i
+          system 'lzop', '-x', srcPath
+
+        when /\.(tar|cpio|gem)$/i
+          system 'tar', '-xf', srcPath
+
+        when /\.(shar)$/i
+          system 'sh', srcPath
+
+        when /\.(7z)$/i
+          system '7zr', 'x', srcPath
+
+        when /\.(zip)$/i
+          system 'unzip', srcPath
+
+        when /\.(jar)$/i
+          system 'jar', 'xf', srcPath
+
+        when /\.(rz)$/i
+          ln srcPath, srcName # rzip removes the archive after extraction
+          system 'rzip', '-d', srcName
+
+        when /\.(rar)$/i
+          system 'unrar', 'x', srcPath
+
+        when /\.(ace)$/i
+          system 'unace', 'x', srcPath
+
+        when /\.(arj)$/i
+          system 'arj', 'x', srcPath
+
+        when /\.(arc)$/i
+          system 'arc', 'x', srcPath
+
+        when /\.(lhz|lha)$/i
+          system 'lha', 'x', srcPath
+
+        when /\.(a|ar)$/i
+          system 'ar', '-x', srcPath
+
+        when /\.(Z)$/
+          system "uncompress -c #{srcPath.inspect} > #{srcPrefix.inspect}"
+
+        when /\.(z)$/
+          system "pcat #{srcPath.inspect} > #{srcPrefix.inspect}"
+
+        when /\.(zoo)$/i
+          system 'zoo', 'x//', srcPath
+
+        when /\.(cab)$/i
+          system 'cabextract', srcPath
+
+        when /\.(deb)$/i
+          system 'ar', 'x', srcPath
+
+        when /\.(rpm)$/i
+          system "rpm2cpio #{srcPath.inspect} | cpio -i --make-directories"
+
+        else
+          warn "I do not know how to extract #{srcPath.inspect}"
+      end
+    end
+
+  # clean any mess made by decompression
+    manifest = Dir.new(tmpDir).entries - %w[ . .. ]
+
+    if manifest.length == 1 # there was no mess!
+      adjDst = File.join(aDstPath, manifest.first)
+      adjSrc = File.join(tmpDir, manifest.first)
+    else
+      adjSrc = tmpDir
+      adjDst = File.join(aDstPath, srcName)[/.*(?=\..*?)/]
+    end
+
+    adjDst << "+#{Time.new.to_i}" until
+      not File.exist?( adjDst ) and
+      mv(adjSrc, adjDst, :force => true)
+
+    remove_entry_secure tmpDir, true
+
+  adjDst
+end
+
+if $0 == __FILE__
+  prefix = File.basename(__FILE__)
+
+  ARGV.each do |src|
+    dst = extract(src)
+    puts "#{prefix}: '#{src}' => '#{dst}'"
+  end
+end

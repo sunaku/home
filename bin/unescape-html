@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'cgi'
+puts CGI.unescapeHTML(CGI.unescape(ARGF.read))

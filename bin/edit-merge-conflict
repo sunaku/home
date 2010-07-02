@@ -1,0 +1,2 @@
+#!/bin/sh
+vim -c 'set hlsearch' -c '0' -c '/^[<=>]\{7\}/' "$@"

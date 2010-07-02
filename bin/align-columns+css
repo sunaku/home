@@ -1,0 +1,2 @@
+#!/bin/sh
+align-columns -d ':(?=.*;)'  # CSS selector assignments

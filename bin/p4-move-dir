@@ -1,0 +1,25 @@
+#!/bin/bash
+# Moves a p4 directory to a new location.
+#
+# Usage:  p4-move-dir old_dir new_dir
+
+src=$1
+shift
+
+dst=$1
+shift
+
+for i in $(p4 have $src/... | sed 's,\#.*,,; s,^'$( p4 where | awk '{print $1}' | sed 's,\.\.\.$,,' | head -1 ),,)
+do
+  x=$src/$i         # src file
+  y=$dst/$i         # dest file
+  d=$dst/${x%/*}    # dest dir
+
+  mkdir -vp "$d" &&
+  #mv -vf "$x" "$y" &&
+  #p4 delete "$x" &&
+  #p4 add "$y"
+
+  p4 integrate "$x" "$y" &&
+  p4 delete "$x"
+done
