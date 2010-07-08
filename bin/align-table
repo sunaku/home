@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
-# Vertically aligns columns, which are delimited (separated) by a user-defined
-# regular expression, that are present in the input given on STDIN.
+#
+# Vertically aligns multiple columns, which are
+# delimited by a user-defined regular expression,
+# that are present in the input given on STDIN.
 #
 # For example, the following input:
 #
-#   short text    =            foo
-#   really long text = bar
-#   wide operator  <=>  moz
+#   short text    =            foo = hello
+#   really long text = bar =     world
+#   wide operator  <=>  moz   <=> again
 #
 # yields the following output:
 #
@@ -17,67 +19,81 @@
 #--
 # Written in 2007 by Suraj N. Kurapati
 
-def align_columns lines, delimiter, selector, rejector, alignment
+def align_table lines, delimiter, selector, rejector, justifier
   delim_regexp = /#{delimiter}/
 
   # determine columns widths
-    widths = Hash.new(0)
+  widths = Hash.new(0)
 
-    rows = lines.map do |line|
-      line.chomp!
+  rows = lines.map do |line|
+    line.chomp!
 
-      if line =~ selector and line !~ rejector and line =~ delim_regexp
-        fields = line.split(delim_regexp)
-        fields.each {|f| f.strip! }
-        fields.unshift line[/\A[ \t]*/] # whitespace margin
+    if line =~ selector and line !~ rejector and line =~ delim_regexp
+      fields = line.split(delim_regexp)
+      fields.each {|f| f.strip! }
+      fields.unshift line[/\A[ \t]*/] # whitespace margin
 
-        delims = line.scan(delim_regexp)
-        delims[0..-2].each {|d| d << ' ' }
-        delims[1..-1].each {|d| d.insert(0, ' ') }
-        #delims.each {|d| d.insert(0, ' ') << ' ' }
-        delims.unshift nil
+      delims = line.scan(delim_regexp)
+      delims[0..-2].each {|d| d << ' ' }
+      delims[1..-1].each {|d| d.insert(0, ' ') }
+      #delims.each {|d| d.insert(0, ' ') << ' ' }
+      delims.unshift nil
 
-        cols = fields.zip(delims).flatten.compact
-        cols.each_with_index do |c, i|
-          widths[i] = [c.length, widths[i]].max
-        end
-      else
-        line
+      cols = fields.zip(delims).flatten.compact
+      cols.each_with_index do |c, i|
+        widths[i] = [c.length, widths[i]].max
       end
+    else
+      line
     end
+  end
 
   # equalize column widths
-    rows.map! do |row|
-      if row.is_a? Array
-        cols = []
+  rows.map! do |row|
+    if row.is_a? Array
+      cols = []
 
-        row.each_with_index do |col, i|
-          cols[i] = col.send(alignment, widths[i])
-        end
-
-        cols.join.rstrip
-      else
-        row
+      row.each_with_index do |col, i|
+        cols[i] = col.send(justifier, widths[i])
       end
+
+      cols.join.rstrip
+    else
+      row
     end
+  end
 
   rows.join("\n")
 end
 
 
 if $0 == __FILE__
-  require 'trollop'
-  opts = Trollop.options do
-    opt :alignment, 'ljust, rjust, or center', :default => 'center'
-    opt :delimiter, 'column delimiter', :default => '[:punct:<>]*=[:punct:<>]*'
-    opt :select, 'only align lines that match REGEXP', :type => :string
-    opt :reject, 'do not align lines that match REGEXP', :type => :string
-  end
+  require 'optparse'
+  parser = OptionParser.new
 
-  alignment = opts[:alignment]
-  delimiter = opts[:delimiter]
-  selector = opts[:selector] ? /#{opts[:selector]}/ : //
-  rejector = opts[:rejector] ? /#{opts[:rejector]}/ : nil
+  parser.on '-h', '--help', 'show this help message' do
+              puts File.read(__FILE__).split(/^$/).first, nil, parser
+              exit
+            end
 
-  print align_columns(STDIN.readlines, delimiter, selector, rejector, alignment)
+  parser.on '-d', '--delimiter REGEXP', 'input column delimiter',
+            "(default: #{(delimiter = /[[:punct:]]*=[[:punct:]]*/).inspect})\n",
+            String do |arg| delimiter = arg end
+
+  parser.on '-j', '--justify METHOD', 'justify text inside columns',
+            '(choices: ljust, rjust, or center)',
+            "(default: #{justifier = 'center'})",
+            String do |arg| justifier = arg end
+
+  parser.on '-m', '--select REGEXP', 'only wrap lines that match REGEXP',
+            "(default: #{(selector = //).inspect})",
+            Regexp do |arg| selector = arg end
+
+  parser.on '-M', '--reject REGEXP', 'do not wrap lines that match REGEXP',
+            "(default: #{(rejector = nil).inspect})",
+            Regexp do |arg| rejector = arg end
+
+  parser.parse ARGV
+
+  print align_table(STDIN.readlines, delimiter, selector, rejector, justifier)
 end

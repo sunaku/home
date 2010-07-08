@@ -1,77 +1,69 @@
 #!/usr/bin/env ruby
-# Performs word wrapping, in a symmetrically balanced fashion, on the
-# source code comments given on STDIN.  All lines are expected to have
-# a common prefix, composed of a variable amount of whitespace followed
-# by a comment marker (which denotes the start of a comment line).  If
-# there is no such common prefix, then the leading whitespace of the
-# first line is assumed to be the common prefix for subsequent lines.
+#
+# Performs word wrapping for the code comments given on STDIN.
+#
+# All lines are expected to have a common prefix, composed of a
+# variable amount of whitespace followed by a comment marker
+# (which denotes the start of a comment line).  If there is no
+# such common prefix, then the leading whitespace of the first
+# line is assumed to be the common prefix for subsequent lines.
+#
 #--
 # Written in 2007 by Suraj N. Kurapati
 
 $: << File.dirname(__FILE__)
 load 'wrap-text'
 
-
-def wrap_comment aLines, aWidth, *aArgs
+def wrap_comment lines, width, *args
   # determine comment margin
-  aLines.first =~ /^(\s*)(\S*)/
-  margin       =  $~.to_s
-  space        =  $1.to_s
-  marker       =  $2.to_s
+  lines.first =~ /^(\s*)(\S*)/
+  margin      =  $~.to_s
+  space       =  $1.to_s
+  marker      =  $2.to_s
 
-  unless aLines.all? {|line| line[/\S+/] == marker}
+  unless lines.all? {|line| line[/\S+/] == marker }
     margin = space
     marker = ''
   end
 
   # parse raw comment (without margin)
-  comment = aLines.join.gsub(/^\s*#{Regexp.escape marker}/, '')
+  comment = lines.join.gsub(/^\s*#{Regexp.escape marker}/, '')
 
   # format raw comment in isolation
-  width  = aWidth - margin.length
-  output = wrap_text(comment, width, *aArgs)
+  width  = width - margin.length
+  output = wrap_text(comment, width, *args)
 
   # add margin to formatted comment
   output.gsub(/^/, margin)
 end
 
-
 if $0 == __FILE__
   require 'optparse'
-  require 'rdoc/usage'
+  parser = OptionParser.new
 
-  opts = OptionParser.new
+  parser.on '-h', '--help', 'show this help message' do
+              puts File.read(__FILE__).split(/^$/).first, nil, parser
+              exit
+            end
 
-  opts.banner = "Usage: #{File.basename $0} [options]"
-  opts.separator ''
+  parser.on '-w', '--width WIDTH', 'maximum line width',
+            "(default: #{width = 80})", Integer do |arg| width = arg end
 
-  opts.on '-h', '--help',
-          "show this help message\n" do
-            RDoc.usage_no_exit
-            puts opts
-            exit
-          end
+  parser.on '-b', '--balance', 'prefer equal line widths',
+            "(default: #{balanced = false})" do |arg| balanced = arg end
 
-  opts.on '-w', '--width WIDTH',
-          'maximum width of output lines',
-          "(default value: #{width = 80})\n",
-          Integer do |width| end
+  parser.on '-2', '--two-space', 'two spaces after sentences',
+            "(default: #{two_space = false})" do |arg| two_space = arg end
 
-  opts.on '-2', '--two-space',
-          'two spaces after sentences',
-          "(default value: #{twoSpace = false})\n" do |twoSpace| end
+  parser.on '-m', '--select REGEXP', 'only wrap lines that match REGEXP',
+            "(default: #{(selector = //).inspect})",
+            Regexp do |arg| selector = arg end
 
-  opts.on '-m', '--select REGEXP',
-          'only wrap lines that match REGEXP',
-          "(default value: #{(selector = //).inspect})\n",
-          Regexp do |selector| end
+  parser.on '-M', '--reject REGEXP', 'do not wrap lines that match REGEXP',
+            "(default: #{(rejector = nil).inspect})",
+            Regexp do |arg| rejector = arg end
 
-  opts.on '-M', '--reject REGEXP',
-          'do not wrap lines that match REGEXP',
-          "(default value: #{(rejector = nil).inspect})\n",
-          Regexp do |rejector| end
+  parser.parse ARGV
 
-  opts.parse ARGV
-
-  print wrap_comment(STDIN.readlines, width, selector, rejector, true, true, twoSpace)
+  print wrap_comment(STDIN.readlines, width, selector, rejector, true, balanced, two_space)
 end

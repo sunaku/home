@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
-# Vertically aligns columns, which are delimited (separated) by a user-defined
+#
+# Vertically aligns columns, which are delimited by a user-defined
 # regular expression, that are present in the input given on STDIN.
 #
 # For example, the following input:
 #
 #   short text    =            foo
 #   really long text = bar
-#   wide operator  <=>  moz
+#   wide operator   <=>  moz
 #
 # yields the following output:
 #
@@ -17,82 +18,69 @@
 #--
 # Written in 2007 by Suraj N. Kurapati
 
-Column = Struct.new :left, :delim, :right
-
-class Column
+class Column < Struct.new(:left, :delim, :right)
   def to_s
     mid = delim.empty? ? ' ' : " #{delim} "
     left + mid + right
   end
 end
 
-def align_columns aLines, aDelimiter, aSelector, aRejector
+def align_columns lines, delimiter, selector, rejector
   # determine columns widths
-    leftWidth  = 0
-    delimWidth = 0
+  left_width = 0
+  delim_width = 0
 
-    cols = aLines.map do |line|
-      if line =~ aSelector and
-         line !~ aRejector and
-         line =~ /^(.*?)(#{aDelimiter})(.*?)$/o
-      then
-        left       = $1.to_s.rstrip
-        delim      = $2.to_s.strip
-        right      = $3.to_s.lstrip
+  cols = lines.map do |line|
+    if line =~ selector and
+       line !~ rejector and
+       line =~ /^(.*?)(#{delimiter})(.*?)$/
+    then
+      left = $1.to_s.rstrip
+      delim = $2.to_s.strip
+      right = $3.to_s.lstrip
 
-        leftWidth  = [leftWidth, left.length].max
-        delimWidth = [delimWidth, delim.length].max
+      left_width = [left_width, left.length].max
+      delim_width = [delim_width, delim.length].max
 
-        Column.new(left, delim, right)
-      else
-        line.chomp
-      end
+      Column.new(left, delim, right)
+    else
+      line.chomp
     end
+  end
 
   # equalize column widths
-    cols.each do |col|
-      if col.is_a? Column
-        col.left  = col.left.ljust(leftWidth)
-        col.delim = col.delim.center(delimWidth)
-      end
+  cols.each do |col|
+    if col.is_a? Column
+      col.left = col.left.ljust(left_width)
+      col.delim = col.delim.center(delim_width)
     end
+  end
 
   cols.join("\n")
 end
 
-
 if $0 == __FILE__
   require 'optparse'
-  require 'rdoc/usage'
+  parser = OptionParser.new
 
-  opts = OptionParser.new
+  parser.on '-h', '--help', 'show this help message' do
+              puts File.read(__FILE__).split(/^$/).first, nil, parser
+              exit
+            end
 
-  opts.banner = "Usage: #{File.basename $0} [options]"
-  opts.separator ''
+  parser.on '-d', '--delimiter REGEXP', 'column delimiter',
+            "(default: #{(delimiter = /[[:punct:]]*=[[:punct:]]*/).inspect})\n",
+            String do |arg| delimiter = arg end
 
-  opts.on '-h', '--help',
-          "show this help message\n" do
-            RDoc.usage_no_exit
-            puts opts
-            exit
-          end
+  parser.on '-m', '--select REGEXP', 'only wrap lines that match REGEXP',
+            "(default: #{(selector = //).inspect})",
+            Regexp do |arg| selector = arg end
 
-  opts.on '-d', '--delimiter REGEXP',
-          'column delimiter',
-          "(default value: #{(delimiter = /[[:punct:]]*=[[:punct:]]*/).inspect})\n",
-          String do |delimiter| end
+  parser.on '-M', '--reject REGEXP', 'do not wrap lines that match REGEXP',
+            "(default: #{(rejector = nil).inspect})",
+            Regexp do |arg| rejector = arg end
 
-  opts.on '-m', '--select REGEXP',
-          'only align lines that match REGEXP',
-          "(default value: #{(selector = //).inspect})\n",
-          Regexp do |selector| end
-
-  opts.on '-M', '--reject REGEXP',
-          'do not align lines that match REGEXP',
-          "(default value: #{(rejector = nil).inspect})\n",
-          Regexp do |rejector| end
-
-  opts.parse ARGV
+  parser.parse ARGV
 
   print align_columns(STDIN.readlines, delimiter, selector, rejector)
 end
