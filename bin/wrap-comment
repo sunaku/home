@@ -11,8 +11,7 @@
 #--
 # Written in 2007 by Suraj N. Kurapati
 
-$: << File.dirname(__FILE__)
-load 'wrap-text'
+load File.join(File.dirname(__FILE__), 'wrap-text')
 
 def wrap_comment lines, width, *args
   # determine comment margin

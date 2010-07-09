@@ -12,8 +12,7 @@
 #--
 # Written in 2007 by Suraj N. Kurapati
 
-$: << File.dirname(__FILE__)
-require 'wrap'
+require File.join(File.dirname(__FILE__), 'wrap')
 
 def wrap_line line, width, two_space, wrapper = :wrap
   line = line.sub(/^(\r?\n)+/, '')
@@ -38,7 +37,7 @@ def wrap_line line, width, two_space, wrapper = :wrap
   line.squeeze! ' '
   line.gsub! %r/([.?!])(?![[:graph:]])/, '\1 ' if two_space
 
-  lines = line.send(wrapper, width - margin.length)
+  lines = Array(line.send(wrapper, width - margin.length))
 
   # add crown and margin to result
   unless lines.empty?
