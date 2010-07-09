@@ -24,8 +24,7 @@ eval $(gpg-agent --daemon)
 #eval $(dbus-launch --sh-syntax --exit-with-session)
 
 # break reminder
-workrave &
-#xwrits breaktime=1:30 typetime=30:00 +mouse +lock +beep &
+(workrave || xwrits breaktime=1:30 typetime=30:00 +mouse +lock +beep) &
 
 # music
 xterm -geometry 14x23+8+0 -e alsamixer &
