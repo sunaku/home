@@ -6,129 +6,118 @@
 #--
 # Written in 2003-2006 by Suraj N. Kurapati
 
-require 'tempfile'
+require 'tmpdir'
+
 require 'fileutils'
-
-include FileUtils
-
-
-# Returns a unique, temporary, nonexistent path.
-def gen_temp_path *a
-  p = Tempfile.new($$, *a).path
-  rm_f p
-  p
-end
+include FileUtils::Verbose
 
 # Extracts the given source archive relative to the given destination path,
 # and returns the path of the directory containing the extracted contents.
-def extract aSrcPath, aDstPath = '.'
-  srcPath = File.expand_path(aSrcPath)
-  srcName = File.basename(srcPath)
-  srcSuffix = File.extname(srcName)
-  srcPrefix = File.basename(srcName, srcSuffix)
+def extract src_path, dst_path = '.'
+  src_path = File.expand_path(src_path)
+  src_name = File.basename(src_path)
+  src_suffix = File.extname(src_name)
+  src_prefix = File.basename(src_name, src_suffix)
 
-  # decompress the archive
-    tmpDir = gen_temp_path(aDstPath)
-    mkdir tmpDir, :mode => 0700
-
-    cd tmpDir do
-      case srcName
+  Dir.mktmpdir(nil, dst_path) do |tmp_dir|
+    # decompress the archive
+    cd tmp_dir do
+      case src_name
         when /\.(tar\.gz|tar\.Z|tgz|taz)$/i
-          system 'tar', '-zxf', srcPath
+          system 'tar', '-zxf', src_path
 
         when /\.(gz)$/i
-          system "gunzip -c #{srcPath.inspect} > #{srcPrefix.inspect}"
+          system "gunzip -c #{src_path.inspect} > #{src_prefix.inspect}"
 
         when /\.(tar\.bz|tar\.bz2|tbz|tbz2)$/i
-          system 'tar', '-jxf', srcPath
+          system 'tar', '-jxf', src_path
 
         when /\.(bz|bz2)$/i
-          system "bunzip2 -c #{srcPath.inspect} > #{srcPrefix.inspect}"
+          system "bunzip2 -c #{src_path.inspect} > #{src_prefix.inspect}"
 
         when /\.(tar.lzo|tzo)$/i
-          system "lzop -xc #{srcPath.inspect} | tar -xf -"
+          system "lzop -xc #{src_path.inspect} | tar -xf -"
 
         when /\.(lzo)$/i
-          system 'lzop', '-x', srcPath
+          system 'lzop', '-x', src_path
 
         when /\.(tar|cpio|gem)$/i
-          system 'tar', '-xf', srcPath
+          system 'tar', '-xf', src_path
 
         when /\.(shar)$/i
-          system 'sh', srcPath
+          system 'sh', src_path
 
         when /\.(7z)$/i
-          system '7zr', 'x', srcPath
+          system '7zr', 'x', src_path
 
         when /\.(zip)$/i
-          system 'unzip', srcPath
+          system 'unzip', src_path
 
         when /\.(jar)$/i
-          system 'jar', 'xf', srcPath
+          system 'jar', 'xf', src_path
 
         when /\.(rz)$/i
-          ln srcPath, srcName # rzip removes the archive after extraction
-          system 'rzip', '-d', srcName
+          ln src_path, src_name # rzip removes the archive after extraction
+          system 'rzip', '-d', src_name
 
         when /\.(rar)$/i
-          system 'unrar', 'x', srcPath
+          system 'unrar', 'x', src_path
 
         when /\.(ace)$/i
-          system 'unace', 'x', srcPath
+          system 'unace', 'x', src_path
 
         when /\.(arj)$/i
-          system 'arj', 'x', srcPath
+          system 'arj', 'x', src_path
 
         when /\.(arc)$/i
-          system 'arc', 'x', srcPath
+          system 'arc', 'x', src_path
 
         when /\.(lhz|lha)$/i
-          system 'lha', 'x', srcPath
+          system 'lha', 'x', src_path
 
         when /\.(a|ar)$/i
-          system 'ar', '-x', srcPath
+          system 'ar', '-x', src_path
 
         when /\.(Z)$/
-          system "uncompress -c #{srcPath.inspect} > #{srcPrefix.inspect}"
+          system "uncompress -c #{src_path.inspect} > #{src_prefix.inspect}"
 
         when /\.(z)$/
-          system "pcat #{srcPath.inspect} > #{srcPrefix.inspect}"
+          system "pcat #{src_path.inspect} > #{src_prefix.inspect}"
 
         when /\.(zoo)$/i
-          system 'zoo', 'x//', srcPath
+          system 'zoo', 'x//', src_path
 
         when /\.(cab)$/i
-          system 'cabextract', srcPath
+          system 'cabextract', src_path
 
         when /\.(deb)$/i
-          system 'ar', 'x', srcPath
+          system 'ar', 'x', src_path
 
         when /\.(rpm)$/i
-          system "rpm2cpio #{srcPath.inspect} | cpio -i --make-directories"
+          system "rpm2cpio #{src_path.inspect} | cpio -i --make-directories"
 
         else
-          warn "I do not know how to extract #{srcPath.inspect}"
+          warn "I do not know how to extract #{src_path.inspect}"
       end
     end
 
-  # clean any mess made by decompression
-    manifest = Dir.new(tmpDir).entries - %w[ . .. ]
+    # clean any mess made by decompression
+    manifest = Dir.new(tmp_dir).entries - %w[ . .. ]
 
     if manifest.length == 1 # there was no mess!
-      adjDst = File.join(aDstPath, manifest.first)
-      adjSrc = File.join(tmpDir, manifest.first)
+      adj_dst = File.join(dst_path, manifest.first)
+      adj_src = File.join(tmp_dir, manifest.first)
     else
-      adjSrc = tmpDir
-      adjDst = File.join(aDstPath, srcName)[/.*(?=\..*?)/]
+      adj_src = tmp_dir
+      adj_dst = File.join(dst_path, src_name)[/.*(?=\..*?)/]
     end
 
-    adjDst << "+#{Time.new.to_i}" until
-      not File.exist?( adjDst ) and
-      mv(adjSrc, adjDst, :force => true)
+    adj_dst << "+#{Time.now.to_i}" until
+      not File.exist? adj_dst and
+      mv(adj_src, adj_dst, :force => true)
 
-    remove_entry_secure tmpDir, true
-
-  adjDst
+    adj_dst
+  end
 end
 
 if $0 == __FILE__
