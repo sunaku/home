@@ -28,6 +28,8 @@ if pretty_printer
   end
 end
 
+IRB.conf[:PROMPT_MODE] = :SIMPLE
+
 require 'irb/completion'
 IRB.conf[:AUTO_INDENT] = true
 
