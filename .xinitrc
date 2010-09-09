@@ -14,10 +14,10 @@ thunar --daemon &
 eval $(gpg-agent --daemon)
 
 # input methods
-#export XMODIFIERS='@im=SCIM'
-#export GTK_IM_MODULE=scim
-#export QT_IM_MODULE=scim
-#scim -d &
+export XMODIFIERS='@im=SCIM'
+export GTK_IM_MODULE=scim
+export QT_IM_MODULE=scim
+scim -d &
 
 # GNOME stuff
 #test -z $DBUS_SESSION_BUS_ADDRESS &&
