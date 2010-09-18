@@ -11,20 +11,19 @@
 #--
 # Written 2004 by Suraj N. Kurapati
 
-usage_file="${TMPDIR:-/tmp}/dw.$$.$RANDOM"
-
-# check args
 if [ $# -eq 0 ] ; then
   set -- .* *  # default argument is all files in pwd
   shift 2  # remove . and ..
 fi
 
-# get disk usage info
-if du -sh "${@}" > "$usage_file" 2> /dev/null; then
+usage_file=$(mktemp)
+
+if du -sh "${@}" | tee /dev/tty > "$usage_file" 2> /dev/null; then
+  echo '----------------------------------------'
 
   # display units in increasing order
   for unit in $'\t' '[Kk]' '[Mm]' '[Gg]'; do
-    grep "^[0-9\.]*${unit}" "$usage_file" | sort -n
+    grep "^[0-9\.]*$unit" "$usage_file" | sort -n
   done
 
   # clean up
@@ -32,4 +31,3 @@ if du -sh "${@}" > "$usage_file" 2> /dev/null; then
 else
   du -s "${@}" | sort -n
 fi
-
