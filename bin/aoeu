@@ -1,0 +1,2 @@
+#!/bin/sh
+setxkbmap us && echo dvorak off
