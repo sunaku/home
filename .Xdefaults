@@ -3,10 +3,10 @@
 !-----------------------------------------------------------------------------
 
 ! see "font5" in /etc/X11/app-defaults/XTerm
-*font                       : -*-fixed-medium-r-*-*-15-*-*-*-*-*-*-*
+*font                       : -*-fixed-medium-r-*-*-18-*-*-*-*-*-*-*
 
 ! make Xft fonts beautiful on LCD monitors
-Xft.dpi                     : 100
+Xft.dpi                     : 96
 Xft.hinting                 : true
 Xft.hintstyle               : hintfull
 
@@ -35,49 +35,8 @@ Rxvt.keysym.Control-Right   : \033[1;5C
 ! appearance
 Rxvt.scrollBar_floating     : True
 Rxvt.scrollBar_right        : True
-Rxvt.font                   : xft:Monospace:pixelsize=15
+Rxvt.font                   : xft:Monospace:pixelsize=13
 Rxvt.termName               : xterm-256color
-
-! The following colors are from the Wombat color scheme for Vim:
-! http://dengmao.wordpress.com/2007/01/22/vim-color-scheme-wombat/
-Rxvt.background             : #242424
-Rxvt.foreground             : #f6f3e8
-Rxvt.cursorColor            : #e5786d
-Rxvt.colorBD                : #8ac6f2
-Rxvt.colorUL                : #95e454
-
-! black
-Rxvt.color0                 : #343434
-Rxvt.color8                 : #343434
-
-! red
-Rxvt.color1                 : #e5786d
-Rxvt.color9                 : #e5786d
-
-! green
-Rxvt.color2                 : #cae682
-Rxvt.color10                : #cae682
-
-! yellow (from the Desert color scheme for Vim:
-!         http://fugal.net/vim/colors/desert.html)
-Rxvt.color3                 : khaki
-Rxvt.color11                : khaki
-
-! blue
-Rxvt.color4                 : #8ac6f2
-Rxvt.color12                : #8ac6f2
-
-! magenta (green at hue 300)
-Rxvt.color5                 : #e682e6
-Rxvt.color13                : #e682e6
-
-! cyan (green at hue 180)
-Rxvt.color6                 : #82e6e6
-Rxvt.color14                : #82e6e6
-
-! white
-Rxvt.color7                 : #f6f3e8
-Rxvt.color15                : #f6f3e8
 
 !-----------------------------------------------------------------------------
 ! XTerm
@@ -96,43 +55,28 @@ XTerm*vt100.colorBDMode     : True
 XTerm*vt100.colorULMode     : True
 XTerm*vt100.veryBoldColors  : 6
 
-! The following colors are from the Wombat color scheme for Vim:
-! http://dengmao.wordpress.com/2007/01/22/vim-color-scheme-wombat/
-XTerm*vt100.background      : #242424
-XTerm*vt100.foreground      : #f6f3e8
-XTerm*vt100.cursorColor     : #e5786d
-XTerm*vt100.colorBD         : #8ac6f2
-XTerm*vt100.colorUL         : #95e454
+!-----------------------------------------------------------------------------
+! terminal color theme
+! http://phraktured.net/terminal-colors/
+!-----------------------------------------------------------------------------
 
-! black
-XTerm*vt100.color0          : #343434
-XTerm*vt100.color8          : #343434
-
-! red
-XTerm*vt100.color1          : #e5786d
-XTerm*vt100.color9          : #e5786d
-
-! green
-XTerm*vt100.color2          : #cae682
-XTerm*vt100.color10         : #cae682
-
-! yellow (from the Desert color scheme for Vim:
-!         http://fugal.net/vim/colors/desert.html)
-XTerm*vt100.color3          : khaki
-XTerm*vt100.color11         : khaki
-
-! blue
-XTerm*vt100.color4          : #8ac6f2
-XTerm*vt100.color12         : #8ac6f2
-
-! magenta (green at hue 300)
-XTerm*vt100.color5          : #e682e6
-XTerm*vt100.color13         : #e682e6
-
-! cyan (green at hue 180)
-XTerm*vt100.color6          : #82e6e6
-XTerm*vt100.color14         : #82e6e6
-
-! white
-XTerm*vt100.color7          : #f6f3e8
-XTerm*vt100.color15         : #f6f3e8
+!Theme Nineteen
+*color0:  rgb:00/00/00
+*color1:  rgb:b0/70/50
+*color2:  rgb:12/91/4e
+*color3:  rgb:a0/a0/70
+*color4:  rgb:3e/45/81
+*color5:  rgb:a0/70/a0
+*color6:  rgb:70/a0/a0
+*color7:  rgb:a0/a0/a0
+*color8:  rgb:60/60/60
+*color9:  rgb:b0/70/50
+*color10: rgb:12/91/4e
+*color11: rgb:c0/c0/90
+*color12: rgb:3e/45/81
+*color13: rgb:c0/90/c0
+*color14: rgb:90/c0/c0
+*color15: rgb:ff/ff/ff
+!taken from above: bold=blue underline=green
+*colorBD: rgb:3e/45/81
+*colorUL: rgb:12/91/4e
