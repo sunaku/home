@@ -1,0 +1,22 @@
+#!/bin/sh
+# Logitech Marble Mouse (trackball + 4 buttons)
+# http://www.robmeerman.co.uk/unix/xinput
+# http://wiki.archlinux.org/index.php/Logitech_Marble_Mouse
+# https://help.ubuntu.com/community/Logitech_Marblemouse_USB
+
+if xinput list-props "Logitech USB Trackball" > /dev/null; then
+  if test "$1" = left; then
+    xinput set-button-map "Logitech USB Trackball" 3 9 1 4 5 6 7 8 2 10 11 12 13
+    xinput set-int-prop "Logitech USB Trackball" "Evdev Wheel Emulation" 8 1
+    xinput set-int-prop "Logitech USB Trackball" "Evdev Wheel Emulation Button" 8 8
+    xinput set-int-prop "Logitech USB Trackball" "Evdev Wheel Emulation Axes" 8 6 7 4 5
+  elif test "$1" = right; then
+    xinput set-button-map "Logitech USB Trackball" 1 8 3 4 5 6 7 2 9 10 11 12 13
+    xinput set-int-prop "Logitech USB Trackball" "Evdev Wheel Emulation" 8 1
+    xinput set-int-prop "Logitech USB Trackball" "Evdev Wheel Emulation Button" 8 9
+    xinput set-int-prop "Logitech USB Trackball" "Evdev Wheel Emulation Axes" 8 6 7 4 5
+  else
+    echo "Usage: $(basename $0) <left|right>"
+    exit 1
+  fi
+fi
