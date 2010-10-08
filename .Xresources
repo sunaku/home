@@ -23,7 +23,7 @@ Xcursor.theme               : Human
 !-----------------------------------------------------------------------------
 
 ! interaction
-Rxvt.saveLines              : 9999
+Rxvt.saveLines              : 8192
 Rxvt.scrollTtyOutput        : False
 Rxvt.scrollTtyKeypress      : True
 Rxvt.scrollWithBuffer       : True
@@ -44,15 +44,15 @@ Rxvt.termName               : xterm-256color
 
 ! interaction
 XTerm*vt100.metaSendsEscape : True
-XTerm*vt100.saveLines       : 9999
+XTerm*vt100.saveLines       : 8192
 
 ! appearance
-XTerm*vt100.faceName        : Monospace:pixelsize=15
-XTerm*vt100.showBlinkAsBold : True
+XTerm*vt100.faceName        : Monospace:pixelsize=13
 XTerm*termName              : xterm-256color
 XTerm*vt100.colorMode       : True
 XTerm*vt100.colorBDMode     : True
 XTerm*vt100.colorULMode     : True
+XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.veryBoldColors  : 6
 
 !-----------------------------------------------------------------------------
