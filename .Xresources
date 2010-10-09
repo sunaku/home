@@ -80,3 +80,10 @@ XTerm*vt100.veryBoldColors  : 6
 !taken from above: bold=blue underline=green
 *colorBD: rgb:3e/45/81
 *colorUL: rgb:12/91/4e
+
+!-----------------------------------------------------------------------------
+! screensaver
+!-----------------------------------------------------------------------------
+
+XLock.mode: space
+XLock.nice: 19
