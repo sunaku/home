@@ -1,6 +1,6 @@
 #!/bin/sh
 if test "x$DISPLAY" != x; then
-  setxkbmap us
+  setxkbmap us -option ''
 else
   sudo loadkeys us
 fi && echo dvorak off

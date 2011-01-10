@@ -1,6 +1,6 @@
 #!/bin/sh
 if test "x$DISPLAY" != x; then
-  setxkbmap dvorak
+  setxkbmap dvorak -option ''
 else
   sudo loadkeys dvorak
 fi && echo dvorak on
