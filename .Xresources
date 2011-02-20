@@ -38,6 +38,47 @@ Rxvt.scrollBar_right        : True
 Rxvt.font                   : xft:Monospace:pixelsize=13
 Rxvt.termName               : xterm-256color
 
+!https://bitbucket.org/redrampage/dotfiles/src/38fb09ee9afb/.Xdefaults
+!colors ripped from vim color theme "Wombat"
+Rxvt.foreground             : #f6f3e8
+Rxvt.background             : #242424
+
+!black
+Rxvt.color0                 : #191919
+Rxvt.color8                 : #252525
+
+!red
+Rxvt.color1                 : #e5786d
+Rxvt.color9                 : #eb887e
+
+!green
+Rxvt.color2                 : #95e454
+Rxvt.color10                : #95f06d
+
+!brown/yellow
+Rxvt.color3                 : #cae682
+Rxvt.color11                : #daf682
+
+!blue
+Rxvt.color4                 : #6aa6c2
+Rxvt.color12                : #7ab6d2
+
+!magenta
+Rxvt.color5                 : #807caa
+Rxvt.color13                : #827ab1
+
+!cyan
+Rxvt.color6                 : #8ac6f2
+Rxvt.color14                : #a1cdcd
+
+!white
+Rxvt.color7                 : #ffffff
+Rxvt.color15                : #dddddd
+
+!styles
+Rxvt.colorBD                : #8ac6f2
+Rxvt.colorUL                : #cae682
+
 !-----------------------------------------------------------------------------
 ! XTerm
 !-----------------------------------------------------------------------------
@@ -54,32 +95,6 @@ XTerm*vt100.colorBDMode     : True
 XTerm*vt100.colorULMode     : True
 XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.veryBoldColors  : 6
-
-!-----------------------------------------------------------------------------
-! terminal color theme
-! http://phraktured.net/terminal-colors/
-!-----------------------------------------------------------------------------
-
-!Theme Nineteen
-*color0:  rgb:00/00/00
-*color1:  rgb:b0/70/50
-*color2:  rgb:12/91/4e
-*color3:  rgb:a0/a0/70
-*color4:  rgb:3e/45/81
-*color5:  rgb:a0/70/a0
-*color6:  rgb:70/a0/a0
-*color7:  rgb:a0/a0/a0
-*color8:  rgb:60/60/60
-*color9:  rgb:b0/70/50
-*color10: rgb:12/91/4e
-*color11: rgb:c0/c0/90
-*color12: rgb:3e/45/81
-*color13: rgb:c0/90/c0
-*color14: rgb:90/c0/c0
-*color15: rgb:ff/ff/ff
-!taken from above: bold=blue underline=green
-*colorBD: rgb:3e/45/81
-*colorUL: rgb:12/91/4e
 
 !-----------------------------------------------------------------------------
 ! screensaver
