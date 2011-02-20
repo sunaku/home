@@ -3,7 +3,7 @@
 !-----------------------------------------------------------------------------
 
 ! see "font5" in /etc/X11/app-defaults/XTerm
-*font                       : -*-fixed-medium-r-*-*-18-*-*-*-*-*-*-*
+*font                       : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
 
 ! make Xft fonts beautiful on LCD monitors
 Xft.dpi                     : 96
@@ -35,8 +35,7 @@ Rxvt.keysym.Control-Right   : \033[1;5C
 ! appearance
 Rxvt.scrollBar_floating     : True
 Rxvt.scrollBar_right        : True
-Rxvt.font                   : xft:Monospace:pixelsize=13
-Rxvt.termName               : xterm-256color
+Rxvt.font                   : xft:Monospace:size=10
 
 !https://bitbucket.org/redrampage/dotfiles/src/38fb09ee9afb/.Xdefaults
 !colors ripped from vim color theme "Wombat"
@@ -88,7 +87,7 @@ XTerm*vt100.metaSendsEscape : True
 XTerm*vt100.saveLines       : 8192
 
 ! appearance
-XTerm*vt100.faceName        : Monospace:pixelsize=13
+XTerm*vt100.faceName        : Monospace:size=10
 XTerm*termName              : xterm-256color
 XTerm*vt100.colorMode       : True
 XTerm*vt100.colorBDMode     : True
