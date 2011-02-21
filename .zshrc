@@ -49,13 +49,6 @@ ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'
 
-test -s ~/app/paths || cat > ~/app/paths <<EOF
-export PATH=\$PATH:$(ls -d ~/app/**/bin/ | tr '\n' ':')
-export MANPATH=\$MANPATH:$(ls -d ~/app/**/man/ | tr '\n' ':')
-EOF
-source ~/app/paths
-export GEM_HOME=~/app/gems
-
 duh() {
   test $# -eq 0 && set -- *
   du -sch "$@" | sort -h
