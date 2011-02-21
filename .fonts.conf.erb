@@ -5,7 +5,25 @@
 -->
 <!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
 <fontconfig>
-    <!--
+
+  <!-- https://wiki.archlinux.org/index.php/Font_Configuration#Subpixel_rendering -->
+  <match target="font">
+    <edit name="rgba" mode="assign">
+      <const>rgb</const>
+    </edit>
+  </match>
+  <match target="font">
+    <edit mode="assign" name="lcdfilter">
+      <const>lcddefault</const>
+    </edit>
+  </match>
+  <match target="font">
+    <edit name="hintstyle" mode="assign">
+      <const>hintfull</const>
+    </edit>
+  </match>
+
+  <!--
          Map generic fonts to the DejaVu family.
 
          /etc/fonts/conf.d/30-metric-aliases.conf
@@ -34,7 +52,7 @@
 			Albany AMT
 			Thorndale AMT
 			Cumberland AMT
-    -->
+  -->
 <%
   {
     'DejaVu Sans' => [
@@ -78,4 +96,5 @@
     end
   end
 %>
+
 </fontconfig>

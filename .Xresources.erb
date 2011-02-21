@@ -60,89 +60,48 @@ XTerm*vt100.veryBoldColors  : 6
 ! And adapted for Xresources by redrampage in June 2010:
 ! https://bitbucket.org/redrampage/dotfiles/src/38fb09ee9afb/.Xdefaults
 !-----------------------------------------------------------------------------
+<% ['Rxvt', 'XTerm*vt100'].each do |term| %>
 
-
-Rxvt.foreground      : #f6f3e8
-Rxvt.background      : #242424
-
-!black
-Rxvt.color0          : #191919
-Rxvt.color8          : #252525
-
-!red
-Rxvt.color1          : #e5786d
-Rxvt.color9          : #eb887e
-
-!green
-Rxvt.color2          : #95e454
-Rxvt.color10         : #95f06d
-
-!brown/yellow
-Rxvt.color3          : #cae682
-Rxvt.color11         : #daf682
-
-!blue
-Rxvt.color4          : #6aa6c2
-Rxvt.color12         : #7ab6d2
-
-!magenta
-Rxvt.color5          : #807caa
-Rxvt.color13         : #827ab1
-
-!cyan
-Rxvt.color6          : #8ac6f2
-Rxvt.color14         : #a1cdcd
-
-!white
-Rxvt.color7          : #ffffff
-Rxvt.color15         : #dddddd
-
-!styles
-Rxvt.colorBD         : #8ac6f2
-Rxvt.colorUL         : #cae682
-
-
-
-XTerm*vt100.foreground      : #f6f3e8
-XTerm*vt100.background      : #242424
+<%= term %>.foreground      : #f6f3e8
+<%= term %>.background      : #242424
 
 !black
-XTerm*vt100.color0          : #191919
-XTerm*vt100.color8          : #252525
+<%= term %>.color0          : #191919
+<%= term %>.color8          : #252525
 
 !red
-XTerm*vt100.color1          : #e5786d
-XTerm*vt100.color9          : #eb887e
+<%= term %>.color1          : #e5786d
+<%= term %>.color9          : #eb887e
 
 !green
-XTerm*vt100.color2          : #95e454
-XTerm*vt100.color10         : #95f06d
+<%= term %>.color2          : #95e454
+<%= term %>.color10         : #95f06d
 
 !brown/yellow
-XTerm*vt100.color3          : #cae682
-XTerm*vt100.color11         : #daf682
+<%= term %>.color3          : #cae682
+<%= term %>.color11         : #daf682
 
 !blue
-XTerm*vt100.color4          : #6aa6c2
-XTerm*vt100.color12         : #7ab6d2
+<%= term %>.color4          : #6aa6c2
+<%= term %>.color12         : #7ab6d2
 
 !magenta
-XTerm*vt100.color5          : #807caa
-XTerm*vt100.color13         : #827ab1
+<%= term %>.color5          : #807caa
+<%= term %>.color13         : #827ab1
 
 !cyan
-XTerm*vt100.color6          : #8ac6f2
-XTerm*vt100.color14         : #a1cdcd
+<%= term %>.color6          : #8ac6f2
+<%= term %>.color14         : #a1cdcd
 
 !white
-XTerm*vt100.color7          : #ffffff
-XTerm*vt100.color15         : #dddddd
+<%= term %>.color7          : #ffffff
+<%= term %>.color15         : #dddddd
 
 !styles
-XTerm*vt100.colorBD         : #8ac6f2
-XTerm*vt100.colorUL         : #cae682
+<%= term %>.colorBD         : #8ac6f2
+<%= term %>.colorUL         : #cae682
 
-
+<% end %>
 
 !-----------------------------------------------------------------------------
 ! screensaver

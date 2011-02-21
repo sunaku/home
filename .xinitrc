@@ -1,17 +1,21 @@
-#!/bin/sh
-set -x
-
-cd # start in home directory
+# IMPORTANT: This file must be run from a login shell so
+# that ~/.profile (which sets up the $PATH) is sourced
+# before this point.  Otherwise, this script might fail
+# because the programs it executes might not be found.
 
 # appearance
-xrdb -merge ~/.Xdefaults
+xrdb ~/.Xresources
 
-# hardware
-left-mouse # left-handed mouse
+# touchpad
+# http://wiki.archlinux.org/index.php/Touchpad_Synaptics
+syndaemon -t -k -i 2 -d &
+synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2
+
+# network
+wicd-client &
+
+# auto-mounting
 thunar --daemon &
-
-# encryption
-eval $(gpg-agent --daemon)
 
 # input methods
 export XMODIFIERS='@im=SCIM'
@@ -19,30 +23,20 @@ export GTK_IM_MODULE=scim
 export QT_IM_MODULE=scim
 scim -d &
 
-# GNOME stuff
-#test -z $DBUS_SESSION_BUS_ADDRESS &&
-#eval $(dbus-launch --sh-syntax --exit-with-session)
-
 # break reminder
-(workrave || xwrits breaktime=1:30 typetime=30:00 +mouse +lock +beep) &
+xwrits breaktime=1:30 typetime=30 +mouse +multiply=5:1.4 +top &
 
 # music
-xterm -geometry 14x23+8+0 -e alsamixer &
 mpc || mpd &
 sonata &
 
 # window manager
-xterm -e tail -f ~/.wmii/wmiirc.log &
+xterm -e tail -F ~/.wmii/wmiirc.log &
 
 while true; do
-  # the ck-launch-session is for proper automounting of USB drives
-  # see http://bbs.archlinux.org/viewtopic.php?id=84635&p=3
   ck-launch-session wmii
-  xmessage 'Restart the Window Manager?' \
-           -buttons 'Yes:1,No:0' -center \
-           -default 'Yes' -timeout 30    \
+  xmessage 'Do you really want to quit wmii?' \
+           -buttons 'Yes:0,No:1' -center \
+           -default 'No' -timeout 30 \
   && break
 done
-
-# clean up
-test $GPG_AGENT_INFO && killall gpg-agent

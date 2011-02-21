@@ -16,20 +16,11 @@ export ZSH_THEME="fishy"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-#plugins=(ruby gem rails git github command-not-found)
-plugins=(command-not-found git zsh-syntax-highlighting zsh-history-substring-search)
+plugins=(zsh-history-substring-search zsh-syntax-highlighting) # git github ruby gem rails)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export EDITOR='vim'
-export PAGER='env LESSOPEN= less -Rf'
-
-test "$TERM" = xterm &&
-export TERM=xterm-256color
-
-setopt histignorealldups
-
 ZSH_HIGHLIGHT_STYLES[default]='none'
 ZSH_HIGHLIGHT_STYLES[isearch]='fg=magenta,standout'
 ZSH_HIGHLIGHT_STYLES[special]='fg=magenta,standout'
@@ -49,69 +40,14 @@ ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'
 
-duh() {
-  test $# -eq 0 && set -- *
-  du -sch "$@" | sort -h
-}
-
-alias e='$EDITOR'
-alias ec='edit-merge-conflict'
-alias ls='ls --color=tty --human-readable'
-alias lt='ls -ltr'
-alias mv='mv -i'
-alias open='xdg-open'
-alias rm='rm -i'
-alias RM='rm -rf'
-alias scp='rsync --rsh=ssh -arv'
-alias v='$PAGER'
-alias x='nice extract-archive'
-
-alias g='git'
-alias gA='git add'
-alias ga='git add -p'
-alias gau='git add -u'
-alias gb='git branch -av'
-alias gbl='git branch -v'
-alias gca='git commit --amend'
-alias gci='git commit'
-alias gco='git checkout'
-alias gcp='git cherry-pick'
-alias gd='gD --cached'
-alias gD='git diff'
-alias gec='ec $(gs | sed -n "s/^.*both [a-z]*ed: *//p")'
-alias gi='gl -n 1'
-alias gl='git log --name-status'
-alias gra='git rebase --abort'
-alias grb='git rebase'
-alias grc='git rebase --continue'
-alias gr='git remote -v'
-alias gri='git rebase --interactive'
-alias gsa='git stash apply'
-alias gs='git status'
-alias gsl='git stash list'
-alias gst='git stash save'
-glf() {
-  git log --format='format:* %s. %b'$'\n' "$@" |
-  ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
-  less
-}
-gur() { # update all git repositories inside the given directories
-  for arg in "$@"; do
-    for repo in "$arg"/**/.git; do
-      echo "$repo"
-      pushd "$repo"/..
-      git pull origin master
-      popd
-    done
-  done
-}
+export PAGER='env LESSOPEN= less -Rf'
+export EDITOR='vim'
 
 unsetopt auto_name_dirs
 source ~/.rvm/scripts/rvm
 source ~/.nvm/nvm.sh
 cd "$PWD" # trigger .rvmrc loading
 
-test -s $HOME/.zshrc_private &&
-source $HOME/.zshrc_private
-
+source ~/.aliases
+setopt histignorealldups
 fortune -s | cowsay

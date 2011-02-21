@@ -1,4 +1,0 @@
-#!/bin/sh
-# http://www.commandlinefu.com/commands/view/2751/run-skype-using-your-gtk-theme
-# http://wiki.archlinux.org/index.php/Skype#Skype_doesn.27t_use_my_GTK_theme.2C_even_though_other_QT_apps_do
-exec /usr/bin/skype --disable-cleanlooks -style GTK
