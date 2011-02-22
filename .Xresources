@@ -27,8 +27,8 @@ Rxvt.scrollTtyKeypress      : True
 Rxvt.scrollWithBuffer       : True
 Rxvt.keysym.Control-Up      : \033[1;5A
 Rxvt.keysym.Control-Down    : \033[1;5B
-Rxvt.keysym.Control-Left    : \033[1;5D
 Rxvt.keysym.Control-Right   : \033[1;5C
+Rxvt.keysym.Control-Left    : \033[1;5D
 
 ! appearance
 Rxvt.font                   : xft:Monospace:pixelsize=13
