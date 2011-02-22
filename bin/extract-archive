@@ -26,14 +26,14 @@ def extract src_path, dst_path = '.'
         when /\.(tar\.gz|tar\.Z|tgz|taz)$/i
           system 'tar', '-zxf', src_path
 
-        when /\.(gz)$/i
-          system "gunzip -c #{src_path.inspect} > #{src_prefix.inspect}"
-
         when /\.(tar\.bz|tar\.bz2|tbz|tbz2)$/i
           system 'tar', '-jxf', src_path
 
-        when /\.(bz|bz2)$/i
-          system "bunzip2 -c #{src_path.inspect} > #{src_prefix.inspect}"
+        when /\.(tar\.xz|txz)$/i
+          system 'tar', '-Jxf', src_path
+
+        when /\.(tar|cpio|gem)$/i
+          system 'tar', '-xf', src_path
 
         when /\.(tar.lzo|tzo)$/i
           system "lzop -xc #{src_path.inspect} | tar -xf -"
@@ -41,8 +41,11 @@ def extract src_path, dst_path = '.'
         when /\.(lzo)$/i
           system 'lzop', '-x', src_path
 
-        when /\.(tar|cpio|gem)$/i
-          system 'tar', '-xf', src_path
+        when /\.(gz)$/i
+          system "gunzip -c #{src_path.inspect} > #{src_prefix.inspect}"
+
+        when /\.(bz|bz2)$/i
+          system "bunzip2 -c #{src_path.inspect} > #{src_prefix.inspect}"
 
         when /\.(shar)$/i
           system 'sh', src_path
