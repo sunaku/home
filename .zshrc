@@ -43,6 +43,9 @@ ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'
 # bind special keys according to readline configuration
 eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
 
+# do not erase entire line when Control-U is pressed
+bindkey '^U' backward-kill-line
+
 export PAGER='env LESSOPEN= less -Rf'
 export EDITOR='vim'
 
