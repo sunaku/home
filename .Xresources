@@ -148,6 +148,8 @@ XTerm*vt100.colorUL         : #cae682
 ! screensaver
 !-----------------------------------------------------------------------------
 
-XLock.mode                  : image
+XLock.mode                  : space
 XLock.erasemode             : no_fade
 XLock.nice                  : 19
+
+! vim: set ft=xdefaults:
