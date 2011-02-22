@@ -14,6 +14,10 @@ duh() { # disk usage for humans
   du -sch "$@" | sort -h
 }
 
+col() { # print only the given columns, numbered from 1 to N
+  awk "{ print $(for n; do echo -n "\$$n,"; done | sed 's/,$//') }"
+}
+
 alias ga='git add -p'
 alias gA='git add'
 alias gau='git add -u'
