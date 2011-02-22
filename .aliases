@@ -42,23 +42,12 @@ alias gst='git stash save'
 alias gsl='git stash list'
 alias gsa='git stash apply'
 alias gsp='git stash pop'
+alias gup='git-upgrade'
 
 glf() { # formatted git changelog
   git log --format='format:* %s. %b'$'\n' "$@" |
   ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
   less
-}
-
-gur() { # update all git repositories inside the given directories
-  for arg in "$@"; do
-    for repo in "$arg"/**/.git; do
-      echo "$repo"
-      pushd "$repo"/..
-      git pull origin master
-      git status
-      popd
-    done
-  done
 }
 
 gme() { # default git author
