@@ -18,6 +18,13 @@ col() { # print only the given columns, numbered from 1 to N
   awk "{ print $(for n; do echo -n "\$$n,"; done | sed 's/,$//') }"
 }
 
+alias aur='yaourt'
+alias pms='pacman -Ss'
+alias pmi='sudo pacman -S --needed'
+alias pmr='sudo pacman -Rc'
+alias pmu='yaourt --sucre'
+alias pmR="pmr \$(pacman -Qdt | awk '{print $1}')"
+
 alias ga='git add -p'
 alias gA='git add'
 alias gau='git add -u'
