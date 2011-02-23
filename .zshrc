@@ -46,7 +46,7 @@ eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
 # do not erase entire line when Control-U is pressed
 bindkey '^U' backward-kill-line
 
-export PAGER='env LESSOPEN= less -Rf'
+export PAGER='less -LR'
 export EDITOR='vim'
 
 unsetopt auto_name_dirs
