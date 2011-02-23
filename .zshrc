@@ -46,14 +46,9 @@ eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
 # do not erase entire line when Control-U is pressed
 bindkey '^U' backward-kill-line
 
-# make ZSH update 256-color terminal titles
-# http://dev.gentoo.org/~steev/files/zshrc
-case $TERM in
-  *256color*)
-    precmd() { print -Pn "\e]2;%n@%m: %~\a" }
-    preexec() { print -Pn "\e]2;$1 # %~\a" }
-  ;;
-esac
+# show current command, directory, and user in terminal title
+precmd()  { print -Pn "\e]2;$0 (%~) %n@%m\a" }
+preexec() { print -Pn "\e]2;$1 (%~) %n@%m\a" }
 
 export PAGER='less -LR'
 export EDITOR='vim'
