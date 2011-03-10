@@ -6,13 +6,17 @@
 # appearance
 xrdb ~/.Xresources
 
+# dbus (needed by networkmanager and other stuff)
+test -z "$DBUS_SESSION_BUS_ADDRESS" &&
+eval `dbus-launch --sh-syntax --exit-with-session`
+
+# network
+nm-applet --sm-disable &
+
 # touchpad
 # http://wiki.archlinux.org/index.php/Touchpad_Synaptics
 syndaemon -t -k -i 2 -d &
 synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2
-
-# network
-wicd-client &
 
 # auto-mounting
 thunar --daemon &
