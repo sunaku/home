@@ -25,10 +25,22 @@ Rxvt.saveLines              : 8192
 Rxvt.scrollTtyOutput        : False
 Rxvt.scrollTtyKeypress      : True
 Rxvt.scrollWithBuffer       : True
-Rxvt.keysym.Control-Up      : \033[1;5A
-Rxvt.keysym.Control-Down    : \033[1;5B
-Rxvt.keysym.Control-Right   : \033[1;5C
-Rxvt.keysym.Control-Left    : \033[1;5D
+Rxvt.keysym.M-Up            : \033[1;3A
+Rxvt.keysym.M-Down          : \033[1;3B
+Rxvt.keysym.M-Right         : \033[1;3C
+Rxvt.keysym.M-Left          : \033[1;3D
+Rxvt.keysym.M-S-Up          : \033[1;4A
+Rxvt.keysym.M-S-Down        : \033[1;4B
+Rxvt.keysym.M-S-Right       : \033[1;4C
+Rxvt.keysym.M-S-Left        : \033[1;4D
+Rxvt.keysym.C-Up            : \033[1;5A
+Rxvt.keysym.C-Down          : \033[1;5B
+Rxvt.keysym.C-Right         : \033[1;5C
+Rxvt.keysym.C-Left          : \033[1;5D
+Rxvt.keysym.C-S-Up          : \033[1;6A
+Rxvt.keysym.C-S-Down        : \033[1;6B
+Rxvt.keysym.C-S-Right       : \033[1;6C
+Rxvt.keysym.C-S-Left        : \033[1;6D
 
 ! appearance
 Rxvt.font                   : xft:Monospace:pixelsize=13
