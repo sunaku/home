@@ -35,7 +35,7 @@ sonata &
 zim &
 
 # window manager
-xterm -e tail -F ~/.wmii/wmiirc.log &
+xterm -T wmiirc.log -e tail -F ~/.wmii/wmiirc.log &
 
 while true; do
   ck-launch-session wmii
