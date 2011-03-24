@@ -53,11 +53,11 @@ preexec() { print -Pn "\e]2;$1 (%~) %n@%m\a" }
 export PAGER='less -LR'
 export EDITOR='vim'
 
+source ~/.aliases
+setopt histignorealldups
+fortune -s | cowsay
+
 unsetopt auto_name_dirs
 source ~/.rvm/scripts/rvm
 source ~/.nvm/nvm.sh
 cd "$PWD" # trigger .rvmrc loading
-
-source ~/.aliases
-setopt histignorealldups
-fortune -s | cowsay
