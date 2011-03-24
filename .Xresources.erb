@@ -25,6 +25,8 @@ Rxvt.saveLines              : 8192
 Rxvt.scrollTtyOutput        : False
 Rxvt.scrollTtyKeypress      : True
 Rxvt.scrollWithBuffer       : True
+
+! emulate XTerm keycodes to support Vim
 Rxvt.keysym.M-Up            : \033[1;3A
 Rxvt.keysym.M-Down          : \033[1;3B
 Rxvt.keysym.M-Right         : \033[1;3C
@@ -41,6 +43,18 @@ Rxvt.keysym.C-S-Up          : \033[1;6A
 Rxvt.keysym.C-S-Down        : \033[1;6B
 Rxvt.keysym.C-S-Right       : \033[1;6C
 Rxvt.keysym.C-S-Left        : \033[1;6D
+Rxvt.keysym.M-Page_Up       : \033[5;3~
+Rxvt.keysym.M-Page_Down     : \033[6;3~
+Rxvt.keysym.M-Home          : \033[1;3H
+Rxvt.keysym.M-End           : \033[1;3F
+Rxvt.keysym.M-S-Home        : \033[1;4H
+Rxvt.keysym.M-S-End         : \033[1;4F
+Rxvt.keysym.C-Page_Up       : \033[5;5~
+Rxvt.keysym.C-Page_Down     : \033[6;5~
+Rxvt.keysym.C-Home          : \033[1;5H
+Rxvt.keysym.C-End           : \033[1;5F
+Rxvt.keysym.C-S-Home        : \033[1;6H
+Rxvt.keysym.C-S-End         : \033[1;6F
 
 ! appearance
 Rxvt.font                   : xft:Monospace:pixelsize=13
