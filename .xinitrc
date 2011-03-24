@@ -18,9 +18,6 @@ nm-applet --sm-disable &
 syndaemon -t -k -i 2 -d &
 synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2
 
-# auto-mounting
-thunar --daemon &
-
 # input methods
 export XMODIFIERS='@im=SCIM'
 export GTK_IM_MODULE=scim
