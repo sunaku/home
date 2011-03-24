@@ -31,6 +31,9 @@ xwrits breaktime=1:30 typetime=30 +mouse +multiply=5:1.4 +top &
 mpc || mpd &
 sonata &
 
+# notes
+zim &
+
 # window manager
 xterm -e tail -F ~/.wmii/wmiirc.log &
 
