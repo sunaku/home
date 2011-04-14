@@ -1,3 +1,4 @@
+#!/bin/sh
 alias ls='ls -h --color=auto'
 alias lt='ls -ltr'
 alias mv='mv -i'
@@ -23,7 +24,7 @@ alias pms='pacman -Ss'
 alias pmi='sudo pacman -S --needed'
 alias pmr='sudo pacman -Rc'
 alias pmu='yaourt --sucre'
-alias pmR="pmr \$(pacman -Qdt | awk '{print $1}')"
+alias pmR='pmr $(pacman -Qdt | sed "s/ .*//")'
 
 alias ga='git add -p'
 alias gA='git add'
