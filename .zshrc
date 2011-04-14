@@ -55,6 +55,8 @@ export EDITOR='vim'
 
 source ~/.aliases
 setopt histignorealldups
+setopt nocompletealiases # treat gco like git checkout
+compdef _git tig=git-checkout # treat tig like git checkout
 fortune -s | cowsay
 
 unsetopt auto_name_dirs
