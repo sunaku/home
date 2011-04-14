@@ -1,18 +1,22 @@
 # personal scripts
-PATH=~/bin:$PATH
+PATH=$HOME/bin:$PATH
 
-# local gem installation
-export GEM_HOME=~/app/gems
+# local installation
+local_install_root=$HOME/app
+
+# rubygems
+export GEM_HOME=$local_install_root/gems
 mkdir -p $GEM_HOME
 
-# local program installation
-file=~/app/PATH.cache
-test -s $file || cat > $file <<EOF
+# programs
+file=$local_install_root/PATH.cache
+test ! -s $file -o $local_install_root -nt $file && cat > $file <<EOF
 export PATH=\$PATH:$(
-  ls -d ~/app/**/bin/ | fgrep -v "$GEM_HOME/gems" | tr '\n' ':' | sed 's,:$,,'
+  find -L $local_install_root -type d -name bin | fgrep -v "$GEM_HOME/gems" |
+  tr '\n' ':' | sed 's,:$,,'
 )
 export MANPATH=\$MANPATH:$(
-  ls -d ~/app/**/man/ | tr '\n' ':' | sed 's,:$,,'
+  find -L $local_install_root -type d -name man | tr '\n' ':' | sed 's,:$,,'
 )
 EOF
 source $file
