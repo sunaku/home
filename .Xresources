@@ -5,7 +5,7 @@
 ! appearance
 !-----------------------------------------------------------------------------
 
-! see "font5" in /etc/X11/app-defaults/XTerm
+! see "font4" in /usr/share/X11/app-defaults/XTerm
 *font                       : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
 
 ! enable colors in native X applications
@@ -57,7 +57,7 @@ Rxvt.keysym.C-S-Home        : \033[1;6H
 Rxvt.keysym.C-S-End         : \033[1;6F
 
 ! appearance
-Rxvt.font                   : xft:Tamsyn-12
+Rxvt.font                   : xft:Tamsyn-11
 Rxvt.scrollBar_right        : True
 Rxvt.scrollBar_floating     : True
 
@@ -70,7 +70,7 @@ XTerm*vt100.metaSendsEscape : True
 XTerm*vt100.saveLines       : 8192
 
 ! appearance
-XTerm*vt100.faceName        : Tamsyn-12
+XTerm*vt100.faceName        : Tamsyn-11
 XTerm*vt100.colorMode       : True
 XTerm*vt100.colorBDMode     : True
 XTerm*vt100.colorULMode     : True
