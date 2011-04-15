@@ -1,5 +1,6 @@
 #!/bin/sh
 alias ls='ls -h --color=auto'
+alias la='ls -lA'
 alias lt='ls -ltr'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -44,6 +45,7 @@ alias gd='git diff --cached'
 alias gec='ec $(git status | sed -n "s/^.*both [a-z]*ed: *//p")'
 alias gi='git log -1'
 alias gl='git log --name-status'
+alias gL='git log --patch-with-stat'
 alias gr='git remote -v'
 alias grv='git revert'
 alias grb='git rebase'
@@ -55,7 +57,9 @@ alias gst='git stash save'
 alias gsl='git stash list'
 alias gsa='git stash apply'
 alias gsp='git stash pop'
-alias gup='git-upgrade'
+alias gup='git upgrade'
+alias gpu='git push'
+alias gpt='git push --tags'
 
 glf() { # formatted git changelog
   git log --format='format:* %s. %b'$'\n' "$@" |
