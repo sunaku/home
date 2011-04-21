@@ -5,10 +5,10 @@
 require 'shellwords'
 
 `git log #{ARGV.shelljoin} --format=oneline`.lines.reverse_each do |line|
-  commit, *message = line.split
+  commit, message = line.split(' ', 2)
 
-  if version = message.grep(/Version \d+(?:\.\d+)+/i).first
-    system 'git', 'tag', '-f', version, commit
+  if version = message[/^Version (\d+(?:\.\d+)+)/, 1]
     p version => commit
+    system 'git', 'tag', '-f', version, commit
   end
 end
