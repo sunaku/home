@@ -1,10 +1,13 @@
 #!/bin/sh
+
+# file
 alias ls='ls -h --color=auto'
 alias la='ls -lA'
 alias lt='ls -ltr'
 alias mv='mv -i'
 alias rm='rm -i'
 alias RM='rm -rf'
+
 alias scp='rsync --rsh=ssh -arvP'
 alias v=$PAGER
 alias x='nice extract-archive'
@@ -20,6 +23,7 @@ col() { # print only the given columns, numbered from 1 to N
   awk "{ print $(for n; do echo -n "\$$n,"; done | sed 's/,$//') }"
 }
 
+# pacman
 alias aur='yaourt'
 alias pms='pacman -Ss'
 alias pmi='sudo pacman -S --needed'
@@ -27,49 +31,92 @@ alias pmr='sudo pacman -Rc'
 alias pmu='yaourt --sucre'
 alias pmR='pmr $(pacman -Qdt | sed "s/ .*//")'
 
-alias ga='git add -p'
-alias gA='git add'
-alias gau='git add -u'
-alias gb='git branch -av'
-alias gB='git branch -v'
-alias gbr='git checkout -b'
-alias gbd='git branch -d'
-alias gbD='git branch -D'
+# work
+alias go='git status'
+alias gol='git status --short'
+alias god='git diff'
+alias gor='git reset --soft'
+alias goR='git reset --hard'
+
+# tree
+alias gfl='git ls-files'
+alias gfi='git status --short --ignored --porcelain | sed -n "s/^!! //p"'
+alias gfc='git ls-files --cached'
+alias gfm='git ls-files --modified'
+alias gfo='git ls-files --others'
+alias gfs='git ls-files --stage'
+alias gfk='git ls-files --killed'
+
+# log
+alias gl='git log --name-status'
+alias gld='git log --patch-with-stat'
+alias glw='git reflog'
+alias gl1='git log -1'
+
+# index
+alias gi='git add -p'
+alias gia='git add'
+alias giu='git add -u'
+alias gid='git diff --cached'
+alias gir='git reset'
+alias giR='git reset --mixed'
+
+# stash
+alias gt='git stash save'
+alias gtl='git stash list'
+alias gta='git stash apply'
+alias gtp='git stash pop'
+
+# branch
+alias gb='git checkout -b'
+alias gbl='git branch -av'
+alias gbL='git branch -v'
+alias gbr='git branch -d'
+alias gbR='git branch -D'
 alias gbm='git branch -m'
-alias gca='git commit --amend'
+alias gbM='git branch -M'
+
+# commit
 alias gci='git commit'
+alias gca='git commit --amend'
 alias gco='git checkout'
 alias gcp='git cherry-pick'
-alias gD='git diff'
-alias gd='git diff --cached'
-alias gec='ec $(git status | sed -n "s/^.*both [a-z]*ed: *//p")'
-alias gi='git log -1'
-alias gl='git log --name-status'
-alias gL='git log --patch-with-stat'
-alias gr='git remote -v'
-alias grv='git revert'
-alias grb='git rebase'
+alias gcr='git revert'
+alias gcR='git reset "HEAD^"'
+alias gcd='git show'
+
+# rebase
+alias gr='git rebase'
 alias gri='git rebase --interactive'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
-alias gs='git status'
-alias gst='git stash save'
-alias gsl='git stash list'
-alias gsa='git stash apply'
-alias gsp='git stash pop'
-alias gup='git upgrade'
-alias gpu='git push'
+
+# remote
+alias ghl='git remote -v'
+alias gha='git remote add'
+alias ghr='git remote rm'
+
+# push
+alias gp='git push'
+alias gpf='git push --force'
 alias gpt='git push --tags'
+
+# pull
+alias gg='git fetch'
+alias ggm='git pull'
+
+# submodule
+alias gml='git submodule'
+alias gma='git submodule add'
+alias gmr='git rm --cached'
+alias gmR='git submodule update'
+alias gmg='git submodule sync'
+
+# misc
+alias gec='ec $(git status | sed -n "s/^.*both [a-z]*ed: *//p")'
 
 glf() { # formatted git changelog
   git log --format='format:* %s. %b'$'\n' "$@" |
   ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
   less
-}
-
-gme() { # default git author
-  unset GIT_AUTHOR_NAME
-  unset GIT_AUTHOR_EMAIL
-  unset GIT_COMMITTER_NAME
-  unset GIT_COMMITTER_EMAIL
 }
