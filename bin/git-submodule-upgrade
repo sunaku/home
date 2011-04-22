@@ -2,4 +2,4 @@
 # Finds all Git clones in the given directories and
 # upgrades them to the latest origin/master branch.
 find -L "$@" -name '*.git' -type d -print0 |
-xargs -0 -n 1 sh -xc 'cd "$0"/.. && git fetch origin && git rebase origin/master'
+xargs -0 -n 1 sh -xc 'cd "$0"/.. && git pull origin master'
