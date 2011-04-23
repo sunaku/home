@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+# Pretty-prints the given YAML document it in Ruby syntax.
+require 'yaml'
+require 'pp'
+pp YAML.load(ARGF)
