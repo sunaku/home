@@ -4,7 +4,7 @@
 tmp=`mktemp`
 
 xsel -b -o > "$tmp" &&
-gvim -f -c 'setf mail|silent! 1,2s/^$\n//|execute "normal 0gqGo"' "$tmp" &&
+gvim -f -c 'silent! 1s/^$\n\n//|setf mail|execute "normal 0gqGo"' "$tmp" &&
 xsel -b -i < "$tmp"
 
 rm -f "$tmp"
