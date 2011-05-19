@@ -6,7 +6,9 @@
 *~
 
 # Interpreted source
+Gemfile.lock
 .rvmrc
+.test-loop
 
 # Compiled source
 *.com
