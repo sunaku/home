@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# media
+alias mp='mplayer -fixed-vo'
+alias mpf='mp -fs'
+
 # file
 alias ls='ls -h --color=auto'
 alias la='ls -lA'
