@@ -6,6 +6,9 @@
 # appearance
 xrdb ~/.Xresources
 
+# encryption
+eval "$(gpg-agent --daemon)"
+
 # dbus (needed by networkmanager and other stuff)
 test -z "$DBUS_SESSION_BUS_ADDRESS" &&
 eval `dbus-launch --sh-syntax --exit-with-session`
@@ -44,3 +47,6 @@ while true; do
            -default 'No' -timeout 30 \
   && break
 done
+
+# clean up
+test $GPG_AGENT_INFO && killall gpg-agent
