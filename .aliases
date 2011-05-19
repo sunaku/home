@@ -6,7 +6,7 @@ alias la='ls -lA'
 alias lt='ls -ltr'
 alias mv='mv -i'
 alias rm='rm -i'
-alias RM='rm -rf'
+alias RM='rm -vrf'
 
 alias scp='rsync --rsh=ssh -arvP'
 alias v=$PAGER
