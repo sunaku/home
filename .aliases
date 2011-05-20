@@ -93,6 +93,7 @@ alias gcd='git show'
 alias gr='git rebase'
 alias gri='git rebase --interactive'
 alias grc='git rebase --continue'
+alias grs='git rebase --skip'
 alias gra='git rebase --abort'
 
 # remote
