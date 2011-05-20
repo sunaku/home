@@ -1,0 +1,3 @@
+#!/bin/sh
+# remove stylized quotation marks from plain text
+exec sed "s/[‘’]/'/g; s/[“”¿¿]/\"/g" "$@"
