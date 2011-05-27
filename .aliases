@@ -57,6 +57,12 @@ alias gld='git log --patch-with-stat'
 alias glw='git reflog'
 alias gl1='git log -1'
 
+glp() { # pretty git changelog
+  git log --format='format:* %s. %b'$'\n' "$@" |
+  ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
+  less
+}
+
 # index
 alias gi='git add -p'
 alias gia='git add'
@@ -89,6 +95,10 @@ alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
 alias gcd='git show'
 
+# merge
+alias gm='git merge --no-ff'
+alias gmc='edit-merge-conflict $(git status | sed -n "s/^.*both [a-z]*ed: *//p")'
+
 # rebase
 alias gr='git rebase'
 alias gri='git rebase --interactive'
@@ -109,19 +119,15 @@ alias gpt='git push --tags'
 # pull
 alias gg='git fetch'
 alias ggm='git pull'
+alias ggr='git pull --rebase'
 
 # submodule
-alias gml='git submodule'
-alias gma='git submodule add'
-alias gmr='git rm --cached'
-alias gmR='git submodule update'
-alias gmg='git submodule sync'
+alias gul='git submodule'
+alias gua='git submodule add'
+alias gur='git rm --cached'
+alias guR='git submodule update'
+alias gug='git submodule sync'
 
-# misc
-alias gec='ec $(git status | sed -n "s/^.*both [a-z]*ed: *//p")'
-
-glf() { # formatted git changelog
-  git log --format='format:* %s. %b'$'\n' "$@" |
-  ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
-  less
-}
+# clean
+alias gx='git clean -n'
+alias gxf='git clean -f'
