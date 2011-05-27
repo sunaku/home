@@ -119,6 +119,8 @@ def extract src_path, dst_path = '.'
       not File.exist? adj_dst and
       mv(adj_src, adj_dst, :force => true)
 
+    touch tmp_dir # give Dir.mktmpdir() something to remove
+
     adj_dst
   end
 end
