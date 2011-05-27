@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# media
-alias mp='mplayer -fixed-vo'
-alias mpf='mp -fs'
-
 # file
 alias ls='ls -h --color=auto'
 alias la='ls -lA'
@@ -12,19 +8,25 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias RM='rm -vrf'
 
+# util
+alias open='xdg-open'
 alias scp='rsync --rsh=ssh -arvP'
+
+alias mp='mplayer -fixed-vo'
+alias mpf='mp -fs'
+
+alias o='open'
+alias e=$EDITOR
 alias v=$PAGER
 alias x='nice extract-archive'
-alias o='xdg-open'
-alias ec='edit-merge-conflict'
+
+col() { # print only the given columns, numbered from 1 to N
+  awk "{ print $(for n; do echo -n "\$$n,"; done | sed 's/,$//') }"
+}
 
 duh() { # disk usage for humans
   test $# -eq 0 && set -- *
   du -sch "$@" | sort -h
-}
-
-col() { # print only the given columns, numbered from 1 to N
-  awk "{ print $(for n; do echo -n "\$$n,"; done | sed 's/,$//') }"
 }
 
 # pacman
