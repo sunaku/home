@@ -78,95 +78,98 @@ XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.veryBoldColors  : 6
 
 !-----------------------------------------------------------------------------
-! terminal colorscheme
+! terminal color scheme
 !
-! These colors were taken from the Wombat color scheme for Vim:
-! http://dengmao.wordpress.com/2007/01/22/vim-color-scheme-wombat/
-!
-! And adapted for Xresources by redrampage in June 2010:
-! https://bitbucket.org/redrampage/dotfiles/src/38fb09ee9afb/.Xdefaults
+! These colors are from the xoria256 color scheme for Vim:
+! http://www.vim.org/scripts/script.php?script_id=2140
 !-----------------------------------------------------------------------------
 
 
-Rxvt.foreground      : #f6f3e8
-Rxvt.background      : #242424
+Rxvt.foreground      : #d0d0d0
+Rxvt.background      : #1c1c1c
+Rxvt.cursorColor     : #ffaf00
 
 !black
-Rxvt.color0          : #191919
-Rxvt.color8          : #252525
+Rxvt.color0          : #3a3a3a
+Rxvt.color8          : #444444
 
 !red
-Rxvt.color1          : #e5786d
-Rxvt.color9          : #eb887e
+Rxvt.color1          : #df8787
+Rxvt.color9          : #dfafaf
 
 !green
-Rxvt.color2          : #95e454
-Rxvt.color10         : #95f06d
+Rxvt.color2          : #afdf87
+Rxvt.color10         : #afdf5f
 
 !brown/yellow
-Rxvt.color3          : #cae682
-Rxvt.color11         : #daf682
+!Rxvt.color3         : #dfaf87
+!Rxvt.color11        : #ffdfaf
+Rxvt.color3          : #dfdf87
+Rxvt.color11         : #ffffaf
 
 !blue
-Rxvt.color4          : #6aa6c2
-Rxvt.color12         : #7ab6d2
+Rxvt.color4          : #87afdf
+Rxvt.color12         : #afdfff
 
 !magenta
-Rxvt.color5          : #807caa
-Rxvt.color13         : #827ab1
+Rxvt.color5          : #dfafdf
+Rxvt.color13         : #ffdfff
 
 !cyan
-Rxvt.color6          : #8ac6f2
-Rxvt.color14         : #a1cdcd
+Rxvt.color6          : #afafdf
+Rxvt.color14         : #d0d0ff
 
 !white
-Rxvt.color7          : #ffffff
-Rxvt.color15         : #dddddd
+Rxvt.color7          : #eeeeee
+Rxvt.color15         : #ffffff
 
 !styles
-Rxvt.colorBD         : #8ac6f2
-Rxvt.colorUL         : #cae682
+Rxvt.colorBD         : #dfafdf
+Rxvt.colorUL         : #ffffaf
 
 
 
-XTerm*vt100.foreground      : #f6f3e8
-XTerm*vt100.background      : #242424
+XTerm*vt100.foreground      : #d0d0d0
+XTerm*vt100.background      : #1c1c1c
+XTerm*vt100.cursorColor     : #ffaf00
 
 !black
-XTerm*vt100.color0          : #191919
-XTerm*vt100.color8          : #252525
+XTerm*vt100.color0          : #3a3a3a
+XTerm*vt100.color8          : #444444
 
 !red
-XTerm*vt100.color1          : #e5786d
-XTerm*vt100.color9          : #eb887e
+XTerm*vt100.color1          : #df8787
+XTerm*vt100.color9          : #dfafaf
 
 !green
-XTerm*vt100.color2          : #95e454
-XTerm*vt100.color10         : #95f06d
+XTerm*vt100.color2          : #afdf87
+XTerm*vt100.color10         : #afdf5f
 
 !brown/yellow
-XTerm*vt100.color3          : #cae682
-XTerm*vt100.color11         : #daf682
+!XTerm*vt100.color3         : #dfaf87
+!XTerm*vt100.color11        : #ffdfaf
+XTerm*vt100.color3          : #dfdf87
+XTerm*vt100.color11         : #ffffaf
 
 !blue
-XTerm*vt100.color4          : #6aa6c2
-XTerm*vt100.color12         : #7ab6d2
+XTerm*vt100.color4          : #87afdf
+XTerm*vt100.color12         : #afdfff
 
 !magenta
-XTerm*vt100.color5          : #807caa
-XTerm*vt100.color13         : #827ab1
+XTerm*vt100.color5          : #dfafdf
+XTerm*vt100.color13         : #ffdfff
 
 !cyan
-XTerm*vt100.color6          : #8ac6f2
-XTerm*vt100.color14         : #a1cdcd
+XTerm*vt100.color6          : #afafdf
+XTerm*vt100.color14         : #d0d0ff
 
 !white
-XTerm*vt100.color7          : #ffffff
-XTerm*vt100.color15         : #dddddd
+XTerm*vt100.color7          : #eeeeee
+XTerm*vt100.color15         : #ffffff
 
 !styles
-XTerm*vt100.colorBD         : #8ac6f2
-XTerm*vt100.colorUL         : #cae682
+XTerm*vt100.colorBD         : #dfafdf
+XTerm*vt100.colorUL         : #ffffaf
 
 
 

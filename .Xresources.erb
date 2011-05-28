@@ -78,54 +78,54 @@ XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.veryBoldColors  : 6
 
 !-----------------------------------------------------------------------------
-! terminal colorscheme
+! terminal color scheme
 !
-! These colors were taken from the Wombat color scheme for Vim:
-! http://dengmao.wordpress.com/2007/01/22/vim-color-scheme-wombat/
-!
-! And adapted for Xresources by redrampage in June 2010:
-! https://bitbucket.org/redrampage/dotfiles/src/38fb09ee9afb/.Xdefaults
+! These colors are from the xoria256 color scheme for Vim:
+! http://www.vim.org/scripts/script.php?script_id=2140
 !-----------------------------------------------------------------------------
 <% ['Rxvt', 'XTerm*vt100'].each do |term| %>
 
-<%= term %>.foreground      : #f6f3e8
-<%= term %>.background      : #242424
+<%= term %>.foreground      : #d0d0d0
+<%= term %>.background      : #1c1c1c
+<%= term %>.cursorColor     : #ffaf00
 
 !black
-<%= term %>.color0          : #191919
-<%= term %>.color8          : #252525
+<%= term %>.color0          : #3a3a3a
+<%= term %>.color8          : #444444
 
 !red
-<%= term %>.color1          : #e5786d
-<%= term %>.color9          : #eb887e
+<%= term %>.color1          : #df8787
+<%= term %>.color9          : #dfafaf
 
 !green
-<%= term %>.color2          : #95e454
-<%= term %>.color10         : #95f06d
+<%= term %>.color2          : #afdf87
+<%= term %>.color10         : #afdf5f
 
 !brown/yellow
-<%= term %>.color3          : #cae682
-<%= term %>.color11         : #daf682
+!<%= term %>.color3         : #dfaf87
+!<%= term %>.color11        : #ffdfaf
+<%= term %>.color3          : #dfdf87
+<%= term %>.color11         : #ffffaf
 
 !blue
-<%= term %>.color4          : #6aa6c2
-<%= term %>.color12         : #7ab6d2
+<%= term %>.color4          : #87afdf
+<%= term %>.color12         : #afdfff
 
 !magenta
-<%= term %>.color5          : #807caa
-<%= term %>.color13         : #827ab1
+<%= term %>.color5          : #dfafdf
+<%= term %>.color13         : #ffdfff
 
 !cyan
-<%= term %>.color6          : #8ac6f2
-<%= term %>.color14         : #a1cdcd
+<%= term %>.color6          : #afafdf
+<%= term %>.color14         : #d0d0ff
 
 !white
-<%= term %>.color7          : #ffffff
-<%= term %>.color15         : #dddddd
+<%= term %>.color7          : #eeeeee
+<%= term %>.color15         : #ffffff
 
 !styles
-<%= term %>.colorBD         : #8ac6f2
-<%= term %>.colorUL         : #cae682
+<%= term %>.colorBD         : #dfafdf
+<%= term %>.colorUL         : #ffffaf
 
 <% end %>
 
