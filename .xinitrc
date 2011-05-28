@@ -9,6 +9,9 @@ xrdb ~/.Xresources
 # encryption
 eval "$(gpg-agent --daemon)"
 
+# notification
+/usr/lib/notification-daemon-1.0/notification-daemon &
+
 # dbus (needed by networkmanager and other stuff)
 test -z "$DBUS_SESSION_BUS_ADDRESS" &&
 eval `dbus-launch --sh-syntax --exit-with-session`
