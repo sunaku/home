@@ -40,6 +40,11 @@ ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]='fg=magenta'
 ZSH_HIGHLIGHT_STYLES[back-quoted-argument]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]='fg=cyan'
 
+if test $TERM != linux; then
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=yellow,standout'
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,standout'
+fi
+
 # bind special keys according to readline configuration
 eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
 
