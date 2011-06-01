@@ -90,42 +90,40 @@ Rxvt.background      : #1c1c1c
 Rxvt.cursorColor     : #ffaf00
 
 !black
-Rxvt.color0          : #3a3a3a
-Rxvt.color8          : #444444
+Rxvt.color0          : #121212
+Rxvt.color8          : #121212
 
 !red
 Rxvt.color1          : #df8787
-Rxvt.color9          : #dfafaf
+Rxvt.color9          : #df8787
 
 !green
 Rxvt.color2          : #afdf87
-Rxvt.color10         : #afdf5f
+Rxvt.color10         : #afdf87
 
 !brown/yellow
-!Rxvt.color3         : #dfaf87
-!Rxvt.color11        : #ffdfaf
 Rxvt.color3          : #dfdf87
-Rxvt.color11         : #ffffaf
+Rxvt.color11         : #dfdf87
 
 !blue
 Rxvt.color4          : #87afdf
-Rxvt.color12         : #afdfff
+Rxvt.color12         : #87afdf
 
 !magenta
 Rxvt.color5          : #dfafdf
-Rxvt.color13         : #ffdfff
+Rxvt.color13         : #dfafdf
 
 !cyan
 Rxvt.color6          : #afafdf
-Rxvt.color14         : #d0d0ff
+Rxvt.color14         : #afafdf
 
 !white
 Rxvt.color7          : #eeeeee
-Rxvt.color15         : #ffffff
+Rxvt.color15         : #eeeeee
 
 !styles
 Rxvt.colorBD         : #dfafdf
-Rxvt.colorUL         : #ffffaf
+Rxvt.colorUL         : #dfdfaf
 
 
 
@@ -134,42 +132,40 @@ XTerm*vt100.background      : #1c1c1c
 XTerm*vt100.cursorColor     : #ffaf00
 
 !black
-XTerm*vt100.color0          : #3a3a3a
-XTerm*vt100.color8          : #444444
+XTerm*vt100.color0          : #121212
+XTerm*vt100.color8          : #121212
 
 !red
 XTerm*vt100.color1          : #df8787
-XTerm*vt100.color9          : #dfafaf
+XTerm*vt100.color9          : #df8787
 
 !green
 XTerm*vt100.color2          : #afdf87
-XTerm*vt100.color10         : #afdf5f
+XTerm*vt100.color10         : #afdf87
 
 !brown/yellow
-!XTerm*vt100.color3         : #dfaf87
-!XTerm*vt100.color11        : #ffdfaf
 XTerm*vt100.color3          : #dfdf87
-XTerm*vt100.color11         : #ffffaf
+XTerm*vt100.color11         : #dfdf87
 
 !blue
 XTerm*vt100.color4          : #87afdf
-XTerm*vt100.color12         : #afdfff
+XTerm*vt100.color12         : #87afdf
 
 !magenta
 XTerm*vt100.color5          : #dfafdf
-XTerm*vt100.color13         : #ffdfff
+XTerm*vt100.color13         : #dfafdf
 
 !cyan
 XTerm*vt100.color6          : #afafdf
-XTerm*vt100.color14         : #d0d0ff
+XTerm*vt100.color14         : #afafdf
 
 !white
 XTerm*vt100.color7          : #eeeeee
-XTerm*vt100.color15         : #ffffff
+XTerm*vt100.color15         : #eeeeee
 
 !styles
 XTerm*vt100.colorBD         : #dfafdf
-XTerm*vt100.colorUL         : #ffffaf
+XTerm*vt100.colorUL         : #dfdfaf
 
 
 
