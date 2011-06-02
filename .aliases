@@ -48,6 +48,9 @@ alias gol='git status --short'
 alias god='git diff'
 alias gor='git reset --soft'
 alias goR='git reset --hard'
+alias goc='git clean -n'
+alias goC='git clean -f'
+alias gox='git rm'
 
 # tree
 alias gfl='git ls-files'
@@ -77,6 +80,7 @@ alias giu='git add -u'
 alias gid='git diff --cached'
 alias gir='git reset'
 alias giR='git reset --mixed'
+alias gix='git rm --cached'
 
 # stash
 alias gt='git stash save'
@@ -88,8 +92,8 @@ alias gtp='git stash pop'
 alias gb='git checkout -b'
 alias gbl='git branch -av'
 alias gbL='git branch -v'
-alias gbr='git branch -d'
-alias gbR='git branch -D'
+alias gbx='git branch -d'
+alias gbX='git branch -D'
 alias gbm='git branch -m'
 alias gbM='git branch -M'
 
@@ -97,10 +101,11 @@ alias gbM='git branch -M'
 alias gci='git commit'
 alias gca='git commit --amend'
 alias gco='git checkout'
+alias gcO='git checkout HEAD --'
 alias gcp='git cherry-pick'
 alias gcr='git revert'
 alias gcR='git reset "HEAD^"'
-alias gcd='git show'
+alias gc1='git show'
 
 # merge
 alias gm='git merge --no-ff'
@@ -116,7 +121,7 @@ alias gra='git rebase --abort'
 # remote
 alias ghl='git remote -v'
 alias gha='git remote add'
-alias ghr='git remote rm'
+alias ghx='git remote rm'
 
 # push
 alias gp='git push'
@@ -131,10 +136,5 @@ alias ggr='git pull --rebase'
 # submodule
 alias gul='git submodule'
 alias gua='git submodule add'
-alias gur='git rm --cached'
 alias guR='git submodule update'
 alias gug='git submodule sync'
-
-# clean
-alias gx='git clean -n'
-alias gxf='git clean -f'
