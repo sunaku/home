@@ -1,5 +1,9 @@
 # Run `gem install awesome_print` for 'ap' library.
 
+#-----------------------------------------------------------------------------
+# identity
+#-----------------------------------------------------------------------------
+
 interpreter = (RUBY_DESCRIPTION rescue RUBY_VERSION)
 puts "### #{interpreter}"
 
@@ -11,22 +15,28 @@ if RUBY_VERSION < '1.9'
   end
 end
 
-pretty_printer = %w[ap pp].find do |library|
-  begin
-    require library
-    true
-  rescue LoadError
-    false
+#-----------------------------------------------------------------------------
+# appearance
+#-----------------------------------------------------------------------------
+
+require 'pp'
+pretty_printer = 'pp'
+
+begin
+  require 'ap'
+  pretty_printer = 'ap'
+rescue LoadError
+end
+
+IRB::Irb.class_eval do
+  define_method :output_value do
+    __send__ pretty_printer, @context.last_value
   end
 end
 
-if pretty_printer
-  IRB::Irb.class_eval do
-    define_method :output_value do
-      __send__ pretty_printer, @context.last_value
-    end
-  end
-end
+#-----------------------------------------------------------------------------
+# interaction
+#-----------------------------------------------------------------------------
 
 IRB.conf[:PROMPT_MODE] = :SIMPLE
 
