@@ -109,7 +109,13 @@ alias gc1='git show'
 
 # merge
 alias gm='git merge --no-ff'
-alias gmc='edit-merge-conflict $(git status | sed -n "s/^.*both [a-z]*ed: *//p")'
+alias gmf='git merge --ff'
+
+# conflict
+alias gkl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+alias gke='edit-merge-conflict $(gkl)'
+alias gko='git checkout --ours --'
+alias gkt='git checkout --theirs --'
 
 # rebase
 alias gr='git rebase'
