@@ -1,5 +1,9 @@
 #!/bin/sh
 
+export PAGER='less -LR'
+export EDITOR='vim'
+export BROWSER='w3m'
+
 # file
 alias ls='ls -h --color=auto'
 alias la='ls -lA'
@@ -12,12 +16,13 @@ alias RM='rm -vrf'
 alias open='xdg-open'
 alias scp='rsync --rsh=ssh -arvP'
 
-alias mp='mplayer -fixed-vo'
-alias mpf='mp -fs'
+alias mp='mplayer'
+alias mpf='mplayer -fs'
 
-alias o='open'
+alias o='xdg-open'
 alias e=$EDITOR
 alias v=$PAGER
+alias b=$BROWSER
 alias x='nice extract-archive'
 
 col() { # print only the given columns, numbered from 1 to N
