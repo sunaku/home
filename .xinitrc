@@ -31,7 +31,7 @@ export QT_IM_MODULE=scim
 scim -d &
 
 # break reminder
-xwrits breaktime=1:30 typetime=30 +mouse +multiply=5:1.4 +top &
+(workrave || xwrits typetime=25 breaktime=5 +mouse +top) &
 
 # music
 mpc || mpd &
