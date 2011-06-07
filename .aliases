@@ -54,12 +54,12 @@ alias gox='git rm'
 
 # tree
 alias gfl='git ls-files'
-alias gfi='git status --short --ignored --porcelain | sed -n "s/^!! //p"'
+alias gfo='git status --porcelain --short --ignored | sed -n "s/^!! //p"'
 alias gfc='git ls-files --cached'
 alias gfm='git ls-files --modified'
-alias gfo='git ls-files --others'
-alias gfs='git ls-files --stage'
-alias gfk='git ls-files --killed'
+alias gfu='git ls-files --others'
+alias gfi='git ls-files --stage'
+alias gfx='git ls-files --killed'
 
 # log
 alias gl='git log --name-status'
