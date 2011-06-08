@@ -41,7 +41,7 @@ sonata &
 zim &
 
 # window manager
-xterm -T wmiirc.log -e tail -F ~/.wmii/wmiirc.log /var/log/slim.log &
+urxvt -T wmiirc.log -e tail -F ~/.wmii/wmiirc.log /var/log/slim.log &
 
 while true; do
   ck-launch-session wmii
