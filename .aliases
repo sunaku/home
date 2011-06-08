@@ -85,6 +85,7 @@ alias gix='git rm --cached'
 # stash
 alias gt='git stash save'
 alias gtl='git stash list'
+alias gtL='git stash list --patch-with-stat'
 alias gta='git stash apply'
 alias gtp='git stash pop'
 
