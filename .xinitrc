@@ -22,6 +22,7 @@ eval `dbus-launch --sh-syntax --exit-with-session`
 /usr/lib/notification-daemon-1.0/notification-daemon &
 
 # network
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 nm-applet --sm-disable &
 
 # touchpad
