@@ -3,6 +3,9 @@
 # before this point.  Otherwise, this script might fail
 # because the programs it executes might not be found.
 
+# execute the rest of this file under the ConsoleKit environment
+sed -n '/^sed/,$p' "$0" | sed 1d | ck-launch-session sh -x; exit
+
 # appearance
 xrdb ~/.Xresources
 
@@ -44,7 +47,7 @@ zim &
 urxvt -T wmiirc.log -e tail -F ~/.wmii/wmiirc.log /var/log/slim.log &
 
 while true; do
-  ck-launch-session wmii
+  wmii
   xmessage 'Do you really want to quit wmii?' \
            -buttons 'Yes:0,No:1' -center \
            -default 'No' -timeout 30 \
