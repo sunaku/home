@@ -7,7 +7,7 @@
 sed -n '/^sed/,$p' "$0" | sed 1d | ck-launch-session sh -x; exit
 
 # appearance
-xrdb ~/.Xresources
+xrdb ~/.Xdefaults
 
 # encryption
 eval "$(gpg-agent --daemon)"
