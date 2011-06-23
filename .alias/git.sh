@@ -56,9 +56,12 @@ alias gra='git rebase --abort'
 
 # k = conflict
 alias gkl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+alias gka='git add $(gkl)'
 alias gke='edit-merge-conflict $(gkl)'
 alias gko='git checkout --ours --'
+alias gkO='gko $(gkl)'
 alias gkt='git checkout --theirs --'
+alias gkT='gkt $(gkl)'
 
 # f = files
 alias gfl='git ls-files'
