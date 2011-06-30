@@ -57,7 +57,7 @@ Rxvt.keysym.C-S-Home        : \033[1;6H
 Rxvt.keysym.C-S-End         : \033[1;6F
 
 ! appearance
-Rxvt.font                   : xft:Tamsyn-11
+Rxvt.font                   : xft:Tamsyn-11:antialias=false
 Rxvt.scrollBar_right        : True
 Rxvt.scrollBar_floating     : True
 Rxvt.scrollstyle            : plain
@@ -71,7 +71,7 @@ XTerm*vt100.metaSendsEscape : True
 XTerm*vt100.saveLines       : 8192
 
 ! appearance
-XTerm*vt100.faceName        : Tamsyn-11
+XTerm*vt100.faceName        : Tamsyn-11:antialias=false
 XTerm*vt100.colorMode       : True
 XTerm*vt100.colorBDMode     : True
 XTerm*vt100.colorULMode     : True
