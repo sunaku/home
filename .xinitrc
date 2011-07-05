@@ -10,7 +10,8 @@ sed -n '/^sed/,$p' "$0" | sed 1d | ck-launch-session sh -x; exit
 xrdb ~/.Xdefaults
 
 # encryption
-eval "$(gpg-agent --daemon)"
+eval `gpg-agent --daemon` &&
+trap 'killall gpg-agent' EXIT
 
 # notification
 /usr/lib/notification-daemon-1.0/notification-daemon &
@@ -53,6 +54,3 @@ while true; do
            -default 'No' -timeout 30 \
   && break
 done
-
-# clean up
-test $GPG_AGENT_INFO && killall gpg-agent
