@@ -1,3 +1,4 @@
+#!/bin/sh
 # IMPORTANT: This file must be run from a login shell so
 # that ~/.profile (which sets up the $PATH) is sourced
 # before this point.  Otherwise, this script might fail
