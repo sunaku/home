@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --bg-scale "$@"
+feh --bg-fill "$@"
