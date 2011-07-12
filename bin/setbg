@@ -1,2 +1,5 @@
 #!/bin/sh
-feh --bg-fill "$@"
+# Usage: setbg PATH_TO_IMAGE_FILE
+file=~/.fehbg
+echo "hsetroot -full '$(readlink -m "$@")'" > $file
+source $file
