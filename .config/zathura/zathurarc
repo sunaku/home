@@ -1,0 +1,8 @@
+set font Tamsyn 11
+set adjust_open width
+set show_inputbar false
+
+map <F5> toggle_fullscreen
+map <PageUp> scroll full_up
+map <PageDown> scroll full_down
+map <C-q> quit
