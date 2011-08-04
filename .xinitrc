@@ -14,9 +14,6 @@ xrdb ~/.Xdefaults
 eval `gpg-agent --daemon` &&
 trap 'killall gpg-agent' EXIT
 
-# notification
-/usr/lib/notification-daemon-1.0/notification-daemon &
-
 # dbus (needed by networkmanager and other stuff)
 test -z "$DBUS_SESSION_BUS_ADDRESS" &&
 eval `dbus-launch --sh-syntax --exit-with-session`
@@ -49,7 +46,7 @@ sonata &
 zim &
 
 # window manager
-urxvt -T wmiirc.log -e tail -F ~/.wmii/wmiirc.log /var/log/slim.log &
+urxvt -e tail -F ~/.wmii/wmiirc.log /var/log/slim.log /var/log/Xorg.0.log &
 
 while true; do
   wmii

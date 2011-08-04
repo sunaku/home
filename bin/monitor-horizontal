@@ -1,2 +1,2 @@
 #!/bin/sh
-xrandr -o normal
+exec xrandr -o normal --dpi 96
