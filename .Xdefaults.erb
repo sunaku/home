@@ -95,45 +95,45 @@ XTerm*vt100.veryBoldColors  : 6
 !-----------------------------------------------------------------------------
 <% ['Rxvt', 'XTerm*vt100'].each do |term| %>
 
-<%= term %>.foreground      : #d0d0d0
-<%= term %>.background      : #1c1c1c
-<%= term %>.cursorColor     : #ffaf00
+<%= term %>.cursorColor     : #ffaf00<%# Cursor(guibg) %>
+<%= term %>.foreground      : #d0d0d0<%# Normal(guifg) %>
+<%= term %>.background      : #1c1c1c<%# Normal(guibg) %>
 
 !black
-<%= term %>.color0          : #121212
-<%= term %>.color8          : #000000
+<%= term %>.color0          : #121212<%# LineNr(guibg) %>
+<%= term %>.color8          : #0a0a0a<%# color0(rgb) - 8 %>
 
 !red
-<%= term %>.color1          : #d78787
-<%= term %>.color9          : #df8787
+<%= term %>.color1          : #d78787<%# color9(r) - 8 %>
+<%= term %>.color9          : #df8787<%# Special(guifg) %>
 
 !green
-<%= term %>.color2          : #afd787
-<%= term %>.color10         : #afdf87
+<%= term %>.color2          : #afd787<%# color10(g) - 8 %>
+<%= term %>.color10         : #afdf87<%# PreProc(guifg) %>
 
-!brown/yellow
-<%= term %>.color3          : #f7f7af
-<%= term %>.color11         : #ffffaf
+!yellow
+<%= term %>.color3          : #f7f7af<%# color11(rg) - 8 %>
+<%= term %>.color11         : #ffffaf<%# Special(guifg) %>
 
 !blue
-<%= term %>.color4          : #87afd7
-<%= term %>.color12         : #87afdf
+<%= term %>.color4          : #87afd7<%# color12(b) - 8 %>
+<%= term %>.color12         : #87afdf<%# Statement(guifg) %>
 
 !magenta
-<%= term %>.color5          : #d7afd7
-<%= term %>.color13         : #dfafdf
+<%= term %>.color5          : #d7afd7<%# color13(rb) - 8 %>
+<%= term %>.color13         : #dfafdf<%# Identifier(guifg) %>
 
 !cyan
-<%= term %>.color6          : #afafd7
-<%= term %>.color14         : #afafdf
+<%= term %>.color6          : #afd7d7<%# color14(gb) - 8 %>
+<%= term %>.color14         : #afdfdf<%# green(#afdf87) + blue(#87afdf) %>
 
 !white
-<%= term %>.color7          : #ededed
-<%= term %>.color15         : #eeeeee
+<%= term %>.color7          : #e4e4e4<%# color15(rgb) - 8 %>
+<%= term %>.color15         : #eeeeee<%# Folded(guifg) %>
 
 !styles
-<%= term %>.colorBD         : #dfafdf
-<%= term %>.colorUL         : #dfdfaf
+<%= term %>.colorBD         : #dfafdf<%# htmlArg(guifg) %>
+<%= term %>.colorUL         : #dfdfaf<%# htmlValue(guifg) %>
 
 <% end %>
 
