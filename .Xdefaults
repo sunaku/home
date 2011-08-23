@@ -63,13 +63,9 @@ Rxvt.scrollBar_floating     : True
 Rxvt.scrollstyle            : plain
 
 ! extensions
-URxvt.perl-ext-common       : default,matcher,tabbed
+URxvt.perl-ext-common       : default,matcher
 URxvt.urlLauncher           : /usr/bin/xdg-open
 URxvt.matcher.button        : 2
-URxvt.tabbed.tab-fg         : 2
-URxvt.tabbed.tab-bg         : 0
-URxvt.tabbed.tabbar-fg      : 6
-URxvt.tabbed.tabbar-bg      : 0
 
 !-----------------------------------------------------------------------------
 ! XTerm
