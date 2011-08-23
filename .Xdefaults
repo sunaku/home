@@ -95,85 +95,111 @@ XTerm*vt100.veryBoldColors  : 6
 !-----------------------------------------------------------------------------
 
 
-Rxvt.cursorColor     : #ffaf00
-Rxvt.foreground      : #d0d0d0
-Rxvt.background      : #1c1c1c
+!cursor                     : xoria256.Cursor.guibg
+Rxvt.cursorColor            : #ffaf00
 
-!black
-Rxvt.color0          : #121212
-Rxvt.color8          : #0a0a0a
+!foreground                 : xoria256.Normal.guifg
+!background                 : xoria256.Normal.guibg
+Rxvt.foreground             : #d0d0d0
+Rxvt.background             : #1c1c1c
 
-!red
-Rxvt.color1          : #d78787
-Rxvt.color9          : #df8787
+!black.normal               : xoria256.LineNr.guibg
+!black.bright               : black.normal.rgb - 8
+Rxvt.color0                 : #121212
+Rxvt.color8                 : #0a0a0a
 
-!green
-Rxvt.color2          : #afd787
-Rxvt.color10         : #afdf87
+!red.normal                 : red.bright.r - 8
+!red.bright                 : xoria256.Special.guifg
+Rxvt.color1                 : #d78787
+Rxvt.color9                 : #df8787
 
-!yellow
-Rxvt.color3          : #f7f7af
-Rxvt.color11         : #ffffaf
+!green.normal               : green.bright.g - 8
+!green.bright               : xoria256.PreProc.guifg
+Rxvt.color2                 : #afd787
+Rxvt.color10                : #afdf87
 
-!blue
-Rxvt.color4          : #87afd7
-Rxvt.color12         : #87afdf
+!yellow.normal              : yellow.bright.rg - 8
+!yellow.bright              : xoria256.Special.guifg
+Rxvt.color3                 : #f7f7af
+Rxvt.color11                : #ffffaf
 
-!magenta
-Rxvt.color5          : #d7afd7
-Rxvt.color13         : #dfafdf
+!blue.normal                : blue.bright.b - 8
+!blue.bright                : xoria256.Statement.guifg
+Rxvt.color4                 : #87afd7
+Rxvt.color12                : #87afdf
 
-!cyan
-Rxvt.color6          : #afd7d7
-Rxvt.color14         : #afdfdf
+!magenta.normal             : magenta.bright.rb - 8
+!magenta.bright             : xoria256.Identifier.guifg
+Rxvt.color5                 : #d7afd7
+Rxvt.color13                : #dfafdf
 
-!white
-Rxvt.color7          : #e4e4e4
-Rxvt.color15         : #eeeeee
+!cyan.normal                : cyan.bright.gb - 8
+!cyan.bright                : green.bright + blue.bright
+Rxvt.color6                 : #afd7d7
+Rxvt.color14                : #afdfdf
 
-!styles
-Rxvt.colorBD         : #dfafdf
-Rxvt.colorUL         : #dfdfaf
+!white.normal               : white.bright.rgb - 8
+!white.bright               : xoria256.Folded.guifg
+Rxvt.color7                 : #e4e4e4
+Rxvt.color15                : #eeeeee
+
+!bold                       : xoria256.htmlArg.guifg
+!underline                  : xoria256.htmlValue.guifg
+Rxvt.colorBD                : #dfafdf
+Rxvt.colorUL                : #dfdfaf
 
 
 
+!cursor                     : xoria256.Cursor.guibg
 XTerm*vt100.cursorColor     : #ffaf00
+
+!foreground                 : xoria256.Normal.guifg
+!background                 : xoria256.Normal.guibg
 XTerm*vt100.foreground      : #d0d0d0
 XTerm*vt100.background      : #1c1c1c
 
-!black
+!black.normal               : xoria256.LineNr.guibg
+!black.bright               : black.normal.rgb - 8
 XTerm*vt100.color0          : #121212
 XTerm*vt100.color8          : #0a0a0a
 
-!red
+!red.normal                 : red.bright.r - 8
+!red.bright                 : xoria256.Special.guifg
 XTerm*vt100.color1          : #d78787
 XTerm*vt100.color9          : #df8787
 
-!green
+!green.normal               : green.bright.g - 8
+!green.bright               : xoria256.PreProc.guifg
 XTerm*vt100.color2          : #afd787
 XTerm*vt100.color10         : #afdf87
 
-!yellow
+!yellow.normal              : yellow.bright.rg - 8
+!yellow.bright              : xoria256.Special.guifg
 XTerm*vt100.color3          : #f7f7af
 XTerm*vt100.color11         : #ffffaf
 
-!blue
+!blue.normal                : blue.bright.b - 8
+!blue.bright                : xoria256.Statement.guifg
 XTerm*vt100.color4          : #87afd7
 XTerm*vt100.color12         : #87afdf
 
-!magenta
+!magenta.normal             : magenta.bright.rb - 8
+!magenta.bright             : xoria256.Identifier.guifg
 XTerm*vt100.color5          : #d7afd7
 XTerm*vt100.color13         : #dfafdf
 
-!cyan
+!cyan.normal                : cyan.bright.gb - 8
+!cyan.bright                : green.bright + blue.bright
 XTerm*vt100.color6          : #afd7d7
 XTerm*vt100.color14         : #afdfdf
 
-!white
+!white.normal               : white.bright.rgb - 8
+!white.bright               : xoria256.Folded.guifg
 XTerm*vt100.color7          : #e4e4e4
 XTerm*vt100.color15         : #eeeeee
 
-!styles
+!bold                       : xoria256.htmlArg.guifg
+!underline                  : xoria256.htmlValue.guifg
 XTerm*vt100.colorBD         : #dfafdf
 XTerm*vt100.colorUL         : #dfdfaf
 

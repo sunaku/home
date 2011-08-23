@@ -95,45 +95,58 @@ XTerm*vt100.veryBoldColors  : 6
 !-----------------------------------------------------------------------------
 <% ['Rxvt', 'XTerm*vt100'].each do |term| %>
 
-<%= term %>.cursorColor     : #ffaf00<%# Cursor(guibg) %>
-<%= term %>.foreground      : #d0d0d0<%# Normal(guifg) %>
-<%= term %>.background      : #1c1c1c<%# Normal(guibg) %>
+!cursor                     : xoria256.Cursor.guibg
+<%= term %>.cursorColor     : #ffaf00
 
-!black
-<%= term %>.color0          : #121212<%# LineNr(guibg) %>
-<%= term %>.color8          : #0a0a0a<%# color0(rgb) - 8 %>
+!foreground                 : xoria256.Normal.guifg
+!background                 : xoria256.Normal.guibg
+<%= term %>.foreground      : #d0d0d0
+<%= term %>.background      : #1c1c1c
 
-!red
-<%= term %>.color1          : #d78787<%# color9(r) - 8 %>
-<%= term %>.color9          : #df8787<%# Special(guifg) %>
+!black.normal               : xoria256.LineNr.guibg
+!black.bright               : black.normal.rgb - 8
+<%= term %>.color0          : #121212
+<%= term %>.color8          : #0a0a0a
 
-!green
-<%= term %>.color2          : #afd787<%# color10(g) - 8 %>
-<%= term %>.color10         : #afdf87<%# PreProc(guifg) %>
+!red.normal                 : red.bright.r - 8
+!red.bright                 : xoria256.Special.guifg
+<%= term %>.color1          : #d78787
+<%= term %>.color9          : #df8787
 
-!yellow
-<%= term %>.color3          : #f7f7af<%# color11(rg) - 8 %>
-<%= term %>.color11         : #ffffaf<%# Special(guifg) %>
+!green.normal               : green.bright.g - 8
+!green.bright               : xoria256.PreProc.guifg
+<%= term %>.color2          : #afd787
+<%= term %>.color10         : #afdf87
 
-!blue
-<%= term %>.color4          : #87afd7<%# color12(b) - 8 %>
-<%= term %>.color12         : #87afdf<%# Statement(guifg) %>
+!yellow.normal              : yellow.bright.rg - 8
+!yellow.bright              : xoria256.Special.guifg
+<%= term %>.color3          : #f7f7af
+<%= term %>.color11         : #ffffaf
 
-!magenta
-<%= term %>.color5          : #d7afd7<%# color13(rb) - 8 %>
-<%= term %>.color13         : #dfafdf<%# Identifier(guifg) %>
+!blue.normal                : blue.bright.b - 8
+!blue.bright                : xoria256.Statement.guifg
+<%= term %>.color4          : #87afd7
+<%= term %>.color12         : #87afdf
 
-!cyan
-<%= term %>.color6          : #afd7d7<%# color14(gb) - 8 %>
-<%= term %>.color14         : #afdfdf<%# green(#afdf87) + blue(#87afdf) %>
+!magenta.normal             : magenta.bright.rb - 8
+!magenta.bright             : xoria256.Identifier.guifg
+<%= term %>.color5          : #d7afd7
+<%= term %>.color13         : #dfafdf
 
-!white
-<%= term %>.color7          : #e4e4e4<%# color15(rgb) - 8 %>
-<%= term %>.color15         : #eeeeee<%# Folded(guifg) %>
+!cyan.normal                : cyan.bright.gb - 8
+!cyan.bright                : green.bright + blue.bright
+<%= term %>.color6          : #afd7d7
+<%= term %>.color14         : #afdfdf
 
-!styles
-<%= term %>.colorBD         : #dfafdf<%# htmlArg(guifg) %>
-<%= term %>.colorUL         : #dfdfaf<%# htmlValue(guifg) %>
+!white.normal               : white.bright.rgb - 8
+!white.bright               : xoria256.Folded.guifg
+<%= term %>.color7          : #e4e4e4
+<%= term %>.color15         : #eeeeee
+
+!bold                       : xoria256.htmlArg.guifg
+!underline                  : xoria256.htmlValue.guifg
+<%= term %>.colorBD         : #dfafdf
+<%= term %>.colorUL         : #dfdfaf
 
 <% end %>
 
