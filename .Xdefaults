@@ -101,34 +101,34 @@ Rxvt.cursorColor     : #ffaf00
 
 !black
 Rxvt.color0          : #121212
-Rxvt.color8          : #121212
+Rxvt.color8          : #000000
 
 !red
-Rxvt.color1          : #df8787
+Rxvt.color1          : #d78787
 Rxvt.color9          : #df8787
 
 !green
-Rxvt.color2          : #afdf87
+Rxvt.color2          : #afd787
 Rxvt.color10         : #afdf87
 
 !brown/yellow
-Rxvt.color3          : #dfdf87
-Rxvt.color11         : #dfdf87
+Rxvt.color3          : #f7f7af
+Rxvt.color11         : #ffffaf
 
 !blue
-Rxvt.color4          : #87afdf
+Rxvt.color4          : #87afd7
 Rxvt.color12         : #87afdf
 
 !magenta
-Rxvt.color5          : #dfafdf
+Rxvt.color5          : #d7afd7
 Rxvt.color13         : #dfafdf
 
 !cyan
-Rxvt.color6          : #afafdf
+Rxvt.color6          : #afafd7
 Rxvt.color14         : #afafdf
 
 !white
-Rxvt.color7          : #eeeeee
+Rxvt.color7          : #ededed
 Rxvt.color15         : #eeeeee
 
 !styles
@@ -143,34 +143,34 @@ XTerm*vt100.cursorColor     : #ffaf00
 
 !black
 XTerm*vt100.color0          : #121212
-XTerm*vt100.color8          : #121212
+XTerm*vt100.color8          : #000000
 
 !red
-XTerm*vt100.color1          : #df8787
+XTerm*vt100.color1          : #d78787
 XTerm*vt100.color9          : #df8787
 
 !green
-XTerm*vt100.color2          : #afdf87
+XTerm*vt100.color2          : #afd787
 XTerm*vt100.color10         : #afdf87
 
 !brown/yellow
-XTerm*vt100.color3          : #dfdf87
-XTerm*vt100.color11         : #dfdf87
+XTerm*vt100.color3          : #f7f7af
+XTerm*vt100.color11         : #ffffaf
 
 !blue
-XTerm*vt100.color4          : #87afdf
+XTerm*vt100.color4          : #87afd7
 XTerm*vt100.color12         : #87afdf
 
 !magenta
-XTerm*vt100.color5          : #dfafdf
+XTerm*vt100.color5          : #d7afd7
 XTerm*vt100.color13         : #dfafdf
 
 !cyan
-XTerm*vt100.color6          : #afafdf
+XTerm*vt100.color6          : #afafd7
 XTerm*vt100.color14         : #afafdf
 
 !white
-XTerm*vt100.color7          : #eeeeee
+XTerm*vt100.color7          : #ededed
 XTerm*vt100.color15         : #eeeeee
 
 !styles
