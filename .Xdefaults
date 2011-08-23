@@ -136,7 +136,7 @@ Rxvt.color14                : #afdfdf
 
 !white.normal               : white.bright.rgb - 8
 !white.bright               : xoria256.Folded.guifg
-Rxvt.color7                 : #e4e4e4
+Rxvt.color7                 : #e6e6e6
 Rxvt.color15                : #eeeeee
 
 !bold                       : xoria256.htmlArg.guifg
@@ -191,7 +191,7 @@ XTerm*vt100.color14         : #afdfdf
 
 !white.normal               : white.bright.rgb - 8
 !white.bright               : xoria256.Folded.guifg
-XTerm*vt100.color7          : #e4e4e4
+XTerm*vt100.color7          : #e6e6e6
 XTerm*vt100.color15         : #eeeeee
 
 !bold                       : xoria256.htmlArg.guifg
