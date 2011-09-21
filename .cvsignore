@@ -1,8 +1,8 @@
 # http://help.github.com/git-ignore/
-# git config --global core.excludesfile ~/.gitignore_global
+# git config --global core.excludesfile ~/.cvsignore
 
 # Vim backup files
-*.swp
+.*.sw[a-z]*
 *~
 
 # Interpreted source
