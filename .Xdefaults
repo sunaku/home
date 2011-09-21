@@ -91,14 +91,6 @@ XTerm*vt100.veryBoldColors  : 6
 !-----------------------------------------------------------------------------
 
 
-!cursor                     : xoria256.Cursor.guibg
-Rxvt.cursorColor            : #ffaf00
-
-!foreground                 : xoria256.Normal.guifg
-!background                 : xoria256.Normal.guibg
-Rxvt.foreground             : #d0d0d0
-Rxvt.background             : #1c1c1c
-
 !black.normal               : xoria256.LineNr.guibg
 !black.bright               : black.normal.rgb - 8
 Rxvt.color0                 : #121212
@@ -139,20 +131,19 @@ Rxvt.color14                : #afdfdf
 Rxvt.color7                 : #e6e6e6
 Rxvt.color15                : #eeeeee
 
+!foreground                 : xoria256.Normal.guifg
+!background                 : xoria256.Normal.guibg
+!cursor                     : xoria256.Cursor.guibg
+Rxvt.foreground             : #d0d0d0
+Rxvt.background             : #1c1c1c
+Rxvt.cursorColor            : #ffaf00
+
 !bold                       : xoria256.htmlArg.guifg
 !underline                  : xoria256.htmlValue.guifg
 Rxvt.colorBD                : #dfafdf
 Rxvt.colorUL                : #dfdfaf
 
 
-
-!cursor                     : xoria256.Cursor.guibg
-XTerm*vt100.cursorColor     : #ffaf00
-
-!foreground                 : xoria256.Normal.guifg
-!background                 : xoria256.Normal.guibg
-XTerm*vt100.foreground      : #d0d0d0
-XTerm*vt100.background      : #1c1c1c
 
 !black.normal               : xoria256.LineNr.guibg
 !black.bright               : black.normal.rgb - 8
@@ -193,6 +184,13 @@ XTerm*vt100.color14         : #afdfdf
 !white.bright               : xoria256.Folded.guifg
 XTerm*vt100.color7          : #e6e6e6
 XTerm*vt100.color15         : #eeeeee
+
+!foreground                 : xoria256.Normal.guifg
+!background                 : xoria256.Normal.guibg
+!cursor                     : xoria256.Cursor.guibg
+XTerm*vt100.foreground      : #d0d0d0
+XTerm*vt100.background      : #1c1c1c
+XTerm*vt100.cursorColor     : #ffaf00
 
 !bold                       : xoria256.htmlArg.guifg
 !underline                  : xoria256.htmlValue.guifg

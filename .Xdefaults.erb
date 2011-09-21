@@ -91,14 +91,6 @@ XTerm*vt100.veryBoldColors  : 6
 !-----------------------------------------------------------------------------
 <% ['Rxvt', 'XTerm*vt100'].each do |term| %>
 
-!cursor                     : xoria256.Cursor.guibg
-<%= term %>.cursorColor     : #ffaf00
-
-!foreground                 : xoria256.Normal.guifg
-!background                 : xoria256.Normal.guibg
-<%= term %>.foreground      : #d0d0d0
-<%= term %>.background      : #1c1c1c
-
 !black.normal               : xoria256.LineNr.guibg
 !black.bright               : black.normal.rgb - 8
 <%= term %>.color0          : #121212
@@ -138,6 +130,13 @@ XTerm*vt100.veryBoldColors  : 6
 !white.bright               : xoria256.Folded.guifg
 <%= term %>.color7          : #e6e6e6
 <%= term %>.color15         : #eeeeee
+
+!foreground                 : xoria256.Normal.guifg
+!background                 : xoria256.Normal.guibg
+!cursor                     : xoria256.Cursor.guibg
+<%= term %>.foreground      : #d0d0d0
+<%= term %>.background      : #1c1c1c
+<%= term %>.cursorColor     : #ffaf00
 
 !bold                       : xoria256.htmlArg.guifg
 !underline                  : xoria256.htmlValue.guifg
