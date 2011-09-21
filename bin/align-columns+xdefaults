@@ -1,0 +1,2 @@
+#!/bin/sh
+exec align-columns -d ':(?= )' -M '^\! vim'
