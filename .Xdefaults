@@ -205,8 +205,8 @@ XTerm*vt100.colorUL         : #dfdfaf
 ! screensaver
 !-----------------------------------------------------------------------------
 
-XLock.mode                  : space
-XLock.erasemode             : no_fade
-XLock.nice                  : 19
+XLock.mode                  : marquee
+XLock.vtlock                : restore
+XLock.erasedelay            : 0
 
 ! vim: set ft=xdefaults:
