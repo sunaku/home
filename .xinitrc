@@ -37,20 +37,21 @@ export QT_IM_MODULE=scim
 scim -d &
 
 # break reminder
-(workrave || xwrits typetime=25 breaktime=5 +mouse +top) &
+xwrits typetime=25 breaktime=1 +mouse +top &
 
 # music
 mpc || mpd &
 sonata &
 
-# notes
-zim &
+# applications
+wihack -tags mail claws-mail &
+wihack -tags feed liferea &
+wihack -tags note zim &
 
 # window manager
 urxvt -e tail -F ~/.wmii/wmiirc.log /var/log/slim.log /var/log/Xorg.0.log &
 
-while true; do
-  wmii
+while true; do wmii
   xmessage 'Do you really want to quit wmii?' \
            -buttons 'Yes:0,No:1' -center \
            -default 'No' -timeout 30 \
