@@ -1,37 +1,32 @@
 #!/bin/sh -x
-# Somewhat secure editing via GPG encryption.
-# @param  ...  Files to securely edit.
+# Secure editing of GPG-encrypted files.
+# Usage: secure-edit FILE
 #--
 # Written in 2005 by Suraj N. Kurapati
 
-ENCRYPT='gpg2 --no-use-agent --encrypt --sign --armor'
-DECRYPT='gpg2 --no-use-agent --decrypt' # also verifies signature if found
+ENCRYPT='gpg2 --encrypt --sign --armor'
+DECRYPT='gpg2 --decrypt' # also verifies signature if found
 DESTROY='shred --force --zero --remove'
-EDIT='vim -n' # -n turns off swap file
+EDIT='vim -n -i NONE' # disable swap file and viminfo
 
-tmp=$$${RANDOM}${RANDOM}${RANDOM}$$
-trap "$DESTROY ${tmp}*" 0 2 15
+source=$1; shift
+encrypt=`mktemp`
+decrypt=`mktemp`
+trap "$DESTROY $encrypt $decrypt" EXIT
+echo "secure-edit: source=$source decrypt=$decrypt encrypt=$encrypt"
 
-for src
-do
-  # create new source file if necessary.  this
-  # is useful when securely editing a new file
-  if ! test -e "$src"
-  then
-    touch "$src"
-    $ENCRYPT < /dev/null > "$src"
-  fi
+# create new source file if necessary.  this
+# is useful when securely editing a new file
+if ! test -e "$source"; then
+  touch "$source"                  &&
+  $ENCRYPT < /dev/null > "$source" ||
+  exit $?
+fi
 
-  tmp1="${tmp}-1"
-  tmp2="${tmp}-2"
+touch "$decrypt" "$encrypt"        &&
+chmod 0600 "$decrypt" "$encrypt"   &&
 
-  echo creating temporary files: "$tmp1" and "$tmp2"
-
-  touch "$tmp1" "$tmp2"         &&
-  chmod 0600 "$tmp1" "$tmp2"    &&
-
-  $DECRYPT < "$src" > "$tmp1"   &&
-  $EDIT "$tmp1"                 &&
-  $ENCRYPT < "$tmp1" > "$tmp2"  &&
-  mv "$tmp2" "$src" # keeps source intact if we fail to encrypt our changes
-done
+$DECRYPT < "$source" > "$decrypt"  &&
+$EDIT "$decrypt"                   &&
+$ENCRYPT < "$decrypt" > "$encrypt" &&
+cp -p "$encrypt" "$source"
