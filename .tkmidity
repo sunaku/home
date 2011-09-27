@@ -1,0 +1,15 @@
+global Config
+set Config(Tracing) 0
+set Config(ConfirmExit) 0
+set Config(Disp:file) 1
+set Config(Disp:volume) 1
+set Config(Disp:button) 1
+set Config(RepeatPlay) 1
+set Config(AutoStart) 1
+set Config(Disp:text) 1
+set Config(Disp:time) 1
+set Config(Disp:trace) 0
+set Config(CurVol) 100
+set Config(ShufflePlay) 0
+set Config(AutoExit) 1
+set Config(CurFileMode) 0
