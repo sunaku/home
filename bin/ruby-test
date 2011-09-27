@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+#
+# When run inside a Ruby project's root directory,
+# this script adds the project library directory
+# and its spec and test directories to Ruby's load
+# path, and finally executes the given test files.
+#
+# ruby-test [-d] [-v] [TEST]...
+#
+# -d    Enables $DEBUG mode in Ruby.
+#
+# -v    Enables $VERBOSE mode in Ruby.
+#
+# TEST  Path to a file, or a file globbing
+#       pattern describing a set of files.
+#
+#       The default value matches the
+#       entire test and spec suite.
+#
+
+$DEBUG   = true if ARGV.delete('-d')
+$VERBOSE = true if ARGV.delete('-v')
+
+$LOAD_PATH.unshift 'lib', 'test', 'spec'
+
+ARGV.push "{test,spec}/**/*_{test,spec}.rb" if ARGV.empty?
+ARGV.each {|glob| Dir[glob].each {|test| load test } }
