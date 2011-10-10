@@ -84,11 +84,10 @@ XTerm*vt100.showBlinkAsBold : True
 XTerm*vt100.veryBoldColors  : 6
 
 !-----------------------------------------------------------------------------
-! terminal color scheme
-!
-! These colors are from the xoria256 color scheme for Vim:
-! http://www.vim.org/scripts/script.php?script_id=2140
+! xoria256 terminal color scheme
+! http://snk.tuxfamily.org/log/xoria256-terminal-color-scheme.html
 !-----------------------------------------------------------------------------
+
 <% ['Rxvt', 'XTerm*vt100'].each do |term| %>
 
 !black.normal               : xoria256.LineNr.guibg
@@ -138,9 +137,9 @@ XTerm*vt100.veryBoldColors  : 6
 <%= term %>.background      : #1c1c1c
 <%= term %>.cursorColor     : #ffaf00
 
-!bold                       : xoria256.htmlArg.guifg
+!bold                       : xoria256.Type.guifg
 !underline                  : xoria256.htmlValue.guifg
-<%= term %>.colorBD         : #dfafdf
+<%= term %>.colorBD         : #afafdf
 <%= term %>.colorUL         : #dfdfaf
 
 <% end %>
