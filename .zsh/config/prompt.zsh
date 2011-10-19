@@ -1,12 +1,17 @@
-# my "sunaku" prompt from oh-my-zsh (see http://ompldr.org/vOHcwZg)
+# my "sunaku" prompt for ZSH using vcs_info stdlib
+# http://snk.tuxfamily.org/log/sunaku-zsh-prompt.png
+
 PROMPT='%(?..%B%F{red}exit %?%f%b
 )'\
 '$(vcs_info && echo $vcs_info_msg_0_)'\
 "%F{$(test $UID -eq 0 && echo red || echo green)}%~%f"\
 '%(!.#.>) '
+
 RPROMPT='%F{cyan}%@%f'
 
-# VCS integration for ZSH command prompt
+# VCS integration for command prompt using vcs_info
+# http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
+
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr     '%B%F{green}^%f%b'
@@ -14,8 +19,6 @@ zstyle ':vcs_info:*' unstagedstr   '%B%F{yellow}*%f%b'
 zstyle ':vcs_info:*' formats       '%c%u%b%m '
 zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b '
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-remotebranch
-
-# http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
 
 ### git: Show marker (T) if there are untracked files in repository
 # Make sure you have added staged to your 'formats':  %c
