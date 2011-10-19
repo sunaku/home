@@ -1,38 +1,48 @@
-# Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.oh-my-zsh
+#-----------------------------------------------------------------------------
+# defaults
+#-----------------------------------------------------------------------------
 
-# Set to the name theme to load.
-# Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="sunaku"
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.zsh_history
+HISTSIZE=9999
+SAVEHIST=9999
+setopt appendhistory autocd nomatch notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
 
-# Set to this to use case-sensitive completion
-# export CASE_SENSITIVE="true"
+# The following lines were added by compinstall
+zstyle :compinstall filename ~/.zshrc
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 
-# Comment this out to disable weekly auto-update checks
-export DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# export DISABLE_LS_COLORS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(zsh-syntax-highlighting zsh-history-substring-search)
-
-source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
+# stuff from default oh-my-zsh configuration
+setopt alwaystoend
+setopt autocd
+setopt autopushd
+setopt cdablevars
+setopt completeinword
+setopt correctall
+setopt extendedglob
+setopt extendedhistory
+setopt noflowcontrol
+setopt histexpiredupsfirst
+setopt histignorealldups
+setopt histignoredups
+setopt histignorespace
+setopt histverify
+setopt incappendhistory
+setopt interactive
+setopt kshglob
+setopt longlistjobs
+setopt monitor
+setopt promptsubst
+setopt pushdignoredups
+setopt sharehistory
 
 #-----------------------------------------------------------------------------
 # appearance
 #-----------------------------------------------------------------------------
-
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='bold'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='bold'
-
-if test $TERM != linux; then
-  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=yellow,standout'
-  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,standout'
-fi
 
 # show current command, directory, and user in terminal title
 precmd()  { print -Pn "\e]2;$0 (%~) %n@%m\a" }
@@ -48,6 +58,7 @@ eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
 # do not erase entire line when Control-U is pressed
 bindkey '^U' backward-kill-line
 
+# keep command history unique to fit more items in it!
 setopt histignorealldups
 
 source ~/.alias
@@ -59,6 +70,18 @@ compdef hub=git               # treat `hub` like `git`
 # plugins
 #-----------------------------------------------------------------------------
 
+# zsh-syntax-highlighting
+source ~/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='bold'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='bold'
+
+# zsh-history-substring-search
+source ~/.zsh-history-substring-search/zsh-history-substring-search.zsh
+if test $TERM != linux; then
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=yellow,standout'
+  HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,standout'
+fi
+
 # Ruby Version Manager
 unsetopt auto_name_dirs
 source ~/.rvm/scripts/rvm
@@ -66,6 +89,10 @@ cd $PWD # trigger .rvmrc loading
 
 # Node Version Manager
 source ~/.nvm/nvm.sh
+
+#-----------------------------------------------------------------------------
+# welcome
+#-----------------------------------------------------------------------------
 
 # fortune cookie ;-)
 fortune -s | cowsay
