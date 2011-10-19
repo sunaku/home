@@ -20,7 +20,7 @@ alias gix='git rm --cached'
 # t = stash
 alias gt='git stash save'
 alias gtl='git stash list'
-alias gtL='git stash list --patch-with-stat'
+alias gtld='git stash list --patch-with-stat'
 alias gtb='git stash branch'
 alias gta='git stash apply'
 alias gtp='git stash pop'
@@ -59,7 +59,7 @@ alias grs='git rebase --skip'
 alias gra='git rebase --abort'
 
 # k = conflict
-alias gkl='git status | sed -n "s/^.*both [a-z]*ed: *//p"'
+alias gkl='git status --porcelain | sed -n "s/^[^? ][^? ] //p"'
 alias gka='git add $(gkl)'
 alias gke='edit-merge-conflict $(gkl)'
 alias gko='git checkout --ours --'
@@ -77,8 +77,15 @@ alias gfx='git ls-files --killed'
 
 # l = log
 alias gl='git log --name-status'
+alias gll='gl --oneline'
 alias gld='git log --patch-with-stat'
-alias glo='git reflog'
+alias glc='git reflog'
+glcf() { # search reflog for all commits related to the given files
+  gl $(git rev-list --all "$@")
+}
+glcfd() { # search reflog for all commits related to the given files, with diffs
+  gld $(git rev-list --all "$@")
+}
 alias gl1='git log -1'
 
 glp() { # pretty git changelog

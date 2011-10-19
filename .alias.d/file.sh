@@ -1,4 +1,5 @@
 alias ls='ls -h --color=auto'
+alias ll='ls -l'
 alias la='ls -lA'
 alias lt='ls -ltr'
 alias mv='mv -i'
@@ -9,3 +10,5 @@ duh() { # disk usage for humans
   test $# -eq 0 && set -- *
   du -sch "$@" | sort -h
 }
+
+alias tree='tree -ACF'
