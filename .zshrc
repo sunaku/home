@@ -59,30 +59,29 @@ RPROMPT='%F{cyan}%@%f'
 # VCS integration for ZSH command prompt
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr     '%F{green}+%f'
-zstyle ':vcs_info:*' unstagedstr   '%F{yellow}!%f'
-zstyle ':vcs_info:*' formats       '%B%c%u%m%%b%b '
-zstyle ':vcs_info:*' actionformats '%B%c%u%m%%b%b %B%F{red}%s:%a%f%%b '
+zstyle ':vcs_info:*' stagedstr     '%B%F{green}^%f%b'
+zstyle ':vcs_info:*' unstagedstr   '%B%F{yellow}*%f%b'
+zstyle ':vcs_info:*' formats       '%c%u%b%m '
+zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b '
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-remotebranch
 
 # http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
 
 ### git: Show marker (T) if there are untracked files in repository
 # Make sure you have added staged to your 'formats':  %c
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
-+vi-git-untracked(){
+function +vi-git-untracked(){
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
         git status --porcelain | grep '??' &> /dev/null ; then
         # This will show the marker if there are any untracked files in repo.
         # If instead you want to show the marker only if there are untracked
         # files in $PWD, use:
         #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
-        hook_com[staged]+='?'
+        hook_com[unstaged]+='%B%F{magenta},%f%b'
     fi
 }
 
 ### git: Show +N/-N when your local branch is ahead-of or behind remote HEAD.
 # Make sure you have added misc to your 'formats':  %m
-zstyle ':vcs_info:git*+set-message:*' hooks git-aheadbehind
 function +vi-git-aheadbehind() {
     local ahead behind
     local -a gitstatus
@@ -90,19 +89,18 @@ function +vi-git-aheadbehind() {
     # for git prior to 1.7
     # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
     ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-    (( $ahead )) && gitstatus+=( "+${ahead}" )
+    (( $ahead )) && gitstatus+=( "%B%F{blue}+${ahead}%f%b" )
 
     # for git prior to 1.7
     # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
     behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-    (( $behind )) && gitstatus+=( "-${behind}" )
+    (( $behind )) && gitstatus+=( "%B%F{red}-${behind}%f%b" )
 
-    hook_com[misc]+=${(j:/:)gitstatus}
+    hook_com[misc]+=${(j::)gitstatus}
 }
 
 ### git: Show remote branch name for remote-tracking branches
 # Make sure you have added staged to your 'formats':  %b
-zstyle ':vcs_info:git*+set-message:*' hooks git-remotebranch
 function +vi-git-remotebranch() {
     local remote
 
@@ -111,7 +109,7 @@ function +vi-git-remotebranch() {
         --symbolic-full-name 2>/dev/null)/refs\/remotes\/}
 
     if [[ -n ${remote} && ${remote#*/} != ${hook_com[branch]} ]] ; then
-        hook_com[branch]="${hook_com[branch]}(${remote})"
+        hook_com[branch]="${hook_com[branch]}(%F{cyan}${remote}%f)"
     fi
 }
 
