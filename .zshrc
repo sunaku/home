@@ -48,6 +48,22 @@ setopt sharehistory
 precmd()  { print -Pn "\e]2;$0 (%~) %n@%m\a" }
 preexec() { print -Pn "\e]2;$1 (%~) %n@%m\a" }
 
+# my "sunaku" prompt from oh-my-zsh (see http://ompldr.org/vOHcwZg)
+PROMPT='%(?..%B%F{red}exit %?%f%b
+)'\
+'$(vcs_info && echo $vcs_info_msg_0_)'\
+"%F{$(test $UID -eq 0 && echo red || echo green)}%~%f"\
+'%(!.#.>) '
+RPROMPT='%F{cyan}%@%f'
+
+# VCS integration for ZSH command prompt
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr     '%F{green}+%f'
+zstyle ':vcs_info:*' unstagedstr   '%F{yellow}!%f'
+zstyle ':vcs_info:*' formats       '%B%c%u%m%%b%b '
+zstyle ':vcs_info:*' actionformats '%B%c%u%m%%b%b %B%F{red}%s:%a%f%%b '
+
 #-----------------------------------------------------------------------------
 # interaction
 #-----------------------------------------------------------------------------
