@@ -1,11 +1,11 @@
-# Run `gem install awesome_print` for 'ap' library.
+# NOTE: Run `gem install awesome_print` for 'ap' library.
 
 #-----------------------------------------------------------------------------
 # identity
 #-----------------------------------------------------------------------------
 
 interpreter = (RUBY_DESCRIPTION rescue RUBY_VERSION)
-puts "### #{interpreter}"
+puts "## #{interpreter}"
 
 if RUBY_VERSION < '1.9'
   begin
@@ -32,11 +32,6 @@ IRB::Irb.class_eval do
   define_method :output_value do
     __send__ pretty_printer, @context.last_value
   end
-end
-
-require 'yaml'
-def yp object
-  puts object.to_yaml
 end
 
 #-----------------------------------------------------------------------------
