@@ -8,5 +8,7 @@ bindkey '^U' backward-kill-line
 autoload -U select-word-style
 select-word-style bash
 
-# keep command history unique to fit more items in it!
-setopt histignorealldups
+# edit the command line in your favorite editor
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
