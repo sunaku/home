@@ -19,6 +19,7 @@ alias gix='git rm --cached'
 
 # t = stash
 alias gt='git stash save'
+alias gT='git stash save && git stash apply'
 alias gtl='git stash list'
 alias gtld='git stash list --patch-with-stat'
 alias gtb='git stash branch'
@@ -29,8 +30,10 @@ alias gtX='git stash clear'
 
 # c = commit
 alias gc='git commit'
+function gcv() { git commit -m "Version $1"; git tag -f "v$1"; }
 alias gcq='git commit -m "SQUASH $(date)"'
 alias gca='git commit --amend'
+alias gcA='git commit --amend --reuse-message=HEAD'
 alias gco='git checkout'
 alias gcO='git checkout HEAD --'
 alias gcp='git cherry-pick'
@@ -46,6 +49,13 @@ alias gbx='git branch -d'
 alias gbX='git branch -D'
 alias gbm='git branch -m'
 alias gbM='git branch -M'
+gb1() { git symbolic-ref "${1:-HEAD}" | sed 's,^refs/heads/,,' }
+gbh() {
+  branch=$(gb1)
+  remote=${1:-origin}
+  echo "$remote" | fgrep -vq "/" && remote="$remote/$branch"
+  git branch --set-upstream "$branch" "$remote"
+}
 
 # m = merge
 alias gm='git merge --no-ff'
@@ -59,7 +69,7 @@ alias grs='git rebase --skip'
 alias gra='git rebase --abort'
 
 # k = conflict
-alias gkl='git status --porcelain | sed -n "s/^[^? ][^? ] //p"'
+alias gkl='git ls-files --unmerged | cut -f2 | uniq'
 alias gka='git add $(gkl)'
 alias gke='edit-merge-conflict $(gkl)'
 alias gko='git checkout --ours --'
