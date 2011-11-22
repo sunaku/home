@@ -1,0 +1,7 @@
+#!/bin/sh
+laptop
+sudo /etc/rc.d/networkmanager stop
+#launch 'xlock' # password protection
+sudo pm-suspend
+sudo /etc/rc.d/networkmanager start
+autotop

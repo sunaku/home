@@ -1,0 +1,3 @@
+#!/bin/sh
+killall xwrits
+exec xwrits typetime=25 breaktime=5 +mouse +top

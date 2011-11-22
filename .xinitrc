@@ -20,7 +20,7 @@ test -z "$DBUS_SESSION_BUS_ADDRESS" &&
 eval `dbus-launch --sh-syntax --exit-with-session`
 
 # notification
-/usr/lib/notification-daemon-1.0/notification-daemon &
+systray & # automatically plugs into xfce-notifyd package
 
 # network
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -38,23 +38,25 @@ export QT_IM_MODULE=scim
 scim -d &
 
 # break reminder
-xwrits typetime=25 breaktime=1 +mouse +top &
+pomodoro &
 
 # music
 mpc || mpd &
 sonata &
+#ario &
 
 # applications
-wihack -tags mail claws-mail &
-wihack -tags feed liferea &
-wihack -tags note zim &
+claws-mail &
+liferea &
+zim &
 
 # window manager
-urxvt -e tail -F ~/.wmii/wmiirc.log /var/log/slim.log /var/log/Xorg.0.log &
-
-while true; do wmii
-  xmessage 'Do you really want to quit wmii?' \
-           -buttons 'Yes:0,No:1' -center \
-           -default 'No' -timeout 30 \
+dwm-statusbar &
+while true; do dwm
+  xmessage 'INSERT COIN TO CONTINUE' -center -timeout 30 \
+           -buttons 'Insert Coin:1,Game Over:0' -default 'Insert Coin' \
   && break
 done
+
+# clean up
+killall gnome-keyring-daemon chromium
