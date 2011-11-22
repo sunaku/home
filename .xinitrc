@@ -53,9 +53,10 @@ zim &
 # window manager
 dwm-statusbar &
 while true; do dwm
-  xmessage 'INSERT COIN TO CONTINUE' -center -timeout 30 \
-           -buttons 'Insert Coin:1,Game Over:0' -default 'Insert Coin' \
-  && break
+  xmessage 'INSERT COIN TO CONTINUE' \
+  -buttons 'Insert Coin:0,Game Over' \
+  -default 'Insert Coin'             \
+  -center -timeout 30 || break
 done
 
 # clean up
