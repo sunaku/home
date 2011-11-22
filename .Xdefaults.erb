@@ -6,15 +6,15 @@
 !-----------------------------------------------------------------------------
 
 ! see "font4" in /usr/share/X11/app-defaults/XTerm
-*font                       : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
+*font                        : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
 
 ! enable colors in native X applications
 #ifdef COLOR
-*customization              : -color
+*customization               : -color
 #endif
 
 ! use the Human cursor theme from Ubuntu
-Xcursor.theme               : Human
+Xcursor.theme                : Human
 
 !-----------------------------------------------------------------------------
 ! Rxvt
@@ -94,90 +94,90 @@ Rxvt.keysym.M-C-S-Home       : \033[1;8H
 Rxvt.keysym.M-C-S-End        : \033[1;8F
 
 ! appearance
-Rxvt.font                   : -*-tamsyn-medium-*-*-*-15-*-*-*-*-*-*-*
-Rxvt.scrollBar_right        : True
-Rxvt.scrollBar_floating     : True
-Rxvt.scrollstyle            : plain
+Rxvt.font                    : -*-tamsyn-medium-*-*-*-15-*-*-*-*-*-*-*
+Rxvt.scrollBar_right         : True
+Rxvt.scrollBar_floating      : True
+Rxvt.scrollstyle             : plain
 
 ! extensions
-URxvt.perl-ext-common       : default,matcher
-URxvt.urlLauncher           : /usr/bin/xdg-open
-URxvt.matcher.button        : 2
+URxvt.perl-ext-common        : default,matcher
+URxvt.urlLauncher            : /usr/bin/xdg-open
+URxvt.matcher.button         : 2
 
 !-----------------------------------------------------------------------------
 ! XTerm
 !-----------------------------------------------------------------------------
 
 ! interaction
-XTerm*vt100.metaSendsEscape : True
-XTerm*vt100.saveLines       : 8192
+XTerm*vt100.metaSendsEscape  : True
+XTerm*vt100.saveLines        : 8192
 
 ! appearance
-XTerm*font                  : -*-tamsyn-medium-*-*-*-15-*-*-*-*-*-*-*
-XTerm*vt100.colorMode       : True
-XTerm*vt100.colorBDMode     : True
-XTerm*vt100.colorULMode     : True
-XTerm*vt100.showBlinkAsBold : True
-XTerm*vt100.veryBoldColors  : 6
+XTerm*font                   : -*-tamsyn-medium-*-*-*-15-*-*-*-*-*-*-*
+XTerm*vt100.colorMode        : True
+XTerm*vt100.colorBDMode      : True
+XTerm*vt100.colorULMode      : True
+XTerm*vt100.showBlinkAsBold  : True
+XTerm*vt100.veryBoldColors   : 6
 
 !-----------------------------------------------------------------------------
-! xoria256 terminal color scheme
+! xoria256 terminal color scheme (uses 00 5f 87 af df ff sequence)
 ! http://snk.tuxfamily.org/log/xoria256-terminal-color-scheme.html
 !-----------------------------------------------------------------------------
 
 <% ['Rxvt', 'XTerm*vt100'].each do |term| %>
 
-!black.normal               : xoria256.LineNr.guibg
-!black.bright               : black.normal.rgb - 8
-<%= term %>.color0          : #121212
-<%= term %>.color8          : #0a0a0a
+!black.normal                : xoria256.LineNr.guibg
+!black.bright                : black.normal.rgb - 8
+<%= term %>.color0           : #121212
+<%= term %>.color8           : #0a0a0a
 
-!red.normal                 : red.bright.r - 8
-!red.bright                 : xoria256.Special.guifg
-<%= term %>.color1          : #d78787
-<%= term %>.color9          : #df8787
+!red.normal                  : red.bright.r - 8
+!red.bright                  : xoria256.Special.guifg
+<%= term %>.color1           : #d78787
+<%= term %>.color9           : #df8787
 
-!green.normal               : green.bright.g - 8
-!green.bright               : xoria256.PreProc.guifg
-<%= term %>.color2          : #afd787
-<%= term %>.color10         : #afdf87
+!green.normal                : green.bright.g - 8
+!green.bright                : xoria256.PreProc.guifg
+<%= term %>.color2           : #afd787
+<%= term %>.color10          : #afdf87
 
-!yellow.normal              : yellow.bright.rg - 8
-!yellow.bright              : xoria256.Special.guifg
-<%= term %>.color3          : #f7f7af
-<%= term %>.color11         : #ffffaf
+!yellow.normal               : yellow.bright.rg - 8
+!yellow.bright               : xoria256.Special.guifg
+<%= term %>.color3           : #f7f7af
+<%= term %>.color11          : #ffffaf
 
-!blue.normal                : blue.bright.b - 8
-!blue.bright                : xoria256.Statement.guifg
-<%= term %>.color4          : #87afd7
-<%= term %>.color12         : #87afdf
+!blue.normal                 : blue.bright.b - 8
+!blue.bright                 : xoria256.Statement.guifg
+<%= term %>.color4           : #87afd7
+<%= term %>.color12          : #87afdf
 
-!magenta.normal             : magenta.bright.rb - 8
-!magenta.bright             : xoria256.Identifier.guifg
-<%= term %>.color5          : #d7afd7
-<%= term %>.color13         : #dfafdf
+!magenta.normal              : magenta.bright.rb - 8
+!magenta.bright              : xoria256.Identifier.guifg
+<%= term %>.color5           : #d7afd7
+<%= term %>.color13          : #dfafdf
 
-!cyan.normal                : cyan.bright.gb - 8
-!cyan.bright                : green.bright + blue.bright
-<%= term %>.color6          : #afd7d7
-<%= term %>.color14         : #afdfdf
+!cyan.normal                 : cyan.bright.gb - 8
+!cyan.bright                 : green.bright + blue.bright
+<%= term %>.color6           : #afd7d7
+<%= term %>.color14          : #afdfdf
 
-!white.normal               : white.bright.rgb - 8
-!white.bright               : xoria256.Folded.guifg
-<%= term %>.color7          : #e6e6e6
-<%= term %>.color15         : #eeeeee
+!white.normal                : white.bright.rgb - 8
+!white.bright                : xoria256.Folded.guifg
+<%= term %>.color7           : #e6e6e6
+<%= term %>.color15          : #eeeeee
 
-!foreground                 : xoria256.Normal.guifg
-!background                 : xoria256.Normal.guibg
-!cursor                     : xoria256.Cursor.guibg
-<%= term %>.foreground      : #d0d0d0
-<%= term %>.background      : #1c1c1c
-<%= term %>.cursorColor     : #ffaf00
+!foreground                  : xoria256.Normal.guifg
+!background                  : xoria256.Normal.guibg
+!cursor                      : xoria256.Cursor.guibg
+<%= term %>.foreground       : #d0d0d0
+<%= term %>.background       : #1c1c1c
+<%= term %>.cursorColor      : #ffaf00
 
-!bold                       : xoria256.Type.guifg
-!underline                  : xoria256.htmlValue.guifg
-<%= term %>.colorBD         : #afafdf
-<%= term %>.colorUL         : #dfdfaf
+!bold                        : xoria256.Type.guifg
+!underline                   : xoria256.htmlValue.guifg
+<%= term %>.colorBD          : #afafdf
+<%= term %>.colorUL          : #dfdfaf
 
 <% end %>
 
@@ -185,8 +185,8 @@ XTerm*vt100.veryBoldColors  : 6
 ! screensaver
 !-----------------------------------------------------------------------------
 
-XLock.mode                  : marquee
-XLock.vtlock                : restore
-XLock.erasedelay            : 0
+XLock.mode                   : space
+XLock.vtlock                 : restore
+XLock.erasedelay             : 0
 
 ! vim: set ft=xdefaults:
