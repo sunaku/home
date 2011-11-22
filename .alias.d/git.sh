@@ -7,6 +7,7 @@ alias goR='git reset --hard'
 alias goc='git clean -n'
 alias goC='git clean -fd'
 alias gox='git rm'
+alias gou='git status --porcelain | sed -n "s/^?? *//p"'
 
 # i = index / stage
 alias gi='git add -p'
@@ -21,7 +22,7 @@ alias gix='git rm --cached'
 alias gt='git stash save'
 alias gT='git stash save && git stash apply'
 alias gtl='git stash list'
-alias gtld='git stash list --patch-with-stat'
+alias gtL='git stash list --patch-with-stat'
 alias gtb='git stash branch'
 alias gta='git stash apply'
 alias gtp='git stash pop'
@@ -30,7 +31,8 @@ alias gtX='git stash clear'
 
 # c = commit
 alias gc='git commit'
-function gcv() { git commit -m "Version $1"; git tag -f "v$1"; }
+function gcv() { git commit -m "Version $1" && git tag "v$1"; }
+function gcV() { git tag -f "v$1"; }
 alias gcq='git commit -m "SQUASH $(date)"'
 alias gca='git commit --amend'
 alias gcA='git commit --amend --reuse-message=HEAD'
@@ -49,8 +51,10 @@ alias gbx='git branch -d'
 alias gbX='git branch -D'
 alias gbm='git branch -m'
 alias gbM='git branch -M'
-gb1() { git symbolic-ref "${1:-HEAD}" | sed 's,^refs/heads/,,' }
-gbh() {
+gb1() { # print current branch name
+  git symbolic-ref -q "${1:-HEAD}" | sed 's,^refs/heads/,,'
+}
+gbh() { # set upstream branch for tracking
   branch=$(gb1)
   remote=${1:-origin}
   echo "$remote" | fgrep -vq "/" && remote="$remote/$branch"
@@ -90,18 +94,20 @@ alias gl='git log --name-status'
 alias gll='gl --oneline'
 alias gld='git log --patch-with-stat'
 alias glc='git reflog'
-glcf() { # search reflog for all commits related to the given files
-  gl $(git rev-list --all "$@")
-}
-glcfd() { # search reflog for all commits related to the given files, with diffs
-  gld $(git rev-list --all "$@")
-}
 alias gl1='git log -1'
-
 glp() { # pretty git changelog
   git log --format='format:* %s. %b'$'\n' "$@" |
   ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
   less
+}
+
+# L = reflog
+alias gL='git reflog'
+gLc() { # search reflog for all commits related to the given files
+  gl $(git rev-list --all "$@")
+}
+gLC() { # search reflog for all commits related to the given files, with diffs
+  gld $(git rev-list --all "$@")
 }
 
 # h = remote hosts
