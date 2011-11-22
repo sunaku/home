@@ -1,6 +1,14 @@
 # http://help.github.com/git-ignore/
 # git config --global core.excludesfile ~/.cvsignore
 
+# version control systems
+.svn
+.hg
+
+# ctags database
+tags
+cscope.out
+
 # Vim backup files
 .*.sw[a-z]*
 *~
