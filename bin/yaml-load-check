@@ -2,3 +2,4 @@
 # Loads the given YAML document, reporting errors if any.
 require 'yaml'
 YAML.load(ARGF)
+puts 'Syntax OK'
