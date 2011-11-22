@@ -55,8 +55,8 @@ dwm-statusbar &
 while true; do dwm
   xmessage 'INSERT COIN TO CONTINUE' \
   -buttons 'Insert Coin:0,Game Over' \
-  -default 'Insert Coin'             \
-  -center -timeout 30 || break
+  -default 'Insert Coin' -timeout 30 \
+  -center || break
 done
 
 # clean up
