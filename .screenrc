@@ -46,7 +46,7 @@ defutf8 on
 #-----------------------------------------------------------------------------
 
 # prefix for all screen shortcuts
-escape ^oo
+escape ^bb
 
 # switch between tabs with Control-Left/Right
 bindkey "^[[1;5D" prev
