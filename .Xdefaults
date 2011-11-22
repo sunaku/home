@@ -21,40 +21,77 @@ Xcursor.theme               : Human
 !-----------------------------------------------------------------------------
 
 ! interaction
-Rxvt.saveLines              : 8192
-Rxvt.scrollTtyOutput        : False
-Rxvt.scrollTtyKeypress      : True
-Rxvt.scrollWithBuffer       : True
+Rxvt.saveLines               : 8192
+Rxvt.scrollTtyOutput         : False
+Rxvt.scrollTtyKeypress       : True
+Rxvt.scrollWithBuffer        : True
 
-! emulate XTerm keycodes to support Vim
-Rxvt.keysym.M-Up            : \033[1;3A
-Rxvt.keysym.M-Down          : \033[1;3B
-Rxvt.keysym.M-Right         : \033[1;3C
-Rxvt.keysym.M-Left          : \033[1;3D
-Rxvt.keysym.M-S-Up          : \033[1;4A
-Rxvt.keysym.M-S-Down        : \033[1;4B
-Rxvt.keysym.M-S-Right       : \033[1;4C
-Rxvt.keysym.M-S-Left        : \033[1;4D
-Rxvt.keysym.C-Up            : \033[1;5A
-Rxvt.keysym.C-Down          : \033[1;5B
-Rxvt.keysym.C-Right         : \033[1;5C
-Rxvt.keysym.C-Left          : \033[1;5D
-Rxvt.keysym.C-S-Up          : \033[1;6A
-Rxvt.keysym.C-S-Down        : \033[1;6B
-Rxvt.keysym.C-S-Right       : \033[1;6C
-Rxvt.keysym.C-S-Left        : \033[1;6D
-Rxvt.keysym.M-Page_Up       : \033[5;3~
-Rxvt.keysym.M-Page_Down     : \033[6;3~
-Rxvt.keysym.M-Home          : \033[1;3H
-Rxvt.keysym.M-End           : \033[1;3F
-Rxvt.keysym.M-S-Home        : \033[1;4H
-Rxvt.keysym.M-S-End         : \033[1;4F
-Rxvt.keysym.C-Page_Up       : \033[5;5~
-Rxvt.keysym.C-Page_Down     : \033[6;5~
-Rxvt.keysym.C-Home          : \033[1;5H
-Rxvt.keysym.C-End           : \033[1;5F
-Rxvt.keysym.C-S-Home        : \033[1;6H
-Rxvt.keysym.C-S-End         : \033[1;6F
+! emulate XTerm for proper recognition of key combinations in Vim
+Rxvt.termName                : xterm-256color
+!Rxvt.keysym.Up              : \033[A  !breaks arrow keys in Vim
+!Rxvt.keysym.Down            : \033[B  !breaks arrow keys in Vim
+!Rxvt.keysym.Right           : \033[C  !breaks arrow keys in Vim
+!Rxvt.keysym.Left            : \033[D  !breaks arrow keys in Vim
+!Rxvt.keysym.Page_Up         : \033[5~ !breaks scrolling in Rxvt
+!Rxvt.keysym.Page_Down       : \033[6~ !breaks scrolling in Rxvt
+!Rxvt.keysym.Home            : \033[H  !breaks navigation in Vim
+!Rxvt.keysym.End             : \033[F  !breaks navigation in Vim
+Rxvt.keysym.S-Up             : \033[1;2A
+Rxvt.keysym.S-Down           : \033[1;2B
+Rxvt.keysym.S-Right          : \033[1;2C
+Rxvt.keysym.S-Left           : \033[1;2D
+!Rxvt.keysym.S-Page_Up       : captured by terminal for scrolling
+!Rxvt.keysym.S-Page_Down     : captured by terminal for scrolling
+Rxvt.keysym.S-Home           : \033[1;2H
+Rxvt.keysym.S-End            : \033[1;2F
+Rxvt.keysym.M-Up             : \033[1;3A
+Rxvt.keysym.M-Down           : \033[1;3B
+Rxvt.keysym.M-Right          : \033[1;3C
+Rxvt.keysym.M-Left           : \033[1;3D
+Rxvt.keysym.M-Page_Up        : \033[5;3~
+Rxvt.keysym.M-Page_Down      : \033[6;3~
+Rxvt.keysym.M-Home           : \033[1;3H
+Rxvt.keysym.M-End            : \033[1;3F
+Rxvt.keysym.M-S-Up           : \033[1;4A
+Rxvt.keysym.M-S-Down         : \033[1;4B
+Rxvt.keysym.M-S-Right        : \033[1;4C
+Rxvt.keysym.M-S-Left         : \033[1;4D
+!Rxvt.keysym.M-S-Page_Up     : seen as Rxvt.keysym.S-Page_Up
+!Rxvt.keysym.M-S-Page_Down   : seen as Rxvt.keysym.S-Page_Down
+Rxvt.keysym.M-S-Home         : \033[1;4H
+Rxvt.keysym.M-S-End          : \033[1;4F
+Rxvt.keysym.C-Up             : \033[1;5A
+Rxvt.keysym.C-Down           : \033[1;5B
+Rxvt.keysym.C-Right          : \033[1;5C
+Rxvt.keysym.C-Left           : \033[1;5D
+Rxvt.keysym.C-Page_Up        : \033[5;5~
+Rxvt.keysym.C-Page_Down      : \033[6;5~
+Rxvt.keysym.C-Home           : \033[1;5H
+Rxvt.keysym.C-End            : \033[1;5F
+Rxvt.keysym.C-S-Up           : \033[1;6A
+Rxvt.keysym.C-S-Down         : \033[1;6B
+Rxvt.keysym.C-S-Right        : \033[1;6C
+Rxvt.keysym.C-S-Left         : \033[1;6D
+!Rxvt.keysym.C-S-Page_Up     : seen as Rxvt.keysym.S-Page_Up
+!Rxvt.keysym.C-S-Page_Down   : seen as Rxvt.keysym.S-Page_Down
+Rxvt.keysym.C-S-Home         : \033[1;6H
+Rxvt.keysym.C-S-End          : \033[1;6F
+Rxvt.keysym.M-C-Up           : \033[1;7A
+Rxvt.keysym.M-C-Down         : \033[1;7B
+Rxvt.keysym.M-C-Right        : \033[1;7C
+Rxvt.keysym.M-C-Left         : \033[1;7D
+Rxvt.keysym.M-C-Page_Up      : \033[5;7~
+Rxvt.keysym.M-C-Page_Down    : \033[6;7~
+Rxvt.keysym.M-C-Home         : \033[1;7H
+Rxvt.keysym.M-C-End          : \033[1;7F
+Rxvt.keysym.M-C-S-Up         : \033[1;8A
+Rxvt.keysym.M-C-S-Down       : \033[1;8B
+Rxvt.keysym.M-C-S-Right      : \033[1;8C
+Rxvt.keysym.M-C-S-Left       : \033[1;8D
+!Rxvt.keysym.M-C-S-Page_Up   : seen as Rxvt.keysym.S-Page_Up
+!Rxvt.keysym.M-C-S-Page_Down : seen as Rxvt.keysym.S-Page_Down
+Rxvt.keysym.M-C-S-Home       : \033[1;8H
+Rxvt.keysym.M-C-S-End        : \033[1;8F
 
 ! appearance
 Rxvt.font                   : -*-tamsyn-medium-*-*-*-15-*-*-*-*-*-*-*
