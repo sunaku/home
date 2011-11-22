@@ -22,7 +22,7 @@ def extract src_path, dst_path = '.'
   Dir.mktmpdir(nil, dst_path) do |tmp_dir|
     # decompress the archive
     cd tmp_dir do
-      case src_name
+      case src_name.sub(/\.part$/, '')
       when /\.(tar\.gz|tar\.Z|tgz|taz)$/i
         system 'tar', '-zxf', src_path
 
