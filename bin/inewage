@@ -1,5 +1,6 @@
 #!/bin/sh
-mplayer -vo null $(
+exec mplayer -vo null $(
   curl -s 'http://inewage.com/listen.pls' |
-  sed -n 's,^File[0-9]*=,,p'
+  sed -n 's,^File[0-9]*=,,p' | sort -u |
+  tee /dev/tty
 )
