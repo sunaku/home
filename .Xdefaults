@@ -102,61 +102,51 @@ URxvt.urlLauncher             : /usr/bin/xdg-open
 URxvt.matcher.button          : 2
 
 !-----------------------------------------------------------------------------
-! xoria256 terminal color scheme (uses 00 5f 87 af df ff sequence)
-! http://snk.tuxfamily.org/log/xoria256-terminal-color-scheme.html
+! Zenburn "high contrast" color scheme
+! http://slinky.imukuppi.org/zenburnpage/
 !-----------------------------------------------------------------------------
 
-!black.normal                 : xoria256.LineNr.guibg
-!black.bright                 : black.normal.rgb - 8
-URxvt.color0                  : #121212
-URxvt.color8                  : #0a0a0a
+!BLK Normal
+URxvt.color0                  : #3f3f3f
+URxvt.color8                  : #3f3f3f
 
-!red.normal                   : red.bright.r - 8
-!red.bright                   : xoria256.Special.guifg
-URxvt.color1                  : #d78787
-URxvt.color9                  : #df8787
+!RED Tag
+URxvt.color1                  : #e89393
+URxvt.color9                  : #e89393
 
-!green.normal                 : green.bright.g - 8
-!green.bright                 : xoria256.PreProc.guifg
-URxvt.color2                  : #afd787
-URxvt.color10                 : #afdf87
+!GRN SpecialKey
+URxvt.color2                  : #9ece9e
+URxvt.color10                 : #9ece9e
 
-!yellow.normal                : yellow.bright.rg - 8
-!yellow.bright                : xoria256.Special.guifg
-URxvt.color3                  : #f7f7af
-URxvt.color11                 : #ffffaf
+!YEL Structure
+URxvt.color3                  : #efefaf
+URxvt.color11                 : #efefaf
 
-!blue.normal                  : blue.bright.b - 8
-!blue.bright                  : xoria256.Statement.guifg
-URxvt.color4                  : #87afd7
-URxvt.color12                 : #87afdf
+!BLU Number
+URxvt.color4                  : #8cd0d3
+URxvt.color12                 : #8cd0d3
 
-!magenta.normal               : magenta.bright.rb - 8
-!magenta.bright               : xoria256.Identifier.guifg
-URxvt.color5                  : #d7afd7
-URxvt.color13                 : #dfafdf
+!MAG Precondit
+URxvt.color5                  : #dfaf8f
+URxvt.color13                 : #dfaf8f
 
-!cyan.normal                  : cyan.bright.gb - 8
-!cyan.bright                  : green.bright + blue.bright
-URxvt.color6                  : #afd7d7
-URxvt.color14                 : #afdfdf
+!CYN Float
+URxvt.color6                  : #c0bed1
+URxvt.color14                 : #c0bed1
 
-!white.normal                 : white.bright.rgb - 8
-!white.bright                 : xoria256.Folded.guifg
-URxvt.color7                  : #e6e6e6
-URxvt.color15                 : #eeeeee
+!WHT Search
+URxvt.color7                  : #ffffe0
+URxvt.color15                 : #ffffe0
 
-!foreground                   : xoria256.Normal.guifg
-!background                   : xoria256.Normal.guibg
-!cursor                       : xoria256.Cursor.guibg
-URxvt.foreground              : #d0d0d0
-URxvt.background              : #1c1c1c
-URxvt.cursorColor             : #ffaf00
+!TXT Normal, Normal, Cursor
+URxvt.background              : #1f1f1f
+URxvt.foreground              : #dcdccc
+URxvt.cursorColor             : #8faf9f
 
-!bold                         : xoria256.Type.guifg
-!underline                    : xoria256.htmlValue.guifg
-URxvt.colorBD                 : #afafdf
-URxvt.colorUL                 : #dfdfaf
+!HLT Include, StatusLine, ErrorMsg
+URxvt.colorBD                 : #ffcfaf
+URxvt.colorUL                 : #ccdc90
+URxvt.colorIT                 : #80d4aa
 
 !-----------------------------------------------------------------------------
 ! screensaver
