@@ -23,5 +23,9 @@ $VERBOSE = true if ARGV.delete('-v')
 
 $LOAD_PATH.unshift 'lib', 'test', 'spec'
 
-ARGV.push "{test,spec}/**/*_{test,spec}.rb" if ARGV.empty?
+Dir['{test,spec}/{test,spec}_helper.rb'].each do |helper|
+  require File.basename(helper, '.rb')
+end
+
+ARGV.push '{test,spec}/**/*.rb' if ARGV.empty?
 ARGV.each {|glob| Dir[glob].each {|test| load test } }
