@@ -64,5 +64,5 @@ if $0 == __FILE__
 
   parser.parse ARGV
 
-  print wrap_comment(STDIN.readlines, width, selector, rejector, true, balanced, two_space)
+  puts wrap_comment(STDIN.readlines, width, selector, rejector, true, balanced, two_space)
 end

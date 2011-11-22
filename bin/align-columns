@@ -82,5 +82,5 @@ if $0 == __FILE__
 
   parser.parse ARGV
 
-  print align_columns(STDIN.readlines, delimiter, selector, rejector)
+  puts align_columns(STDIN.readlines, delimiter, selector, rejector)
 end

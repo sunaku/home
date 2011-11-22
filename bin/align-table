@@ -95,5 +95,5 @@ if $0 == __FILE__
 
   parser.parse ARGV
 
-  print align_table(STDIN.readlines, delimiter, selector, rejector, justifier)
+  puts align_table(STDIN.readlines, delimiter, selector, rejector, justifier)
 end
