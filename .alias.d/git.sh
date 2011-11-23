@@ -6,7 +6,7 @@ alias gor='git reset --soft'
 alias goR='git reset --hard'
 alias goc='git clean -n'
 alias goC='git clean -fd'
-alias gox='git rm'
+alias gox='git rm -r --ignore-unmatch'
 alias gou='git status --porcelain | sed -n "s/^?? *//p"'
 
 # i = index / stage
@@ -16,7 +16,7 @@ alias giu='git add -u'
 alias gid='git diff --cached'
 alias gir='git reset'
 alias giR='git reset --mixed'
-alias gix='git rm --cached'
+alias gix='git rm -r --cached --ignore-unmatch'
 
 # t = stash
 alias gt='git stash save'
@@ -91,10 +91,9 @@ alias gfx='git ls-files --killed'
 
 # l = log
 alias gl='git log --name-status'
+alias gl1='gl -1'
 alias gll='gl --oneline'
-alias gld='git log --patch-with-stat'
-alias glc='git reflog'
-alias gl1='git log -1'
+alias gld='gl --patch-with-stat'
 glp() { # pretty git changelog
   git log --format='format:* %s. %b'$'\n' "$@" |
   ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
