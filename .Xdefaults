@@ -24,7 +24,6 @@ URxvt.scrollTtyKeypress       : True
 URxvt.scrollWithBuffer        : True
 
 ! emulate XTerm for proper recognition of key combinations in Vim
-URxvt.termName                : xterm-256color
 !URxvt.keysym.Up              : \033[A  !breaks arrow keys in Vim
 !URxvt.keysym.Down            : \033[B  !breaks arrow keys in Vim
 !URxvt.keysym.Right           : \033[C  !breaks arrow keys in Vim
@@ -106,9 +105,9 @@ URxvt.matcher.button          : 2
 ! http://slinky.imukuppi.org/zenburnpage/
 !-----------------------------------------------------------------------------
 
-!BLK Normal
-URxvt.color0                  : #3f3f3f
-URxvt.color8                  : #3f3f3f
+!BLK Cursor
+URxvt.color0                  : #000d18
+URxvt.color8                  : #000d18
 
 !RED Tag
 URxvt.color1                  : #e89393
@@ -135,8 +134,8 @@ URxvt.color6                  : #c0bed1
 URxvt.color14                 : #c0bed1
 
 !WHT Search
-URxvt.color7                  : #ffffe0
-URxvt.color15                 : #ffffe0
+URxvt.color7                  : #efefef
+URxvt.color15                 : #efefef
 
 !TXT Normal, Normal, Cursor
 URxvt.background              : #1f1f1f
