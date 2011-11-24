@@ -1,0 +1,17 @@
+#!/bin/sh
+# Runs the given command inside the working directory of
+# the currently focused X11 window if possible. Otherwise,
+# runs the given command in the present working directory.
+
+xid=$(xdpyinfo | awk '/^focus:/{print $3; exit}' | tr -d ',') &&
+pid=$(xprop -id "$xid" _NET_WM_PID | cut -d' ' -f3) &&
+{
+  # when current window is terminal, target its shell child
+  cid=$(pgrep -P "$pid") && test -n "$cid" && pid=$cid
+
+  # travel to current window's present working directory
+  cwd=/proc/$pid/cwd
+  test -L $cwd && cd "$(readlink $cwd)"
+}
+
+eval "$@"
