@@ -1,4 +1,4 @@
-alias ,='cd -'
+alias -- -='cd -'
 alias ls='ls -h --color=auto'
 alias ll='ls -l'
 alias la='ls -lA'
