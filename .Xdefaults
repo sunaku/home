@@ -101,51 +101,50 @@ URxvt.urlLauncher             : /usr/bin/xdg-open
 URxvt.matcher.button          : 2
 
 !-----------------------------------------------------------------------------
-! Zenburn "high contrast" color scheme
-! http://slinky.imukuppi.org/zenburnpage/
+! bright colors from the "invisibone" colorscheme by baskerville
+! https://github.com/baskerville/invisibone/blob/master/invisibone
 !-----------------------------------------------------------------------------
 
-!BLK Cursor
-URxvt.color0                  : #000d18
-URxvt.color8                  : #000d18
+!(235, 248)
+URxvt.background              : #262626
+URxvt.foreground              : #A8A8A8
 
-!RED Tag
-URxvt.color1                  : #e89393
-URxvt.color9                  : #e89393
+!(252)
+URxvt.colorBD                 : #D0D0D0
+URxvt.colorIT                 : #D0D0D0
+URxvt.colorUL                 : #D0D0D0
 
-!GRN SpecialKey
-URxvt.color2                  : #9ece9e
-URxvt.color10                 : #9ece9e
+!BLK (236, 243)
+URxvt.color0                  : #303030
+URxvt.color8                  : #303030
 
-!YEL Structure
-URxvt.color3                  : #efefaf
-URxvt.color11                 : #efefaf
+!WHT (252, 231)
+URxvt.color7                  : #D0D0D0
+URxvt.color15                 : #D0D0D0
 
-!BLU Number
-URxvt.color4                  : #8cd0d3
-URxvt.color12                 : #8cd0d3
+!RED
+URxvt.color1                  : #FFA7DA
+URxvt.color9                  : #FFA7DA
 
-!MAG Precondit
-URxvt.color5                  : #dfaf8f
-URxvt.color13                 : #dfaf8f
+!GRN
+URxvt.color2                  : #A3D572
+URxvt.color10                 : #A3D572
 
-!CYN Float
-URxvt.color6                  : #c0bed1
-URxvt.color14                 : #c0bed1
+!BLU
+URxvt.color4                  : #98CBFE
+URxvt.color12                 : #98CBFE
 
-!WHT Search
-URxvt.color7                  : #efefef
-URxvt.color15                 : #efefef
+!YEL
+URxvt.color3                  : #EFBD8B
+URxvt.color11                 : #EFBD8B
 
-!TXT Normal, Normal, Cursor
-URxvt.background              : #1f1f1f
-URxvt.foreground              : #dcdccc
-URxvt.cursorColor             : #8faf9f
+!CYN
+URxvt.color6                  : #75DAA9
+URxvt.color14                 : #75DAA9
 
-!HLT Include, StatusLine, ErrorMsg
-URxvt.colorBD                 : #ffcfaf
-URxvt.colorUL                 : #ccdc90
-URxvt.colorIT                 : #80d4aa
+!MAG
+URxvt.color5                  : #E5B0FF
+URxvt.color13                 : #E5B0FF
 
 !-----------------------------------------------------------------------------
 ! screensaver
