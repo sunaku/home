@@ -117,21 +117,21 @@ URxvt.color9                  : #e89393
 URxvt.color2                  : #9ece9e
 URxvt.color10                 : #9ece9e
 
-!YEL Structure
-URxvt.color3                  : #efefaf
-URxvt.color11                 : #efefaf
+!YEL Keyword
+URxvt.color3                  : #f0dfaf
+URxvt.color11                 : #f0dfaf
 
 !BLU Number
 URxvt.color4                  : #8cd0d3
 URxvt.color12                 : #8cd0d3
 
 !MAG Precondit
-URxvt.color5                  : #dfaf8f
-URxvt.color13                 : #dfaf8f
+URxvt.color5                  : #c0bed1
+URxvt.color13                 : #c0bed1
 
 !CYN Float
-URxvt.color6                  : #c0bed1
-URxvt.color14                 : #c0bed1
+URxvt.color6                  : #dfaf8f
+URxvt.color14                 : #dfaf8f
 
 !WHT Search
 URxvt.color7                  : #efefef
