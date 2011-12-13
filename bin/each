@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# NAME
+#       each - loop over file paths
+#
+# SYNOPSIS
+#       each <SCRIPT> <FILE_PATH>...
+#       cat <SCRIPT> | each - <FILE_PATH>...
+#
+# DESCRIPTION
+#       For each given <FILE_PATH>, the following variables are set and
+#       then the given <SCRIPT> is evaluated.  If <SCRIPT> is "-", then
+#       the contents of the standard input stream are used in its place.
+#
+#       $p = original file path
+#       $f = without directories
+#       $f = without directories and file extension
+#       $d = with only directories
+#       $x = with only file extension
+#       $X = with without file extension
+#
+#       These variable names come from Ruby's String#pathmap() method.
+#
+# AUTHOR
+#       Written by Suraj N. Kurapati in 2011 based on
+#       on his old "for each file" project from 2003:
+#       https://github.com/sunaku/ff-bash
+#
+
+if test $# -lt 2; then
+  sed -n '2,/^$/s/^# \?//p' "$0"
+  exit 1
+fi
+
+SCRIPT=$1 && shift
+test "$SCRIPT" = '-' && SCRIPT="$(cat)"
+
+for p; do
+  f=${p##*/}
+  n=${f%.*}
+  d=${p%/*}
+  x=${f##*.}
+  X=${p%.*}
+  eval "$SCRIPT"
+done
