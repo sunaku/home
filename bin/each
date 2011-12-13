@@ -4,22 +4,24 @@
 #       each - loop over file paths
 #
 # SYNOPSIS
-#       each <SCRIPT> <FILE_PATH>...
-#       cat <SCRIPT> | each - <FILE_PATH>...
+#       each [-n] <SCRIPT> <FILE_PATH>...
 #
 # DESCRIPTION
-#       For each given <FILE_PATH>, the following variables are set and
-#       then the given <SCRIPT> is evaluated.  If <SCRIPT> is "-", then
-#       the contents of the standard input stream are used in its place.
+#       Sets the following variables and evaluates the
+#       given <SCRIPT> once for each given <FILE_PATH>.
 #
-#       $p = original file path
-#       $f = without directories
-#       $f = without directories and file extension
-#       $d = with only directories
-#       $x = with only file extension
-#       $X = with without file extension
+#       $p = the given <FILE_PATH>
+#       $f = the given <FILE_PATH> without directories (basename)
+#       $n = the given <FILE_PATH> without directories and file extension
+#       $d = the given <FILE_PATH> with only directories (dirname)
+#       $x = the given <FILE_PATH> with only file extension
+#       $X = the given <FILE_PATH> without file extension
 #
 #       These variable names come from Ruby's String#pathmap() method.
+#
+# OPTIONS
+#       -n  Dry run.  Instead of evaluating the <SCRIPT>,
+#           print what would happen if it were evaluated.
 #
 # AUTHOR
 #       Written by Suraj N. Kurapati in 2011 based on
@@ -27,13 +29,24 @@
 #       https://github.com/sunaku/ff-bash
 #
 
+if test "$1" = '-n'; then
+  DRYRUN=$1
+  shift
+fi
+
 if test $# -lt 2; then
   sed -n '2,/^$/s/^# \?//p' "$0"
   exit 1
 fi
 
-SCRIPT=$1 && shift
-test "$SCRIPT" = '-' && SCRIPT="$(cat)"
+SCRIPT=$1
+shift
+
+if test -n "$DRYRUN"; then
+SCRIPT="cat <<END_SCRIPT_DRYRUN
+$SCRIPT
+END_SCRIPT_DRYRUN"
+fi
 
 for p; do
   f=${p##*/}
