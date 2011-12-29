@@ -1,7 +1,0 @@
-#!/bin/sh
-xrandr --output HDMI1 --auto --output LVDS1 --off --dpi 96
-#xset dpms force on # wake up monitor from power saving mode
-setxkbmap us -option "" # switch to QWERTY for keyboard
-marble-mouse left
-statusbar &
-systray &

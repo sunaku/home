@@ -1,9 +1,0 @@
-#!/bin/sh
-if xrandr | fgrep -q 'HDMI1 connected'; then
-  desktop
-else
-  xrandr --auto --dpi 96
-  xset dpms force on # wake up monitor from power saving mode
-fi
-statusbar &
-systray &
