@@ -52,8 +52,8 @@ URxvt.keysym.M-S-Up           : \033[1;4A
 URxvt.keysym.M-S-Down         : \033[1;4B
 URxvt.keysym.M-S-Right        : \033[1;4C
 URxvt.keysym.M-S-Left         : \033[1;4D
-!URxvt.keysym.M-S-Page_Up     : seen as Rxvt.keysym.S-Page_Up
-!URxvt.keysym.M-S-Page_Down   : seen as Rxvt.keysym.S-Page_Down
+!URxvt.keysym.M-S-Page_Up     : captured by terminal for scrolling
+!URxvt.keysym.M-S-Page_Down   : captured by terminal for scrolling
 URxvt.keysym.M-S-Home         : \033[1;4H
 URxvt.keysym.M-S-End          : \033[1;4F
 URxvt.keysym.C-Up             : \033[1;5A
@@ -68,8 +68,8 @@ URxvt.keysym.C-S-Up           : \033[1;6A
 URxvt.keysym.C-S-Down         : \033[1;6B
 URxvt.keysym.C-S-Right        : \033[1;6C
 URxvt.keysym.C-S-Left         : \033[1;6D
-!URxvt.keysym.C-S-Page_Up     : seen as Rxvt.keysym.S-Page_Up
-!URxvt.keysym.C-S-Page_Down   : seen as Rxvt.keysym.S-Page_Down
+!URxvt.keysym.C-S-Page_Up     : captured by terminal for scrolling
+!URxvt.keysym.C-S-Page_Down   : captured by terminal for scrolling
 URxvt.keysym.C-S-Home         : \033[1;6H
 URxvt.keysym.C-S-End          : \033[1;6F
 URxvt.keysym.M-C-Up           : \033[1;7A
@@ -84,13 +84,13 @@ URxvt.keysym.M-C-S-Up         : \033[1;8A
 URxvt.keysym.M-C-S-Down       : \033[1;8B
 URxvt.keysym.M-C-S-Right      : \033[1;8C
 URxvt.keysym.M-C-S-Left       : \033[1;8D
-!URxvt.keysym.M-C-S-Page_Up   : seen as Rxvt.keysym.S-Page_Up
-!URxvt.keysym.M-C-S-Page_Down : seen as Rxvt.keysym.S-Page_Down
+!URxvt.keysym.M-C-S-Page_Up   : captured by terminal for scrolling
+!URxvt.keysym.M-C-S-Page_Down : captured by terminal for scrolling
 URxvt.keysym.M-C-S-Home       : \033[1;8H
 URxvt.keysym.M-C-S-End        : \033[1;8F
 
 ! appearance
-URxvt.font                    : -*-tamsyn-medium-*-*-*-15-*-*-*-*-*-*-*
+URxvt.font                    : -*-tamzen-medium-*-*-*-15-*-*-*-*-*-*-*
 URxvt.scrollBar_right         : True
 URxvt.scrollBar_floating      : True
 URxvt.scrollstyle             : plain

@@ -9,7 +9,7 @@
 #  the argument
 #
 #--
-# Written 2004 by Suraj N. Kurapati
+# Written in 2004 by Suraj N. Kurapati
 
 if [ $# -eq 0 ] ; then
   set -- .* *  # default argument is all files in pwd
@@ -19,7 +19,7 @@ fi
 usage_file=$(mktemp)
 
 if du -sh "${@}" | tee /dev/tty > "$usage_file" 2> /dev/null; then
-  echo '----------------------------------------'
+  echo '----------------------------------------' > /dev/tty
 
   # display units in increasing order
   for unit in $'\t' '[Kk]' '[Mm]' '[Gg]'; do

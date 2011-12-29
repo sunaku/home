@@ -10,6 +10,7 @@ sed -n '/^sed/,$p' "$0" | sed 1d | ck-launch-session sh -x; exit
 # appearance
 xset +fp /usr/share/fonts/artwiz-fonts
 xset +fp /usr/share/fonts/local
+xset +fp ~/.fonts
 xset fp rehash
 xrdb ~/.Xdefaults
 

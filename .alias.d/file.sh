@@ -39,3 +39,8 @@ buc() { # undo backup copy
     mv -v "$file" "$dest"
   done
 }
+
+mount-dir-ro() {
+  sudo mount --bind "$@" &&
+  sudo mount -o remount,ro,bind "$@"
+}

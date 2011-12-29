@@ -19,13 +19,14 @@ alias giR='git reset --mixed'
 alias gix='git rm -r --cached --ignore-unmatch'
 
 # t = stash
-alias gt='git stash save'
-alias gT='git stash save && git stash apply'
+alias gt='git stash save -p'
+alias gT='git stash save'
+alias gTo='git stash save && git stash apply'
 alias gtl='git stash list'
 alias gtL='git stash list --patch-with-stat'
 alias gtb='git stash branch'
-alias gta='git stash apply'
-alias gtp='git stash pop'
+alias gto='git stash apply'
+alias gtO='git stash pop'
 alias gtx='git stash drop'
 alias gtX='git stash clear'
 
