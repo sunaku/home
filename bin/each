@@ -5,6 +5,7 @@
 #
 # SYNOPSIS
 #       each [-n] <SCRIPT> <FILE_PATH>...
+#       ls <FILE_PATH>... | each [-n] <SCRIPT>
 #
 # DESCRIPTION
 #       Sets the following variables and evaluates the
@@ -34,7 +35,7 @@ if test "$1" = '-n'; then
   shift
 fi
 
-if test $# -lt 2; then
+if test $# -lt 1; then
   sed -n '2,/^$/s/^# \?//p' "$0"
   exit 1
 fi
@@ -48,11 +49,18 @@ $SCRIPT
 END_SCRIPT_DRYRUN"
 fi
 
-for p; do
-  f=${p##*/}
-  n=${f%.*}
-  d=${p%/*}
-  x=${f##*.}
-  X=${p%.*}
-  eval "$SCRIPT"
-done
+if test -p /dev/stdin; then
+  exec 3<&0 0</dev/tty
+  loop='while read p <&3'
+else
+  loop='for p'
+fi
+
+eval "$loop; do
+  f=\${p##*/}
+  n=\${f%.*}
+  d=\${p%/*}
+  x=\${f##*.}
+  X=\${p%.*}
+  eval \"\$SCRIPT\"
+done"
