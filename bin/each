@@ -11,12 +11,12 @@
 #       Sets the following variables and evaluates the
 #       given <SCRIPT> once for each given <FILE_PATH>.
 #
-#       $p = the given <FILE_PATH>
-#       $f = the given <FILE_PATH> without directories (basename)
-#       $n = the given <FILE_PATH> without directories and file extension
-#       $d = the given <FILE_PATH> with only directories (dirname)
-#       $x = the given <FILE_PATH> with only file extension
-#       $X = the given <FILE_PATH> without file extension
+#       $p = <FILE_PATH>
+#       $f = <FILE_PATH> without directories (basename)
+#       $n = <FILE_PATH> without directories and file extension
+#       $d = <FILE_PATH> with only directories (dirname)
+#       $x = <FILE_PATH> with only file extension
+#       $X = <FILE_PATH> without file extension
 #
 #       These variable names come from Ruby's String#pathmap() method.
 #
@@ -36,6 +36,7 @@ if test "$1" = '-n'; then
 fi
 
 if test $# -lt 1; then
+  # show file information header
   sed -n '2,/^$/s/^# \?//p' "$0"
   exit 1
 fi
