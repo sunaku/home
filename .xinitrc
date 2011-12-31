@@ -53,7 +53,7 @@ liferea &
 zim &
 
 # window manager
-urxvt -e tail -f ~/.wmii/wmiirc.log /var/log/slim.log /var/log/Xorg.0.log &
+urxvt -fg \#ecbcbc -bg \#41363c -e tail -f ~/.wmii/wmiirc.log /var/log/*.log &
 while true; do wmii
   xmessage 'INSERT COIN TO CONTINUE' \
   -buttons 'Insert Coin:0,Game Over' \
