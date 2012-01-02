@@ -45,12 +45,14 @@ xwrits typetime=25 breaktime=1 +mouse +top &
 
 # music
 mpc || mpd &
-sonata &
 
 # applications
-claws-mail &
-liferea &
-zim &
+(sleep 5
+  sonata &
+  claws-mail &
+  liferea &
+  zim &
+)&
 
 # window manager
 urxvt -fg \#ecbcbc -bg \#41363c -e tail -f ~/.wmii/wmiirc.log /var/log/*.log &
