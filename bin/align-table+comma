@@ -1,0 +1,2 @@
+#!/bin/sh
+align-table -d '(?<=,) ' -j ljust

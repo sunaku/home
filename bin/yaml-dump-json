@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+# Pretty-prints the given YAML document as JSON.
+require 'yaml'
+require 'json'
+puts JSON.pretty_generate(YAML.load(ARGF))
