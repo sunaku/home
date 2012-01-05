@@ -1,3 +1,5 @@
+source ~/.pathrc
+
 # delegate configuration
 for file in ~/.zsh/config/**/*.zsh; do
   source $file

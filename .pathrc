@@ -1,0 +1,35 @@
+#!/bin/sh
+# Sets up PATHs for the shell session that sources this file.
+
+ROOT=$HOME/app
+
+pathify() {
+  sort -u | tr '\n' ':' | sed 's/:$//'
+}
+
+# local rubygems PREFIX
+export GEM_HOME=$ROOT/rubygems
+mkdir -p $GEM_HOME
+
+# update cache of PATHs
+cache=$HOME/.pathrc.cache
+test ! -s $cache -o $ROOT -nt $cache && cat > $cache <<EOF
+export PATHRC_PATH=$HOME/bin:$(
+  echo '.pathrc: calculating $PATH ...' >&2
+  find -L $ROOT -type d -name bin |
+  fgrep -v "$GEM_HOME/gems" |
+  fgrep -v "/lib/" |
+  pathify
+)
+export PATHRC_MANPATH=$(
+  echo '.pathrc: calculating $MANPATH ...' >&2
+  find -L $ROOT -type d -name man | pathify
+)
+EOF
+
+# apply PATHs from cache
+test -n "$PATHRC_PATH" && PATH=$(echo "$PATH" | sed "s|$PATHRC_PATH:||")
+test -n "$PATHRC_MANPATH" && MANPATH=$(echo "$MANPATH" | sed "s|$PATHRC_MANPATH:||")
+source $cache
+export PATH=$PATHRC_PATH:$PATH
+export MANPATH=$PATHRC_MANPATH:$MANPATH

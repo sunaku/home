@@ -61,4 +61,5 @@ while true; do wmii
   -buttons 'Insert Coin:0,Game Over' \
   -default 'Insert Coin' -timeout 30 \
   -center || break
+  source ~/.pathrc # pick up PATH changes
 done
