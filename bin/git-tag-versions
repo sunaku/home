@@ -8,6 +8,7 @@ require 'shellwords'
   commit, message = line.split(' ', 2)
 
   if version = message[/^Version (\d+(?:\.\d+)+)/, 1]
+    version.insert 0, 'v'
     p version => commit
     system 'git', 'tag', '-f', version, commit
   end
