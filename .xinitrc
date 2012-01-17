@@ -5,7 +5,7 @@
 # because the programs it executes might not be found.
 
 # execute the rest of this file under the ConsoleKit environment
-sed -n '/^sed/,$p' "$0" | sed 1d | ck-launch-session sh -x; exit
+sed '1,/^sed/d' "$0" | ck-launch-session sh -x; exit
 
 # appearance
 xset +fp /usr/share/fonts/artwiz-fonts
