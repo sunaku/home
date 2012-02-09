@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# nsloc - reports the number of source lines of code per globbed file
+# usage: nsloc <FILE|GLOB>...
+total = 0
+require 'coverage'
+Coverage.start
+files = Dir[*ARGV].each {|f| load f }
+cover = Coverage.result.map do |file, hits|
+  if files.include? file
+    [hits.reject(&:nil?).size, file]
+  end
+end.compact.sort_by(&:first).map do |line|
+  total += line.first
+  line.join("\t")
+end
+puts cover, total
