@@ -1,0 +1,15 @@
+#!/bin/sh
+vim --version | fgrep -q '+cryptv' &&
+exec vim -u NONE -c 'set '\
+'nocompatible '\
+'secure '\
+'viminfo= '\
+'history=0 '\
+'noswapfile '\
+'noshelltemp '\
+'nobackup '\
+'nowritebackup '\
+'cryptmethod=blowfish '\
+'foldmethod=marker '\
+'background=dark '\
+  "$@"
