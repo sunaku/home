@@ -40,6 +40,9 @@ export GTK_IM_MODULE=scim
 export QT_IM_MODULE=scim
 scim -d &
 
+# automatic locking
+xscreensaver -no-splash &
+
 # break reminder
 xwrits typetime=25 breaktime=1 +mouse +top &
 

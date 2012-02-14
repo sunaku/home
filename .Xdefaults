@@ -146,11 +146,3 @@ URxvt.cursorColor             : #8faf9f
 URxvt.colorBD                 : #ffcfaf
 URxvt.colorUL                 : #ccdc90
 URxvt.colorIT                 : #80d4aa
-
-!-----------------------------------------------------------------------------
-! screensaver
-!-----------------------------------------------------------------------------
-
-XLock.mode                    : space
-XLock.vtlock                  : restore
-XLock.erasedelay              : 0
