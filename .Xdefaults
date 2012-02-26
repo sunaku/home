@@ -96,7 +96,7 @@ URxvt.scrollBar_floating      : True
 URxvt.scrollstyle             : plain
 
 ! extensions
-URxvt.perl-ext-common         : default,matcher,searchable-scrollback<M-Up>
+URxvt.perl-ext-common         : default,matcher,searchable-scrollback<M-slash>
 URxvt.urlLauncher             : /usr/bin/xdg-open
 URxvt.matcher.button          : 2
 
