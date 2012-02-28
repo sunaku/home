@@ -96,9 +96,7 @@ alias gl1='gl -1'
 alias gll='gl --oneline'
 alias gld='gl --patch-with-stat'
 glp() { # pretty git changelog
-  git log --format='format:* %s. %b'$'\n' "$@" |
-  ruby -pe '$_.sub!(/^\* ./) { $&.upcase }' |
-  less
+  git log --format='format:  * %s. %b'$'\n' "$@"
 }
 
 # L = reflog
