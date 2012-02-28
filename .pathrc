@@ -17,7 +17,7 @@ find_paths() {
 }
 cache=$HOME/.pathrc.cache
 test ! -s $cache -o $ROOT -nt $cache -o $0 -nt $cache && cat > $cache <<EOF
-export PATHRC_PATH=$HOME/bin:$(
+export PATHRC_PATH=bundle_bin:$HOME/bin:$(
   echo '.pathrc: calculating $PATH ...' >&2
   find_paths bin
 )
