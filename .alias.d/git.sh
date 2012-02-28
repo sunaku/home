@@ -55,7 +55,7 @@ alias gbM='git branch -M'
 gb1() { # print current branch name
   git symbolic-ref -q "${1:-HEAD}" | sed 's,^refs/heads/,,'
 }
-gbh() { # set upstream branch for tracking
+gbH() { # set upstream branch for tracking
   branch=$(gb1)
   remote=${1:-origin}
   echo "$remote" | fgrep -vq "/" && remote="$remote/$branch"
