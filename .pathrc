@@ -20,7 +20,7 @@ test ! -s $cache -o $ROOT -nt $cache -o $0 -nt $cache && cat > $cache <<EOF
 export PATHRC_PATH=bundle_bin:$HOME/bin:$(
   echo '.pathrc: calculating $PATH ...' >&2
   find_paths bin
-)
+):/usr/bin/vendor_perl
 export PATHRC_MANPATH=$(
   echo '.pathrc: calculating $MANPATH ...' >&2
   find_paths man
