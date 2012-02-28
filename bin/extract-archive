@@ -13,7 +13,7 @@ include FileUtils::Verbose
 
 # Extracts the given source archive relative to the given destination path,
 # and returns the path of the directory containing the extracted contents.
-def extract src_path, dst_path = '.'
+def extract src_path, dst_path = File.dirname(src_path)
   src_path = File.expand_path(src_path)
   src_name = File.basename(src_path)
   src_suffix = File.extname(src_name)
