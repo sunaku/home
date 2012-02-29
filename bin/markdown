@@ -1,0 +1,9 @@
+#!/bin/sh
+exec redcarpet \
+  --parse-no_intra_emphasis \
+  --parse-autolink \
+  --parse-tables \
+  --render-xhtml \
+  --render-safe_links_only \
+  --render-with_toc_data \
+  "$@"
