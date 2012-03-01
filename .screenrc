@@ -48,13 +48,13 @@ defutf8 on
 # prefix for all screen shortcuts
 escape ^bb
 
-# switch between tabs with Control-Left/Right
-bindkey "^[[1;5D" prev
-bindkey "^[[1;5C" next
+# switch between tabs with Alt-Left/Right
+bindkey "^[[1;3D" prev
+bindkey "^[[1;3C" next
 
-# access scrollback buffer with Control-Up/Down
-bindkey "^[[1;5A" copy
-bindkey "^[[1;5B" paste .
+# access scrollback buffer with Alt-Up/Down
+bindkey "^[[1;3A" copy
+bindkey "^[[1;3B" paste .
 
 # only allow Shift-K to close a tab
 bind k
