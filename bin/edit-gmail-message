@@ -1,11 +1,5 @@
 #!/bin/sh
-# Copy an e-mail message body to clipboard in Gmail, then run this script to
-# edit it in Vim, and finally :x to write your changes back to the clipboard.
-tmp=`mktemp`
-trap "rm -f $tmp" EXIT
-
-xsel -b -o > "$tmp" &&
-gvim -f -c 'silent! 1s/^$\n\n//|'\
+exec edit-text-field -c \
+'silent! 1s/^$\n\n//|'\
 'silent! %s/ *<[^>]*@[^>]*>//g|'\
-'setf mail|execute "normal 0gqG"' "$tmp" &&
-xsel -b -i < "$tmp"
+'setf mail|execute "normal 0gqG"'

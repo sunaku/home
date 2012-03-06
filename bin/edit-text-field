@@ -1,0 +1,18 @@
+#!/bin/sh
+#
+# This script lets you edit the contents of the currently focused text field
+# through a temporary file in GVim.  Any changes you write to the temporary
+# file will be stored into clipboard after you quit GVim, ready for pasting.
+#
+# Usage: edit-text-field [ARGS_FOR_GVIM]
+#
+set -e
+
+xdotool key ctrl+a ctrl+c # copy text into clipboard
+
+tmp=$(mktemp)
+trap "rm -f $tmp" EXIT
+
+xsel -b -o > "$tmp"       # dump clipboard into file
+gvim -f "$@" "$tmp"       # edit the dumped contents
+xsel -b -i < "$tmp"       # load file into clipboard
