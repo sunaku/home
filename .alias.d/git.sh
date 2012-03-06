@@ -32,6 +32,8 @@ alias gtX='git stash clear'
 
 # c = commit
 alias gc='git commit'
+alias gcd='git commit --date'
+function gcdf() { git commit --date="$(date -r "$1")"; }
 function gcv() { git commit -m "Version $1" && git tag "v$1"; }
 function gcV() { git tag -f "v$1"; }
 alias gcq='git commit -m "SQUASH $(date)"'
@@ -115,8 +117,9 @@ alias ghx='git remote rm'
 
 # p = push
 alias gp='git push'
-alias gpf='git push --force'
+alias gP='git push --force'
 alias gpt='git push --tags'
+alias gPt='git push --tags --force'
 
 # g = fetch
 alias gg='git fetch'
