@@ -1,5 +1,5 @@
 # bind special keys according to readline configuration
-eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)"
+eval "$(sed -n 's/^\( *[^#][^:]*\):/bindkey \1/p' /etc/inputrc)"
 
 # do not erase entire line when Control-U is pressed
 bindkey '^U' backward-kill-line
