@@ -10,7 +10,7 @@ tags
 cscope.out
 
 # Vim backup files
-.*.sw[a-z]*
+.*.sw[a-z]
 *~
 
 # Interpreted source
