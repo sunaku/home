@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 # Usage: ruby-bump-version DESIRED_VERSION [DESIRED_DATE]
 
 desired_version = ARGV.shift or raise ArgumentError
 desired_date = ARGV.shift || Time.now.strftime('%F')
 
-history = File.read('HISTORY.markdown').scan(/^#* ?Version (.+?) \((.+?)\)/)
+history = File.read('HISTORY.markdown').force_encoding('utf-8').
+  scan(/^#* ?Version (.+?) \((.+?)\)/)
 desired_version ||= history.first.first
 
 begin current_version, current_date = history.shift
