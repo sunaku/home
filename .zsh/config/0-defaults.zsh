@@ -24,3 +24,6 @@ setopt longlistjobs
 setopt monitor
 setopt promptsubst
 setopt pushdignoredups
+
+# remove HEAD^ escaping madness
+unsetopt nomatch
