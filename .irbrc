@@ -45,3 +45,23 @@ IRB.conf[:AUTO_INDENT] = true
 
 require 'irb/ext/save-history'
 IRB.conf[:SAVE_HISTORY] = 10_000
+
+#-----------------------------------------------------------------------------
+# utility
+#-----------------------------------------------------------------------------
+
+class Object
+  # create bang methods to reveal method origins
+  methods.grep(/methods$/).each do |plural|
+    singular = plural.to_s.sub(/s$/, '').to_sym
+    singular = :method unless respond_to? singular
+    define_method "#{plural}!" do |*args|
+      Hash[
+        send(plural, *args).map do |name|
+          method = send(singular, name)
+          [method, method.source_location]
+        end
+      ]
+    end
+  end
+end
