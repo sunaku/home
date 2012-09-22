@@ -55,7 +55,8 @@ alias gbX='git branch -D'
 alias gbm='git branch -m'
 alias gbM='git branch -M'
 gb1() { # print current branch name
-  git symbolic-ref -q "${1:-HEAD}" | sed 's,^refs/heads/,,'
+  # http://stackoverflow.com/a/7251377
+  git name-rev --name-only "${1:-HEAD}"
 }
 gbH() { # set upstream branch for tracking
   branch=$(gb1)
@@ -114,6 +115,13 @@ gLC() { # search reflog for all commits related to the given files, with diffs
 alias ghl='git remote -v'
 alias gha='git remote add'
 alias ghx='git remote rm'
+gh1() { # print current remote name
+  # http://stackoverflow.com/a/7251377
+  git config branch.$(gb1 "$@").remote
+}
+ghd() { # diff remote tracking branch
+  git diff $(gh1)/$(gb1) "$@"
+}
 
 # p = push
 alias gp='git push'
