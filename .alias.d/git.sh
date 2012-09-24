@@ -216,16 +216,16 @@ alias gka='git add $(gkl)'
 # edit conflicted files
 alias gke='edit-merge-conflict $(gkl)'
 
-# use our version of the given files
-alias gko='git checkout --ours --'
+# use local version of the given files
+alias gko='git checkout --theirs --'
 
-# use our version of all conflicted files
+# use local version of all conflicted files
 alias gkO='gko $(gkl)'
 
-# use their version of the given files
-alias gkt='git checkout --theirs --'
+# use upstream version of the given files
+alias gkt='git checkout --ours --'
 
-# use their version of all conflicted files
+# use upstream version of all conflicted files
 alias gkT='gkt $(gkl)'
 
 #-----------------------------------------------------------------------------
