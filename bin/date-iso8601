@@ -1,0 +1,2 @@
+#!/bin/sh
+exec date +'%Y-%m-%dT%H:%M:%S%z' "$@"
