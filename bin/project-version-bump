@@ -18,7 +18,7 @@ if current = history.find {|(v,_)| v != desired_version }
   def replace source, target
     if target != source
       system "fgrep -lR #{source.inspect} bin lib | "\
-        "xargs -r sed -i 's/#{source}/#{target}/g'"
+        "xargs -r sed -i 's/\\<#{source}\\>/#{target}/g'"
     end
   end
 
