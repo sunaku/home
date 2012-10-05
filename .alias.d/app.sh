@@ -1,5 +1,7 @@
-export PAGER='less -LR'
+export LESS='-iLR'
+export PAGER='less'
 export EDITOR='vim'
+export VISUAL=$EDITOR
 export BROWSER='w3m -v'
 
 alias e=$EDITOR
