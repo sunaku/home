@@ -101,48 +101,60 @@ URxvt.urlLauncher             : /usr/bin/xdg-open
 URxvt.matcher.button          : 2
 
 !-----------------------------------------------------------------------------
-! Zenburn "high contrast" color scheme
-! http://slinky.imukuppi.org/zenburnpage/
+! TomorrowNight color scheme
+! https://github.com/chriskempson/tomorrow-theme/blob/master/Xdefaults/XresourceTomorrowNight
 !-----------------------------------------------------------------------------
 
-!BLK Cursor
-URxvt.color0                  : #000d18
-URxvt.color8                  : #000d18
+#define t_background          #1d1f21
+#define t_current_line        #282a2e
+#define t_selection           #373b41
+#define t_foreground          #c5c8c6
+#define t_comment             #969896
+#define t_red                 #cc6666
+#define t_orange              #de935f
+#define t_yellow              #f0c674
+#define t_green               #b5bd68
+#define t_aqua                #8abeb7
+#define t_blue                #81a2be
+#define t_purple              #b294bb
 
-!RED Tag
-URxvt.color1                  : #e89393
-URxvt.color9                  : #e89393
+URxvt.foreground              : t_foreground
+URxvt.background              : t_background
+URxvt.cursorColor             : #aeafad
 
-!GRN SpecialKey
-URxvt.color2                  : #9ece9e
-URxvt.color10                 : #9ece9e
+! Black / Grey
+URxvt.color0                  : #000000
+URxvt.color8                  : #666666
 
-!YEL Keyword
-URxvt.color3                  : #f0dfaf
-URxvt.color11                 : #f0dfaf
+! Red / Bright Red
+URxvt.color1                  : t_red
+URxvt.color9                  : #FF3334
 
-!BLU Number
-URxvt.color4                  : #8cd0d3
-URxvt.color12                 : #8cd0d3
+! Green + Bright Green
+URxvt.color2                  : t_green
+URxvt.color10                 : #9ec400
 
-!MAG Precondit
-URxvt.color5                  : #c0bed1
-URxvt.color13                 : #c0bed1
+! Yellow (Orange) + Bright Yellow (Yellow)
+URxvt.color3                  : t_orange
+URxvt.color11                 : t_yellow
 
-!CYN Float
-URxvt.color6                  : #dfaf8f
-URxvt.color14                 : #dfaf8f
+! Blue + Bright Blue
+URxvt.color4                  : t_blue
+URxvt.color12                 : t_blue
 
-!WHT Search
-URxvt.color7                  : #efefef
-URxvt.color15                 : #efefef
+! Magenta (Purple) + Bright Magenta
+URxvt.color5                  : t_purple
+URxvt.color13                 : #b777e0
 
-!TXT Normal, Normal, Cursor
-URxvt.background              : #1f1f1f
-URxvt.foreground              : #dcdccc
-URxvt.cursorColor             : #8faf9f
+! Cyan (Aqua) + Bright Cyan
+URxvt.color6                  : t_aqua
+URxvt.color14                 : #54ced6
 
-!HLT Include, StatusLine, ErrorMsg
-URxvt.colorBD                 : #ffcfaf
-URxvt.colorUL                 : #ccdc90
-URxvt.colorIT                 : #80d4aa
+! Light Grey (Selection) + White (Current Line)
+URxvt.color7                  : t_selection
+URxvt.color15                 : t_current_line
+
+! extensions for reading man pages in color
+URxvt.colorBD                 : t_green
+URxvt.colorUL                 : t_aqua
+URxvt.colorIT                 : t_blue
