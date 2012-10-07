@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+# Replay HAR given on stdin using curl(1).
+# Usage: curl-har [ARGS_FOR_CURL]... < HAR
+# Written by Suraj N. Kurapati in 2012 :^)
+rip = ->(hash){ hash.to_a.transpose.last }
+require 'json'
+req = JSON.load(STDIN.read)['request']
+hdr = req['headers'].flat_map {|h| ['-H', rip[h].join(?:)] }
+arg = req['queryString'].flat_map {|q| ['-d', rip[q].join(?=)] }
+get = '-G' if req['method'] == 'GET'
+exec 'curl', *hdr, *arg, *get, req['url'], *ARGV
