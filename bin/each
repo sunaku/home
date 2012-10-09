@@ -4,25 +4,39 @@
 #       each - loop over file paths
 #
 # SYNOPSIS
-#       each [-n] <SCRIPT> <FILE_PATH>...
-#       ls <FILE_PATH>... | each [-n] <SCRIPT>
+#       each [OPTION]... SCRIPT [PATH]...
+#       ls [PATH]... | each [OPTION]... SCRIPT
 #
 # DESCRIPTION
-#       Sets the following variables and evaluates the
-#       given <SCRIPT> once for each given <FILE_PATH>.
+#       Sets the following variables and evaluates the given SCRIPT
+#       once for each PATH, which can be either (1) specified as a
+#       command line argument or (2) listed one per line on stdin.
 #
-#       $p = <FILE_PATH>
-#       $f = <FILE_PATH> without directories (basename)
-#       $n = <FILE_PATH> without directories and file extension
-#       $d = <FILE_PATH> with only directories (dirname)
-#       $x = <FILE_PATH> with only file extension
-#       $X = <FILE_PATH> without file extension
+#       $p = PATH
+#       $f = PATH without directories (basename)
+#       $n = PATH without directories and file extension
+#       $d = PATH with only directories (dirname)
+#       $x = PATH with only file extension
+#       $X = PATH without file extension
 #
 #       These variable names come from Ruby's String#pathmap() method.
 #
 # OPTIONS
-#       -n  Dry run.  Instead of evaluating the <SCRIPT>,
-#           print what would happen if it were evaluated.
+#       -n  Dry run.
+#           Instead of executing the SCRIPT, print
+#           what would happen if it were executed.
+#
+#       -i  Confirm.
+#           While executing the SCRIPT, ask if
+#           commands should really be executed.
+#
+#       -v  Verbose.
+#           While executing the SCRIPT, print
+#           commands before they are executed.
+#
+#       -x  Trace.
+#           While executing the SCRIPT, print
+#           commands as they are being executed.
 #
 # AUTHOR
 #       Written by Suraj N. Kurapati in 2011 based on
@@ -30,38 +44,105 @@
 #       https://github.com/sunaku/ff-bash
 #
 
-if test "$1" = '-n'; then
-  DRYRUN=$1
-  shift
-fi
+#-----------------------------------------------------------------------------
+# command line options
+#-----------------------------------------------------------------------------
 
-if test $# -lt 1; then
+# http://software.frodo.looijaard.name/getopt/docs/getopt-parse.bash
+if options=$(getopt -o nivx -n "$0" -- "$@"); then
+  eval set -- "$options"
+  while true; do
+    case "$1" in
+      -n) DRY_RUN=$1; shift ;;
+      -i) CONFIRM=$1; shift ;;
+      -v) VERBOSE=$1; shift ;;
+      -x) EXTRACE=$1; shift ;;
+      --) shift; break ;;       # end of options
+       *) exit 2 ;;             # internal error
+    esac
+  done
+else
   # show file information header
   sed -n '2,/^$/s/^# \?//p' "$0"
   exit 1
 fi
 
+#-----------------------------------------------------------------------------
+# command line arguments
+#-----------------------------------------------------------------------------
+
 SCRIPT=$1
 shift
 
-if test -n "$DRYRUN"; then
-SCRIPT="cat <<END_SCRIPT_DRYRUN
-$SCRIPT
-END_SCRIPT_DRYRUN"
-fi
+#-----------------------------------------------------------------------------
+# head of the each loop
+#-----------------------------------------------------------------------------
 
 if test -p /dev/stdin; then
+  # paths are listed on stdin
   exec 3<&0 0</dev/tty
-  loop='while read p <&3'
+  each='while read p <&3'
 else
-  loop='for p'
+  # paths are on command line
+  each='for p'
 fi
 
-eval "$loop; do
-  f=\${p##*/}
-  n=\${f%.*}
-  d=\${p%/*}
-  x=\${f##*.}
-  X=\${p%.*}
-  eval \"\$SCRIPT\"
-done"
+#-----------------------------------------------------------------------------
+# body of the each loop
+#-----------------------------------------------------------------------------
+
+echo="
+cat <<END_SCRIPT_PREVIEW
+$SCRIPT
+END_SCRIPT_PREVIEW
+"
+
+if test -n "$DRY_RUN"; then
+  body=$echo
+elif test -n "$CONFIRM"; then
+  body="
+>/dev/tty $echo
+>/dev/tty echo -n 'Run command? [Y/n/q] '
+read </dev/tty &&
+case \"\$REPLY\" in
+  q|Q) break ;;
+  n|N) continue ;;
+  *)
+$SCRIPT
+  ;;
+esac
+"
+elif test -n "$VERBOSE"; then
+  body="
+$echo
+$SCRIPT
+"
+else
+  body=$SCRIPT
+fi
+
+body="
+f=\${p##*/}
+n=\${f%.*}
+d=\${p%/*}
+x=\${f##*.}
+X=\${p%.*}
+$body
+"
+
+test -n "$EXTRACE" && body="
+set -x
+$body
+set +x
+"
+
+#-----------------------------------------------------------------------------
+# the each loop itself
+#-----------------------------------------------------------------------------
+
+eval "
+$each
+do
+$body
+done
+"
