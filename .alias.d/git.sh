@@ -197,7 +197,7 @@ alias gmf='git merge --ff'
 # r = rebase
 #-----------------------------------------------------------------------------
 
-alias gr='git rebase'
+alias gr='git rebase --preserve-merges'
 alias gri='git rebase --interactive'
 alias grc='git rebase --continue'
 alias grs='git rebase --skip'
