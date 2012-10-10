@@ -134,6 +134,9 @@ alias gcO='git checkout HEAD --'
 
 # cherry pick the given commit into current branch
 alias gcp='git cherry-pick'
+alias gcpc='git cherry-pick --continue'
+alias gcpa='git cherry-pick --abort'
+alias gcps='git cherry-pick --skip'
 
 # show current commit in detail
 alias gc1='git show'
@@ -200,8 +203,8 @@ alias gmf='git merge --ff'
 alias gr='git rebase --preserve-merges'
 alias gri='git rebase --interactive'
 alias grc='git rebase --continue'
-alias grs='git rebase --skip'
 alias gra='git rebase --abort'
+alias grs='git rebase --skip'
 
 #-----------------------------------------------------------------------------
 # k = conflict
