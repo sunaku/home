@@ -1,0 +1,13 @@
+#!/bin/sh
+# Merges the current branch into master branch and then restacks all branches.
+
+# abort if any shell commands fail
+set -e
+
+# ensure that working tree is clean
+git rebase HEAD --quiet
+
+current=$(git name-rev --name-only HEAD)
+git checkout master
+git merge $current
+project-branch-stack

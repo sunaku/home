@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+#
+# Creates a new commit or updates an existing commit that is labelled with the
+# first version and date from the HISTORY_FILE.
+#
+# Usage: project-version-commit HISTORY_FILE
+
+raise 'nothing staged for commit' if system 'git diff --cached --quiet'
+
+(new_version, new_date) = ARGF.set_encoding('utf-8').read.
+  scan(/^## Version (\S+) \((\S+?)\)/).first
+
+title = "Version #{new_version} (#{new_date})"
+amend = `git log -1 --format=%s`.chomp == title
+
+exec 'git', 'commit', '-m', title, *('--amend' if amend)

@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+# Prints release notes ranging from the current branch to the master branch.
+
+branches = [:major, :minor, :patch, :other, :master]
+current_branch = `git name-rev --name-only HEAD`.chomp.to_sym
+branches.shift branches.index(current_branch)
+
+sections = {}
+branches.each_cons(2) do |head, tail|
+  output = ["#{head.capitalize}:", nil]
+  `git log --pretty=medium #{tail}..#{head}`.split(/(?=^commit)/).reverse_each do |log|
+    commit, message = log.split(/^$/, 2)
+    output.push "  * #{message.strip}", nil
+  end
+  sections[head] = output if output.length > 2
+end
+
+version = `git tag --contains master`.scan(/\d+/)
+if sections.key? :major
+  version[0].next!
+  version[1] = '0'
+  version[2] = '0'
+elsif sections.key? :minor
+  version[1].next!
+  version[2] = '0'
+elsif sections.key? :patch or sections.key? :other
+  version[2].next!
+end
+
+title = "## Version #{version.join('.')} (#{Time.now.strftime('%F')})"
+notes = sections.values
+puts title, nil, notes

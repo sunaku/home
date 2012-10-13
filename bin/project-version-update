@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+#
+# Updates all text files in the project that mention the current version
+# and/or date to match the first version and date from the HISTORY_FILE.
+#
+# Usage: project-version-update HISTORY_FILE
+
+HISTORY_FILE = ARGV.shift or raise ArgumentError, 'HISTORY_FILE not given'
+
+(new_version, new_date), (old_version, old_date) =
+  File.read(HISTORY_FILE, encoding: 'utf-8').
+  scan(/^## Version (\S+) \((\S+?)\)/).first(2)
+
+`git grep -I -l "#{old_version}\\|#{old_date}"`.split(/\n/).each do |file|
+  next if file == HISTORY_FILE
+  body = File.read(file)
+  body.gsub! /\b#{old_version}\b/, new_version
+  body.gsub! /\b#{old_date}\b/, new_date
+  File.write file, body
+end
