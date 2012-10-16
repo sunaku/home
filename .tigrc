@@ -2,3 +2,5 @@
 bind generic E !git format-patch -1 %(commit)
 
 bind generic R !git revert %(commit)
+
+bind generic B !git rebase -i %(commit)^
