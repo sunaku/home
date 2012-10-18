@@ -1,0 +1,2 @@
+#!/bin/sh
+exec cloc --by-file-by-lang --exclude-dir .git "$@"
