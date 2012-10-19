@@ -14,8 +14,14 @@ alias god='git diff'
 # reset working copy to current index
 alias gor='git reset --soft'
 
+# reset working copy to upstream state
+alias gorh='git reset --soft $(gbh)'
+
 # reset working copy to current commit
 alias goR='git reset --hard'
+
+# reset working copy to upstream state
+alias goRh='git reset --hard $(gbh)'
 
 # stage deletion and also delete from working copy
 alias gox='git rm -r --ignore-unmatch'
