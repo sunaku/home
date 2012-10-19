@@ -167,15 +167,15 @@ alias gbm='git branch -m'
 alias gbM='git branch -M'
 
 # show current branch name
-# http://stackoverflow.com/a/7251377
+# http://stackoverflow.com/a/9753364
 gb1() {
-  git name-rev --name-only "${1:-HEAD}"
+  git symbolic-ref --short HEAD
 }
 
-# show current remote name
-# http://stackoverflow.com/a/7251377
+# show current remote branch name
+# http://stackoverflow.com/a/9753364
 gbh() {
-  git config branch.$(gb1).remote
+  git rev-parse --abbrev-ref '@{u}'
 }
 
 # set upstream branch for tracking
@@ -316,7 +316,7 @@ alias gh1='git config branch.$(gb1).remote'
 alias gh2='git config remote.$(gh1).url'
 
 # diff remote tracking branch
-alias ghd='git diff $(gh1)/$(gb1)'
+alias ghd='git diff $(gbh)'
 
 #-----------------------------------------------------------------------------
 # p = push
