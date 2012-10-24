@@ -11,23 +11,20 @@
 #--
 # Written in 2004 by Suraj N. Kurapati
 
-if [ $# -eq 0 ] ; then
+if test $# -eq 0; then
   set -- .* *  # default argument is all files in pwd
   shift 2  # remove . and ..
 fi
 
 usage_file=$(mktemp)
+trap "rm -f $usage_file" EXIT
 
-if du -sh "${@}" | tee /dev/tty > "$usage_file" 2> /dev/null; then
-  echo '----------------------------------------' > /dev/tty
+# preview output while capturing it
+echo '---BEGIN-PREVIEW---' > /dev/tty
+du -hs "${@}" 2>&1 | tee /dev/tty > "$usage_file"
+echo '----END-PREVIEW----' > /dev/tty
 
-  # display units in increasing order
-  for unit in $'\t' '[Kk]' '[Mm]' '[Gg]'; do
-    grep "^[0-9\.]*$unit" "$usage_file" | sort -n
-  done
-
-  # clean up
-  rm -f $usage_file
-else
-  du -s "${@}" | sort -n
-fi
+# display units in increasing order
+for unit in '\s' '[Kk]' '[Mm]' '[Gg]'; do
+  grep "^[0-9\.]\+$unit" "$usage_file" | sort -n
+done
