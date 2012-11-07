@@ -189,7 +189,7 @@ gbH() {
   branch=$(gb1)
   remote=${1:-origin}
   echo "$remote" | fgrep -vq "/" && remote="$remote/$branch"
-  git branch --set-upstream "$branch" "$remote"
+  git branch -u "$remote" "$branch"
 }
 
 #-----------------------------------------------------------------------------
