@@ -14,7 +14,6 @@ cscope.out
 *~
 
 # Interpreted source
-Gemfile.lock
 .rvmrc
 .test-loop
 
