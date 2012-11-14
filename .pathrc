@@ -17,10 +17,20 @@ find_paths() {
 }
 cache=$HOME/.pathrc.cache
 test ! -s $cache -o $ROOT -nt $cache -o $0 -nt $cache && cat > $cache <<EOF
-export PATHRC_PATH=.bundle/bin:$HOME/bin:$(
+export PATHRC_PATH=\
+.bundle/bin:\
+$HOME/bin:\
+$(
   echo '.pathrc: calculating $PATH ...' >&2
   find_paths bin
-):/usr/bin/vendor_perl
+):\
+/usr/bin/vendor_perl:\
+/usr/local/sbin:\
+/usr/sbin:\
+/sbin:\
+/usr/local/bin:\
+/usr/bin:\
+/bin
 export PATHRC_MANPATH=$(
   echo '.pathrc: calculating $MANPATH ...' >&2
   find_paths man
