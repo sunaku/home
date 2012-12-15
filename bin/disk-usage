@@ -20,9 +20,11 @@ usage_file=$(mktemp)
 trap "rm -f $usage_file" EXIT
 
 # preview output while capturing it
-echo '---BEGIN-PREVIEW---' > /dev/tty
-du -hs "${@}" 2>&1 | tee /dev/tty > "$usage_file"
-echo '----END-PREVIEW----' > /dev/tty
+{
+  echo '---BEGIN-PREVIEW---'
+  du -hs "${@}" 2>&1 | tee "$usage_file"
+  echo '----END-PREVIEW----'
+} > /dev/tty
 
 # display units in increasing order
 for unit in '\s' '[Kk]' '[Mm]' '[Gg]'; do
