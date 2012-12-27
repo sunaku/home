@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
 # Replaces my custom ZSH shell prompt with the more conventional $ prefix.
-print ARGF.read.gsub(/^.+?>(.*?)\s*\S+$/, '$\1')
+print ARGF.read.gsub(/^.*?\/.*?>( .+?)\s*\S+$/, '$\1')
