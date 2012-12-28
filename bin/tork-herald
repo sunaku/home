@@ -1,4 +1,4 @@
 #!/bin/sh
 inotifywait --recursive . @./.git --excludei '\.log$' \
-  --event close_write --format '%w%f' --monitor |
+  --event close_write --format '%w%f' --monitor --quiet |
 sed --unbuffered 's,^\./,,; s/^/["/; s/$/"]/'
