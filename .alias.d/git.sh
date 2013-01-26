@@ -1,3 +1,6 @@
+# http://neurotap.blogspot.com/2012/04/character-level-diff-in-git-gui.html
+intra_line_diff='--word-diff-regex="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+"'
+
 #-----------------------------------------------------------------------------
 # o = working copy
 #-----------------------------------------------------------------------------
@@ -10,6 +13,9 @@ alias gol='git status --short'
 
 # diff working copy against current commit
 alias god='git diff'
+
+# ... while showing changes within a line
+alias goD='god '$intra_line_diff
 
 # reset working copy to current index
 alias gor='git reset --soft'
@@ -50,6 +56,9 @@ alias giu='git add -u'
 
 # diff index against current commit
 alias gid='git diff --cached'
+
+# ... while showing changes within a line
+alias giD='gid '$intra_line_diff
 
 # unstage changes from index but keep them in working copy
 alias gir='git reset'
