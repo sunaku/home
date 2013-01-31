@@ -273,23 +273,23 @@ alias gfx='git ls-files --killed'
 #-----------------------------------------------------------------------------
 
 # show commit log
-alias gl='git log'
+alias gl='git log --decorate --graph'
 
 # show most recent log entry
 alias gl1='glf -1'
 
 # show log with affected files
-alias glf='git log --name-status'
+alias glf='gl --name-status'
 
 # show log like `ls -l`
-alias gll='git log --oneline'
+alias gll='gl --oneline'
 
 # show log with diffs
 alias gld='gl --patch-with-stat'
 
 # pretty git changelog
 glp() {
-  git log --format='format:  * %s. %b'$'\n' "$@"
+  git log --pretty='  * %s. %b'$'\n' "$@"
 }
 
 #-----------------------------------------------------------------------------
@@ -297,7 +297,9 @@ glp() {
 #-----------------------------------------------------------------------------
 
 # show reference log
-alias gL='git reflog'
+alias gL='git reflog --decorate'
+
+alias gLL='gll `gL --pretty=%h`'
 
 # search reflog for all commits related to the given files
 gLf() {
