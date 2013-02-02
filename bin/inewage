@@ -1,2 +1,6 @@
 #!/bin/sh
-exec mplayer -playlist 'http://inewage.com/listen.pls' -cache 128 "$@"
+# plays Happyday New Age Radio Station
+exec mplayer -cache 128 "$@" $(
+  curl 'http://inewage.com/listen.pls' |
+  awk -F= '/^File/ { print $2 }' | sort -u
+)
