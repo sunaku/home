@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+#
+# Runs dwdiff(1) on MiniTest assert_equal failure notices
+# (which are read from the given FILEs or else from STDIN)
+# so that you can easily see character-level differences!
+#
+# Usage: minitest-dwdiff [FILE]...
+# Usage: cat [FILE]... | minitest-dwdiff
+#
+#--
+# Written in 2013 by Suraj N. Kurapati
+
+require 'tempfile'
+
+ARGF.read.scan(/:\n<(.+?)> expected but was\n<(.+?)>\.\n/m).each do |expected, actual|
+  expected_file = Tempfile.new('expected')
+  expected_file.write expected
+  expected_file.close
+
+  actual_file = Tempfile.new('actual')
+  actual_file.write actual
+  actual_file.close
+
+  system 'dwdiff', expected_file.path, actual_file.path
+end
