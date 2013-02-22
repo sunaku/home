@@ -4,7 +4,7 @@
 # before this point.  Otherwise, this script might fail
 # because the programs it executes might not be found.
 
-source ~/.profile
+. ~/.profile
 
 # execute the rest of this file under the ConsoleKit environment
 sed '1,/^sed/d' "$0" | ck-launch-session sh -x; exit
@@ -60,5 +60,5 @@ while true; do wmii
   -buttons 'Insert Coin:0,Game Over' \
   -default 'Insert Coin' -timeout 30 \
   -center || break
-  source ~/.pathrc # pick up PATH changes
+  . ~/.pathrc # pick up PATH changes
 done

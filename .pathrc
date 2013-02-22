@@ -40,6 +40,6 @@ EOF
 # apply PATHs from cache
 test -n "$PATHRC_PATH" && PATH=$(echo "$PATH" | sed "s|$PATHRC_PATH:||")
 test -n "$PATHRC_MANPATH" && MANPATH=$(echo "$MANPATH" | sed "s|$PATHRC_MANPATH:||")
-source $cache
+. $cache
 export PATH=$PATHRC_PATH:$PATH
 export MANPATH=$PATHRC_MANPATH:$MANPATH
