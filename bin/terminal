@@ -1,5 +1,5 @@
 #!/bin/sh
 # Launches a URxvt client, starting the server if necessary.
 urxvtc "$@"; status=$?
-test $status -eq 2 && urxvtd -q -o -f && exec "$0" "$@"
+test $status -eq 2 && urxvtd -q -o -f && { sleep 1; exec "$0" "$@"; }
 exit $status
