@@ -20,12 +20,13 @@ for branch in master other patch minor major; do
     if test -n "$(git branch --list $branch)"; then
       git checkout $branch
     else
-      git checkout -b $branch "$previous"
+      git checkout $branch ||
+      git checkout -b $branch $previous
     fi
 
     # stack this branch atop the previous one
     commit=$(git rev-parse --short HEAD)
-    if ! git rebase --preserve-merges "$previous" --quiet >/dev/null 2>&1; then
+    if ! git rebase --preserve-merges $previous --quiet >/dev/null 2>&1; then
       while test -d .git/rebase-apply; do
         echo -n 'Skipping conflicting commit: '
         cat .git/rebase-apply/original-commit
