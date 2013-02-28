@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Highlights hexadecimal color sequences found in the given
+# FILEs (or in STDIN if no FILEs are given) using inline
+# CSS and prints the result as preformatted HTML to STDOUT.
+#
+# Usage: hex-color-html [FILE]...
+# Usage: cat FILE | hex-color-html
+#
+#--
+# Written in 2013 by Suraj N. Kurapati
+
+exec sed '1s/^/<pre>/; $s!$!</pre>!; s!#[[:xdigit:]]\{3,6\}!<b style="background:&">&</b>!g;' "$@"
