@@ -37,9 +37,17 @@ export PATHRC_MANPATH=$(
 )
 EOF
 
-# apply PATHs from cache
-test -n "$PATHRC_PATH" && PATH=$(echo "$PATH" | sed "s|$PATHRC_PATH:||")
-test -n "$PATHRC_MANPATH" && MANPATH=$(echo "$MANPATH" | sed "s|$PATHRC_MANPATH:||")
+# remove previous application
+test -n "$PATHRC_PATH" && PATH=$(echo "$PATH" | sed "s|$PATHRC_PATH:||g")
+test -n "$PATHRC_MANPATH" && MANPATH=$(echo "$MANPATH" | sed "s|$PATHRC_MANPATH:||g")
+
+# apply new PATHs from cache
 . $cache
 export PATH=$PATHRC_PATH:$PATH
 export MANPATH=$PATHRC_MANPATH:$MANPATH
+
+# remove duplicated entries
+if uniq-path-env; then
+  export PATH=$(uniq-path-env "$PATH")
+  export MANPATH=$(uniq-path-env "$MANPATH")
+fi
