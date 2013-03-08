@@ -1,0 +1,2 @@
+# ensure that my home directory's bin/ and the local bundle's bin/ come first!
+PATH=~/bin:.bundle/bin:$PATH
