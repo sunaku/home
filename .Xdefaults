@@ -47,14 +47,14 @@ URxvt.scrollWithBuffer        : True
 !URxvt.keysym.Down            : \033[B  !breaks arrow keys in Vim
 !URxvt.keysym.Right           : \033[C  !breaks arrow keys in Vim
 !URxvt.keysym.Left            : \033[D  !breaks arrow keys in Vim
-!URxvt.keysym.Page_Up         : \033[5~ !breaks scrolling in Rxvt
-!URxvt.keysym.Page_Down       : \033[6~ !breaks scrolling in Rxvt
+!URxvt.keysym.Page_Up         : \033[5~ !breaks scrolling in URxvt
+!URxvt.keysym.Page_Down       : \033[6~ !breaks scrolling in URxvt
 !URxvt.keysym.Home            : \033[H  !breaks navigation in Vim
 !URxvt.keysym.End             : \033[F  !breaks navigation in Vim
-!URxvt.keysym.S-Up            : \033[1;2A !breaks tabbing in Rxvt
-!URxvt.keysym.S-Down          : \033[1;2B !breaks tabbing in Rxvt
-!URxvt.keysym.S-Right         : \033[1;2C !breaks tabbing in Rxvt
-!URxvt.keysym.S-Left          : \033[1;2D !breaks tabbing in Rxvt
+URxvt.keysym.S-Up             : \033[1;2A
+URxvt.keysym.S-Down           : \033[1;2B
+URxvt.keysym.S-Right          : \033[1;2C
+URxvt.keysym.S-Left           : \033[1;2D
 !URxvt.keysym.S-Page_Up       : captured by terminal for scrolling
 !URxvt.keysym.S-Page_Down     : captured by terminal for scrolling
 URxvt.keysym.S-Home           : \033[1;2H
