@@ -19,7 +19,7 @@ Xcursor.theme                 : Human
 
 ! interaction
 XTerm*vt100.metaSendsEscape   : True
-XTerm*vt100.saveLines         : 8192
+XTerm*vt100.saveLines         : 0
 
 ! appearance
 XTerm*termName                : xterm-256color
@@ -35,7 +35,7 @@ XTerm*vt100.veryBoldColors    : 6
 !-----------------------------------------------------------------------------
 
 ! interaction
-URxvt.saveLines               : 8192
+URxvt.saveLines               : 0
 URxvt.scrollTtyOutput         : False
 URxvt.scrollTtyKeypress       : True
 URxvt.scrollWithBuffer        : True
@@ -113,7 +113,7 @@ URxvt.scrollBar_floating      : True
 URxvt.scrollstyle             : plain
 
 ! extensions
-URxvt.perl-ext-common         : default,matcher,searchable-scrollback<M-slash>
+URxvt.perl-ext-common         : default,-searchable-scrollback,matcher
 URxvt.urlLauncher             : /usr/bin/xdg-open
 URxvt.matcher.button          : 2
 
