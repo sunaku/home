@@ -14,6 +14,7 @@ marble-mouse left
 nvidia-settings --load-config-only
 
 # appearance
+xsetroot -cursor_name left_ptr
 xset +fp /usr/share/fonts/artwiz-fonts
 xset +fp /usr/share/fonts/local
 xset +fp ~/.fonts
