@@ -13,6 +13,11 @@
 ! use the Human cursor theme from Ubuntu
 Xcursor.theme                 : Human
 
+! choose color scheme to use in terminals
+!#define use_xoria256_terminal_color_scheme
+!#define use_zenburn_terminal_color_scheme
+#define use_tomorrow_terminal_color_scheme
+
 !-----------------------------------------------------------------------------
 ! XTerm
 !-----------------------------------------------------------------------------
@@ -31,7 +36,7 @@ XTerm*vt100.showBlinkAsBold   : True
 XTerm*vt100.veryBoldColors    : 6
 
 !-----------------------------------------------------------------------------
-!! URxvt
+! URxvt
 !-----------------------------------------------------------------------------
 
 ! interaction
@@ -120,77 +125,217 @@ URxvt.urlLauncher             : /usr/bin/xdg-open
 URxvt.matcher.button          : 2
 
 !-----------------------------------------------------------------------------
-! TomorrowNight color scheme (remixed for visual harmony, per my taste)
-! https://github.com/chriskempson/tomorrow-theme/blob/master/Xdefaults/
+! xoria256 terminal color scheme
+! http://snk.tuxfamily.org/log/xoria256-terminal-color-scheme.html
+#ifdef use_xoria256_terminal_color_scheme
+
+!black.normal                 : xoria256.LineNr.guibg
+!black.bright                 : black.normal.rgb - 8
+#define _color0                 #121212
+#define _color8                 #0a0a0a
+
+!red.normal                   : red.bright.r - 8
+!red.bright                   : xoria256.Special.guifg
+#define _color1                 #d78787
+#define _color9                 #df8787
+
+!green.normal                 : green.bright.g - 8
+!green.bright                 : xoria256.PreProc.guifg
+#define _color2                 #afd787
+#define _color10                #afdf87
+
+!yellow.normal                : yellow.bright.rg - 8
+!yellow.bright                : xoria256.Special.guifg
+#define _color3                 #f7f7af
+#define _color11                #ffffaf
+
+!blue.normal                  : blue.bright.b - 8
+!blue.bright                  : xoria256.Statement.guifg
+#define _color4                 #87afd7
+#define _color12                #87afdf
+
+!magenta.normal               : magenta.bright.rb - 8
+!magenta.bright               : xoria256.Identifier.guifg
+#define _color5                 #d7afd7
+#define _color13                #dfafdf
+
+!cyan.normal                  : cyan.bright.gb - 8
+!cyan.bright                  : green.bright + blue.bright
+#define _color6                 #afd7d7
+#define _color14                #afdfdf
+
+!white.normal                 : white.bright.rgb - 8
+!white.bright                 : xoria256.Folded.guifg
+#define _color7                 #e6e6e6
+#define _color15                #eeeeee
+
+!bold                         : xoria256.Type.guifg
+!underline                    : xoria256.htmlValue.guifg
+#define _colorBD                #afafdf
+#define _colorUL                #dfdfaf
+
+!foreground                   : xoria256.Normal.guifg
+!background                   : xoria256.Normal.guibg
+!cursorColor                  : xoria256.Cursor.guibg
+#define _foreground             #d0d0d0
+#define _background             #1c1c1c
+#define _cursorColor            #ffaf00
+
+#endif
 !-----------------------------------------------------------------------------
 
-!TomorrowNight
-#define t_background            #1d1f21
-#define t_current_line          #282a2e
-#define t_selection             #373b41
-#define t_foreground            #c5c8c6
-#define t_comment               #969896
-#define t_red                   #cc6666
-#define t_orange                #de935f
-#define t_yellow                #f0c674
-#define t_green                 #b5bd68
-#define t_aqua                  #8abeb7
-#define t_blue                  #81a2be
-#define t_purple                #b294bb
+!-----------------------------------------------------------------------------
+! Zenburn terminal color scheme
+! http://snk.tuxfamily.org/log/zenburn-terminal-color-scheme.html
+#ifdef use_zenburn_terminal_color_scheme
 
-!TomorrowNightEighties
-#define t_background            #2d2d2d
-#define t_current_line          #393939
-#define t_selection             #515151
-#define t_foreground            #cccccc
-#define t_comment               #999999
-#define t_red                   #f2777a
-!#define t_orange               #f99157
-!#define t_yellow               #ffcc66
-#define t_green                 #99cc99
-!#define t_aqua                 #66cccc
-#define t_aqua                  #94CCCC /* REMIX *****************************
-TomorrowNight's t_aqua with TomorrowNightEighties's t_aqua's hue and value
-*****************************************************************************/
-!#define t_blue                 #6699cc
-#define t_purple                #cc99cc
+!BLK Cursor
+#define _color0                 #000d18
+#define _color8                 #000d18
 
-URxvt.foreground              : t_foreground
-URxvt.background              : t_background
-URxvt.cursorColor             : #aeafad
+!RED Tag
+#define _color1                 #e89393
+#define _color9                 #e89393
 
-! Black / Grey
-URxvt.color0                  : #000000
-URxvt.color8                  : #666666
+!GRN SpecialKey
+#define _color2                 #9ece9e
+#define _color10                #9ece9e
 
-! Red / Bright Red
-URxvt.color1                  : t_red
-URxvt.color9                  : t_red
+!YEL Keyword
+#define _color3                 #f0dfaf
+#define _color11                #f0dfaf
 
-! Green + Bright Green
-URxvt.color2                  : t_green
-URxvt.color10                 : t_green
+!BLU Number
+#define _color4                 #8cd0d3
+#define _color12                #8cd0d3
 
-! Yellow (Orange) + Bright Yellow (Yellow)
-URxvt.color3                  : t_orange
-URxvt.color11                 : t_yellow
+!MAG Precondit
+#define _color5                 #c0bed1
+#define _color13                #c0bed1
 
-! Blue + Bright Blue
-URxvt.color4                  : t_blue
-URxvt.color12                 : t_blue
+!CYN Float
+#define _color6                 #dfaf8f
+#define _color14                #dfaf8f
 
-! Magenta (Purple) + Bright Magenta
-URxvt.color5                  : t_purple
-URxvt.color13                 : t_purple
+!WHT Search
+#define _color7                 #efefef
+#define _color15                #efefef
 
-! Cyan (Aqua) + Bright Cyan
-URxvt.color6                  : t_aqua
-URxvt.color14                 : t_aqua
+!FMT Include, StatusLine, ErrorMsg
+#define _colorBD                #ffcfaf
+#define _colorUL                #ccdc90
+#define _colorIT                #80d4aa
 
-! Light Grey (Selection) + White (Current Line)
-URxvt.color7                  : t_selection
-URxvt.color15                 : t_current_line
+!TXT Normal, Normal, Cursor
+#define _foreground             #dcdccc
+#define _background             #1f1f1f
+#define _cursorColor            #8faf9f
 
-! extensions for reading man pages in color
-URxvt.colorBD                 : t_yellow
-URxvt.colorUL                 : t_aqua
+#endif
+!-----------------------------------------------------------------------------
+
+!-----------------------------------------------------------------------------
+! Tomorrow terminal color scheme
+! http://snk.tuxfamily.org/log/tomorrow-terminal-color-scheme.html
+#ifdef use_tomorrow_terminal_color_scheme
+
+! BLK
+#define _color0                 #000000
+#define _color8                 #666666
+
+! RED
+! TomorrowNightEighties.t_red
+#define _color1                 #f2777a
+#define _color9                 _color1
+
+! GRN
+! TomorrowNightEighties.t_green
+#define _color2                 #99cc99
+#define _color10                _color2
+
+! YEL
+! TomorrowNight.t_orange
+#define _color3                 #de935f
+! TomorrowNight.t_yellow
+#define _color11                #f0c674
+
+! BLU
+! TomorrowNight.t_blue
+#define _color4                 #81a2be
+#define _color12                _color4
+
+! MAG
+! TomorrowNightEighties.t_purple
+#define _color5                 #cc99cc
+#define _color13                _color5
+
+! CYN
+! TomorrowNightEighties.t_aqua(hue,value) + TomorrowNight.t_aqua(saturation)
+#define _color6                 #94CCCC
+#define _color14                _color6
+
+! WHT
+! TomorrowNightEighties.t_selection
+#define _color7                 #515151
+! TomorrowNightEighties.t_current_line
+#define _color15                #393939
+
+! FMT
+#define _colorBD                _color11
+#define _colorUL                _color6
+
+! TXT
+! TomorrowNightEighties.t_foreground
+#define _foreground             #cccccc
+! TomorrowNightEighties.t_background
+#define _background             #2d2d2d
+#define _cursorColor            #aeafad
+
+#endif
+!-----------------------------------------------------------------------------
+
+URxvt*color0                  : _color0
+URxvt*color1                  : _color1
+URxvt*color2                  : _color2
+URxvt*color3                  : _color3
+URxvt*color4                  : _color4
+URxvt*color5                  : _color5
+URxvt*color6                  : _color6
+URxvt*color7                  : _color7
+URxvt*color8                  : _color8
+URxvt*color9                  : _color9
+URxvt*color10                 : _color10
+URxvt*color11                 : _color11
+URxvt*color12                 : _color12
+URxvt*color13                 : _color13
+URxvt*color14                 : _color14
+URxvt*color15                 : _color15
+URxvt*colorBD                 : _colorBD
+URxvt*colorIT                 : _colorIT
+URxvt*colorUL                 : _colorUL
+URxvt*foreground              : _foreground
+URxvt*background              : _background
+URxvt*cursorColor             : _cursorColor
+
+XTerm*color0                  : _color0
+XTerm*color1                  : _color1
+XTerm*color2                  : _color2
+XTerm*color3                  : _color3
+XTerm*color4                  : _color4
+XTerm*color5                  : _color5
+XTerm*color6                  : _color6
+XTerm*color7                  : _color7
+XTerm*color8                  : _color8
+XTerm*color9                  : _color9
+XTerm*color10                 : _color10
+XTerm*color11                 : _color11
+XTerm*color12                 : _color12
+XTerm*color13                 : _color13
+XTerm*color14                 : _color14
+XTerm*color15                 : _color15
+XTerm*colorBD                 : _colorBD
+XTerm*colorIT                 : _colorIT
+XTerm*colorUL                 : _colorUL
+XTerm*foreground              : _foreground
+XTerm*background              : _background
+XTerm*cursorColor             : _cursorColor
