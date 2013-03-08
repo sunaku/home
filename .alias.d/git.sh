@@ -287,6 +287,9 @@ alias gll='gl --oneline'
 # show log with diffs
 alias gld='gl --patch-with-stat'
 
+# ... while showing changes within a line
+alias glD='gld '$intra_line_diff
+
 # pretty git changelog
 glp() {
   git log --pretty='  * %s. %b'$'\n' "$@"
@@ -334,6 +337,9 @@ alias gh2='git config remote.$(gh1).url'
 
 # diff remote tracking branch
 alias ghd='git diff $(gbh)'
+
+# ... while showing changes within a line
+alias ghD='ghd '$intra_line_diff
 
 #-----------------------------------------------------------------------------
 # p = push
