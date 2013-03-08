@@ -36,6 +36,8 @@ XTerm*vt100.veryBoldColors    : 6
 
 ! interaction
 URxvt.saveLines               : 0
+URxvt.iso14755                : False
+URxvt.iso14755_52             : False
 URxvt.scrollTtyOutput         : False
 URxvt.scrollTtyKeypress       : True
 URxvt.scrollWithBuffer        : True
