@@ -10,4 +10,4 @@
 #--
 # Written in 2013 by Suraj N. Kurapati
 
-exec sed '1s/^/<pre>/; $s!$!</pre>!; s!#[[:xdigit:]]\{3,6\}!<b style="background:&">&</b>!g;' "$@"
+exec sed '1s/^/<pre>/; $s!$!</pre>!; s!#[[:xdigit:]]\{3,6\}\>!<b style="background:&">&</b>!g;' "$@"
