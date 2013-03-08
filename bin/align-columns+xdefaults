@@ -1,3 +1,2 @@
 #!/bin/sh
-align-columns -d ':(?= )' -M '^\! vim' |
-align-columns -d ' (?=#[[:xdigit:]]{6})'
+align-columns -d ':(?= )|(?=\#\h{6})' -M '^\! vim'
