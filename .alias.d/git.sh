@@ -21,13 +21,13 @@ alias goD='god '$intra_line_diff
 alias gor='git reset --soft'
 
 # reset working copy to upstream state
-alias gorh='git reset --soft $(gbh)'
+alias gorh='git reset --soft @{u}'
 
 # reset working copy to current commit
 alias goR='git reset --hard'
 
 # reset working copy to upstream state
-alias goRh='git reset --hard $(gbh)'
+alias goRh='git reset --hard @{u}'
 
 # stage deletion and also delete from working copy
 alias gox='git rm -r --ignore-unmatch'
@@ -220,6 +220,7 @@ alias gri='git rebase --interactive'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
+alias grh='gr @{u}' # against upstream branch
 
 #-----------------------------------------------------------------------------
 # k = conflict
@@ -336,7 +337,7 @@ alias gh1='git config branch.$(gb1).remote'
 alias gh2='git config remote.$(gh1).url'
 
 # diff remote tracking branch
-alias ghd='git diff $(gbh)'
+alias ghd='git diff @{u}'
 
 # ... while showing changes within a line
 alias ghD='ghd '$intra_line_diff
