@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+# Loads the given YAML document, reporting errors if any.
+require 'json'
+JSON.load(ARGF)
+puts 'Syntax OK'
