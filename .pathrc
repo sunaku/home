@@ -49,5 +49,6 @@ export MANPATH=$PATHRC_MANPATH:$MANPATH
 # remove duplicated entries
 if uniq-path-env; then
   export PATH=$(uniq-path-env "$PATH")
-  export MANPATH=$(uniq-path-env "$MANPATH")
+  # NOTE: the trailing colon makes man(1) fall back to system man/ directories
+  export MANPATH=$(uniq-path-env "$MANPATH"):
 fi
