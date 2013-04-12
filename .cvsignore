@@ -10,6 +10,7 @@ tags
 cscope.out
 
 # Vim backup files
+Session.vim
 .*.sw[a-z]
 *~
 
