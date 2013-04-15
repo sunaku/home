@@ -22,11 +22,13 @@ trap "rm -f $usage_file" EXIT
 # preview output while capturing it
 {
   echo '---BEGIN-PREVIEW---'
-  du -hs "${@}" 2>&1 | tee "$usage_file"
+  du -hs "${@}" 2>&1 | sort -n
   echo '----END-PREVIEW----'
-} > /dev/tty
+} > "$usage_file" &
+tail -f "$usage_file" --pid $! >/dev/tty 2>/dev/null
+wait
 
-# display units in increasing order
-for unit in '\s' '[Kk]' '[Mm]' '[Gg]'; do
-  grep "^[0-9\.]\+$unit" "$usage_file" | sort -n
+# show increasing orders of magnitude
+for unit in '\s' '[Kk]' '[Mm]' '[Gg]' '[Tt]' '[Pp]' '[Ee]' '[Zz]' '[Yy]'; do
+  grep "^[0-9\.]\+$unit" "$usage_file"
 done
