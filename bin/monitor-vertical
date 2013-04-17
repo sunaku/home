@@ -1,2 +1,2 @@
 #!/bin/sh
-exec xrandr -o left --dpi 96
+xrandr -o left && xrandr --dpi 96
