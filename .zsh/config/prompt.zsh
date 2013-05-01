@@ -1,10 +1,9 @@
 # my "sunaku" prompt for ZSH using vcs_info stdlib
 # http://snk.tuxfamily.org/log/sunaku-zsh-prompt.png
 
-PROMPT='%(?..%B%F{red}exit %?%f%b
-)'\
+PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 '$(vcs_info && echo $vcs_info_msg_0_)'\
-"%F{$(test $UID -eq 0 && echo red || echo green)}%~%f"\
+'%(!.%F{red}.%F{green})%~%f'\
 '%(!.#.>) '
 
 RPROMPT='%F{cyan}%@%f'
