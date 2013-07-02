@@ -22,11 +22,9 @@ trap "rm -f $usage_file" EXIT
 # preview output while capturing it
 {
   echo '---BEGIN-PREVIEW---'
-  du -hs "${@}" 2>&1 | sort -n
+  du -hs "${@}" 2>&1
   echo '----END-PREVIEW----'
-} > "$usage_file" &
-tail -f "$usage_file" --pid $! >/dev/tty 2>/dev/null
-wait
+} | tee /dev/tty 2>/dev/null | sort -n > "$usage_file"
 
 # show increasing orders of magnitude
 for unit in '\s' '[Kk]' '[Mm]' '[Gg]' '[Tt]' '[Pp]' '[Ee]' '[Zz]' '[Yy]'; do
