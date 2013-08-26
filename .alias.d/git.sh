@@ -166,8 +166,14 @@ alias gb='git checkout -b'
 # list all branches
 alias gbl='git branch -av'
 
-# list all branches with commit details
+# list local branches with commit details
 alias gbL='git branch -v'
+
+# list local branches chronologically with commit date
+gbLt() {
+  git for-each-ref refs/heads/ --sort=-committerdate \
+    --format='%(committerdate:short) %(refname:short)' "$@"
+}
 
 # delete merged branch
 alias gbx='git branch -d'
