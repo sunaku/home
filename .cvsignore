@@ -4,6 +4,7 @@
 # version control systems
 .svn
 .hg
+.git
 
 # ctags database
 tags
@@ -15,8 +16,7 @@ Session.vim
 *~
 
 # Interpreted source
-.rvmrc
-.test-loop
+.ruby-version
 
 # Compiled source
 *.com
