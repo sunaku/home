@@ -4,6 +4,10 @@ export EDITOR='vim'
 export VISUAL=$EDITOR
 export BROWSER='w3m -v'
 
+alias vi=vim
+alias view='vim -R'
+alias vim='test -s Session.vim && \vim -S || \vim -c Obsession'
+
 alias e=$EDITOR
 alias v=$PAGER
 alias b=$BROWSER
