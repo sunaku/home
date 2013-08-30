@@ -6,7 +6,15 @@ export BROWSER='w3m -v'
 
 alias vi=vim
 alias view='vim -R'
-alias vim='test -s Session.vim && \vim -S || \vim -c Obsession'
+function vim() {
+  if test $# -gt 0; then
+    env vim "$@"
+  elif test -f Session.vim; then
+    env vim -S
+  else
+    env vim -c Obsession
+  fi
+}
 
 alias e=$EDITOR
 alias v=$PAGER
