@@ -41,6 +41,12 @@ XTerm*vt100.colorULMode       : True
 XTerm*vt100.showBlinkAsBold   : True
 XTerm*vt100.veryBoldColors    : 6
 
+! prevent Shift+PgUp and Shift+PgDn keys from scrolling the scrollback buffer
+! http://aperiodic.net/screen/interface
+XTerm.vt100.translations: #override \n\
+    Shift <Key>Prior:string(0x1b) string("[5;2~") \n\
+    Shift <Key>Next:string(0x1b) string("[6;2~")
+
 !-----------------------------------------------------------------------------
 ! URxvt
 !-----------------------------------------------------------------------------
