@@ -8,8 +8,8 @@ zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
-# ... support zsh in tmux in URxvt too
-if test "${TERM#screen}" != "$TERM"; then
+# ... support zsh in tmux in URxvt or XTerm; and under Ubuntu Linux too
+if test "${TERM#screen}" != "$TERM" || fgrep -q Ubuntu /etc/issue; then
   bindkey '^[[A' history-substring-search-up
   bindkey '^[[B' history-substring-search-down
 fi
