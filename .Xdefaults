@@ -29,6 +29,12 @@ XTerm*vt100.saveLines         : 0
 ! appearance
 XTerm*termName                : xterm-256color
 XTerm*font                    : -*-tamzen-medium-*-*-*-15-*-*-*-*-*-*-*
+XTerm*font1                   : -*-tamzen-medium-*-*-*-11-*-*-*-*-*-*-*
+XTerm*font2                   : -*-tamzen-medium-*-*-*-12-*-*-*-*-*-*-*
+XTerm*font3                   : -*-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*
+XTerm*font4                   : -*-tamzen-medium-*-*-*-15-*-*-*-*-*-*-*
+XTerm*font5                   : -*-tamzen-medium-*-*-*-17-*-*-*-*-*-*-*
+XTerm*font6                   : -*-tamzen-medium-*-*-*-20-*-*-*-*-*-*-*
 XTerm*vt100.colorMode         : True
 XTerm*vt100.colorBDMode       : True
 XTerm*vt100.colorULMode       : True
