@@ -41,6 +41,10 @@ XTerm*vt100.colorULMode       : True
 XTerm*vt100.showBlinkAsBold   : True
 XTerm*vt100.veryBoldColors    : 6
 
+! prevent Alt+Enter keys from toggling fullscreen mode
+XTerm*fullscreen              : never
+XTerm.omitTranslation         : fullscreen
+
 ! prevent Shift+PgUp and Shift+PgDn keys from scrolling the scrollback buffer
 ! http://aperiodic.net/screen/interface
 XTerm.vt100.translations: #override \n\
