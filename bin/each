@@ -109,7 +109,7 @@ fi
 
 echo="
 cat <<END_SCRIPT_PREVIEW
-$SCRIPT
+$(echo "$SCRIPT")
 END_SCRIPT_PREVIEW
 "
 
