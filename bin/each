@@ -5,12 +5,16 @@
 #
 # SYNOPSIS
 #       each [OPTION]... SCRIPT [PATH]...
-#       ls [PATH]... | each [OPTION]... SCRIPT
+#       ls [PATH]... | each [OPTION]... [SCRIPT]
 #
 # DESCRIPTION
 #       Sets the following variables and evaluates the given SCRIPT
 #       once for each PATH, which can be either (1) specified as a
 #       command line argument or (2) listed one per line on stdin.
+#
+#       If SCRIPT is either `:`, blank, or not specified, then the
+#       following variables and their effective values will be
+#       printed to stderr, followed by a newline, for each PATH.
 #
 #       $p = PATH
 #       $f = PATH without directories (basename)
@@ -71,8 +75,19 @@ fi
 # command line arguments
 #-----------------------------------------------------------------------------
 
-SCRIPT=$1
-shift
+if test $# -gt 0; then
+  SCRIPT=$1
+  shift
+else
+  SCRIPT=
+fi
+
+# provide default script if none was specified:
+# dump variables and emit newline for each item
+if test -z "$SCRIPT" -o "$SCRIPT" = ':'; then
+  EXTRACE=1
+  SCRIPT='echo >&2'
+fi
 
 #-----------------------------------------------------------------------------
 # head of the each loop
@@ -122,6 +137,7 @@ else
 fi
 
 body="
+p=\$each
 f=\${p##*/}
 n=\${f%.*}
 d=\${p%/*}
