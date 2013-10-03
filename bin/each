@@ -30,10 +30,12 @@
 #       -n  Dry run.
 #           Instead of executing the SCRIPT, print
 #           what would happen if it were executed.
+#           This overrides `-i` and `-v` options.
 #
 #       -i  Confirm.
 #           While executing the SCRIPT, ask if
 #           commands should really be executed.
+#           This overrides the `-v` option.
 #
 #       -v  Verbose.
 #           While executing the SCRIPT, print
