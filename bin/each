@@ -117,10 +117,10 @@ if test -n "$DRY_RUN"; then
   body=$echo
 elif test -n "$CONFIRM"; then
   body="
->/dev/tty $echo
->/dev/tty echo -n 'Run command? [Y/n/q] '
-read REPLY </dev/tty &&
-case \"\$REPLY\" in
+$echo >/dev/tty
+echo -n 'Run command? [Y/n/q] ' >/dev/tty
+read CONFIRM </dev/tty &&
+case \"\$CONFIRM\" in
   q|Q) break ;;
   n|N) continue ;;
   *)
