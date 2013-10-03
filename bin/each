@@ -16,6 +16,7 @@
 #       following variables and their effective values will be
 #       printed to stderr, followed by a newline, for each PATH.
 #
+#       $i = sequence number, counting from 1, for PATH
 #       $p = PATH
 #       $f = PATH without directories (basename)
 #       $n = PATH without directories and file extension
@@ -157,8 +158,10 @@ set +x
 #-----------------------------------------------------------------------------
 
 eval "
+i=0
 $each
 do
+i=\$(expr \$i + 1)
 $body
 done
 "
