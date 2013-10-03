@@ -78,13 +78,13 @@ shift
 # head of the each loop
 #-----------------------------------------------------------------------------
 
-if test -p /dev/stdin; then
+if test -t 0; then
+  # paths are on command line
+  each='for each'
+else
   # paths are listed on stdin
   exec 3<&0 0</dev/tty
-  each='while read p <&3'
-else
-  # paths are on command line
-  each='for p'
+  each='while read each <&3'
 fi
 
 #-----------------------------------------------------------------------------
