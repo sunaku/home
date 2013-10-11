@@ -1,0 +1,4 @@
+#!/bin/sh
+# Runs the given command using the lowest possible CPU and I/O priority.
+# Usage: yield COMMAND [ARGUMENT...]
+exec nice -n 19 ionice -c 3 -t "$@"
