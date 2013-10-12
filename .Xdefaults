@@ -147,55 +147,55 @@ URxvt.matcher.button          : 2
 
 !black.normal                 : xoria256.LineNr.guibg
 !black.bright                 : black.normal.rgb - 8
-#define _color0                 #121212
-#define _color8                 #0a0a0a
+#define Ansi_0_Color            #121212
+#define Ansi_8_Color            #0a0a0a
 
 !red.normal                   : red.bright.r - 8
 !red.bright                   : xoria256.Special.guifg
-#define _color1                 #d78787
-#define _color9                 #df8787
+#define Ansi_1_Color            #d78787
+#define Ansi_9_Color            #df8787
 
 !green.normal                 : green.bright.g - 8
 !green.bright                 : xoria256.PreProc.guifg
-#define _color2                 #afd787
-#define _color10                #afdf87
+#define Ansi_2_Color            #afd787
+#define Ansi_10_Color           #afdf87
 
 !yellow.normal                : yellow.bright.rg - 8
 !yellow.bright                : xoria256.Special.guifg
-#define _color3                 #f7f7af
-#define _color11                #ffffaf
+#define Ansi_3_Color            #f7f7af
+#define Ansi_11_Color           #ffffaf
 
 !blue.normal                  : blue.bright.b - 8
 !blue.bright                  : xoria256.Statement.guifg
-#define _color4                 #87afd7
-#define _color12                #87afdf
+#define Ansi_4_Color            #87afd7
+#define Ansi_12_Color           #87afdf
 
 !magenta.normal               : magenta.bright.rb - 8
 !magenta.bright               : xoria256.Identifier.guifg
-#define _color5                 #d7afd7
-#define _color13                #dfafdf
+#define Ansi_5_Color            #d7afd7
+#define Ansi_13_Color           #dfafdf
 
 !cyan.normal                  : cyan.bright.gb - 8
 !cyan.bright                  : green.bright + blue.bright
-#define _color6                 #afd7d7
-#define _color14                #afdfdf
+#define Ansi_6_Color            #afd7d7
+#define Ansi_14_Color           #afdfdf
 
 !white.normal                 : white.bright.rgb - 8
 !white.bright                 : xoria256.Folded.guifg
-#define _color7                 #e6e6e6
-#define _color15                #eeeeee
+#define Ansi_7_Color            #e6e6e6
+#define Ansi_15_Color           #eeeeee
 
 !bold                         : xoria256.Type.guifg
 !underline                    : xoria256.htmlValue.guifg
-#define _colorBD                #afafdf
-#define _colorUL                #dfdfaf
+#define Bold_Color              #afafdf
+#define Underline_Color         #dfdfaf
 
 !foreground                   : xoria256.Normal.guifg
 !background                   : xoria256.Normal.guibg
 !cursorColor                  : xoria256.Cursor.guibg
-#define _foreground             #d0d0d0
-#define _background             #1c1c1c
-#define _cursorColor            #ffaf00
+#define Foreground_Color        #d0d0d0
+#define Background_Color        #1c1c1c
+#define Cursor_Color            #ffaf00
 
 #endif
 !-----------------------------------------------------------------------------
@@ -206,46 +206,46 @@ URxvt.matcher.button          : 2
 #ifdef use_zenburn_terminal_color_scheme
 
 !BLK Cursor
-#define _color0                 #000d18
-#define _color8                 #000d18
+#define Ansi_0_Color            #000d18
+#define Ansi_8_Color            #000d18
 
 !RED Tag
-#define _color1                 #e89393
-#define _color9                 #e89393
+#define Ansi_1_Color            #e89393
+#define Ansi_9_Color            #e89393
 
 !GRN SpecialKey
-#define _color2                 #9ece9e
-#define _color10                #9ece9e
+#define Ansi_2_Color            #9ece9e
+#define Ansi_10_Color           #9ece9e
 
 !YEL Keyword
-#define _color3                 #f0dfaf
-#define _color11                #f0dfaf
+#define Ansi_3_Color            #f0dfaf
+#define Ansi_11_Color           #f0dfaf
 
 !BLU Number
-#define _color4                 #8cd0d3
-#define _color12                #8cd0d3
+#define Ansi_4_Color            #8cd0d3
+#define Ansi_12_Color           #8cd0d3
 
 !MAG Precondit
-#define _color5                 #c0bed1
-#define _color13                #c0bed1
+#define Ansi_5_Color            #c0bed1
+#define Ansi_13_Color           #c0bed1
 
 !CYN Float
-#define _color6                 #dfaf8f
-#define _color14                #dfaf8f
+#define Ansi_6_Color            #dfaf8f
+#define Ansi_14_Color           #dfaf8f
 
 !WHT Search
-#define _color7                 #efefef
-#define _color15                #efefef
+#define Ansi_7_Color            #efefef
+#define Ansi_15_Color           #efefef
 
 !FMT Include, StatusLine, ErrorMsg
-#define _colorBD                #ffcfaf
-#define _colorUL                #ccdc90
-#define _colorIT                #80d4aa
+#define Bold_Color              #ffcfaf
+#define Underline_Color         #ccdc90
+#define Italic_Color            #80d4aa
 
 !TXT Normal, Normal, Cursor
-#define _foreground             #dcdccc
-#define _background             #1f1f1f
-#define _cursorColor            #8faf9f
+#define Foreground_Color        #dcdccc
+#define Background_Color        #1f1f1f
+#define Cursor_Color            #8faf9f
 
 #endif
 !-----------------------------------------------------------------------------
@@ -256,102 +256,114 @@ URxvt.matcher.button          : 2
 #ifdef use_tomorrow_terminal_color_scheme
 
 ! BLK
-#define _color0                 #000000
-#define _color8                 #666666
+#define Ansi_0_Color            #000000
+#define Ansi_8_Color            #666666
 
 ! RED
 ! TomorrowNightEighties.t_red
-#define _color1                 #f2777a
-#define _color9                 _color1
+#define Ansi_1_Color            #f2777a
+#define Ansi_9_Color            Ansi_1_Color
 
 ! GRN
 ! TomorrowNightEighties.t_green
-#define _color2                 #99cc99
-#define _color10                _color2
+#define Ansi_2_Color            #99cc99
+#define Ansi_10_Color           Ansi_2_Color
 
 ! YEL
 ! TomorrowNight.t_orange
-#define _color3                 #de935f
+#define Ansi_3_Color            #de935f
 ! TomorrowNight.t_yellow
-#define _color11                #f0c674
+#define Ansi_11_Color           #f0c674
 
 ! BLU
 ! TomorrowNight.t_blue
-#define _color4                 #81a2be
-#define _color12                _color4
+#define Ansi_4_Color            #81a2be
+#define Ansi_12_Color           Ansi_4_Color
 
 ! MAG
 ! TomorrowNightEighties.t_purple
-#define _color5                 #cc99cc
-#define _color13                _color5
+#define Ansi_5_Color            #cc99cc
+#define Ansi_13_Color           Ansi_5_Color
 
 ! CYN
 ! TomorrowNightEighties.t_aqua(hue,value) + TomorrowNight.t_aqua(saturation)
-#define _color6                 #94CCCC
-#define _color14                _color6
+#define Ansi_6_Color            #94CCCC
+#define Ansi_14_Color           Ansi_6_Color
 
 ! WHT
 ! TomorrowNightEighties.t_selection
-#define _color7                 #515151
+#define Ansi_7_Color            #515151
 ! TomorrowNightEighties.t_current_line
-#define _color15                #393939
+#define Ansi_15_Color           #393939
 
 ! FMT
-#define _colorBD                _color11
-#define _colorUL                _color6
+#define Bold_Color              Ansi_11_Color
+#define Underline_Color         Ansi_6_Color
 
 ! TXT
-! TomorrowNightEighties.t_foreground
-#define _foreground             #cccccc
-! TomorrowNightEighties.t_background
-#define _background             #2d2d2d
-#define _cursorColor            #aeafad
+! TomorrowNightEighties.tForeground_Color
+#define Foreground_Color        #cccccc
+! TomorrowNightEighties.tBackground_Color
+#define Background_Color        #2d2d2d
+#define Cursor_Color            #aeafad
 
 #endif
 !-----------------------------------------------------------------------------
 
-URxvt*color0                  : _color0
-URxvt*color1                  : _color1
-URxvt*color2                  : _color2
-URxvt*color3                  : _color3
-URxvt*color4                  : _color4
-URxvt*color5                  : _color5
-URxvt*color6                  : _color6
-URxvt*color7                  : _color7
-URxvt*color8                  : _color8
-URxvt*color9                  : _color9
-URxvt*color10                 : _color10
-URxvt*color11                 : _color11
-URxvt*color12                 : _color12
-URxvt*color13                 : _color13
-URxvt*color14                 : _color14
-URxvt*color15                 : _color15
-URxvt*colorBD                 : _colorBD
-URxvt*colorIT                 : _colorIT
-URxvt*colorUL                 : _colorUL
-URxvt*foreground              : _foreground
-URxvt*background              : _background
-URxvt*cursorColor             : _cursorColor
+#ifndef Bold_Color
+#define Bold_Color Ansi_3_Color
+#endif
 
-XTerm*color0                  : _color0
-XTerm*color1                  : _color1
-XTerm*color2                  : _color2
-XTerm*color3                  : _color3
-XTerm*color4                  : _color4
-XTerm*color5                  : _color5
-XTerm*color6                  : _color6
-XTerm*color7                  : _color7
-XTerm*color8                  : _color8
-XTerm*color9                  : _color9
-XTerm*color10                 : _color10
-XTerm*color11                 : _color11
-XTerm*color12                 : _color12
-XTerm*color13                 : _color13
-XTerm*color14                 : _color14
-XTerm*color15                 : _color15
-XTerm*colorBD                 : _colorBD
-XTerm*colorIT                 : _colorIT
-XTerm*colorUL                 : _colorUL
-XTerm*foreground              : _foreground
-XTerm*background              : _background
-XTerm*cursorColor             : _cursorColor
+#ifndef Italic_Color
+#define Italic_Color Ansi_13_Color
+#endif
+
+#ifndef Underline_Color
+#define Underline_Color Ansi_6_Color
+#endif
+
+Rxvt*color0                   : Ansi_0_Color
+Rxvt*color1                   : Ansi_1_Color
+Rxvt*color2                   : Ansi_2_Color
+Rxvt*color3                   : Ansi_3_Color
+Rxvt*color4                   : Ansi_4_Color
+Rxvt*color5                   : Ansi_5_Color
+Rxvt*color6                   : Ansi_6_Color
+Rxvt*color7                   : Ansi_7_Color
+Rxvt*color8                   : Ansi_8_Color
+Rxvt*color9                   : Ansi_9_Color
+Rxvt*color10                  : Ansi_10_Color
+Rxvt*color11                  : Ansi_11_Color
+Rxvt*color12                  : Ansi_12_Color
+Rxvt*color13                  : Ansi_13_Color
+Rxvt*color14                  : Ansi_14_Color
+Rxvt*color15                  : Ansi_15_Color
+Rxvt*colorBD                  : Bold_Color
+Rxvt*colorIT                  : Italic_Color
+Rxvt*colorUL                  : Underline_Color
+Rxvt*foreground               : Foreground_Color
+Rxvt*background               : Background_Color
+Rxvt*cursorColor              : Cursor_Color
+
+XTerm*color0                  : Ansi_0_Color
+XTerm*color1                  : Ansi_1_Color
+XTerm*color2                  : Ansi_2_Color
+XTerm*color3                  : Ansi_3_Color
+XTerm*color4                  : Ansi_4_Color
+XTerm*color5                  : Ansi_5_Color
+XTerm*color6                  : Ansi_6_Color
+XTerm*color7                  : Ansi_7_Color
+XTerm*color8                  : Ansi_8_Color
+XTerm*color9                  : Ansi_9_Color
+XTerm*color10                 : Ansi_10_Color
+XTerm*color11                 : Ansi_11_Color
+XTerm*color12                 : Ansi_12_Color
+XTerm*color13                 : Ansi_13_Color
+XTerm*color14                 : Ansi_14_Color
+XTerm*color15                 : Ansi_15_Color
+XTerm*colorBD                 : Bold_Color
+XTerm*colorIT                 : Italic_Color
+XTerm*colorUL                 : Underline_Color
+XTerm*foreground              : Foreground_Color
+XTerm*background              : Background_Color
+XTerm*cursorColor             : Cursor_Color
