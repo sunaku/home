@@ -6,7 +6,7 @@ PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 '%(!.%F{red}.%F{green})%~%f'\
 '%(!.#.>) '
 
-RPROMPT='%F{cyan}%@%f'
+RPROMPT='$(test -c "$SSH_TTY" && echo "%F{cyan}%n@%m%f")'
 
 # VCS integration for command prompt using vcs_info
 # http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
