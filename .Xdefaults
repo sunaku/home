@@ -322,6 +322,9 @@ URxvt.matcher.button          : 2
 #define Underline_Color Ansi_6_Color
 #endif
 
+! LuciusDark.Cursor
+#define Cursor_Color            #87afd7
+
 Rxvt*color0                   : Ansi_0_Color
 Rxvt*color1                   : Ansi_1_Color
 Rxvt*color2                   : Ansi_2_Color
