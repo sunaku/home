@@ -15,7 +15,7 @@ alias gol='git status --short'
 alias god='git diff'
 
 # ... while showing changes within a line
-alias goD='god '$intra_line_diff
+alias goD='git diff '$intra_line_diff
 
 # reset working copy to current index
 alias gor='git reset --soft'
@@ -151,7 +151,7 @@ alias gcps='git cherry-pick --skip'
 alias gcd='git show'
 
 # ... while showing changes within a line
-alias gcD='gcd '$intra_line_diff
+alias gcD='git show '$intra_line_diff
 
 #-----------------------------------------------------------------------------
 # b = branch
@@ -219,7 +219,7 @@ alias gri='git rebase --interactive'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
-alias grh='gr @{u}' # against upstream branch
+alias grh='git rebase @{u}' # against upstream branch
 
 #-----------------------------------------------------------------------------
 # k = conflict
