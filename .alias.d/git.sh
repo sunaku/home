@@ -154,7 +154,10 @@ alias gcpa='git cherry-pick --abort'
 alias gcps='git cherry-pick --skip'
 
 # show current commit in detail
-alias gc1='git show'
+alias gcd='git show'
+
+# ... while showing changes within a line
+alias gcD='gcd '$intra_line_diff
 
 #-----------------------------------------------------------------------------
 # b = branch
