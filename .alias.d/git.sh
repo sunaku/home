@@ -142,10 +142,10 @@ alias gco='git checkout'
 alias gcO='git checkout HEAD --'
 
 # cherry pick the given commit into current branch
-alias gcp='git cherry-pick'
-alias gcpc='git cherry-pick --continue'
-alias gcpa='git cherry-pick --abort'
-alias gcps='git cherry-pick --skip'
+alias gcy='git cherry-pick'
+alias gcyc='git cherry-pick --continue'
+alias gcya='git cherry-pick --abort'
+alias gcys='git cherry-pick --skip'
 
 # show current commit in detail
 alias gcd='git show'
