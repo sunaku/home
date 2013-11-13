@@ -77,7 +77,7 @@ alias gix='git rm -r --cached --ignore-unmatch'
 alias gt='git stash save'
 
 # stash current state but keep working copy as-is
-alias gT='git stash save && git stash apply'
+gT() { git stash save "$@" && git stash apply ;}
 
 # list all stashes
 alias gtl='git stash list'
@@ -114,20 +114,14 @@ alias gcm='git commit -m'
 alias gcd='git commit --date'
 
 # commit staged changes as if on the modification date of the given file
-function gcdf() {
-  git commit --date="$(date -r "$1")"
-}
+gcdf() { git commit --date="$(date -r "$1")" ;}
 
 # commit staged changes with the given version string as the message
-function gcv() {
-  git commit -m "Version $1" && git tag "v$1"
-}
-function gcV() {
-  git tag -f "v$1"
-}
+gcv() { git commit -m "Version $1" && git tag "v$1" ;}
+gcV() { git tag -f "v$1" ;}
 
 # commit staged changes to a temporary "squash" commit, to be rebased later
-alias gcq='git commit -m "SQUASH $(date)"'
+alias gcq='git commit -m "squash! $(date)"'
 
 # amend current commit and edit its message
 alias gca='git commit --amend'
@@ -192,15 +186,11 @@ alias gbM='git branch -M'
 
 # show current branch name
 # http://stackoverflow.com/a/9753364
-gb1() {
-  git symbolic-ref --short HEAD
-}
+gb1() { git symbolic-ref --short HEAD ;}
 
 # show current remote branch name
 # http://stackoverflow.com/a/9753364
-gbh() {
-  git rev-parse --abbrev-ref '@{u}'
-}
+gbh() { git rev-parse --abbrev-ref '@{u}' ;}
 
 # set upstream branch for tracking
 gbH() {
@@ -301,9 +291,7 @@ alias gld='gl --patch-with-stat'
 alias glD='gld '$intra_line_diff
 
 # pretty git changelog
-glp() {
-  git log --pretty='  * %s. %b'$'\n' "$@"
-}
+glp() { git log --pretty='  * %s. %b'$'\n' "$@" ;}
 
 #-----------------------------------------------------------------------------
 # L = reflog
@@ -315,14 +303,10 @@ alias gL='git reflog --decorate'
 alias gLL='gll `gL --pretty=%h`'
 
 # search reflog for all commits related to the given files
-gLf() {
-  gl $(git rev-list --all "$@")
-}
+gLf() { gl $(git rev-list --all "$@") ;}
 
 # search reflog for all commits related to the given files, show with diffs
-gLfd() {
-  gld $(git rev-list --all "$@")
-}
+gLfd() { gld $(git rev-list --all "$@") ;}
 
 #-----------------------------------------------------------------------------
 # h = remote hosts
