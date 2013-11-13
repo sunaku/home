@@ -268,6 +268,9 @@ alias gfu='git ls-files --others'
 # list deleted files
 alias gfx='git ls-files --killed'
 
+# list commits related to the given files
+alias gfc='git rev-list --all'
+
 #-----------------------------------------------------------------------------
 # l = log
 #-----------------------------------------------------------------------------
@@ -300,13 +303,8 @@ glp() { git log --pretty='  * %s. %b'$'\n' "$@" ;}
 # show reference log
 alias gL='git reflog --decorate'
 
-alias gLL='gll `gL --pretty=%h`'
-
-# search reflog for all commits related to the given files
-gLf() { gl $(git rev-list --all "$@") ;}
-
-# search reflog for all commits related to the given files, show with diffs
-gLfd() { gld $(git rev-list --all "$@") ;}
+# ... in a more visual format
+alias gLl='gll `gL --pretty=%h`'
 
 #-----------------------------------------------------------------------------
 # h = remote hosts
