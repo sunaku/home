@@ -111,10 +111,10 @@ alias gc='git commit'
 alias gcm='git commit -m'
 
 # commit staged changes as if on the given date
-alias gcd='git commit --date'
+alias gct='git commit --date'
 
 # commit staged changes as if on the modification date of the given file
-gcdf() { git commit --date="$(date -r "$1")" ;}
+gctf() { git commit --date="$(date -r "$1")" ;}
 
 # commit staged changes with the given version string as the message
 gcv() { git commit -m "Version $1" && git tag "v$1" ;}
