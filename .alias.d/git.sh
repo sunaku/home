@@ -351,6 +351,12 @@ alias gpt='git push --tags'
 # push tags forcefully
 alias gPt='git push --tags --force'
 
+# push branch to current remote
+alias gph='git push `gh1` `gb1`'
+
+# ... and set as remote tracking branch
+alias gpH='gph && gbH'
+
 #-----------------------------------------------------------------------------
 # g = fetch
 #-----------------------------------------------------------------------------
