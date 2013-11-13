@@ -233,7 +233,7 @@ alias gkl='git ls-files --unmerged | cut -f2 | uniq'
 alias gka='git add $(gkl)'
 
 # edit conflicted files
-alias gke='edit-merge-conflict $(gkl)'
+alias gke='vim +"set hlsearch" +"/^[<=>]\{7\}/" $(gkl)'
 
 # use local version of the given files
 alias gko='git checkout --theirs --'
