@@ -220,6 +220,7 @@ alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
 alias grh='git rebase @{u}' # against upstream branch
+alias grih='grh --interactive'
 
 #-----------------------------------------------------------------------------
 # k = conflict
