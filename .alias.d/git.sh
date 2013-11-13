@@ -295,7 +295,7 @@ alias gld='gl --patch-with-stat'
 alias glD='gld '$intra_line_diff
 
 # pretty git changelog
-glp() { git log --pretty='  * %s. %b'$'\n' "$@" ;}
+alias glp='git log --pretty="  * %s. %b"'$'\n'
 
 #-----------------------------------------------------------------------------
 # L = reflog
