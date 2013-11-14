@@ -141,17 +141,20 @@ alias gco='git checkout'
 # update working copy to current commit
 alias gcO='git checkout HEAD --'
 
-# cherry pick the given commit into current branch
-alias gcy='git cherry-pick'
-alias gcyc='git cherry-pick --continue'
-alias gcya='git cherry-pick --abort'
-alias gcys='git cherry-pick --skip'
-
 # show current commit in detail
 alias gcd='git show'
 
 # ... while showing changes within a line
 alias gcD='git show '$intra_line_diff
+
+#-----------------------------------------------------------------------------
+# y = cherry-pick
+#-----------------------------------------------------------------------------
+
+alias gy='git cherry-pick'
+alias gyc='git cherry-pick --continue'
+alias gya='git cherry-pick --abort'
+alias gys='git cherry-pick --skip'
 
 #-----------------------------------------------------------------------------
 # b = branch
