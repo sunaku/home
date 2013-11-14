@@ -219,7 +219,8 @@ alias gM='git merge --ff'
 # r = rebase
 #-----------------------------------------------------------------------------
 
-alias gr='git rebase'
+alias gr='git rebase --preserve-merges'
+alias gR='git rebase' # don't preserve merges
 alias gri='git rebase --interactive'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
