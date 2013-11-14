@@ -305,7 +305,7 @@ alias glp='git log --pretty="  * %s. %b"'$'\n'
 alias gL='git reflog --decorate'
 
 # ... in a more visual format
-alias gLl='gll `gL --pretty=%h`'
+alias gLl='gll $(gL --pretty=%h)'
 
 #-----------------------------------------------------------------------------
 # h = remote hosts
@@ -351,7 +351,7 @@ alias gpt='git push --tags'
 alias gPt='git push --tags --force'
 
 # push branch to current remote
-alias gph='git push `gh1` `gb1`'
+alias gph='git push $(gh1) $(gb1)'
 
 # ... and set as remote tracking branch
 alias gpH='gph && gbH'
