@@ -204,11 +204,13 @@ gbH() {
 # m = merge
 #-----------------------------------------------------------------------------
 
-# merge commits
 alias gm='git merge --no-ff'
+alias gmc='git merge --continue'
+alias gma='git merge --abort'
+alias gms='git merge --skip'
 
 # merge commits but don't record a special merge commit
-alias gmf='git merge --ff'
+alias gM='git merge --ff'
 
 #-----------------------------------------------------------------------------
 # r = rebase
