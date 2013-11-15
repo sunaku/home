@@ -221,12 +221,11 @@ alias gM='git merge --ff'
 
 alias gr='git rebase --preserve-merges'
 alias gR='git rebase' # don't preserve merges
-alias gri='git rebase --interactive'
+alias gri='gr --interactive'
+alias gRi='gR --interactive'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
-alias grh='git rebase @{u}' # against upstream branch
-alias grih='grh --interactive'
 
 #-----------------------------------------------------------------------------
 # k = conflict
