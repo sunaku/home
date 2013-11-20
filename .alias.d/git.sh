@@ -241,13 +241,13 @@ alias gka='git add $(gkl)'
 alias gke='vim +"set hlsearch" +"/^[<=>]\{7\}/" $(gkl)'
 
 # use local version of the given files
-alias gko='git checkout --theirs --'
+alias gko='git checkout --$(test -f .git/MERGE_HEAD && echo ours || echo theirs) --'
 
 # use local version of all conflicted files
 alias gkO='gko $(gkl)'
 
 # use upstream version of the given files
-alias gkt='git checkout --ours --'
+alias gkt='git checkout --$(test -f .git/MERGE_HEAD && echo theirs || echo ours) --'
 
 # use upstream version of all conflicted files
 alias gkT='gkt $(gkl)'
