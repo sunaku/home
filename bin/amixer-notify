@@ -1,0 +1,16 @@
+#!/bin/sh -e
+#
+# Wrapper for amixer(1) that notifies you afterward.
+#
+# Usage: amixer-notify OPERATION MIXER [ARGUMENT...]
+#
+# Example: amixer-notify set Master toggle
+# Example: amixer-notify set Master 5%+ unmute
+# Example: amixer-notify set Master 5%- unmute
+#
+# Written in 2013 by Suraj N. Kurapati <https://github.com/sunaku>
+
+amixer "$@"
+notify-send -t 1500 -i stock_volume Volume "$(
+  amixer get "$2" | awk '/%/{print $6,$4}' | tr -d '[]'
+)"
