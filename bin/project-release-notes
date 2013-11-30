@@ -15,7 +15,7 @@ branches.each_cons(2) do |head, tail|
   sections[head] = output if output.length > 2
 end
 
-version = `git tag --contains master`.scan(/\d+/)
+version = `git tag -l | tail -1`.scan(/\d+/)
 if sections.key? :major
   version[0].next!
   version[1] = '0'
