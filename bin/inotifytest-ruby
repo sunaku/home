@@ -1,0 +1,22 @@
+#!/bin/sh
+# When *.rb files in the current directory are modified, this script runs
+# their corresponding *test.rb files and prints any errors or test fails.
+
+inotifywait -qme close_write --format '%w%f' . | while read file; do
+  # only process *.rb files - ignore all other files
+  test "${file%.rb}" = "$file" && continue
+
+  # map the *.rb file to its corresponding *test.rb
+  # file, unless it already _is_ that *test.rb file!
+  test "${file%test.rb}" = "$file" && file="${file%.rb}test.rb"
+
+  # make sure *test.rb file exists before running it
+  test -f "$file" || continue
+
+  # keep track of which test file is being run & when
+  clear
+  echo "\033[36m$file @ $(date)\033[0m"
+
+  # run test file and print any errors or test fails
+  ruby "$file"
+done

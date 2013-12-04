@@ -1,0 +1,26 @@
+#!/bin/sh
+# When *.sml files in the current directory are modified, this script runs
+# their corresponding *test.sml files and prints any errors or test fails.
+
+inotifywait -qme close_write --format '%w%f' . | while read file; do
+  # only process *.sml files - ignore all other files
+  test "${file%.sml}" = "$file" && continue
+
+  # map the *.sml file to its corresponding *test.sml
+  # file, unless it already _is_ that *test.sml file!
+  test "${file%test.sml}" = "$file" && file="${file%.sml}test.sml"
+
+  # make sure *test.sml file exists before running it
+  test -f "$file" || continue
+
+  # keep track of which test file is being run & when
+  clear
+  echo "\033[36m$file @ $(date)\033[0m"
+
+  # run test file and print any errors or test fails
+  sml "$file" </dev/null | sed -n \
+    -e '/ Error: /,$p' \
+    -e '/ Warning: /p' \
+    -e '/ = false : bool$/p' \
+    -e '/ = <hidden-value> : bool$/p'
+done

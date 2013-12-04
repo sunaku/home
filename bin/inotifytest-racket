@@ -1,0 +1,22 @@
+#!/bin/sh
+# When *.rkt files in the current directory are modified, this script runs
+# their corresponding *test.rkt files and prints any errors or test fails.
+
+inotifywait -qme close_write --format '%w%f' . | while read file; do
+  # only process *.rkt files - ignore all other files
+  test "${file%.rkt}" = "$file" && continue
+
+  # map the *.rkt file to its corresponding *test.rkt
+  # file, unless it already _is_ that *test.rkt file!
+  test "${file%test.rkt}" = "$file" && file="${file%.rkt}test.rkt"
+
+  # make sure *test.rkt file exists before running it
+  test -f "$file" || continue
+
+  # keep track of which test file is being run & when
+  clear
+  echo "\033[36m$file @ $(date)\033[0m"
+
+  # run test file and print any errors or test fails
+  racket "$file"
+done
