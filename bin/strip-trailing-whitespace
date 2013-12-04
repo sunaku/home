@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Removes trailing whitespace from the given FILEs, while modifying them
+# in-place!  If no FILEs are given, it operates on input read from stdin.
+#
+# Usage: strip-trailing-whitespace [FILE]...
+# Usage: cat FILE | strip-trailing-whitespace
+#
+exec sed ${1:+-i} 's/\s\+$//' "$@"
