@@ -25,6 +25,7 @@ Xcursor.theme                 : Human
 ! interaction
 XTerm*vt100.metaSendsEscape   : True
 XTerm*vt100.saveLines         : 0
+XTerm*vt100.eightBitInput     : False
 
 ! appearance
 XTerm*termName                : xterm-256color
