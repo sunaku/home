@@ -1,0 +1,21 @@
+#!/system/bin/sh -ex
+# Docks SHIELD to an external HDMI display.
+
+# make sure external display exists
+grep 1 /sys/devices/virtual/switch/hdmi/state
+
+resize() {
+  wm size 1920x1080
+  wm density 160
+}
+
+# use external display's resolution
+setprop persist.tegra.hdmi.resolution 1080p
+resize
+
+# adjust Android UI for new resolution
+pkill 'com.android.(launcher|systemui)'
+resize # run again for full adjustment
+
+# power off SHIELD's internal display
+echo 1 > /sys/class/graphics/fb0/blank

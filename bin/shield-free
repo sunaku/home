@@ -1,0 +1,18 @@
+#!/system/bin/sh -ex
+# Frees SHIELD from an external HDMI display.
+
+# power on SHIELD's internal display
+echo 0 > /sys/class/graphics/fb0/blank
+
+resize() {
+  wm size reset
+  wm density reset
+}
+
+# restore SHIELD's internal resolution
+#setprop persist.tegra.hdmi.resolution Auto
+resize
+
+# adjust Android UI for new resolution
+pkill 'com.android.(launcher|systemui)'
+resize # run again for full adjustment
