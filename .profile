@@ -8,3 +8,4 @@ test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 && exec startx
 export LANG=en_US.utf8
 export XDG_DESKTOP_DIR=$HOME
 export XDG_DOWNLOAD_DIR=$HOME/get
+export XAUTHORITY=$HOME/.Xauthority
