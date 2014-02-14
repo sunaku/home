@@ -9,3 +9,9 @@ export XAUTHORITY=$HOME/.Xauthority
 # start X when logging into the first Virtual Terminal
 # https://wiki.archlinux.org/index.php/Start_X_at_Login
 test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 && exec startx
+
+# reattach last tmux session after logging in through SSH
+# unless we are logging into the same machine from itself
+test -z "$TMUX" -a -n "$SSH_CONNECTION" &&
+echo "$SSH_CONNECTION" | awk '{ exit $1 == $3 }' &&
+tmux attach -d
