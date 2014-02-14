@@ -6,6 +6,9 @@ export XDG_DESKTOP_DIR=$HOME
 export XDG_DOWNLOAD_DIR=$HOME/get
 export XAUTHORITY=$HOME/.Xauthority
 
+# use all processors for fast, parallel make(1) builds
+export MAKEFLAGS="-j$(fgrep -c processor /proc/cpuinfo)"
+
 # start X when logging into the first Virtual Terminal
 # https://wiki.archlinux.org/index.php/Start_X_at_Login
 test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 && exec startx
