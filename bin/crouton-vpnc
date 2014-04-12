@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Setup: apt-get install vpnc wireless-tools
+#
+# Usage: crouton-vpnc VPNC_CONFIGURATION_FILE [OPTIONS_FOR_VPNC...]
+#
+# Connects to the VPN specified by the given vpnc(1) configuration file and
+# then waits for you to interrupt or kill this process, at which time it
+# disconnects the VPN.  See https://github.com/dnschneid/crouton/wiki/VPNC
+#
+test $UID -ne 0 && { echo "$0: Please run this command as root."; exit 1; }
+
+function ensure {
+  set +e
+  vpnc-disconnect
+  iwconfig wlan0 power on
+  pkill -f 'croutonpowerd -i'
+}
+trap ensure EXIT
+
+set -ex
+croutonpowerd -i &
+iwconfig wlan0 power off
+vpnc --ifmode tap "$@"
+wait
