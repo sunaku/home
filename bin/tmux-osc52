@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Usage: tmux-osc52 [FILE...]
+#
+# Copies the contents of the given files (or STDIN if no files are given) to
+# the terminal that attaches a tmux(1) session and runs this program therein.
+#
+# See http://sourceforge.net/p/tmux/mailman/message/32221257 for copy limits.
+# See http://sourceforge.net/p/tmux/tmux-code/ci/a0295b4c2f6 for DCS details.
+#
+printf '\ePtmux;\e\e]52;c;%s\a\e\\' "$( base64 -w 0 "$@" | head -c 99992 )"
