@@ -17,4 +17,4 @@ test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 && exec startx
 # unless we are logging into the same machine from itself
 test -z "$TMUX" -a -n "$SSH_CONNECTION" &&
 echo "$SSH_CONNECTION" | awk '{ exit $1 == $3 }' &&
-tmux attach -d
+{ tmux has-session && tmux attach -d || tmux -2 ;}
