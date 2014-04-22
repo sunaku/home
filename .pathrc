@@ -4,14 +4,10 @@
 ROOT=$HOME/app
 
 # local rubygems PREFIX
-export GEM_HOME=$ROOT/rubygems
-mkdir -p $GEM_HOME
 
 # update cache of PATHs
 find_paths() {
   find -L $ROOT -type d -name "$@" |
-  fgrep -v "$GEM_HOME/gems" |
-  fgrep -v "$GEM_HOME/bundler" |
   fgrep -v "/lib/" |
   sort -u | tr '\n' ':' | sed 's/:$//'
 }
