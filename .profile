@@ -18,3 +18,5 @@ test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 && exec startx
 test -z "$TMUX" -a -n "$SSH_CONNECTION" &&
 echo "$SSH_CONNECTION" | awk '{ exit $1 == $3 }' &&
 { tmux has-session && tmux attach -d || tmux -2 ;}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
