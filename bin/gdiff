@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Ran by MiniTest to diff(1) expected and actual values in assert_equal().
+# Shows colorized line differences followed by colorized word differences.
+#
+# See http://sunaku.github.io/minitest-colordiff.html for more information.
+#
+colordiff "$@"                                # colorized line differences
+diff "$@" | sed 1,2d | wdiff -d3 | colordiff  # colorized word differences
