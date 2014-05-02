@@ -1,0 +1,5 @@
+#!/bin/sh
+wdiff \
+  --start-delete='<del>' --end-delete='</del>' \
+  --start-insert='<ins>' --end-insert='</ins>' \
+  "$@"
