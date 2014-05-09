@@ -9,7 +9,7 @@
 startup_message off
 
 # tab & status bar
-caption always "%{= dY}%H %=%-w%{= Yk}%n %t%{-}%+w %-= %c"
+caption always "%{= dC}%H %=%-w%{= Cw}%n %t%{-}%+w %-= %c"
 
 # do not name tabs by default
 shelltitle ""
