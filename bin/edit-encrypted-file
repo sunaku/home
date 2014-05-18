@@ -12,5 +12,4 @@ exec vim -u NONE -c 'set '\
 'cryptmethod=blowfish '\
 'foldmethod=marker '\
 'foldlevel=0 '\
-'background=dark '\
   "$@"
