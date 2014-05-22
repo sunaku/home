@@ -83,7 +83,7 @@ gT() { git stash save "$@" && git stash apply ;}
 alias gtl='git stash list --pretty="%C(auto,yellow)%gd%C(auto,reset): %C(auto,green)%ar%C(auto,reset): %gs"'
 
 # list all stashes with diffs
-alias gtL='git stash list --patch-with-stat'
+alias gtL='gtl | awk -F: "{print; system(\"git -c color.diff=always --no-pager stash show -p \" \$1)}" | less -R +/^stash.*'
 
 # create new branch from stash
 alias gtb='git stash branch'
