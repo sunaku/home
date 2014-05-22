@@ -80,7 +80,7 @@ alias gt='git stash save'
 gT() { git stash save "$@" && git stash apply ;}
 
 # list all stashes
-alias gtl='git stash list'
+alias gtl='git stash list --pretty="%C(auto,yellow)%gd%C(auto,reset): %C(auto,green)%ar%C(auto,reset): %gs"'
 
 # list all stashes with diffs
 alias gtL='git stash list --patch-with-stat'
