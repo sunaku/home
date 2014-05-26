@@ -37,6 +37,7 @@ Session.vim
 *.rar
 *.tar
 *.zip
+.rubygems
 
 # Logs and databases
 *.log
