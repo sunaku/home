@@ -1,0 +1,6 @@
+#!/usr/bin/awk -f
+
+/background:/ { bg=$2 }
+/foreground:/ { fg=$2 }
+/color(\d+):/ { print $2 } # c=gensub(/color(\d+):/, '\1', 'g'); colors[c] = $2 }
+END { print fg, bg, colors }
