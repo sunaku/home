@@ -3,8 +3,6 @@
 
 ROOT=$HOME/app
 
-# local rubygems PREFIX
-
 # update cache of PATHs
 find_paths() {
   find -L $ROOT -type d -name "$@" |
@@ -15,7 +13,6 @@ cache=$HOME/.pathrc.cache
 test ! -s $cache -o $ROOT -nt $cache -o $0 -nt $cache && cat > $cache <<EOF
 export PATHRC_PATH=\
 $HOME/bin:\
-.bundle/bin:\
 $(
   echo '.pathrc: calculating $PATH ...' >&2
   find_paths bin
