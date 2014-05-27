@@ -2,9 +2,15 @@
 exec redcarpet \
   --smarty \
   --parse-no_intra_emphasis \
-  --parse-autolink \
   --parse-tables \
+  --parse-fenced_code_blocks \
+  --parse-autolink \
+  --parse-strikethrough \
+  --parse-superscript \
+  --parse-highlight \
+  --parse-footnotes \
   --render-xhtml \
   --render-safe_links_only \
   --render-with_toc_data \
+  --render-prettify \
   "$@"
