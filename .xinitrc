@@ -6,12 +6,8 @@
 
 . ~/.profile
 
-# execute the rest of this file under the ConsoleKit environment
-sed '1,/^sed/d' "$0" | ck-launch-session sh -x; exit
-
 # hardware
 marble-mouse left
-nvidia-settings --load-config-only
 
 # appearance
 xsetroot -cursor_name left_ptr
@@ -21,23 +17,13 @@ xset +fp ~/.fonts
 xset fp rehash
 xrdb ~/.Xdefaults
 
-## encryption
-#eval `gpg-agent --daemon` &&
-#trap 'killall gpg-agent' EXIT
+# encryption
+eval `gpg-agent --daemon` &&
+trap 'killall gpg-agent' EXIT
 
 # dbus (for libnotify and other stuff)
 test -z "$DBUS_SESSION_BUS_ADDRESS" &&
 eval `dbus-launch --sh-syntax --exit-with-session`
-
-# network
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-#nm-applet --sm-disable &
-wicd-gtk --tray &
-
-# touchpad
-# http://wiki.archlinux.org/index.php/Touchpad_Synaptics
-#syndaemon -t -k -i 2 -d &
-#synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2
 
 # input methods
 export XMODIFIERS='@im=SCIM'
@@ -51,12 +37,9 @@ xscreensaver -no-splash &
 # break reminder
 xwrits typetime=25 breaktime=1 +mouse +top &
 
-# music
-mpc || mpd &
-
 # window manager
-urxvt -fg \#ecbcbc -bg \#41363c -e tail -f ~/.wmii/wmiirc.log /var/log/*.log &
-while true; do wmii
+xterm -fg '#ecbcbc' -bg '#41363c' -e tail -f /var/log/*.log &
+while xterm & do wm2
   xmessage 'INSERT COIN TO CONTINUE' \
   -buttons 'Insert Coin:0,Game Over' \
   -default 'Insert Coin' -timeout 30 \
