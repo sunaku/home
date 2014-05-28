@@ -110,6 +110,9 @@ alias gc='git commit'
 # commit staged changes with the given message
 alias gcm='git commit -m'
 
+# commit staged changes with the default message
+alias gcM='git commit --no-edit'
+
 # commit staged changes as if on the given date
 alias gct='git commit --date'
 
