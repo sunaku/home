@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 # Pretty-prints the given YAML document as JSON.
-require 'yaml'
+require 'psych'
 require 'json'
-puts JSON.pretty_generate(YAML.load(ARGF))
+Psych.load_stream(ARGF) {|doc| puts JSON.pretty_generate(doc) }
