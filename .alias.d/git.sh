@@ -374,8 +374,11 @@ alias gg='git fetch'
 # fetch and merge commits
 alias ggm='git pull'
 
-# fetch and rebase commits
-alias ggr='git pull --rebase'
+# fetch and rebase commits while preserving merges
+alias ggr='gg && gr $(gbh)'
+
+# fetch and rebase commits without preserving merges
+alias ggR='git pull --rebase'
 
 #-----------------------------------------------------------------------------
 # u = submodule
