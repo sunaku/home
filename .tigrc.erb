@@ -1,6 +1,10 @@
+# this file was generated from <%= __FILE__ %> by ~/bin/theme
+
+<% if ENV['theme'] == 'dark' %>
 color cursor black green
 color title-blur black blue
 color title-focus black blue
+<% end %>
 
 # http://who-t.blogspot.com/2009/04/git-format-patch-for-single-commit.html
 bind generic E !git format-patch -1 %(commit)
