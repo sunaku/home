@@ -1,0 +1,35 @@
+#!/bin/bash -ex
+# Usage: backup [ARGS_FOR_RSYNC...]
+# Usage: restore [ARGS_FOR_RSYNC...]
+
+# make sure this script is run as root
+test "$UID" -ne 0 && exec sudo "$0" "$@"
+
+# configuration of backup device mapping
+DISKID=0eb945ac-1df0-458a-ad92-1786c681b894
+LUKSID=backup
+SOURCE=/dev/mapper/$LUKSID
+TARGET=/mnt/$LUKSID@$DISKID
+
+# ensure proper clean up before exiting
+ensure() { set +e
+  umount $TARGET
+  rmdir $TARGET
+  cryptsetup luksClose $LUKSID
+  date # just for my reference
+}
+trap ensure EXIT
+
+# unlock the backup device and mount it
+cryptsetup luksOpen /dev/disk/by-uuid/$DISKID $LUKSID --key-file "$0.key"
+mkdir -p $TARGET
+mount -o discard,noatime,data=writeback $SOURCE $TARGET
+
+# perform the backup or restore operation
+case "$0" in
+  */backup)  transfer=" /home/   $TARGET/ " ;;
+  */restore) transfer=" $TARGET/ /home/   " ;;
+esac
+rsync -auv $transfer --delete "$@"
+
+# the EXIT trap above will clean up now
