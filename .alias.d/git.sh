@@ -80,7 +80,7 @@ alias gt='git stash save'
 gT() { git stash save "$@" && git stash apply ;}
 
 # list all stashes
-alias gtl='git stash list --pretty="%C(auto,yellow)%gd%C(auto,reset): %C(auto,green)%ar%C(auto,reset): %gs"'
+alias gtl='git stash list --pretty="%C(auto,yellow)%gd%C(auto,reset): %C(auto,green)%cr%C(auto,reset):%C(auto,blue)%d%C(auto,reset) %gs"'
 
 # list all stashes with diffs
 alias gtL='gtl | awk -F: "{print; system(\"git -c color.diff=always --no-pager stash show -p \" \$1)}" | less -R +/^stash.*'
@@ -310,7 +310,10 @@ alias glp='git log --pretty="  * %s. %b"'$'\n'
 #-----------------------------------------------------------------------------
 
 # show reference log
-alias gL='git reflog --decorate'
+alias gL='git reflog --pretty="%C(auto,yellow)%h%C(auto,reset): %C(auto,green)%cr%C(auto,reset):%C(auto,blue)%d%C(auto,reset) %gs"'
+
+# show reference log with diffs
+alias gLL='gL | awk -F: "{print \"reflog/\" \$0; system(\"git -c color.diff=always --no-pager show -p \" \$1)}" | less -R +/^reflog.*'
 
 # ... in a more visual format
 alias gLl='gll $(gL --pretty=%h)'
