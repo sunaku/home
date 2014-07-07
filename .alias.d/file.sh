@@ -1,11 +1,13 @@
 alias -- -='cd -'
+alias ,=ll
+alias ,.=la
 alias ls='ls -h --color=auto'
-alias ll='ls -l'
-alias la='ls -lA'
-alias lt='ls -ltr'
+alias ll='ls -ltr'
+alias la='ll -A'
+alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-alias RM='rm -vrf'
+alias RM='rm -vfr'
 
 duh() { # disk usage for humans
   test $# -eq 0 && set -- *
