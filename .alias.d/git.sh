@@ -297,7 +297,7 @@ alias glf='gl --name-status'
 alias gll='gl --oneline'
 
 # show log with diffs
-alias gld='gl --patch-with-stat'
+alias gld='LESS="-R +/^\*.*" gl --patch-with-stat'
 
 # ... while showing changes within a line
 alias glD='gld '$intra_line_diff
