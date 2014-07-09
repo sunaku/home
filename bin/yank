@@ -3,8 +3,8 @@
 # Usage: yank [FILE...]
 #
 # Copies the contents of the given files (or STDIN if no files are given) to
-# the terminal that attaches a tmux(1) session and runs this program therein,
-# or to the terminal that runs this program directly, outside of any tmux(1).
+# the terminal that runs this program.  If this program is run inside tmux(1),
+# then it also copies the given contents into tmux's current clipboard buffer.
 #
 # This is achieved by writing an OSC 52 escape sequence to the said terminal.
 # The maximum length of an OSC 52 escape sequence is 100_000 bytes, of which
@@ -18,6 +18,7 @@
 #
 # Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
 #
-osc52="\e]52;c;$( cat "$@" | head -c 74994 | base64 | tr -d '\r\n' )\a"
-test -n "$TMUX" && osc52="\ePtmux;\e$osc52\e\\" # wrap it inside DCS for tmux
+input=$( cat "$@" )
+osc52="\e]52;c;$( echo "$input" | head -c 74994 | base64 | tr -d '\r\n' )\a"
+test -n "$TMUX" && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$input"
 echo -ne "$osc52"
