@@ -6,6 +6,12 @@ export XDG_DESKTOP_DIR=$HOME
 export XDG_DOWNLOAD_DIR=$HOME/get
 export XAUTHORITY=$HOME/.Xauthority
 
+# when inside crouton, use chromebook's existing X server
+if test -z "$DISPLAY" -a -f /var/host/Xauthority ; then
+  export XAUTHORITY=/var/host/Xauthority
+  export DISPLAY=:0.0
+fi
+
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS="-j$(fgrep -c processor /proc/cpuinfo)"
 
