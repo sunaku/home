@@ -3,6 +3,9 @@
 # MiniTest runs this command to show the differences between expected and
 # actual values in assert_equal(), so we make it word-aware and colorful.
 #
+# You can make this script use blue instead of green by setting the COLORBLIND
+# environment variable, as described at https://pypi.python.org/pypi/fragments
+#
 # See http://sunaku.github.io/minitest-colordiff.html for more information.
 #
 
@@ -41,5 +44,8 @@ diff = linewise_hunks.zip(charwise_hunks).map(&:uniq).flatten.map do |hunk|
     hunk
   end
 end.join
+
+# use blue instead of green for users who indicate that they are colorblind
+diff = diff.gsub(/(\e\[[\w;]*\b3)2m/, '\14m') if ENV['COLORBLIND']
 
 print diff
