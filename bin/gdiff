@@ -39,7 +39,10 @@ end
 diff = linewise_hunks.zip(charwise_hunks).map(&:uniq).flatten.map do |hunk|
   if hunk =~ FILE_BEGIN_REGEXP
     # color-code file headers according to difference highlighting colors
-    hunk.sub(/^\e\[1(?=m-{3})/, '\&;31').sub(/^\e\[1(?=m\+{3})/, '\&;32')
+    hunk.sub(/^\e\[1(?=m-{3})/, '\&;31').sub(/^\e\[1(?=m\+{3})/, '\&;32').
+      # provide human-friendly descriptions of MiniTest value assertions
+      sub(/(?<=m-{3}\s)\S+?\bexpect\S+/,  'I expected it to be...').
+      sub(/(?<=m\+{3}\s)\S+?\bbutwas\S+/, 'but it actually was...')
   else
     hunk
   end
