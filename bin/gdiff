@@ -4,5 +4,14 @@
 # actual values in assert_equal(), so we make it word-aware and colorful.
 #
 # See http://sunaku.github.io/minitest-colordiff.html for more information.
-#
-diff "$@" | wdiff -d | colordiff
+{
+
+  # highlight sub-line differences in differing lines, shown one atop another
+  git diff --color=always "$@" | perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight
+
+  # combine differing lines into one and only color their differing regions
+  # http://neurotap.blogspot.com/2012/04/character-level-diff-in-git-gui.html
+  character_level_differences='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
+  git diff --color-words --word-diff-regex=$character_level_differences "$@"
+
+} | sed -e 's/m--- /;31&/' -e 's/m+++ /;32&/' # color-code file headers too
