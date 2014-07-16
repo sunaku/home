@@ -1,17 +1,45 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 #
 # MiniTest runs this command to show the differences between expected and
 # actual values in assert_equal(), so we make it word-aware and colorful.
 #
 # See http://sunaku.github.io/minitest-colordiff.html for more information.
-{
+#
 
-  # highlight sub-line differences in differing lines, shown one atop another
-  git diff --color=always "$@" | perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight
+require 'shellwords'
 
-  # combine differing lines into one and only color their differing regions
-  # http://neurotap.blogspot.com/2012/04/character-level-diff-in-git-gui.html
-  character_level_differences='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+'
-  git diff --color-words --word-diff-regex=$character_level_differences "$@"
+HUNK_BEGIN_REGEXP = /(?=^\e\[36m?@@)/
+FILE_BEGIN_REGEXP = /\A\e\[1mdiff/
 
-} | sed -e 's/m--- /;31&/' -e 's/m+++ /;32&/' # color-code file headers too
+# highlight the different inside changed lines while keeping unified output
+linewise_diff = `git diff --color=always #{ARGV.shelljoin} |
+perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight`
+
+linewise_hunks = linewise_diff.split(HUNK_BEGIN_REGEXP)
+
+# squash common portions of changed lines and only highlight the differences
+# http://neurotap.blogspot.com/2012/04/character-level-diff-in-git-gui.html
+charwise_diff = `git diff --color=always --color-words \
+--word-diff-regex='[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+' #{ARGV.shelljoin}`
+
+charwise_hunks = charwise_diff.split(HUNK_BEGIN_REGEXP).map do |hunk|
+  # nullify character-wise diffs that don't give any whitespace information
+  if hunk =~ /\S\e\[3[12]m.*?\e\[m/
+    # highlight headers to indicate that these character-wise diffs are
+    # alternate representations of the line-wise diffs that precede them
+    hunk.sub(/\A\e\[36(?=m@@)/, '\&;7')
+  end
+end
+
+# combine the diffs by joining the charwise output into the linewise output
+# and use uniq() to show only one copy of common hunks between both outputs
+diff = linewise_hunks.zip(charwise_hunks).map(&:uniq).flatten.map do |hunk|
+  if hunk =~ FILE_BEGIN_REGEXP
+    # color-code file headers according to difference highlighting colors
+    hunk.sub(/^\e\[1(?=m-{3})/, '\&;31').sub(/^\e\[1(?=m\+{3})/, '\&;32')
+  else
+    hunk
+  end
+end.join
+
+print diff
