@@ -33,9 +33,7 @@ for branch in master other patch minor major; do
         git rebase --skip
       done
       # show differences if conflicting
-      if ! git diff --quiet; then
-        git diff "$commit"
-      fi
+      git --no-pager diff
     fi
   fi
   previous=$branch
