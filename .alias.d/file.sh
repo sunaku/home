@@ -26,6 +26,7 @@ bam() { # backup with move
 bum() { # undo backup move
   for file; do
     file=${file%/}
+    test "${file%.bak}" = "$file" && file="$file.bak"
     mv -v "$file" "${file%.bak}"
   done
 }
