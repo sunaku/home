@@ -1,5 +1,6 @@
 # http://neurotap.blogspot.com/2012/04/character-level-diff-in-git-gui.html
 intra_line_diff='--word-diff-regex="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+"'
+intra_line_less='LESS="-R +/-\]|\{\+"' # jump directly to changes in diffs
 
 #-----------------------------------------------------------------------------
 # o = working copy
@@ -15,7 +16,7 @@ alias gol='git status --short'
 alias god='git diff'
 
 # ... while showing changes within a line
-alias goD='git diff '$intra_line_diff
+alias goD="$intra_line_less git diff $intra_line_diff"
 
 # reset working copy to current index
 alias gor='git reset --soft'
@@ -58,7 +59,7 @@ alias giu='git add -u'
 alias gid='git diff --cached'
 
 # ... while showing changes within a line
-alias giD='gid '$intra_line_diff
+alias giD="$intra_line_less gid $intra_line_diff"
 
 # unstage changes from index but keep them in working copy
 alias gir='git reset'
@@ -148,7 +149,7 @@ alias gcO='git checkout HEAD --'
 alias gcd='git show'
 
 # ... while showing changes within a line
-alias gcD='git show '$intra_line_diff
+alias gcD="$intra_line_less git show $intra_line_diff"
 
 #-----------------------------------------------------------------------------
 # y = cherry-pick
@@ -300,7 +301,7 @@ alias gll='gl --oneline'
 alias gld='LESS="-R +/^\*.*" gl --patch-with-stat'
 
 # ... while showing changes within a line
-alias glD='gld '$intra_line_diff
+alias glD="$intra_line_less gld $intra_line_diff"
 
 # pretty git changelog
 alias glp='git log --pretty="  * %s. %b"'$'\n'
@@ -343,7 +344,7 @@ alias gh2='git config remote.$(gh1).url'
 alias ghd='git diff @{u}'
 
 # ... while showing changes within a line
-alias ghD='ghd '$intra_line_diff
+alias ghD="$intra_line_less ghd $intra_line_diff"
 
 #-----------------------------------------------------------------------------
 # p = push
