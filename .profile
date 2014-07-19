@@ -5,9 +5,10 @@ export LANG=en_US.utf8
 export XDG_DESKTOP_DIR=$HOME
 export XDG_DOWNLOAD_DIR=$HOME/get
 export XAUTHORITY=$HOME/.Xauthority
+test -d /var/host/cras && export CROUTON=1
 
-# when inside crouton, use chromebook's existing X server
-if test -z "$DISPLAY" -a -f /var/host/Xauthority ; then
+# use ChromeOS' existing X11 server when inside crouton
+if test -z "$DISPLAY" -a -n "$CROUTON" ; then
   export XAUTHORITY=/var/host/Xauthority
   export DISPLAY=:0.0
 fi
