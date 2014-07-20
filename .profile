@@ -5,7 +5,7 @@ export LANG=en_US.utf8
 export XDG_DESKTOP_DIR=$HOME
 export XDG_DOWNLOAD_DIR=$HOME/get
 export XAUTHORITY=$HOME/.Xauthority
-test -d /var/host/cras && export CROUTON=1
+test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
 
 # use ChromeOS' existing X11 server when inside crouton
 if test -z "$DISPLAY" -a -n "$CROUTON" ; then
