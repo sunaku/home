@@ -30,7 +30,8 @@ charwise_hunks = charwise_diff.split(HUNK_BEGIN_REGEXP).map do |hunk|
   if hunk =~ /\S\e\[3[12]m.*?\e\[m/
     # highlight headers to indicate that these character-wise diffs are
     # alternate representations of the line-wise diffs that precede them
-    hunk.sub(/\A\e\[36(?=m@@)/, '\&;7')
+    # and also highlight the changes themselves in character-wise diffs
+    hunk.gsub(/\A\e\[36(?=m@@)|\e\[3[12](?=m.*?\e\[m)/, '\&;7')
   end
 end
 
