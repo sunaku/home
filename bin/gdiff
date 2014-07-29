@@ -16,7 +16,7 @@ HUNK_BEGIN_REGEXP = /(?=^\e\[36m@@)/
 
 # highlight the different inside changed lines while keeping unified output
 linewise_diff = `git diff --color=always #{ARGV.shelljoin} |
-perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight`
+( perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight || cat )`
 
 linewise_hunks = linewise_diff.split(HUNK_BEGIN_REGEXP)
 
