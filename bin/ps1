@@ -1,0 +1,3 @@
+#!/bin/sh
+# Lists detached processes with elapsed time and their complete command lines.
+exec ps wxfo pid,ppid,pcpu,pmem,etime,stat,args "$@"
