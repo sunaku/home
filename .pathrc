@@ -1,7 +1,7 @@
 #!/bin/sh
 # Sets up PATHs for the shell session that sources this file.
 
-ROOT=$HOME/app
+ROOT=$HOME/Programs
 
 # update cache of PATHs
 find_paths() {
