@@ -12,14 +12,14 @@
 
 require 'tempfile'
 
-ARGF.read.scan(/:\s+<(.*)> expected but was\s+<(.*)>\.$/m).each do |expected, actual|
-  expected_file = Tempfile.new('expected')
-  expected_file.write expected
-  expected_file.close
+ARGF.read.gsub(/(?<=:$\n)<(.*?)> expected but was\s+<(.*?)>\.$/m) do
+  expected_file = Tempfile.new('expect')
+  expected_file.write $1
+  expected_file.flush
 
-  actual_file = Tempfile.new('actual')
-  actual_file.write actual
-  actual_file.close
+  actual_file = Tempfile.new('butwas')
+  actual_file.write $2
+  actual_file.flush
 
-  system 'dwdiff', expected_file.path, actual_file.path
+  system 'gdiff', expected_file.path, actual_file.path
 end
