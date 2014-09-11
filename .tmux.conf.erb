@@ -1,5 +1,5 @@
-# this file was generated from <%= __FILE__ %> by ~/bin/theme
-<% theme = File.read(File.expand_path('~/.theme')).chomp.to_sym %>
+# this file was generated from <%= __FILE__ %> by ~/makefile
+<% tmux_version = `tmux -V`.split.last %>
 
 bind-key R source ~/.tmux.conf \; display-message 'config reloaded!'
 
@@ -34,7 +34,7 @@ set-option -ag terminal-overrides 'rxvt-unicode*:sitm@'
 # Colors from the "lucius" and "bubblegum" themes in the vim-airline plugin:
 # https://github.com/bling/vim-airline/blob/master/autoload/airline/themes/lucius.vim
 # https://github.com/bling/vim-airline/blob/master/autoload/airline/themes/bubblegum.vim
-<% case ENV['theme'] when 'light' %>
+<% case ENV['THEME'] when 'light' %>
 set-option -g pane-border-fg colour253 # lucius normal airline_c
 set-option -g pane-border-bg colour253 # lucius normal airline_c
 set-option -g pane-active-border-fg colour250 # lucius normal airline_b
@@ -62,8 +62,10 @@ set-window-option -g mode-fg '#514721' # notice (yellow)
 set-window-option -g mode-bg '#ffd324' # notice (yellow)
 set-window-option -g window-status-bell-fg '#d5edf8' # info (blue)
 set-window-option -g window-status-bell-bg '#205791' # info (blue)
+<% if tmux_version < '2' %>
 set-window-option -g window-status-content-fg '#e6efc2' # success (green)
 set-window-option -g window-status-content-bg '#264409' # success (green)
+<% end %>
 set-window-option -g window-status-activity-fg '#fbe3e4' # error (red)
 set-window-option -g window-status-activity-bg '#8a1f11' # error (red)
 
@@ -88,7 +90,7 @@ set-window-option -g window-status-separator ''
 
 # show pane title, pane identifier, and hostname on right side of status bar
 set-option -g status-right '#{=26:pane_title} <%=
-  case ENV['theme']
+  case ENV['THEME']
   when 'light' then '#[fg=colour231,bg=colour244]'
   when 'dark'  then '#[fg=colour146,bg=colour236]'
   end
