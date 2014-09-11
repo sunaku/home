@@ -19,6 +19,9 @@ linewise_diff = `git diff --color=always #{ARGV.shelljoin} |
 ( perl /usr/share/doc/git/contrib/diff-highlight/diff-highlight || cat )`
 
 linewise_hunks = linewise_diff.split(HUNK_BEGIN_REGEXP)
+if linewise_hunks.empty?
+  exec "git --no-pager diff #{ARGV.shelljoin}"
+end
 
 # squash common portions of changed lines and only highlight the differences
 # http://neurotap.blogspot.com/2012/04/character-level-diff-in-git-gui.html
