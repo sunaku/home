@@ -1,5 +1,8 @@
 all: theme
 
+help:
+	@echo 'Usage: make <dark|light>' >&2
+
 dark:
 	make THEME=$@
 
@@ -10,7 +13,7 @@ theme: ~/.theme
 	make theme-tig theme-tmux THEME=`cat $^`
 
 ~/.theme:
-	@test -n "$$THEME" || (echo 'Usage: make <dark|light>' >&2; false)
+	@test -n "$$THEME" || (make help; false)
 	echo "$$THEME" > $@
 
 theme-tig:
@@ -20,4 +23,4 @@ theme-tmux:
 	erb ~/.tmux.conf.erb > ~/.tmux.conf
 	test -n "$TMUX" && tmux source ~/.tmux.conf
 
-.PHONY: all dark light theme theme-tig theme-tmux
+.PHONY: all help dark light theme theme-tig theme-tmux
