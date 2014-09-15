@@ -19,8 +19,11 @@ theme: ~/.theme
 theme-tig:
 	erb ~/.tigrc.erb > ~/.tigrc
 
-theme-tmux:
+theme-tmux: ~/.tmux/plugins/tpm
 	erb ~/.tmux.conf.erb > ~/.tmux.conf
 	test -n "$TMUX" && tmux source ~/.tmux.conf
+
+~/.tmux/plugins/tpm:
+	git clone https://github.com/tmux-plugins/tpm $@
 
 .PHONY: all help dark light theme theme-tig theme-tmux
