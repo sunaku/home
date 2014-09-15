@@ -6,10 +6,12 @@ dark:
 light:
 	make THEME=$@
 
-theme:
+theme: ~/.theme
+	make theme-tig theme-tmux THEME=`cat $^`
+
+~/.theme:
 	@test -n "$$THEME" || (echo 'Usage: make <dark|light>' >&2; false)
-	echo "$$THEME" > ~/.theme
-	make theme-tig theme-tmux
+	echo "$$THEME" > $@
 
 theme-tig:
 	erb ~/.tigrc.erb > ~/.tigrc

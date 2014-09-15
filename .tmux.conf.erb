@@ -263,3 +263,15 @@ bind-key -n M-I choose-buffer
 # transfer copied text to attached terminal with yank:
 # https://github.com/sunaku/home/blob/master/bin/yank
 bind-key -n M-y run-shell 'tmux save-buffer - | yank > #{pane_tty}'
+
+#-----------------------------------------------------------------------------
+# TMUX plugin manager https://github.com/tmux-plugins/tpm
+#-----------------------------------------------------------------------------
+
+set -g @tpm_plugins "         \
+  tmux-plugins/tpm            \
+  tmux-plugins/tmux-resurrect \
+  tmux-plugins/tmux-copycat   \
+"
+
+run-shell ~/.tmux/plugins/tpm/tpm
