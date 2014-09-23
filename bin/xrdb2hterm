@@ -1,6 +1,24 @@
-#!/usr/bin/awk -f
+#!/usr/bin/env ruby
+#
+# Converts xrdb(1) color schemes into Chrome Secure Shell preferences format
+# and prints the result to STDOUT.  Reads STDIN if no input files are given.
+#
+# Usage: xrdb2hterm FILE...
+# Usage: cat FILE... | xrdb2hterm
+# Usage: xrdb2hterm < INPUT
+#
+#--
+# Written in 2014 by Suraj N. Kurapati
 
-/background:/ { bg=$2 }
-/foreground:/ { fg=$2 }
-/color(\d+):/ { print $2 } # c=gensub(/color(\d+):/, '\1', 'g'); colors[c] = $2 }
-END { print fg, bg, colors }
+xrdb = Hash[ ARGF.read.scan(%r{(\w+)\s*:\s*(.*)\s*}) ]
+
+puts <<HTERM
+term_.prefs_.set("background-color", "#{ xrdb['background'] }");
+term_.prefs_.set("foreground-color", "#{ xrdb['foreground'] }");
+term_.prefs_.set("cursor-color", "rgba(#{
+  xrdb['cursorColor'].scan(/\h{2}/).map {|s| s.to_i 16 }.join(?,)
+}, 0.5)"); /* #{ xrdb['cursorColor'] } */
+term_.prefs_.set("color-palette-overrides", #{
+  (0..15).map {|i| xrdb["color#{i}"] }
+});
+HTERM
