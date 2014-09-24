@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+# Usage: admit1 COMMAND [ARGUMENTS...]
+#
+# Runs the given command only if it is found to be not already running.
+# In a sense, it "admits one" instance of the command to run at a time.
+#
+#--
+# Written in 2014 by Suraj N. Kurapati
+
+signature=$(echo "$*" | sed 's/[\^.[$()|*+?{\\]/\\&/g') # man regex(7)
+pgrep -u $USER -xf "$signature" >/dev/null || eval "$@"
