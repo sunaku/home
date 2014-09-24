@@ -6,11 +6,17 @@
 # (exits with status 0) and then propagates its exit status to the caller.
 #
 # Like a canary in a coal mine, this program exists to vocalize failures.
+# It also prints the given command and its failing exit status to stderr.
 #
 #--
 # Written in 2014 by Suraj N. Kurapati
 
 output=$(exec 2>&1; eval set -x\; "$@")
 status=$?
-test $status -ne 0 && echo "$output"
+
+if test $status -ne 0; then
+  echo "${0##*/}: command exited with status $status: $*" >&2
+  echo "$output"
+fi
+
 exit $status
