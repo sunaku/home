@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Usage: canary COMMAND [ARGUMENTS...]
+#
+# Silences (both stdout and stderr) the given command only if it succeeds
+# (exits with status 0) and then propagates its exit status to the caller.
+#
+# Like a canary in a coal mine, this program exists to vocalize failures.
+#
+#--
+# Written in 2014 by Suraj N. Kurapati
+
+output=$(exec 2>&1; eval set -x\; "$@")
+status=$?
+test $status -ne 0 && echo "$output"
+exit $status
