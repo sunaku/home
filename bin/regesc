@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Usage: regesc PATTERN
+#
+# Escapes the given regular expression, as defined in the regex(7) manual.
+#
+#--
+# Written in 2014 by Suraj N. Kurapati
+
+echo "$*" | sed 's/[\^.[$()|*+?{\\]/\\&/g'
