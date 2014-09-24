@@ -10,9 +10,10 @@
 #--
 # Written in 2014 by Suraj N. Kurapati
 
+input = ARGF.read.gsub(/^!.*/, '') # strip comments from xrdb(1) file format
+
 # expand preprocessor definitions
-input = DATA.read + ARGF.read
-defines = Hash[ input.scan /\#define\s+(\w+)\s+(.*)\s*/ ]
+defines = Hash[ input.prepend(DATA.read).scan /\#define\s+(\w+)\s+(.*)\s*/ ]
 while defines.any? {|k,v| input.gsub! k, v } do end
 
 # convert xrdb(1) colors to hterm
