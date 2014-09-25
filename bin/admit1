@@ -3,11 +3,18 @@
 # Usage: admit1 COMMAND [ARGUMENTS...]
 # Usage: admit1 SHELL_EXPRESSION...
 #
-# Runs the given command only if it is found to be not already running.
+# Runs the given command only if it is found to be not already running;
+# otherwise, prints the already-running instance(s)' PID(s) to stderr.
 # In a sense, it "admits one" instance of the command to run at a time.
 #
 #--
 # Written in 2014 by Suraj N. Kurapati
 
 signature=$(echo "$*" | sed 's/[\^.[$()|*+?{\\]/\\&/g') # man regex(7)
-pgrep -u $USER -xf "$signature" >/dev/null || eval "$@"
+instances=$(pgrep -u $USER -xf "$signature" | xargs echo)
+
+if test -n "$instances"; then
+  echo "${0##*/}: command is already running: $instances" >&2
+else
+  eval "$@"
+fi
