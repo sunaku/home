@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # Usage: admit1 COMMAND [ARGUMENTS...]
+# Usage: admit1 SHELL_EXPRESSION...
 #
 # Runs the given command only if it is found to be not already running.
 # In a sense, it "admits one" instance of the command to run at a time.

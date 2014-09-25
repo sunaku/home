@@ -1,6 +1,7 @@
 #!/bin/sh
 #
 # Usage: canary COMMAND [ARGUMENTS...]
+# Usage: canary SHELL_EXPRESSION...
 #
 # Silences (both stdout and stderr) the given command only if it succeeds
 # (exits with status 0) and then propagates its exit status to the caller.
