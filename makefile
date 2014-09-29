@@ -4,9 +4,11 @@ help:
 	@echo 'Usage: make <dark|light>' >&2
 
 dark:
+	rm -f ~/.theme
 	make THEME=$@
 
 light:
+	rm -f ~/.theme
 	make THEME=$@
 
 theme: ~/.theme
