@@ -5,6 +5,7 @@
 # Copies the contents of the given files (or STDIN if no files are given) to
 # the terminal that runs this program.  If this program is run inside tmux(1),
 # then it also copies the given contents into tmux's current clipboard buffer.
+# If this program is run inside X11, then it also copies to the X11 clipboard.
 #
 # This is achieved by writing an OSC 52 escape sequence to the said terminal.
 # The maximum length of an OSC 52 escape sequence is 100_000 bytes, of which
@@ -19,6 +20,8 @@
 # Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
 #
 input=$( cat "$@" )
+which xsel >& /dev/null && echo "$input" | xsel -i -b >& /dev/null
+which xclip >& /dev/null && echo "$input" | xclip -sel c >& /dev/null
 osc52="\e]52;c;$( echo "$input" | head -c 74994 | base64 | tr -d '\r\n' )\a"
 test -n "$TMUX" && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$input"
 echo -ne "$osc52"
