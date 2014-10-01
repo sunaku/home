@@ -10,9 +10,12 @@
 Xcursor.theme  : Human
 
 ! choose color scheme to use in terminals
-#include ".Xdefaults.d/colors/Tomorrow.xrdb"
+#include ".Xdefaults.d/colors/LuciusLight.xrdb"
 #include ".Xdefaults.d/colors.xrdb"
 
 ! configure applications
 #include ".Xdefaults.d/XTerm.xrdb"
+XTerm*faceName : Source Code Pro
+XTerm*faceSize : 10
+
 #include ".Xdefaults.d/URxvt.xrdb"
