@@ -1,0 +1,54 @@
+! Tomorrow terminal color scheme
+! http://snk.tuxfamily.org/log/tomorrow-terminal-color-scheme.html
+
+! BLK
+#define Ansi_0_Color     #000000
+#define Ansi_8_Color     #666666
+
+! RED
+! TomorrowNightEighties.t_red
+#define Ansi_1_Color     #f2777a
+#define Ansi_9_Color     Ansi_1_Color
+
+! GRN
+! TomorrowNightEighties.t_green
+#define Ansi_2_Color     #99cc99
+#define Ansi_10_Color    Ansi_2_Color
+
+! YEL
+! TomorrowNight.t_orange
+#define Ansi_3_Color     #de935f
+! TomorrowNight.t_yellow
+#define Ansi_11_Color    #f0c674
+
+! BLU
+! TomorrowNight.t_blue
+#define Ansi_4_Color     #81a2be
+#define Ansi_12_Color    Ansi_4_Color
+
+! MAG
+! TomorrowNightEighties.t_purple
+#define Ansi_5_Color     #cc99cc
+#define Ansi_13_Color    Ansi_5_Color
+
+! CYN
+! TomorrowNightEighties.t_aqua(hue,value) + TomorrowNight.t_aqua(saturation)
+#define Ansi_6_Color     #94CCCC
+#define Ansi_14_Color    Ansi_6_Color
+
+! WHT
+! TomorrowNightEighties.t_selection
+#define Ansi_7_Color     #515151
+! TomorrowNightEighties.t_current_line
+#define Ansi_15_Color    #393939
+
+! FMT
+#define Bold_Color       Ansi_11_Color
+#define Underline_Color  Ansi_6_Color
+
+! TXT
+! TomorrowNightEighties.tForeground_Color
+#define Foreground_Color #cccccc
+! TomorrowNightEighties.tBackground_Color
+#define Background_Color #2d2d2d
+#define Cursor_Color     #aeafad

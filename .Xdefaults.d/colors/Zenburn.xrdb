@@ -1,0 +1,44 @@
+! Zenburn terminal color scheme
+! http://snk.tuxfamily.org/log/zenburn-terminal-color-scheme.html
+
+!BLK Cursor
+#define Ansi_0_Color     #000d18
+#define Ansi_8_Color     #000d18
+
+!RED Tag
+#define Ansi_1_Color     #e89393
+#define Ansi_9_Color     #e89393
+
+!GRN SpecialKey
+#define Ansi_2_Color     #9ece9e
+#define Ansi_10_Color    #9ece9e
+
+!YEL Keyword
+#define Ansi_3_Color     #f0dfaf
+#define Ansi_11_Color    #f0dfaf
+
+!BLU Number
+#define Ansi_4_Color     #8cd0d3
+#define Ansi_12_Color    #8cd0d3
+
+!MAG Precondit
+#define Ansi_5_Color     #c0bed1
+#define Ansi_13_Color    #c0bed1
+
+!CYN Float
+#define Ansi_6_Color     #dfaf8f
+#define Ansi_14_Color    #dfaf8f
+
+!WHT Search
+#define Ansi_7_Color     #efefef
+#define Ansi_15_Color    #efefef
+
+!FMT Include, StatusLine, ErrorMsg
+#define Bold_Color       #ffcfaf
+#define Underline_Color  #ccdc90
+#define Italic_Color     #80d4aa
+
+!TXT Normal, Normal, Cursor
+#define Foreground_Color #dcdccc
+#define Background_Color #1f1f1f
+#define Cursor_Color     #8faf9f

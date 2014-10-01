@@ -1,0 +1,54 @@
+! xoria256 terminal color scheme
+! http://snk.tuxfamily.org/log/xoria256-terminal-color-scheme.html
+
+!black.normal            : xoria256.LineNr.guibg
+!black.bright            : black.normal.rgb - 8
+#define Ansi_0_Color       #121212
+#define Ansi_8_Color       #0a0a0a
+
+!red.normal              : red.bright.r - 8
+!red.bright              : xoria256.Special.guifg
+#define Ansi_1_Color       #d78787
+#define Ansi_9_Color       #df8787
+
+!green.normal            : green.bright.g - 8
+!green.bright            : xoria256.PreProc.guifg
+#define Ansi_2_Color       #afd787
+#define Ansi_10_Color      #afdf87
+
+!yellow.normal           : yellow.bright.rg - 8
+!yellow.bright           : xoria256.Special.guifg
+#define Ansi_3_Color       #f7f7af
+#define Ansi_11_Color      #ffffaf
+
+!blue.normal             : blue.bright.b - 8
+!blue.bright             : xoria256.Statement.guifg
+#define Ansi_4_Color       #87afd7
+#define Ansi_12_Color      #87afdf
+
+!magenta.normal          : magenta.bright.rb - 8
+!magenta.bright          : xoria256.Identifier.guifg
+#define Ansi_5_Color       #d7afd7
+#define Ansi_13_Color      #dfafdf
+
+!cyan.normal             : cyan.bright.gb - 8
+!cyan.bright             : green.bright + blue.bright
+#define Ansi_6_Color       #afd7d7
+#define Ansi_14_Color      #afdfdf
+
+!white.normal            : white.bright.rgb - 8
+!white.bright            : xoria256.Folded.guifg
+#define Ansi_7_Color       #e6e6e6
+#define Ansi_15_Color      #eeeeee
+
+!bold                    : xoria256.Type.guifg
+!underline               : xoria256.htmlValue.guifg
+#define Bold_Color         #afafdf
+#define Underline_Color    #dfdfaf
+
+!foreground              : xoria256.Normal.guifg
+!background              : xoria256.Normal.guibg
+!cursorColor             : xoria256.Cursor.guibg
+#define Foreground_Color   #d0d0d0
+#define Background_Color   #1c1c1c
+#define Cursor_Color       #ffaf00
