@@ -1,0 +1,13 @@
+#!/bin/sh -x
+# Automatic docking configuration for Acer C720 Chromebook:
+# it's "docked" when connected to an external HDMI display.
+
+if xrandr | fgrep -q 'HDMI1 connected' ; then
+  xrandr --output HDMI1 --auto --output eDP1 --off
+  xinput | fgrep -q 'Logitech USB Trackball' && logitech-marble-mouse left
+  xinput | fgrep -q 'HID 05f3:0007' && aoeu # qwerty layout
+else
+  xrandr --auto
+  xbacklight = 5
+  asdf # dvorak layout
+fi
