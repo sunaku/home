@@ -1,3 +1,5 @@
+<% light_theme = ENV['THEME'] == 'light' %>
+
 ! see "font4" in /usr/share/X11/app-defaults/XTerm
 *font          : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
 
@@ -10,7 +12,11 @@
 Xcursor.theme  : Human
 
 ! choose color scheme to use in terminals
+<% if light_theme %>
 #include ".Xdefaults.d/colors/LuciusLight.xrdb"
+<% else %>
+#include ".Xdefaults.d/colors/Tomorrow.xrdb"
+<% end %>
 #include ".Xdefaults.d/colors.xrdb"
 
 ! configure applications
