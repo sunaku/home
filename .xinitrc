@@ -7,7 +7,7 @@
 . ~/.profile
 
 # hardware
-marble-mouse left
+logitech-marble-mouse left
 
 # appearance
 xsetroot -cursor_name left_ptr
