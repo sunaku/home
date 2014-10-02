@@ -16,6 +16,6 @@ Xcursor.theme  : Human
 ! configure applications
 #include ".Xdefaults.d/XTerm.xrdb"
 XTerm*faceName : Source Code Pro
-XTerm*faceSize : 10
+XTerm*faceSize : 10.5
 
 #include ".Xdefaults.d/URxvt.xrdb"
