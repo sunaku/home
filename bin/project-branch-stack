@@ -13,11 +13,11 @@ git branch -v # for user's reference
 original=$(git name-rev --name-only HEAD)
 previous=
 for branch in master other patch minor major; do
-  if test -n "$previous"; then
+  if [ -n "$previous" ]; then
     echo; echo; echo;
 
     # checkout or create the branch as needed
-    if test -n "$(git branch --list $branch)"; then
+    if [ -n "$(git branch --list $branch)" ]; then
       git checkout $branch
     else
       git checkout $branch ||
@@ -27,7 +27,7 @@ for branch in master other patch minor major; do
     # stack this branch atop the previous one
     commit=$(git rev-parse --short HEAD)
     if ! git rebase --preserve-merges $previous --quiet >/dev/null 2>&1; then
-      while test -d .git/rebase-apply; do
+      while [ -d .git/rebase-apply ]; do
         echo -n 'Skipping conflicting commit: '
         cat .git/rebase-apply/original-commit
         git rebase --skip

@@ -11,6 +11,6 @@
 
 regex=$( ps ho cmd $$ | sed 's/[\^.[$()|*+?{\\]/\\&/g' ) # man regex(7)
 
-if test $$ = "$( pgrep -u "$USER" -xf "$regex" )"; then
+if [ $$ = "$( pgrep -u "$USER" -xf "$regex" )" ]; then
   eval "$@"
 fi

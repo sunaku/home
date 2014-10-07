@@ -78,7 +78,7 @@ fi
 # command line arguments
 #-----------------------------------------------------------------------------
 
-if test $# -gt 0; then
+if [ $# -gt 0 ]; then
   SCRIPT=$1
   shift
 else
@@ -87,7 +87,7 @@ fi
 
 # provide default script if none was specified:
 # dump variables and emit newline for each item
-if test -z "$SCRIPT" -o "$SCRIPT" = ':'; then
+if [ -z "$SCRIPT" -o "$SCRIPT" = ':' ]; then
   EXTRACE=1
   SCRIPT='echo >&2'
 fi
@@ -96,7 +96,7 @@ fi
 # head of the each loop
 #-----------------------------------------------------------------------------
 
-if test -t 0; then
+if [ -t 0 ]; then
   # paths are on command line
   each='for each'
 else
@@ -115,9 +115,9 @@ $(echo "$SCRIPT")
 END_SCRIPT_PREVIEW
 "
 
-if test -n "$DRY_RUN"; then
+if [ -n "$DRY_RUN" ]; then
   body=$echo
-elif test -n "$CONFIRM"; then
+elif [ -n "$CONFIRM" ]; then
   body="
 $echo >/dev/tty
 echo -n 'Run command? [Y/n/q] ' >/dev/tty
@@ -130,7 +130,7 @@ $SCRIPT
   ;;
 esac
 "
-elif test -n "$VERBOSE"; then
+elif [ -n "$VERBOSE" ]; then
   body="
 $echo
 $SCRIPT

@@ -11,7 +11,7 @@
 #--
 # Written in 2004 by Suraj N. Kurapati
 
-if test $# -eq 0; then
+if [ $# -eq 0 ]; then
   set -- .* *  # default argument is all files in pwd
   shift 2  # remove . and ..
 fi

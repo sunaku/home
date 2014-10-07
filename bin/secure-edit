@@ -17,7 +17,7 @@ echo "secure-edit: source=$source decrypt=$decrypt encrypt=$encrypt"
 
 # create new source file if necessary.  this
 # is useful when securely editing a new file
-if ! test -e "$source"; then
+if ! [ -e "$source" ]; then
   touch "$source"                  &&
   $ENCRYPT < /dev/null > "$source" ||
   exit $?

@@ -11,7 +11,7 @@ set -e
 tmp=$(mktemp)               # create a temporary file
 trap "rm -f $tmp" EXIT      # ensure it is cleaned up
 
-if test -n "$DISPLAY" -a -z "$CROUTON" ; then
+if [ -n "$DISPLAY" -a -z "$CROUTON" ]; then
   xdotool key ctrl+a ctrl+c # copy text into clipboard
   xsel -b -o > "$tmp"       # dump clipboard into file
   gvim -f "$@" "$tmp"       # edit the dumped contents

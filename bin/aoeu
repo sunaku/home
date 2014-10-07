@@ -1,6 +1,6 @@
 #!/bin/sh
 # Changes the keyboard layout to the ANSI standard QWERTY keyboard.
-if test -n "$DISPLAY"; then
+if [ -n "$DISPLAY" ]; then
   setxkbmap us
   xmodmap ~/.xmodmaprc
 else
