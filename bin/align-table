@@ -23,47 +23,35 @@ def align_table lines, delimiter, selector, rejector, justifier
   delim_regexp = /#{delimiter}/
 
   # determine columns widths
-  widths = Hash.new(0)
-
+  widths = []
   rows = lines.map do |line|
-    line.chomp!
-
     if line =~ selector and line !~ rejector and line =~ delim_regexp
-      fields = line.split(delim_regexp)
-      fields.each {|f| f.strip! }
-      fields.unshift line[/\A[ \t]*/] # whitespace margin
+      delims = line.scan(delim_regexp).map(&:squeeze)
+      fields = line.split(delim_regexp).map(&:strip)
+      result = fields.zip(delims).flatten(1)
 
-      delims = line.scan(delim_regexp)
-      delims[0..-2].each {|d| d << ' ' }
-      delims[1..-1].each {|d| d.insert(0, ' ') }
-      #delims.each {|d| d.insert(0, ' ') << ' ' }
-      delims.unshift nil
-
-      cols = fields.zip(delims).flatten.compact
-      cols.each_with_index do |c, i|
-        widths[i] = [c.length, widths[i]].max
+      # update the widths for the entire table by inspecting this row
+      widths = result.map(&:size).zip(widths).map do |new_width, old_width|
+        # run to_i() on old_width because there are no old values initially
+        [ new_width, old_width.to_i ].max
       end
+
+      result
     else
       line
     end
   end
 
   # equalize column widths
-  rows.map! do |row|
-    if row.is_a? Array
-      cols = []
-
-      row.each_with_index do |col, i|
-        cols[i] = col.send(justifier, widths[i])
-      end
-
-      cols.join.rstrip
+  rows.map do |row|
+    if row.respond_to? :zip
+      row.zip(widths).map do |column, width|
+        column.send(justifier, width)
+      end.join
     else
       row
     end
   end
-
-  rows.join("\n")
 end
 
 
