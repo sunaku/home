@@ -1,0 +1,69 @@
+###########################
+# xbindkeys configuration #
+###########################
+#
+# Version: 0.1.3
+#
+# If you edit this, do not forget to uncomment any lines that you change.
+# The pound(#) symbol may be used anywhere for comments.
+#
+# A list of keys is in /usr/include/X11/keysym.h and in
+# /usr/include/X11/keysymdef.h 
+# The XK_ is not needed. 
+#
+# List of modifier (on my keyboard): 
+#   Control, Shift, Mod1 (Alt), Mod2 (NumLock), 
+#   Mod3 (CapsLock), Mod4, Mod5 (Scroll). 
+#
+# Another way to specifie a key is to use 'xev' and set the 
+# keycode with c:nnn or the modifier with m:nnn where nnn is 
+# the keycode or the state returned by xev 
+#
+# This file is created by xbindkey_config 
+# The structure is : 
+# # Remark 
+# "command" 
+# m:xxx + c:xxx 
+# Shift+... 
+
+
+
+
+#keystate_numlock = enable
+#keystate_scrolllock = enable
+#keystate_capslock = enable
+
+
+
+#display config
+"lxrandr"
+    m:0x4 + c:70
+    Control + XF86Display 
+
+#auto docking
+"acer-c720-docking"
+    m:0x0 + c:70
+    XF86Display 
+
+#dim backlight
+"xbacklight - 5"
+    m:0x0 + c:72
+    XF86MonBrightnessDown 
+
+#shine backlight
+"xbacklight + 5"
+    m:0x0 + c:73
+    XF86MonBrightnessUp 
+
+#choose window
+"admit1 skippy-xd"
+    m:0x0 + c:71
+    XF86Explorer 
+
+#lock screen
+"lxlock"
+    m:0x4 + c:124
+    Control + XF86PowerOff 
+
+#
+# End of xbindkeys configuration

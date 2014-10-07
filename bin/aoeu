@@ -1,6 +1,9 @@
 #!/bin/sh
-if test "x$DISPLAY" != x; then
-  setxkbmap us -option ''
+# Changes the keyboard layout to the ANSI standard QWERTY keyboard.
+if test -n "$DISPLAY"; then
+  setxkbmap us
+  xmodmap ~/.xmodmaprc
 else
   sudo loadkeys us
-fi && echo dvorak off
+fi
+echo dvorak OFF >&2

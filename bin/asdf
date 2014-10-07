@@ -1,6 +1,9 @@
-#!/bin/sh
-if test "x$DISPLAY" != x; then
-  setxkbmap dvorak -option ''
+#!/bin/sh -e
+# Changes the keyboard layout to the Dvorak Simplified Keyboard.
+if test -n "$DISPLAY"; then
+  setxkbmap dvorak
+  xmodmap ~/.xmodmaprc
 else
   sudo loadkeys dvorak
-fi && echo dvorak on
+fi
+echo dvorak ON >&2

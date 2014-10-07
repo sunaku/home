@@ -1,2 +1,1 @@
-#!/bin/sh
-xscreensaver-command -lock
+/usr/bin/lxlock

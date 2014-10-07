@@ -1,0 +1,28 @@
+#!/bin/sh
+# This script is run _before_ the window manager starts up.
+
+# hardware
+xbacklight = 5
+
+# http://wiki.archlinux.org/index.php/Touchpad_Synaptics
+#syndaemon -t -k -i 2 -d &
+#synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2
+
+# http://virtuallyhyper.com/2013/03/install-chrubuntu-12-04-on-samsung-chromebook/
+xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Finger" 15 20 256
+xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Two-Finger Scrolling" 1 1
+
+# Synaptics Tap Action
+#     8 bit, up to MAX_TAP values (see  synaptics.h),  0  disables  an
+#     element. order: RT, RB, LT, LB, F1, F2, F3.
+# Synaptics Tap Action (285):     2, 3, 0, 0, 1, 3, 0
+
+xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Click Action" 1 3 2
+xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Tap Action" 2 3 0 0 1 3 2
+#xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Palm Detection" 1
+
+# appearance
+xsetroot -cursor_name left_ptr
+xset +fp ~/.fonts
+xset fp rehash
+xrdb ~/.Xdefaults
