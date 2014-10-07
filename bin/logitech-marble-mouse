@@ -21,7 +21,7 @@ case "$1" in
     xinput set-int-prop "$DEVICE" 'Evdev Wheel Emulation Axes' 8 6 7 4 5
     ;;
   *)
-    echo "Usage: ${0##*/} {left|right} [XINPUT_DEVICE_IDENTIFIER]" >&2
+    echo "Usage: $0 {left|right} [XINPUT_DEVICE_IDENTIFIER]" >&2
     exit 1
     ;;
 esac
