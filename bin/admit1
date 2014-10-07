@@ -3,17 +3,14 @@
 # Usage: admit1 COMMAND [ARGUMENTS...]
 # Usage: admit1 SHELL_EXPRESSION...
 #
-# Admits one instance of the command to run at a time by running it only if
-# there are no other instances of this program already doing so.  Otherwise,
-# prints a note to stderr stating that the given command is already running.
+# Admits only one instance of the given command to run at a time (by running
+# it only if there are no other instances of this program already doing so).
 #
 #--
 # Written in 2014 by Suraj N. Kurapati
 
 regex=$( ps ho cmd $$ | sed 's/[\^.[$()|*+?{\\]/\\&/g' ) # man regex(7)
 
-if test $( pgrep -u "$USER" -xf "$regex" -c ) -gt 1; then
-  echo "${0##*/}: command is already running: $*" >&2
-else
+if test $$ = "$( pgrep -u "$USER" -xf "$regex" )"; then
   eval "$@"
 fi
