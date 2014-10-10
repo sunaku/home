@@ -20,14 +20,14 @@ theme: ~/.theme
 
 theme-xrdb:
 	erb ~/.Xdefaults.erb > ~/.Xdefaults
-	test -n "$$DISPLAY" && xrdb -merge ~/.Xdefaults
+	if test -n "$$DISPLAY" ; then xrdb -merge ~/.Xdefaults ; fi
 
 theme-tig:
 	erb ~/.tigrc.erb > ~/.tigrc
 
 theme-tmux: ~/.tmux/plugins/tpm
 	erb ~/.tmux.conf.erb > ~/.tmux.conf
-	test -n "$$TMUX" && tmux source ~/.tmux.conf
+	if test -n "$$TMUX" ; then tmux source ~/.tmux.conf ; fi
 
 ~/.tmux/plugins/tpm:
 	git clone https://github.com/tmux-plugins/tpm $@
