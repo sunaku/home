@@ -5,7 +5,7 @@
 if xrandr | fgrep -q 'HDMI1 connected' ; then
   xrandr --output HDMI1 --auto --dpi 96 --output eDP1 --off
   xinput | fgrep -q 'Logitech USB Trackball' && logitech-marble-mouse left
-  xinput | fgrep -q 'HID 05f3:0007' && aoeu # qwerty layout
+  xinput | fgrep -q 'HID 05f3:0007' && aoeu || asdf # qwerty/dvorak layout
 else
   xrandr --auto
   xbacklight = 5
