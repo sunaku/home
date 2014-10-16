@@ -31,9 +31,8 @@ def align_table lines, delimiter, selector, rejector, justifier
       result = fields.zip(delims).flatten(1)
 
       # update the widths for the entire table by inspecting this row
-      widths = result.map(&:size).zip(widths).map do |new_width, old_width|
-        # run to_i() on old_width because there are no old values initially
-        [ new_width, old_width.to_i ].max
+      result.map(&:size).each_with_index do |new_width, column|
+        widths[column] = [new_width, (widths[column] || 0)].max
       end
 
       result
