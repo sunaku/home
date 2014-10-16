@@ -43,7 +43,7 @@ def align_table lines, delimiter, selector, rejector, justifier
 
   # equalize column widths
   rows.map do |row|
-    if row.respond_to? :zip
+    if row.respond_to? :zip and not row.empty?
       row.zip(widths).map do |column, width|
         column.send(justifier, width)
       end.join
