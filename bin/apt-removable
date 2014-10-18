@@ -1,0 +1,2 @@
+#!/bin/sh
+sed -n '/^Install:/{ s/([^)]*)//g; s/, //g; s/^Install:/\nsudo apt-get remove/; p }' /var/log/apt/history.log
