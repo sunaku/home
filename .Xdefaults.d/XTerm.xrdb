@@ -17,6 +17,7 @@ XTerm*vt100.colorBDMode         : True
 XTerm*vt100.colorULMode         : True
 XTerm*vt100.showBlinkAsBold     : True
 XTerm*vt100.veryBoldColors      : 6
+XTerm*vt100.internalBorder      : 0
 
 ! prevent Alt+Enter keys from toggling fullscreen mode
 XTerm*fullscreen                : never
