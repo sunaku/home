@@ -7,6 +7,9 @@ acer-c720-docking
 # terminal
 xterm -maximized -e sh -c 'tmux -2 attach -d || tmux -2' &
 
+# calendar
+osmo &
+
 # e-mail
 sylpheed &
 
