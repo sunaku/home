@@ -65,5 +65,10 @@
     m:0x4 + c:124
     Control + XF86PowerOff 
 
+#touchpad on/off
+"synclient TouchpadOff=$(synclient | grep -c 'TouchpadOff.*0')"
+    m:0x4 + c:74
+    Control + XF86AudioMute 
+
 #
 # End of xbindkeys configuration
