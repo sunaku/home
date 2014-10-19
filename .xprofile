@@ -5,7 +5,7 @@
 xbacklight = 5
 
 # http://wiki.archlinux.org/index.php/Touchpad_Synaptics
-#syndaemon -t -k -i 2 -d &
+syndaemon -t -k -i 1 -d
 #synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2
 
 # http://virtuallyhyper.com/2013/03/install-chrubuntu-12-04-on-samsung-chromebook/
