@@ -1,0 +1,4 @@
+#define alt_bullet_width 6
+#define alt_bullet_height 6
+static unsigned char alt_bullet_bits[] = {
+   0x00, 0x02, 0x06, 0x0e, 0x06, 0x02 };
