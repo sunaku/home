@@ -8,7 +8,7 @@ inotifywait -qme close_write --format '%w%f' . | while read file; do
 
   # map the *.rkt file to its corresponding *test.rkt
   # file, unless it already _is_ that *test.rkt file!
-  test "${file%test.rkt}" = "$file" && file="${file%.rkt}test.rkt"
+  test "${file%test.rkt}" = "$file" && file=$(ls "${file%.rkt}"*"test.rkt")
 
   # make sure *test.rkt file exists before running it
   test -f "$file" || continue

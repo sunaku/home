@@ -8,7 +8,7 @@ inotifywait -qme close_write --format '%w%f' . | while read file; do
 
   # map the *.rb file to its corresponding *test.rb
   # file, unless it already _is_ that *test.rb file!
-  test "${file%test.rb}" = "$file" && file="${file%.rb}test.rb"
+  test "${file%test.rb}" = "$file" && file=$(ls "${file%.rb}"*"test.rb")
 
   # make sure *test.rb file exists before running it
   test -f "$file" || continue

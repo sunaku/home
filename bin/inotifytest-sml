@@ -8,7 +8,7 @@ inotifywait -qme close_write --format '%w%f' . | while read file; do
 
   # map the *.sml file to its corresponding *test.sml
   # file, unless it already _is_ that *test.sml file!
-  test "${file%test.sml}" = "$file" && file="${file%.sml}test.sml"
+  test "${file%test.sml}" = "$file" && file=$(ls "${file%.sml}"*"test.sml")
 
   # make sure *test.sml file exists before running it
   test -f "$file" || continue
