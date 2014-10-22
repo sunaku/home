@@ -203,25 +203,25 @@
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Left">
+    <keybind key="S-C-A-Left">
       <action name="SendToDesktop">
         <to>left</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Right">
+    <keybind key="S-C-A-Right">
       <action name="SendToDesktop">
         <to>right</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Up">
+    <keybind key="S-C-A-Up">
       <action name="SendToDesktop">
         <to>up</to>
         <wrap>no</wrap>
       </action>
     </keybind>
-    <keybind key="S-A-Down">
+    <keybind key="S-C-A-Down">
       <action name="SendToDesktop">
         <to>down</to>
         <wrap>no</wrap>
@@ -323,26 +323,26 @@
       </action>
     </keybind>
     <!-- Keybindings for window tiling -->
-    <keybind key="C-A-H">        # HalfLeftScreen
+    <keybind key="C-A-H">        <!--HalfLeftScreen-->
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>0</y><height>100%</height><width>50%</width></action>
     </keybind>
-    <keybind key="C-A-S">        # HalfRightScreen
+    <keybind key="C-A-S">        <!--HalfRightScreen-->
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>-0</x><y>0</y><height>100%</height><width>50%</width></action>
     </keybind>
-    <keybind key="C-A-T">        # HalfUpperScreen
+    <keybind key="C-A-T">        <!--HalfUpperScreen-->
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>0</y><width>100%</width><height>50%</height></action>
     </keybind>
-    <keybind key="C-A-N">        # HalfLowerScreen
+    <keybind key="C-A-N">        <!--HalfLowerScreen-->
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>-0</y><width>100%</width><height>50%</height></action>
     </keybind>
     <keybind key="C-A-M">
       <action name="ToggleMaximize"/>
     </keybind>
-    <keybind key="C-A-Z">
+    <keybind key="C-A-B">
       <action name="Iconify"/>
     </keybind>
     <!-- Keybindings for running applications on Home + E -->
@@ -393,7 +393,7 @@
       </action>
     </keybind>
     <!-- Launch a terminal on Ctrl + Alt + X-->
-    <keybind key="C-A-U">
+    <keybind key="C-A-X">
       <action name="Execute">
         <command>lxsession-default terminal</command>
       </action>
