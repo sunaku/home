@@ -35,15 +35,25 @@
 
 
 
+#auto docking
+"acer-c720-docking"
+    m:0x0 + c:70
+    XF86Display 
+
 #display config
 "lxrandr"
     m:0x4 + c:70
     Control + XF86Display 
 
-#auto docking
-"acer-c720-docking"
-    m:0x0 + c:70
-    XF86Display 
+#mac expose
+"admit1 skippy-xd"
+    m:0x0 + c:71
+    XF86Explorer 
+
+#invert colors
+"xcalib -invert -alter"
+    m:0x4 + c:71
+    Control + XF86Explorer 
 
 #dim backlight
 "xbacklight - 5"
@@ -55,20 +65,15 @@
     m:0x0 + c:73
     XF86MonBrightnessUp 
 
-#choose window
-"admit1 skippy-xd"
-    m:0x0 + c:71
-    XF86Explorer 
+#touchpad on/off
+"synclient TouchpadOff=$(synclient | grep -c 'TouchpadOff.*0')"
+    m:0x4 + c:74
+    Control + XF86AudioMute 
 
 #lock screen
 "lxlock"
     m:0x4 + c:124
     Control + XF86PowerOff 
-
-#touchpad on/off
-"synclient TouchpadOff=$(synclient | grep -c 'TouchpadOff.*0')"
-    m:0x4 + c:74
-    Control + XF86AudioMute 
 
 #
 # End of xbindkeys configuration
