@@ -20,7 +20,7 @@ theme: ~/.theme
 
 theme-xrdb:
 	erb ~/.Xdefaults.erb > ~/.Xdefaults
-	if test -n "$$DISPLAY" ; then xrdb -merge ~/.Xdefaults ; fi
+	if test -n "$$DISPLAY" ; then xrdb ~/.Xdefaults ; fi
 
 theme-tig:
 	erb ~/.tigrc.erb > ~/.tigrc

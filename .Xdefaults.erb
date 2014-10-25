@@ -1,3 +1,4 @@
+! vim:filetype=xdefaults:
 <% light_theme = ENV['THEME'] == 'light' %>
 
 ! see "font4" in /usr/share/X11/app-defaults/XTerm
@@ -14,8 +15,12 @@ Xcursor.theme  : Human
 ! choose color scheme to use in terminals
 <% if light_theme %>
 #include ".Xdefaults.d/colors/LuciusLight.xrdb"
+! LCD colors from "Daedalus Touch" iPad app
+#define Background_Color #ebebe6
+#define Foreground_Color #272727
 <% else %>
-#include ".Xdefaults.d/colors/Tomorrow.xrdb"
+!#include ".Xdefaults.d/colors/Tomorrow.xrdb"
+#include ".Xdefaults.d/colors/base16/base16-eighties.dark.xresources"
 <% end %>
 #include ".Xdefaults.d/colors.xrdb"
 

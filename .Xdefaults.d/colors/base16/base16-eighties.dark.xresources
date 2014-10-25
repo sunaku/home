@@ -1,0 +1,41 @@
+! Base16 Eighties
+! Scheme: Chris Kempson (http://chriskempson.com)
+
+#define base00 #2d2d2d
+#define base01 #393939
+#define base02 #515151
+#define base03 #747369
+#define base04 #a09f93
+#define base05 #d3d0c8
+#define base06 #e8e6df
+#define base07 #f2f0ec
+#define base08 #f2777a
+#define base09 #f99157
+#define base0A #ffcc66
+#define base0B #99cc99
+#define base0C #66cccc
+#define base0D #6699cc
+#define base0E #cc99cc
+#define base0F #d27b53
+
+#define Foreground_Color   base05
+#define Background_Color   base00
+#define Cursor_Color  base05
+
+#define Ansi_0_Color       base00
+#define Ansi_1_Color       base08
+#define Ansi_2_Color       base0B
+#define Ansi_3_Color       base0A
+#define Ansi_4_Color       base0D
+#define Ansi_5_Color       base0E
+#define Ansi_6_Color       base0C
+#define Ansi_7_Color       base05
+
+#define Ansi_8_Color       base03
+#define Ansi_9_Color       base09
+#define Ansi_10_Color      base01
+#define Ansi_11_Color      base02
+#define Ansi_12_Color      base04
+#define Ansi_13_Color      base06
+#define Ansi_14_Color      base0F
+#define Ansi_15_Color      base07

@@ -4,59 +4,77 @@
 */
 
 #ifndef Bold_Color
-#define Bold_Color Ansi_3_Color
+#define Bold_Color      Ansi_4_Color /* blue */
 #endif
 
 #ifndef Italic_Color
-#define Italic_Color Ansi_13_Color
+#define Italic_Color    Ansi_6_Color /* cyan */
 #endif
 
 #ifndef Underline_Color
-#define Underline_Color Ansi_6_Color
+#define Underline_Color Ansi_5_Color /* magenta */
 #endif
 
-Rxvt*color0       : Ansi_0_Color
-Rxvt*color1       : Ansi_1_Color
-Rxvt*color2       : Ansi_2_Color
-Rxvt*color3       : Ansi_3_Color
-Rxvt*color4       : Ansi_4_Color
-Rxvt*color5       : Ansi_5_Color
-Rxvt*color6       : Ansi_6_Color
-Rxvt*color7       : Ansi_7_Color
-Rxvt*color8       : Ansi_8_Color
-Rxvt*color9       : Ansi_9_Color
-Rxvt*color10      : Ansi_10_Color
-Rxvt*color11      : Ansi_11_Color
-Rxvt*color12      : Ansi_12_Color
-Rxvt*color13      : Ansi_13_Color
-Rxvt*color14      : Ansi_14_Color
-Rxvt*color15      : Ansi_15_Color
+#ifndef Reverse_Color
+#define Reverse_Color   Ansi_2_Color /* green */
+#endif
+
+Rxvt*color0       : Ansi_0_Color     /* normal black */
+Rxvt*color1       : Ansi_1_Color     /* normal red */
+Rxvt*color2       : Ansi_2_Color     /* normal green */
+Rxvt*color3       : Ansi_3_Color     /* normal yellow */
+Rxvt*color4       : Ansi_4_Color     /* normal blue */
+Rxvt*color5       : Ansi_5_Color     /* normal magenta */
+Rxvt*color6       : Ansi_6_Color     /* normal cyan */
+Rxvt*color7       : Ansi_7_Color     /* normal white */
+Rxvt*color8       : Ansi_8_Color     /* bright black */
+Rxvt*color9       : Ansi_9_Color     /* bright red */
+Rxvt*color10      : Ansi_10_Color    /* bright green */
+Rxvt*color11      : Ansi_11_Color    /* bright yellow */
+Rxvt*color12      : Ansi_12_Color    /* bright blue */
+Rxvt*color13      : Ansi_13_Color    /* bright magenta */
+Rxvt*color14      : Ansi_14_Color    /* bright cyan */
+Rxvt*color15      : Ansi_15_Color    /* bright white */
+Rxvt*color16      : Ansi_16_Color    /* extra colors */
+Rxvt*color17      : Ansi_17_Color    /* extra colors */
+Rxvt*color18      : Ansi_18_Color    /* extra colors */
+Rxvt*color19      : Ansi_19_Color    /* extra colors */
+Rxvt*color20      : Ansi_20_Color    /* extra colors */
+Rxvt*color21      : Ansi_21_Color    /* extra colors */
 Rxvt*colorBD      : Bold_Color
 Rxvt*colorIT      : Italic_Color
 Rxvt*colorUL      : Underline_Color
+Rxvt*colorRV      : Reverse_Color
 Rxvt*foreground   : Foreground_Color
 Rxvt*background   : Background_Color
 Rxvt*cursorColor  : Cursor_Color
 
-XTerm*color0      : Ansi_0_Color
-XTerm*color1      : Ansi_1_Color
-XTerm*color2      : Ansi_2_Color
-XTerm*color3      : Ansi_3_Color
-XTerm*color4      : Ansi_4_Color
-XTerm*color5      : Ansi_5_Color
-XTerm*color6      : Ansi_6_Color
-XTerm*color7      : Ansi_7_Color
-XTerm*color8      : Ansi_8_Color
-XTerm*color9      : Ansi_9_Color
-XTerm*color10     : Ansi_10_Color
-XTerm*color11     : Ansi_11_Color
-XTerm*color12     : Ansi_12_Color
-XTerm*color13     : Ansi_13_Color
-XTerm*color14     : Ansi_14_Color
-XTerm*color15     : Ansi_15_Color
+XTerm*color0      : Ansi_0_Color     /* normal black */
+XTerm*color1      : Ansi_1_Color     /* normal red */
+XTerm*color2      : Ansi_2_Color     /* normal green */
+XTerm*color3      : Ansi_3_Color     /* normal yellow */
+XTerm*color4      : Ansi_4_Color     /* normal blue */
+XTerm*color5      : Ansi_5_Color     /* normal magenta */
+XTerm*color6      : Ansi_6_Color     /* normal cyan */
+XTerm*color7      : Ansi_7_Color     /* normal white */
+XTerm*color8      : Ansi_8_Color     /* bright black */
+XTerm*color9      : Ansi_9_Color     /* bright red */
+XTerm*color10     : Ansi_10_Color    /* bright green */
+XTerm*color11     : Ansi_11_Color    /* bright yellow */
+XTerm*color12     : Ansi_12_Color    /* bright blue */
+XTerm*color13     : Ansi_13_Color    /* bright magenta */
+XTerm*color14     : Ansi_14_Color    /* bright cyan */
+XTerm*color15     : Ansi_15_Color    /* bright white */
+XTerm*color16     : Ansi_16_Color    /* extra colors */
+XTerm*color17     : Ansi_17_Color    /* extra colors */
+XTerm*color18     : Ansi_18_Color    /* extra colors */
+XTerm*color19     : Ansi_19_Color    /* extra colors */
+XTerm*color20     : Ansi_20_Color    /* extra colors */
+XTerm*color21     : Ansi_21_Color    /* extra colors */
 XTerm*colorBD     : Bold_Color
 XTerm*colorIT     : Italic_Color
 XTerm*colorUL     : Underline_Color
+XTerm*colorRV     : Reverse_Color
 XTerm*foreground  : Foreground_Color
 XTerm*background  : Background_Color
 XTerm*cursorColor : Cursor_Color

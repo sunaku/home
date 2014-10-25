@@ -6,7 +6,7 @@ XTerm*vt100.bellIsUrgent        : True
 
 ! appearance
 XTerm*termName                  : xterm-256color
-XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-15-*-*-*-*-*-*-*
+XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-17-*-*-*-*-*-*-*
 XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-11-*-*-*-*-*-*-*
 XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
 XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-14-*-*-*-*-*-*-*
@@ -14,10 +14,12 @@ XTerm*font4                     : -*-tamzenforpowerline-medium-*-*-*-15-*-*-*-*-
 XTerm*font5                     : -*-tamzenforpowerline-medium-*-*-*-17-*-*-*-*-*-*-*
 XTerm*font6                     : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
 XTerm*vt100.colorMode           : True
+XTerm*vt100.boldColors          : False
 XTerm*vt100.colorBDMode         : True
 XTerm*vt100.colorULMode         : True
-XTerm*vt100.showBlinkAsBold     : True
+XTerm*vt100.colorRVMode         : False
 XTerm*vt100.veryBoldColors      : 6
+XTerm*vt100.showBlinkAsBold     : True
 XTerm*vt100.internalBorder      : 0
 
 ! prevent Alt+Enter keys from toggling fullscreen mode

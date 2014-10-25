@@ -18,11 +18,3 @@
 #define Ansi_14_Color    #008787
 #define Ansi_7_Color     #d7d7d7
 #define Ansi_15_Color    #d7d7d7
-
-#define Bold_Color        Ansi_4_Color
-#define Italic_Color      Ansi_6_Color
-#define Underline_Color   Ansi_5_Color
-
-! a "classic LCD" look using colors from the "Daedalus Touch" iPad app
-#define Background_Color #ebebe6
-#define Foreground_Color #272727
