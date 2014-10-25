@@ -342,7 +342,7 @@
     <keybind key="C-A-M">
       <action name="ToggleMaximize"/>
     </keybind>
-    <keybind key="C-A-B">
+    <keybind key="C-A-Z">
       <action name="Iconify"/>
     </keybind>
     <!-- Keybindings for running applications on Home + E -->
@@ -384,6 +384,9 @@
     </keybind>
     <!-- Keybindings to toggle fullscreen -->
     <keybind key="F11">
+      <action name="ToggleFullscreen"/>
+    </keybind>
+    <keybind key="C-A-B">
       <action name="ToggleFullscreen"/>
     </keybind>
     <!-- Launch task manager on Ctrl + Alt + Del-->
