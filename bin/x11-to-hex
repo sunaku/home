@@ -1,6 +1,12 @@
 #!/usr/bin/ruby -w
 # Converts X11 color names into hex codes or vice
 # versa, depending upon the name of this file.
+#
+# Usage: x11-to-hex < INPUT_FILE
+# Usage: cat INPUT_FILE | x11-to-hex
+#
+# Usage: hex-to-x11 < INPUT_FILE
+# Usage: cat INPUT_FILE | hex-to-x11
 
 # X11 color names and hex values, gotten from:
 # http://www.mcfedries.com/books/cightml/x11color.htm
