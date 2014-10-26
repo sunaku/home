@@ -44,11 +44,12 @@ function rubygems_local_folder_helper() {
 }
 
 function rubygems_local_folder() {
-  if test -d .rubygems -o -f Gemfile -o -f Gemfile.lock
-  then rubygems_local_folder_helper "$PWD"
-  elif test -z "$GEM_HOME"
-  then rubygems_local_folder_helper "$HOME"
-  fi
+  # always establish a rubygems installation folder in $HOME
+  test -z "$GEM_HOME" && rubygems_local_folder_helper "$HOME"
+
+  # establish a local rubygems installation folder in $PWD
+  test -d .rubygems -o -f Gemfile -o -f Gemfile.lock &&
+  rubygems_local_folder_helper "$PWD"
 }
 
 # run initially when this script is sourced at ZSH startup
