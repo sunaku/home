@@ -5,17 +5,17 @@ help:
 
 dark:
 	rm -f ~/.theme
-	make THEME=$@
+	$(MAKE) THEME=$@
 
 light:
 	rm -f ~/.theme
-	make THEME=$@
+	$(MAKE) THEME=$@
 
 theme: ~/.theme
-	make theme-xrdb theme-tig theme-tmux THEME=`cat $^`
+	$(MAKE) theme-xrdb theme-tig theme-tmux THEME=`cat $^`
 
 ~/.theme:
-	@test -n "$$THEME" || (make help; false)
+	@test -n "$$THEME" || ($(MAKE) help; false)
 	echo "$$THEME" > $@
 
 theme-xrdb:
