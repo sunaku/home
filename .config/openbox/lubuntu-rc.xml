@@ -949,9 +949,22 @@
       http://www.murga-linux.com/puppy/viewtopic.php?t=67209
     -->
     <application class="Sylpheed" type="normal" name="main_window">
-      <iconic>true</iconic>
+      <iconic>yes</iconic>
     </application>
 
+    <!--
+      __  _______
+      \ \/ /_   _|__ _ __ _ __ ___
+       \  /  | |/ _ \ '__| '_ ` _ \
+       /  \  | |  __/ |  | | | | | |
+      /_/\_\ |_|\___|_|  |_| |_| |_|
+
+      maximize XTerm and remove decorations
+    -->
+    <application class="XTerm" type="normal" title="xterm">
+      <maximized>yes</maximized>
+      <decor>no</decor>
+    </application>
 
   </applications>
 </openbox_config>
