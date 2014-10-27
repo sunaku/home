@@ -6,7 +6,14 @@ XTerm*vt100.bellIsUrgent        : True
 
 ! appearance
 XTerm*termName                  : xterm-256color
-XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-17-*-*-*-*-*-*-*
+!XTerm*font                     : -*-tamzen-medium-*-*-*-15-*-*-*-*-*-*-*
+!XTerm*font1                    : -*-tamzen-medium-*-*-*-11-*-*-*-*-*-*-*
+!XTerm*font2                    : -*-tamzen-medium-*-*-*-12-*-*-*-*-*-*-*
+!XTerm*font3                    : -*-tamzen-medium-*-*-*-14-*-*-*-*-*-*-*
+!XTerm*font4                    : -*-tamzen-medium-*-*-*-15-*-*-*-*-*-*-*
+!XTerm*font5                    : -*-tamzen-medium-*-*-*-17-*-*-*-*-*-*-*
+!XTerm*font6                    : -*-tamzen-medium-*-*-*-20-*-*-*-*-*-*-*
+XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-15-*-*-*-*-*-*-*
 XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-11-*-*-*-*-*-*-*
 XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
 XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-14-*-*-*-*-*-*-*

@@ -73,7 +73,8 @@ URxvt.keysym.M-C-S-Home       : \033[1;8H
 URxvt.keysym.M-C-S-End        : \033[1;8F
 
 ! appearance
-URxvt.font                    : -*-tamzen-medium-*-*-*-17-*-*-*-*-*-*-*
+!URxvt*font                   : -*-tamzen-medium-*-*-*-15-*-*-*-*-*-*-*
+URxvt*font                    : -*-tamzenforpowerline-medium-*-*-*-15-*-*-*-*-*-*-*
 URxvt.scrollBar_right         : True
 URxvt.scrollBar_floating      : True
 URxvt.scrollstyle             : plain
@@ -82,4 +83,3 @@ URxvt.scrollstyle             : plain
 URxvt.perl-ext-common         : default,-searchable-scrollback,matcher
 URxvt.urlLauncher             : /usr/bin/xdg-open
 URxvt.matcher.button          : 2
-

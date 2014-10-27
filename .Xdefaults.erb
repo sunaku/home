@@ -2,31 +2,33 @@
 <% light_theme = ENV['THEME'] == 'light' %>
 
 ! see "font4" in /usr/share/X11/app-defaults/XTerm
-*font          : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
+*font                    : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
 
 ! enable colors in native X applications
 #ifdef COLOR
-*customization : -color
+*customization           : -color
 #endif
 
 ! use the Human cursor theme from Ubuntu
-Xcursor.theme  : Human
+Xcursor.theme            : Human
 
 ! choose color scheme to use in terminals
 <% if light_theme %>
 #include ".Xdefaults.d/colors/LuciusLight.xrdb"
 ! LCD colors from "Daedalus Touch" iPad app
-#define Background_Color #ebebe6
-#define Foreground_Color #272727
+#define Background_Color   #ebebe6
+#define Foreground_Color   #272727
 <% else %>
 !#include ".Xdefaults.d/colors/Tomorrow.xrdb"
 #include ".Xdefaults.d/colors/base16/base16-eighties.dark.xresources"
 <% end %>
 #include ".Xdefaults.d/colors.xrdb"
 
-! configure applications
-#include ".Xdefaults.d/XTerm.xrdb"
-XTerm*faceName : Source Code Pro
-XTerm*faceSize : 10.5
-
+! configure terminal emulators
 #include ".Xdefaults.d/URxvt.xrdb"
+#include ".Xdefaults.d/XTerm.xrdb"
+<% if light_theme %>
+URxvt*font               : xft:Source Code Pro:pixelsize=14:antialias=true:hinting=true
+XTerm*faceName           : Source Code Pro:antialias=true:hinting=true
+XTerm*faceSize           : 10.5
+<% end %>
