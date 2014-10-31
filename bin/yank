@@ -19,8 +19,8 @@
 #
 # Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
 #
-input=$( cat "$@" )
-osc52="\e]52;c;$( echo "$input" | head -c 74994 | base64 | tr -d '\r\n' )\a"
+input=$(cat "$@")
+osc52="\e]52;c;$(echo -n "$input" | head -c 74994 | base64 | tr -d '\r\n')\a"
 test -n "$TMUX" && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$input"
 echo -ne "$osc52"
 
