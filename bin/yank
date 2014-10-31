@@ -18,12 +18,13 @@
 # See http://sourceforge.net/p/tmux/tmux-code/ci/a0295b4c2f6 for DCS in tmux.
 #
 # Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
-#
-input=$(cat "$@")
-osc52="\e]52;c;$(echo -n "$input" | head -c 74994 | base64 | tr -d '\r\n')\a"
-test -n "$TMUX" && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$input"
-echo -ne "$osc52"
 
-# try copying directly to X11 clipboard, bypassing the OSC-52 length limit
-which xsel  >& /dev/null && echo "$input" | xsel -i -b   >& /dev/null ||
-which xclip >& /dev/null && echo "$input" | xclip -sel c >& /dev/null || :
+# try bypassing the OSC-52 length limit by copying directly to X11 clipboard
+buf=$(cat "$@" | tee >(exec >& /dev/null; xsel -i -b || xclip -sel c)) || {
+  # X11 was not available, so build an OSC 52 escape sequence and send it out
+  len=$(echo -n "$buf" | wc -c) max=74994
+  [ $len -gt $max ] && echo "$0: truncated $((len-max)) bytes from input" >&2
+  osc52="\e]52;c;$(echo -n "$buf" | head -c $max | base64 | tr -d '\r\n')\a"
+  [ -n "$TMUX" ] && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$buf"
+  echo -ne "$osc52"
+}
