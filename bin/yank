@@ -2,7 +2,7 @@
 #
 # Usage: yank [FILE...]
 #
-# Copies the contents of the given files (or STDIN if no files are given) to
+# Copies the contents of the given files (or stdin if no files are given) to
 # the terminal that runs this program.  If this program is run inside tmux(1),
 # then it also copies the given contents into tmux's current clipboard buffer.
 # If this program is run inside X11, then it also copies to the X11 clipboard.
@@ -11,7 +11,11 @@
 # The maximum length of an OSC 52 escape sequence is 100_000 bytes, of which
 # 7 bytes are occupied by a "\e]52;c;" header, 1 byte by a "\a" footer, and
 # 99_992 bytes by the base64-encoded result of 74_994 bytes of copyable text.
+#
 # In other words, this program can only copy up to 74_994 bytes of its input.
+# However, in such cases, this program tries to bypass the input length limit
+# by copying directly to the X11 clipboard if a $DISPLAY server is available;
+# otherwise, it emits a warning (on stderr) about the number of bytes dropped.
 #
 # See http://en.wikipedia.org/wiki/Base64 for the 4*ceil(n/3) length formula.
 # See http://sourceforge.net/p/tmux/mailman/message/32221257 for copy limits.
@@ -19,12 +23,11 @@
 #
 # Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
 
-# try bypassing the OSC-52 length limit by copying directly to X11 clipboard
-buf=$(cat "$@" | tee >(exec >& /dev/null; xsel -i -b || xclip -sel c)) || {
-  # X11 was not available, so build an OSC 52 escape sequence and send it out
-  len=$(echo -n "$buf" | wc -c) max=74994
-  [ $len -gt $max ] && echo "$0: truncated $((len-max)) bytes from input" >&2
-  osc52="\e]52;c;$(echo -n "$buf" | head -c $max | base64 | tr -d '\r\n')\a"
-  [ -n "$TMUX" ] && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$buf"
-  echo -ne "$osc52"
-}
+buf=$(cat "$@") len=$(echo -n "$buf" | wc -c) max=74994
+osc52="\e]52;c;$(echo -n "$buf" | head -c $max | base64 | tr -d '\r\n')\a"
+test -n "$TMUX" && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$buf"
+echo -ne "$osc52"
+
+# try bypassing the OSC 52 length limit by copying directly to X11 clipboard
+test $len -le $max || echo -n "$buf" | { xsel -i -b || xclip -sel c ;} ||
+echo "$0: input too long: $len bytes; dropped $((len-max)) bytes at end" >&2
