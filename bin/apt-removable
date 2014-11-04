@@ -1,2 +1,16 @@
 #!/bin/sh
-sed -n '/^Install:/{ s/([^)]*)//g; s/, //g; s/^Install:/\nsudo apt-get remove/; p }' /var/log/apt/history.log
+# Undo apt-get installation history.
+for log in /var/log/apt/history.log*
+do
+  case "$log" in
+    (*.gz) zcat "$log" ;;
+    (*)     cat "$log" ;;
+  esac
+done | sed -n '
+  /^Install:/{
+    s/^Install:/\nsudo apt-get remove/
+    s/([^)]*)//g
+    s/, //g
+    p
+  }
+'
