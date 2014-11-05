@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Usage: yank [FILE...]
 #
@@ -9,7 +9,7 @@
 #
 # This is achieved by writing an OSC 52 escape sequence to the said terminal.
 # The maximum length of an OSC 52 escape sequence is 100_000 bytes, of which
-# 7 bytes are occupied by a "\e]52;c;" header, 1 byte by a "\a" footer, and
+# 7 bytes are occupied by a "\033]52;c;" header, 1 byte by a "\a" footer, and
 # 99_992 bytes by the base64-encoded result of 74_994 bytes of copyable text.
 #
 # In other words, this program can only copy up to 74_994 bytes of its input.
@@ -23,11 +23,11 @@
 #
 # Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
 
-buf=$(cat "$@") len=$(echo -n "$buf" | wc -c) max=74994
-osc52="\e]52;c;$(echo -n "$buf" | head -c $max | base64 | tr -d '\r\n')\a"
-test -n "$TMUX" && osc52="\ePtmux;\e$osc52\e\\" && tmux set-buffer "$buf"
-echo -ne "$osc52"
+buf=$( cat "$@" ) len=$( echo -n "$buf" | wc -c ) max=74994
+osc52="\033]52;c;$( echo -n "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
+[ -n "$TMUX" ] && osc52="\033Ptmux;\033$osc52\033\\" && tmux set-buffer "$buf"
+printf "$osc52"
 
 # try bypassing the OSC 52 length limit by copying directly to X11 clipboard
-test $len -le $max || echo -n "$buf" | { xsel -i -b || xclip -sel c ;} ||
-echo "$0: input too long: $len bytes; dropped $((len-max)) bytes at end" >&2
+[ $len -le $max ] || echo -n "$buf" | { xsel -i -b || xclip -sel c ;} ||
+echo "$0: input too long: $len bytes; dropped $(( len-max )) bytes at end" >&2
