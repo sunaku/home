@@ -254,6 +254,8 @@ bind-key -t vi-copy C-V rectangle-toggle
 # transfer copied text to attached terminal with yank:
 # https://github.com/sunaku/home/blob/master/bin/yank
 bind-key -t vi-copy y copy-pipe yank
+# open the visual selection with xdg-open(1)
+bind-key -t vi-copy O copy-pipe 'xargs xdg-open'
 set-window-option -g mode-mouse on
 
 # paste most-recently copied text
@@ -278,7 +280,6 @@ set -g @tpm_plugins "         \
   tmux-plugins/tpm            \
   tmux-plugins/tmux-resurrect \
   tmux-plugins/tmux-copycat   \
-  tmux-plugins/tmux-open      \
 "
 
 run-shell ~/.tmux/plugins/tpm/tpm
