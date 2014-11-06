@@ -29,6 +29,7 @@ def align_table lines, delimiter, selector, rejector, justifier
       delims = line.scan(delim_regexp).map(&:squeeze)
       fields = line.split(delim_regexp).map(&:strip)
       result = fields.zip(delims).flatten(1)
+      result.pop if result.last.nil?
 
       # update the widths for the entire table by inspecting this row
       result.map(&:size).each_with_index do |new_width, column|
