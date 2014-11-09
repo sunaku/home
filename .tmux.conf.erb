@@ -22,11 +22,15 @@ set-option -s escape-time 1
 
 # allow set-titles to change the window title under XTerm
 # http://opennomad.com/content/goodbye-screen-hello-tmux
-set-option -ag terminal-overrides 'xterm*:XT'
+set-option -ga terminal-overrides ',xterm*:XT'
+
+# yank to system clipboard rather than primary selection
+# http://invisible-island.net/xterm/terminfo-contents.html#tic-xterm_tmux
+set-option -ga terminal-overrides ',xterm*:Ms=\E]52;c;%p2%s\007'
 
 # prevent standout from appearing as italics under URxvt
 # http://comments.gmane.org/gmane.comp.terminal-emulators.tmux.user/1927
-set-option -ag terminal-overrides 'rxvt-unicode*:sitm@'
+set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
 
 #-----------------------------------------------------------------------------
 # appearance
@@ -253,7 +257,7 @@ bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy C-V rectangle-toggle
 # transfer copied text to attached terminal with yank:
 # https://github.com/sunaku/home/blob/master/bin/yank
-bind-key -t vi-copy y copy-pipe yank
+bind-key -t vi-copy y copy-pipe 'yank > #{pane_tty}'
 # open the visual selection with xdg-open(1)
 bind-key -t vi-copy O copy-pipe 'xargs xdg-open'
 set-window-option -g mode-mouse on
