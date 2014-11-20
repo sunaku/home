@@ -1,0 +1,4 @@
+#!/bin/sh
+# Ensure that laptop docking script runs after returning from locked screen.
+/usr/bin/lxlock "$@"
+acer-c720-docking
