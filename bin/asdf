@@ -1,11 +1,2 @@
-#!/bin/sh -e
-# Changes the keyboard layout to the Dvorak Simplified Keyboard.
-if [ -n "$DISPLAY" ]; then
-  variant=$(setxkbmap -query | sed -n 's/^variant: *//p')
-  test -z "$variant" -o "$variant" != dvorak
-  setxkbmap dvorak
-  xmodmap ~/.xmodmaprc
-else
-  sudo loadkeys dvorak
-fi
-echo dvorak ON >&2
+#!/bin/sh
+keyboard dvorak

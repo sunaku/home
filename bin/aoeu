@@ -1,11 +1,2 @@
-#!/bin/sh -e
-# Changes the keyboard layout to the ANSI standard QWERTY keyboard.
-if [ -n "$DISPLAY" ]; then
-  variant=$(setxkbmap -query | sed -n 's/^variant: *//p')
-  test -z "$variant" -o "$variant" = dvorak
-  setxkbmap us
-  xmodmap ~/.xmodmaprc
-else
-  sudo loadkeys us
-fi
-echo dvorak OFF >&2
+#!/bin/sh
+keyboard us
