@@ -384,6 +384,12 @@ alias ggr='gg && gr $(gbh)'
 # fetch and rebase commits without preserving merges
 alias ggR='git pull --rebase'
 
+# clone a repository
+alias ggg='git clone --recursive'
+
+# shallow clone a repository
+alias ggG='ggg --depth=1'
+
 #-----------------------------------------------------------------------------
 # u = submodule
 #-----------------------------------------------------------------------------
