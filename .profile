@@ -16,10 +16,6 @@ fi
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS="-j$(fgrep -c processor /proc/cpuinfo)"
 
-# start X when logging into the first Virtual Terminal
-# https://wiki.archlinux.org/index.php/Start_X_at_Login
-test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 && exec startx
-
 # reattach last tmux session after logging in through Crouton or through SSH,
 # in which case we must also not be SSH'ing into the same machine from itself
 test -z "$TMUX" && {
