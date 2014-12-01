@@ -1,8 +1,15 @@
 #!/bin/sh
 # This script is run _after_ the window manager starts up.
 
-# hardware
-acer-c720-docking
+# automatically (re)configure laptop hardware whenever lock screen is unlocked
+# which happens when initially logging in, resuming from suspend, or unlocking
+tail -f /var/log/auth.log | while read line; do
+  case "$line" in
+    (*'New session c'*'of user lightdm.'|*'New session c'*"of user $USER.")
+      acer-c720-docking
+      ;;
+  esac
+done &
 
 # terminal
 xterm -maximized -e sh -c 'tmux -2 attach -d || tmux -2' &
