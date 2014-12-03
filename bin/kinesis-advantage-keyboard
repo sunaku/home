@@ -1,0 +1,9 @@
+#!/bin/sh -x
+# I use Dvorak layout natively on my Kinesis Advantage keyboard
+# and non-natively (emulated by software) on any other keyboard.
+# This script ensures the Dvorak layout is applied in all cases.
+
+if [ $(xinput list | fgrep -c 'HID 05f3:0007') -eq 2 ]
+then keyboard us
+else keyboard dvorak
+fi

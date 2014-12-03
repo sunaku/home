@@ -386,7 +386,7 @@
     <keybind key="F11">
       <action name="ToggleFullscreen"/>
     </keybind>
-    <keybind key="C-A-B">
+    <keybind key="XF86Display">
       <action name="ToggleFullscreen"/>
     </keybind>
     <!-- Launch task manager on Ctrl + Alt + Del-->

@@ -35,11 +35,6 @@
 
 
 
-#auto docking
-"acer-c720-docking"
-    m:0x0 + c:70
-    XF86Display 
-
 #display config
 "lxrandr"
     m:0x4 + c:70

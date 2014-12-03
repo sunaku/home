@@ -1,14 +1,16 @@
 #!/bin/sh
-# Changes the keyboard layout to the given value (e.g. "us" or "dvorak").
-# Usage: keyboard LAYOUT
+# Changes the keyboard layout to the given value (such as "us" or "dvorak").
+#
+# Usage: keyboard [LAYOUT]
 
 if [ -n "$DISPLAY" ]; then
+  # change the keyboard layout to the given value, if necessary
   test "$(setxkbmap -query | sed -n '$s/.* //p')" != "$1" &&
-    setxkbmap -layout "$1"
+  setxkbmap "$1"
 
   # enable search-key based modifier keys for Acer C720 Chromebook
   xmodmap -pke | fgrep -q 'keycode 133 = Super_L NoSymbol Super_L' &&
-    xmodmap ~/.xmodmaprc
+  xmodmap ~/.xmodmaprc
 else
   sudo loadkeys "$1"
 fi

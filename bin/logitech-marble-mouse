@@ -1,27 +1,30 @@
 #!/bin/sh
 # Handedness for Logitech Marble Mouse trackball & 4 buttons.
 #
+# Usage: logitech-marble-mouse [HANDEDNESS] [XINPUT_DEVICE_ID]
+# Where: HANDEDNESS is either "left" or "right" (default: "left")
+#
 # http://www.robmeerman.co.uk/unix/xinput
 # http://wiki.archlinux.org/index.php/Logitech_Marble_Mouse
 # https://help.ubuntu.com/community/Logitech_Marblemouse_USB
 
+HANDED=${1:-left}
 DEVICE=${2:-Logitech USB Trackball}
 
-case "$1" in
-  left)
+# make sure the device exists before trying to configure it
+xinput list --id-only "$DEVICE" >/dev/null || exit $?
+
+case "$HANDED" in
+  (left)
     xinput set-button-map "$DEVICE" 3 9 1 4 5 6 7 8 2 10 11 12 13
     xinput set-int-prop "$DEVICE" 'Evdev Wheel Emulation' 8 1
     xinput set-int-prop "$DEVICE" 'Evdev Wheel Emulation Button' 8 8
     xinput set-int-prop "$DEVICE" 'Evdev Wheel Emulation Axes' 8 6 7 4 5
     ;;
-  right)
+  (right)
     xinput set-button-map "$DEVICE" 1 8 3 4 5 6 7 2 9 10 11 12 13
     xinput set-int-prop "$DEVICE" 'Evdev Wheel Emulation' 8 1
     xinput set-int-prop "$DEVICE" 'Evdev Wheel Emulation Button' 8 9
     xinput set-int-prop "$DEVICE" 'Evdev Wheel Emulation Axes' 8 6 7 4 5
-    ;;
-  *)
-    echo "Usage: $0 {left|right} [XINPUT_DEVICE_IDENTIFIER]" >&2
-    exit 1
     ;;
 esac

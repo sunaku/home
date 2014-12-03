@@ -1,0 +1,52 @@
+#!/bin/sh
+# Reacts to hardware events and (re)configures the system accordingly.
+
+trap "kill -- -$$" EXIT # terminate all background processes on exit
+trap exit INT TERM # ensure the above trap is triggered on interrupt
+
+dmesg='dmesg --facility auth'
+depth=$($dmesg | awk '
+  / systemd-logind.+: New session c.+ of user .+/ { depth=NR }
+  END { print depth-1 }
+')
+$dmesg --follow | {
+  # discard old events
+  i=1
+  while [ $i -le $depth ]; do
+    read _discard
+    i=$(( i + 1 ))
+  done
+
+  # process new events
+  while read event; do
+    case "$event" in
+      # lock screen was unlocked after initial login or resuming from suspend
+      (*' systemd-logind'*': New session c'*'of user '*)
+        acer-c720-display
+        logitech-marble-mouse
+        kinesis-advantage-keyboard
+        ;;
+    esac
+  done
+} &
+
+stdbuf -oL udevadm monitor --udev | while read event; do
+  case "$event" in
+    # HDMI cable was either plugged in or unplugged
+    (*' change '*'/devices/pci0000:00/0000:00:02.0/drm/card0 (drm)')
+      acer-c720-display
+      ;;
+
+    # mouse was plugged in
+    (*' add '*'/devices/'*'/usb'*'/0003:046D:C408.'*' (hid)')
+      logitech-marble-mouse
+      ;;
+
+    # keyboard was either plugged in or unplugged
+    (*' /devices/'*'/usb'*'/0003:05F3:0007.'*' (hid)')
+      kinesis-advantage-keyboard
+      ;;
+  esac
+done &
+
+wait
