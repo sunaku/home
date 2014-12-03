@@ -10,11 +10,6 @@ alias mv='mv -i'
 alias rm='rm -i'
 alias RM='rm -vfr'
 
-duh() { # disk usage for humans
-  test $# -eq 0 && set -- *
-  du -sch "$@" | sort -h
-}
-
 alias tree='tree -ACF'
 
 bam() { # backup with move

@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Reimplementation of `sort -h` for systems with a very old sort(1).
+# Sorts du(1) output, especially `du -h` output, in ascending order.
+#
+# Usage: du -h | sort-h
+# Usage: sort-h < FILE
+
+sort -h "$@" 2>/dev/null && exit # use the actual `sort -h` if available
+
+input="$( sort -n "$@" )"
+for unit in '\s' '[Kk]' '[Mm]' '[Gg]' '[Tt]' '[Pp]' '[Ee]' '[Zz]' '[Yy]'
+do echo "$input" | grep "^[0-9\.]\+$unit"
+done
+true # prevent nonzero exit status: the last grep might not have matched

@@ -1,0 +1,6 @@
+#!/bin/sh
+# Disk usage, in human friendly format.
+{ echo '---BEGIN-PREVIEW---'
+  du -ch "$@"
+  echo '----END-PREVIEW----'
+} | tee /dev/tty | sed '1d;$d' | sort-h
