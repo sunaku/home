@@ -6,6 +6,12 @@ xset +fp ~/.fonts
 xset fp rehash
 xrdb ~/.Xdefaults
 
+# keyboard
+# http://wiki.bodhilinux.com/doku.php?id=keyboard_-_toggle_between_2_layouts
+#setxkbmap -layout dvorak,us -option grp:shift_toggle
+xmodmap ~/.xmodmaprc
+
+# touchpad
 # http://wiki.archlinux.org/index.php/Touchpad_Synaptics
 syndaemon -t -k -i 1 -d
 #synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2

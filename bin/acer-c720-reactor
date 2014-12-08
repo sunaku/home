@@ -42,8 +42,8 @@ stdbuf -oL udevadm monitor --udev | while read event; do
       logitech-marble-mouse
       ;;
 
-    # keyboard was either plugged in or unplugged
-    (*' /devices/'*'/usb'*'/0003:05F3:0007.'*' (hid)')
+    # keyboard was plugged in
+    (*' add '*'/devices/'*'/usb'*'/0003:05F3:0007.'*' (hid)')
       kinesis-advantage-keyboard
       ;;
   esac
