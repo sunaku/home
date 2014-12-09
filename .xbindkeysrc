@@ -35,10 +35,15 @@
 
 
 
-#display config
-"lxrandr"
+#auto docking
+"acer-c720-docking"
     m:0x4 + c:70
     Control + XF86Display 
+
+#display config
+"lxrandr"
+    m:0x5 + c:70
+    Control+Shift + XF86Display 
 
 #mac expose
 "admit1 skippy-xd"

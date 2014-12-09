@@ -22,9 +22,7 @@ $dmesg --follow | {
     case "$event" in
       # lock screen was unlocked after initial login or resuming from suspend
       (*' systemd-logind'*': New session c'*'of user '*)
-        acer-c720-display
-        logitech-marble-mouse
-        kinesis-advantage-keyboard
+        acer-c720-docking
         ;;
     esac
   done
