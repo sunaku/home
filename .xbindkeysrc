@@ -61,12 +61,12 @@
     Control + XF86MonBrightnessDown 
 
 #dim backlight
-"xbacklight - 5"
+"xbacklight - 1"
     m:0x0 + c:72
     XF86MonBrightnessDown 
 
 #shine backlight
-"xbacklight + 5"
+"xbacklight + 1"
     m:0x0 + c:73
     XF86MonBrightnessUp 
 
