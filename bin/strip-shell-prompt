@@ -1,3 +1,9 @@
 #!/usr/bin/env ruby
 # Replaces my custom ZSH shell prompt with the more conventional $ prefix.
-print ARGF.read.gsub(/^.*?>( .+?)\s*(#\S+@\S+)?$/, "\n$\\1")
+print ARGF.read.gsub(/^(?:\S+ )?(.+?)>(.+?)(?:\s*#\S+@\S+)?$/) { |original|
+  if File.directory? File.expand_path($1)
+    "\n$#{$2}"
+  else
+    original
+  end
+}
