@@ -23,11 +23,21 @@
 #
 # Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
 
-buf=$( cat "$@" ) len=$( echo -n "$buf" | wc -c ) max=74994
-osc52="\033]52;c;$( echo -n "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
-[ -n "$TMUX" ] && osc52="\033Ptmux;\033$osc52\033\\" && tmux set-buffer "$buf"
-printf "$osc52"
+buf=$( cat "$@" )
 
-# try bypassing the OSC 52 length limit by copying directly to X11 clipboard
-[ $len -le $max ] || echo -n "$buf" | { xsel -i -b || xclip -sel c ;} ||
-echo "$0: input too long: $len bytes; dropped $(( len-max )) bytes at end" >&2
+# copy to tmux if possible
+[ -n "$TMUX" ] && tmux set-buffer "$buf"
+
+# copy to X11 if possible...
+[ -n "$DISPLAY" ] && echo -n "$buf" | { xsel -i -b || xclip -sel c ;} ||
+
+# ...otherwise copy to terminal
+{
+  len=$( echo -n "$buf" | wc -c ) max=74994
+  [ $len -gt $max ] && echo "$0: input is $(( len - max )) bytes too long" >&2
+
+  esc="\033]52;c;$( echo -n "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
+  [ -n "$TMUX" ] && esc="\033Ptmux;\033$esc\033\\"
+
+  printf "$esc"
+}
