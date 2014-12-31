@@ -3,5 +3,10 @@
 
 if grep -q '^connected' /sys/class/drm/card0-HDMI-A-1/status
 then xrandr --output HDMI1 --auto --dpi 96 --output eDP1 --off
-else xrandr --auto; xbacklight = 3 # reduce display brightness
+else xrandr --auto
+fi
+
+# reduce display brightness
+if xbacklight | grep -q '^100'
+then xbacklight = 5
 fi
