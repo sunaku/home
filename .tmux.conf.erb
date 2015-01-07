@@ -49,14 +49,14 @@ set-option -g status-bg colour253 # lucius normal airline_c
 set-window-option -g window-status-current-fg colour231 # lucius visual airline_a
 set-window-option -g window-status-current-bg colour67 # lucius visual airline_a
 <% else %>
-set-option -g pane-border-fg colour237 # lucius normal airline_c
-set-option -g pane-border-bg colour237 # lucius normal airline_c
-set-option -g pane-active-border-fg colour241 # lucius normal airline_b
-set-option -g pane-active-border-bg colour241 # lucius normal airline_b
+set-option -g pane-border-fg colour237 # gruvbox normal airline_c
+set-option -g pane-border-bg colour237 # gruvbox normal airline_c
+set-option -g pane-active-border-fg colour239 # gruvbox normal airline_b
+set-option -g pane-active-border-bg colour239 # gruvbox normal airline_b
 set-option -g status-fg colour188 # lucius normal airline_c
 set-option -g status-bg colour238 # lucius normal airline_c
-set-window-option -g window-status-current-fg colour236 # bubblegum normal airline_a
-set-window-option -g window-status-current-bg colour146 # bubblegum s:cterm_purple
+set-window-option -g window-status-current-fg colour235 # gruvbox modified airline_c
+set-window-option -g window-status-current-bg colour109 # gruvbox modified airline_c
 <% end %>
 
 # Common UI interaction cues from Blueprint CSS:
@@ -98,7 +98,7 @@ set-option -g status-right '#{=26:pane_title} <%=
   if light_theme
     '#[fg=colour231,bg=colour244]'
   else
-    '#[fg=colour146,bg=colour236]'
+    '#[fg=colour109,bg=colour235]'
   end
 %> #S:#I.#P #(test -n "$SSH_TTY" && echo "\<%=
   if light_theme
