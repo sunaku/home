@@ -75,6 +75,11 @@
     m:0x4 + c:73
     Control + XF86MonBrightnessUp 
 
+#toggle mute
+"amixer set Master toggle; amixer set Headphone on; amixer set Speaker on"
+    m:0x0 + c:74
+    XF86AudioMute 
+
 #touchpad on/off
 "synclient TouchpadOff=$(synclient | grep -c 'TouchpadOff.*0')"
     m:0x4 + c:74
