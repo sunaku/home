@@ -1,3 +1,4 @@
 #!/bin/sh
-# Changes default choice from "Shutdown" to "Cancel" in LXDE logout menu.
-/usr/bin/lxsession-logout & sleep 0.3 ; xdotool key Shift+Tab
+# Changes default choice from "Shutdown" to "Cancel" in LXDE logout menu
+# and prevents the menu from being displayed again if it's already shown.
+admit1 /usr/bin/lxsession-logout & sleep 0.3 ; xdotool key Shift+Tab
