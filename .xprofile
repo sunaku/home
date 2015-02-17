@@ -4,12 +4,13 @@
 # appearance
 xset +fp ~/.fonts
 xset fp rehash
-xrdb ~/.Xdefaults
+#xrdb -merge ~/.Xdefaults
 
 # keyboard
 # http://wiki.bodhilinux.com/doku.php?id=keyboard_-_toggle_between_2_layouts
 #setxkbmap -layout dvorak,us -option grp:shift_toggle
-xmodmap ~/.xmodmaprc
+# https://github.com/dnschneid/crouton/wiki/Keyboard
+setxkbmap -model chromebook
 
 # touchpad
 # http://wiki.archlinux.org/index.php/Touchpad_Synaptics
@@ -27,4 +28,4 @@ xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Two-Finger Scrolling" 
 
 xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Click Action" 1 3 2
 xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Tap Action" 2 3 0 0 1 3 2
-#xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Palm Detection" 1
+xinput set-prop "Cypress APA Trackpad (cyapa)" "Synaptics Palm Detection" 1

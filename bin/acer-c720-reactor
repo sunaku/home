@@ -20,8 +20,11 @@ $dmesg --follow | {
   # process new events
   while read event; do
     case "$event" in
-      # lock screen was unlocked after initial login or resuming from suspend
-      (*' systemd-logind'*': New session c'*'of user '*)
+      # lock screen was unlocked after initial login
+      # ... or after laptop was resumed from suspend
+      (*' systemd-logind'*': New session c'*'of user '*\
+      |*' systemd-logind'*': Lid opened.'\
+      |*' systemd-logind'*': Operation finished.')
         acer-c720-docking
         ;;
     esac

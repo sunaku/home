@@ -1,4 +1,4 @@
 #!/bin/sh
 # workrave(1) calls this command to lock the screen
-# so delegate to lxlock(1) because this is Lubuntu
-exec lxlock "$@"
+# so delegate to xflock4(1) because this is Xubuntu
+exec xflock4 "$@"

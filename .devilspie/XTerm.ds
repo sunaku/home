@@ -1,0 +1,11 @@
+; generated_rule XTerm
+( if 
+( begin 
+( is ( window_class ) "XTerm" )
+) 
+( begin 
+( undecorate )
+( maximize )
+( println "match" )
+)
+)

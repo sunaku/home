@@ -5,7 +5,6 @@
 
 if [ -n "$DISPLAY" ]; then
   setxkbmap -layout "$@"
-  xmodmap ~/.xmodmaprc
 else
   sudo loadkeys "$1"
 fi

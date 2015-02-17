@@ -35,60 +35,35 @@
 
 
 
-#auto docking
-"acer-c720-docking"
-    m:0x4 + c:70
-    Control + XF86Display 
+#fullscreen on/off
+"wmctrl -r :ACTIVE: -b toggle,fullscreen"
+    m:0x40 + c:70
+    Mod4 + F4 
 
-#display config
-"lxrandr"
-    m:0x5 + c:70
-    Control+Shift + XF86Display 
-
-#mac expose
+#window chooser
 "admit1 skippy-xd"
-    m:0x0 + c:71
-    XF86Explorer 
+    m:0x0 + c:250
+    XF86ApplicationRight 
+
+#lock screen
+"xlock"
+    m:0x4 + c:124
+    Control + XF86PowerOff 
+
+#dock laptop
+"acer-c720-docking"
+    m:0x8 + c:124
+    Alt + XF86PowerOff 
 
 #invert colors
 "xcalib -invert -alter"
-    m:0x4 + c:71
-    Control + XF86Explorer 
-
-#min backlight
-"xbacklight = 1"
-    m:0x4 + c:72
-    Control + XF86MonBrightnessDown 
-
-#dim backlight
-"xbacklight - 1"
-    m:0x0 + c:72
-    XF86MonBrightnessDown 
-
-#shine backlight
-"xbacklight + 1"
-    m:0x0 + c:73
-    XF86MonBrightnessUp 
-
-#max backlight
-"xbacklight = 100"
-    m:0x4 + c:73
-    Control + XF86MonBrightnessUp 
-
-#toggle mute
-"amixer set Master toggle; amixer set Headphone on; amixer set Speaker on"
-    m:0x0 + c:74
-    XF86AudioMute 
+    m:0x1 + c:124
+    Shift + XF86PowerOff 
 
 #touchpad on/off
 "synclient TouchpadOff=$(synclient | grep -c 'TouchpadOff.*0')"
-    m:0x4 + c:74
-    Control + XF86AudioMute 
-
-#lock screen
-"lxlock"
-    m:0x4 + c:124
-    Control + XF86PowerOff 
+    m:0xc + c:124
+    Control+Alt + XF86PowerOff 
 
 #
 # End of xbindkeys configuration
