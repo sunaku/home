@@ -12,12 +12,12 @@
 #--
 # Written in 2014 by Suraj N. Kurapati
 
-output=$(exec 2>&1; eval set -x\; "$@")
+output=$( exec 2>&1 ; set -x ; "$@" )
 status=$?
 
-if [ $status -ne 0 ]; then
-  echo "canary: command exited with status $status: $*" >&2
-  echo "$output"
+if [ $status -ne 0 ]
+then echo "canary: command exited with status $status: $*" >&2
+     echo "$output" # propagate output of command to the user
 fi
 
 exit $status
