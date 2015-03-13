@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Usage: admit1 COMMAND [ARGUMENTS...]
-# Usage: admit1 SHELL_EXPRESSION...
+# Usage: admit1 SHELL_EVAL_EXPRESSION
 #
 # Admits only one instance of the given command to run at a time (by running
 # it only if there are no other instances of this program already doing so).
@@ -9,8 +9,12 @@
 #--
 # Written in 2014 by Suraj N. Kurapati
 
-regex=$( ps ho cmd $$ | sed 's/[\^.[$()|*+?{\\]/\\&/g' ) # man regex(7)
+regex=$( ps ho cmd $$ | sed 's/[\^.[$()|*+?{\\]/\\&/g' ) # see `man 7 regex`
 
-if [ $$ = "$( pgrep -u "$USER" -xf "$regex" )" ]
-then "$@"
+if [ $$ = "$( pgrep -u "$USER" -xf "$regex" )" ]; then
+  # SHELL_EVAL_EXPRESSION was given
+  test $# -eq 1 && set -- eval "$@"
+
+  # execute the given command line
+  "$@"
 fi
