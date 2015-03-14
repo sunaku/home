@@ -143,10 +143,14 @@ bind-key -n M-< swap-window -t :-1
 bind-key -n M-> swap-window -t :+1
 
 # monitor window
-bind-key -n M-k set-window-option monitor-activity
+set-option -g visual-activity on
+set-option -g visual-silence on
+set-option -g bell-on-alert on
+bind-key -n M-k set-window-option monitor-activity \; display-message 'monitor-activity #{?monitor-activity,on,off}'
+bind-key -n M-j command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-option monitor-silence %% ; display-message "monitor-silence #{?monitor-silence,on,off}"'
+<% if tmux_version < '2' %>
 bind-key -n M-q command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-option monitor-silence %%'
-bind-key -n M-j command-prompt -p 'monitor-content (fnmatch)' "set-window-option monitor-content '%%'"
-bind-key -n M-J set-window-option monitor-content
+<% end %>
 
 #-----------------------------------------------------------------------------
 # panes
