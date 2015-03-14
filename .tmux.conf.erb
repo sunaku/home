@@ -113,9 +113,16 @@ set-option -g status-right-length 48
 # windows
 #-----------------------------------------------------------------------------
 
-# create window
+# create new window
 bind-key -n M-e command-prompt "new-window -n '%%'"
-bind-key -n M-E command-prompt -I '#W' "rename-window '%%'"
+bind-key -n M-E new-window
+
+# create window from current pane
+bind-key -n M-x command-prompt -p '(break-window)' -I '#W' "break-pane ; rename-window '%%'"
+bind-key -n M-X break-pane
+
+# rename window
+bind-key -n M-q command-prompt -I '#W' "rename-window '%%'"
 
 # focus window
 set-option -g mouse-select-window on
