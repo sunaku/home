@@ -81,6 +81,12 @@ set-window-option -g window-status-activity-fg '#8a1f11' # error (red)
 # toggle status bar visibility
 bind-key -n M-` set-option -g status
 
+# toggle status bar position
+bind-key -n M-~ if-shell \
+  'tmux show-option -g status-position | grep -q top$' \
+    'set-option -g status-position bottom' \
+    'set-option -g status-position top'
+
 # put status bar at the top of the screen
 set-option -g status-position top
 
