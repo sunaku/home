@@ -61,18 +61,18 @@ set-window-option -g window-status-current-bg colour109 # gruvbox modified airli
 
 # Common UI interaction cues from Blueprint CSS:
 # http://blueprintcss.org/tests/parts/forms.html
-set-option -g message-fg '#514721' # notice (yellow)
-set-option -g message-bg '#ffd324' # notice (yellow)
-set-window-option -g mode-fg '#514721' # notice (yellow)
-set-window-option -g mode-bg '#ffd324' # notice (yellow)
-set-window-option -g window-status-bell-fg '#d5edf8' # info (blue)
-set-window-option -g window-status-bell-bg '#205791' # info (blue)
+set-option -g message-bg '#514721' # notice (yellow)
+set-option -g message-fg '#ffd324' # notice (yellow)
+set-window-option -g mode-bg '#514721' # notice (yellow)
+set-window-option -g mode-fg '#ffd324' # notice (yellow)
+set-window-option -g window-status-bell-bg '#d5edf8' # info (blue)
+set-window-option -g window-status-bell-fg '#205791' # info (blue)
 <% if tmux_version < '2' %>
-set-window-option -g window-status-content-fg '#e6efc2' # success (green)
-set-window-option -g window-status-content-bg '#264409' # success (green)
+set-window-option -g window-status-content-bg '#e6efc2' # success (green)
+set-window-option -g window-status-content-fg '#264409' # success (green)
 <% end %>
-set-window-option -g window-status-activity-fg '#fbe3e4' # error (red)
-set-window-option -g window-status-activity-bg '#8a1f11' # error (red)
+set-window-option -g window-status-activity-bg '#fbe3e4' # error (red)
+set-window-option -g window-status-activity-fg '#8a1f11' # error (red)
 
 #-----------------------------------------------------------------------------
 # status bar
