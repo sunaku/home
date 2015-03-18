@@ -1,6 +1,6 @@
 #!/bin/sh
 # Undo apt-get installation history.
-for log in /var/log/apt/history.log*
+for log in $(ls -tr /var/log/apt/history.log*)
 do
   case "$log" in
     (*.gz) zcat "$log" ;;
