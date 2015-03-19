@@ -176,10 +176,10 @@ bind-key -n M-r split-window -c '#{pane_current_path}' -h
 bind-key -n M-R split-window -c '#{pane_current_path}' -h \; run-shell 'tmux last-pane \; swap-pane -d -s #D'
 
 # join pane
-bind-key -n M-g move-pane -d -s .+1 -t .    # join next pane at bottom
-bind-key -n M-G move-pane    -t .-1 -s .    # join pane at bottom of prev pane
-bind-key -n M-l move-pane -d -s .+1 -t . -h # join next pane at right
-bind-key -n M-L move-pane    -t .-1 -s . -h # join pane at right of prev pane
+bind-key -n M-g move-pane    -t .-1 -s .    # join pane at bottom of prev pane
+bind-key -n M-l move-pane    -t .-1 -s . -h # join pane at right of prev pane
+bind-key -n M-G move-pane -d -s .+1 -t .    # join next pane at bottom
+bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 
 # focus pane or Vim split (if pane running Vim)
 # http://robots.thoughtbot.com/post/53022241323
