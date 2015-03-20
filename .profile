@@ -22,5 +22,8 @@ test -z "$TMUX" && {
   test -n "$CROUTON" ||
   echo "$SSH_CONNECTION" | awk '{ exit $1 == $3 }'
 } && {
-  tmux has-session && tmux -2 attach -d || tmux -2
+  tmux has-session 2>/dev/null && tmux -2 attach -d || {
+    echo -n 'No tmux sessions found.  Start one? (y/n) '
+    read && echo "$REPLY" | grep -qi '^y' && tmux -2
+  }
 }
