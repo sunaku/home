@@ -1,16 +1,16 @@
 #!/bin/sh
 vim --version | fgrep -q '+cryptv' &&
-exec vim -u NONE -c 'set '\
-'nocompatible '\
-'secure '\
-'viminfo= '\
-'history=0 '\
-'noswapfile '\
-'noshelltemp '\
-'nobackup '\
-'nowritebackup '\
-'cryptmethod=blowfish '\
-'foldmethod=marker '\
-'foldlevel=0 '\
-"background=$(cat ~/.theme) "\
-  "$@"
+vim -u NONE -c "set $(tr '\n' ' ' <<SETTINGS)" -c 'colorscheme desert' "$@"
+  nocompatible
+  secure
+  viminfo=
+  history=0
+  noswapfile
+  noshelltemp
+  nobackup
+  nowritebackup
+  cryptmethod=blowfish
+  foldmethod=marker
+  foldlevel=0
+  background=$(cat ~/.theme)
+SETTINGS
