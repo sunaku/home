@@ -40,7 +40,9 @@ end
 
 # combine the diffs by joining the charwise output into the linewise output
 # and use uniq() to show only one copy of common hunks between both outputs
-diff = linewise_hunks.zip(charwise_hunks).map(&:uniq).flatten.map do |hunk|
+diff = linewise_hunks.zip(charwise_hunks).map do |(linewise, charwise)|
+  # prefer showing charwise hunk over linewise hunk when both are available
+  hunk = charwise || linewise
   if hunk =~ FILE_BEGIN_REGEXP
     # strip diff headers and git index headers which mention /tmp/* files
     hunk.sub(/\A.+\bexpect.+\bbutwas.+\n\e\[1mindex.+\n/, '').
