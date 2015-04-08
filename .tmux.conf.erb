@@ -270,11 +270,12 @@ bind-key -n S-PPage copy-mode -u
 # copy text from buffer
 bind-key -n M-u copy-mode
 set-window-option -g mode-keys vi
-bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy C-V rectangle-toggle
+bind-key -t vi-copy v begin-selection
+bind-key -t vi-copy y copy-selection -x
 # transfer copied text to attached terminal with yank:
 # https://github.com/sunaku/home/blob/master/bin/yank
-bind-key -t vi-copy y copy-pipe 'yank > #{pane_tty}'
+bind-key -t vi-copy Y copy-pipe 'yank > #{pane_tty}'
 # open the visual selection with xdg-open(1)
 bind-key -t vi-copy O copy-pipe 'xargs xdg-open'
 set-window-option -g mode-mouse on
