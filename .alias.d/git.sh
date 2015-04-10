@@ -329,6 +329,9 @@ alias ghl='git remote -v'
 # add remote
 alias gha='git remote add'
 
+# rename remote
+alias ghm='git remote rename'
+
 # delete remote
 alias ghx='git remote rm'
 

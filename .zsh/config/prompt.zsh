@@ -1,6 +1,8 @@
 # my "sunaku" prompt for ZSH using vcs_info stdlib
 # http://snk.tuxfamily.org/log/sunaku-zsh-prompt.png
 
+setopt PROMPT_SUBST
+
 PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 '$(vcs_info && echo $vcs_info_msg_0_)'\
 '%(!.%F{red}.%F{green})%~%f'\

@@ -1,4 +1,6 @@
 source ~/.alias
-setopt nocompletealiases      # treat `gco` like `git checkout`
-compdef _git tig=git-checkout # treat `tig` like `git checkout`
-compdef hub=git               # treat `hub` like `git`
+
+alias -g P='| $PAGER'
+alias -g T='| tee /dev/tty |'
+alias -g L='| wc -l'
+alias -g N='/dev/null'

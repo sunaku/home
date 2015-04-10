@@ -1,3 +1,13 @@
+#
+# ZSH Line Editor
+#
+# http://zsh.sourceforge.net/Doc/Release/Options.html#Zle
+#
+setopt BEEP
+
+# use EMACS-style keybindings for command line editing
+bindkey -e
+
 # bind special keys according to readline configuration
 eval "$(sed -n 's/^\( *[^#][^:]*\):/bindkey \1/p' /etc/inputrc ~/.inputrc)"
 
@@ -12,3 +22,8 @@ select-word-style bash
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
+
+# automatically escape special characters in URLs
+# http://blog.viridian-project.de/2008/07/03/zsh-tip-handling-urls-with-url-quote-magic/
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic

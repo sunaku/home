@@ -1,4 +1,5 @@
-alias -- -='cd -'
+alias .,='cd -'
+alias ..='cd ..'
 alias ,=la
 alias ,,='ls-summary'
 alias ,.='ll -d'
@@ -9,8 +10,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 alias RM='rm -vfr'
-
-alias tree='tree -ACF'
 
 bam() { # backup with move
   for file; do
