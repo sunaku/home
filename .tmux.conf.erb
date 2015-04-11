@@ -40,13 +40,13 @@ set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
 # https://github.com/bling/vim-airline/blob/master/autoload/airline/themes/lucius.vim
 # https://github.com/bling/vim-airline/blob/master/autoload/airline/themes/bubblegum.vim
 <% if light_theme %>
-set-option -g pane-border-style fg=colour253,bg=colour253 # lucius normal airline_c
+set-option -g pane-border-style fg=colour253 # lucius normal airline_c
 set-option -g pane-active-border-style fg=colour250,bg=colour250 # lucius normal airline_b
 set-option -g status-style fg=colour238,bg=colour253 # lucius normal airline_c
 set-window-option -g window-status-current-style fg=colour231,bg=colour67 # lucius visual airline_a
 <% else %>
-set-option -g pane-border-style fg=colour237,bg=colour237 # gruvbox normal airline_c
-set-option -g pane-active-border-style fg=colour239,bg=colour239 # gruvbox normal airline_b
+set-option -g pane-border-style fg=colour238
+set-option -g pane-active-border-style fg=colour109
 set-option -g status-style fg=colour188,bg=colour238 # lucius normal airline_c
 set-window-option -g window-status-current-style fg=colour235,bg=colour109 # gruvbox modified airline_c
 <% end %>
