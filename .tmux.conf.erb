@@ -8,6 +8,11 @@ bind-key R source ~/.tmux.conf \; display-message 'config reloaded!'
 # terminal
 #-----------------------------------------------------------------------------
 
+<% if tmux_version >= '2' %>
+# enable mouse support for general selection and control
+set-option -g mouse on
+<% end %>
+
 # auto-set terminal title to current window pane's title
 set-option -g set-titles on
 
@@ -119,7 +124,9 @@ bind-key -n M-X break-pane
 bind-key -n M-q command-prompt -I '#W' "rename-window '%%'"
 
 # focus window
+<% if tmux_version < '2' %>
 set-option -g mouse-select-window on
+<% end %>
 bind-key -n M-, previous-window
 bind-key -n M-. next-window
 bind-key -n M-o last-window
@@ -176,14 +183,18 @@ bind-key -n M-h if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-h' 
 bind-key -n M-t if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-t' 'select-pane -U'
 bind-key -n M-n if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-n' 'select-pane -D'
 bind-key -n M-s if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-s' 'select-pane -R'
+<% if tmux_version < '2' %>
 set-option -g mouse-select-pane on
+<% end %>
 
 # resize pane
 bind-key -r H resize-pane -L 5
 bind-key -r T resize-pane -U 5
 bind-key -r N resize-pane -D 5
 bind-key -r S resize-pane -R 5
+<% if tmux_version < '2' %>
 set-option -g mouse-resize-pane on
+<% end %>
 
 # zoom pane
 bind-key -n M-m resize-pane -Z
@@ -266,7 +277,9 @@ bind-key -t vi-copy y copy-selection -x
 bind-key -t vi-copy Y copy-pipe 'yank > #{pane_tty}'
 # open the visual selection with xdg-open(1)
 bind-key -t vi-copy O copy-pipe 'xargs xdg-open'
+<% if tmux_version < '2' %>
 set-window-option -g mode-mouse on
+<% end %>
 
 # paste most-recently copied text
 bind-key -n M-i paste-buffer
