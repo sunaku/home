@@ -179,10 +179,10 @@ bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 # focus pane or Vim split (if pane running Vim)
 # http://robots.thoughtbot.com/post/53022241323
 bind-key -n M-d select-pane -l
-bind-key -n M-h if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-h' 'select-pane -L'
-bind-key -n M-t if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-t' 'select-pane -U'
-bind-key -n M-n if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-n' 'select-pane -D'
-bind-key -n M-s if-shell 'test "#{pane_current_command}" = vim' 'send-keys M-s' 'select-pane -R'
+bind-key -n M-h if-shell 'cmd="#{pane_current_command}"; test -z "${cmd#*vim}"' 'send-keys M-h' 'select-pane -L'
+bind-key -n M-t if-shell 'cmd="#{pane_current_command}"; test -z "${cmd#*vim}"' 'send-keys M-t' 'select-pane -U'
+bind-key -n M-n if-shell 'cmd="#{pane_current_command}"; test -z "${cmd#*vim}"' 'send-keys M-n' 'select-pane -D'
+bind-key -n M-s if-shell 'cmd="#{pane_current_command}"; test -z "${cmd#*vim}"' 'send-keys M-s' 'select-pane -R'
 <% if tmux_version < '2' %>
 set-option -g mouse-select-pane on
 <% end %>
