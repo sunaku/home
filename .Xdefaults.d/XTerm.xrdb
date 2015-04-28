@@ -6,20 +6,13 @@ XTerm*vt100.bellIsUrgent        : True
 
 ! appearance
 XTerm*termName                  : xterm-256color
-!XTerm*font                     : -*-tamzen-medium-*-*-*-16-*-*-*-*-*-*-*
-!XTerm*font1                    : -*-tamzen-medium-*-*-*-9-*-*-*-*-*-*-*
-!XTerm*font2                    : -*-tamzen-medium-*-*-*-12-*-*-*-*-*-*-*
-!XTerm*font3                    : -*-tamzen-medium-*-*-*-13-*-*-*-*-*-*-*
-!XTerm*font4                    : -*-tamzen-medium-*-*-*-15-*-*-*-*-*-*-*
-!XTerm*font5                    : -*-tamzen-medium-*-*-*-16-*-*-*-*-*-*-*
-!XTerm*font6                    : -*-tamzen-medium-*-*-*-20-*-*-*-*-*-*-*
 XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
-XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-9-*-*-*-*-*-*-*
-XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
-XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-13-*-*-*-*-*-*-*
-XTerm*font4                     : -*-tamzenforpowerline-medium-*-*-*-15-*-*-*-*-*-*-*
-XTerm*font5                     : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
-XTerm*font6                     : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
+XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
+XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
+XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
+XTerm*font4                     : lucidasanstypewriter-14
+XTerm*font5                     : lucidasanstypewriter-18
+XTerm*font6                     : lucidasanstypewriter-24
 XTerm*vt100.colorMode           : True
 XTerm*vt100.boldColors          : False
 XTerm*vt100.colorBDMode         : True
