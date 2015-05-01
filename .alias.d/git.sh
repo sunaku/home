@@ -356,8 +356,14 @@ alias ghD="$intra_line_less ghd $intra_line_diff"
 # push commits
 alias gp='git push'
 
+# push branches
+alias gpa='git push --all'
+
 # push commits forcefully
 alias gP='git push --force'
+
+# push branches forcefully
+alias gPa='git push --all --force'
 
 # push tags
 alias gpt='git push --tags'
