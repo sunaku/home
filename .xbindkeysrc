@@ -45,25 +45,20 @@
     m:0x0 + c:250
     XF86ApplicationRight 
 
-#lock screen
-"xlock"
-    m:0x4 + c:124
-    Control + XF86PowerOff 
-
 #dock laptop
 "acer-c720-docking"
-    m:0x8 + c:124
-    Alt + XF86PowerOff 
+    m:0x4 + c:235
+    Control + XF86Display 
 
 #invert colors
 "xcalib -invert -alter"
-    m:0x1 + c:124
-    Shift + XF86PowerOff 
+    m:0x1 + c:235
+    Shift + XF86Display 
 
 #touchpad on/off
 "synclient TouchpadOff=$(synclient | grep -c 'TouchpadOff.*0')"
-    m:0xc + c:124
-    Control+Alt + XF86PowerOff 
+    m:0x4 + c:250
+    Control + XF86ApplicationRight 
 
 #
 # End of xbindkeys configuration
