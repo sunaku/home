@@ -292,7 +292,7 @@ alias gl='git log --decorate --graph'
 alias gl1='glf -1'
 
 # show log with affected files
-alias glf='gl --name-status'
+alias glf='gl --name-status --find-copies'
 
 # show log like `ls -l`
 alias gll='gl --oneline'
