@@ -6,7 +6,7 @@ for file in ~/.zsh/config/**/*.zsh; do
 done
 
 # load plugin bundles
-for bundle in ~/.zsh/bundle/*; do
+for bundle in ~/.zsh/bundle/[0-9]/*; do
   test -d $bundle && bundle=$bundle/${bundle##*/}.zsh
   test -f $bundle && source $bundle
 done
