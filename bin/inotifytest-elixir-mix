@@ -15,14 +15,16 @@ inotifywait -rqme close_write --format '%w%f' lib test | while read file; do
   case "$file" in
     (lib/*.ex|lib/*.exs) test=test${file#lib}
                          test=${test%.*}_test.exs
-                         [ -f "$test" ] || continue ;; # file mapped to test
-    (test/*test.exs)     test=$file                 ;; # file is test itself
-    (*)                  continue                   ;; # ignore unknown file
+                         [ -f "$test" ] || continue ;; # file is now mapped
+    (test/*test.exs)     test=$file                 ;; # file *is* the test!
+    (*)                  continue                   ;; # skip unknown files
   esac
 
-  # keep track of which test file is being run & when
-  printf "\033[36m$file -> $test \033[33m@ $(date)\033[0m\n"
+  # show which file changed and which test will be run
+  printf "\033[33m$(date -r "$file" +'%X') -> \033[36m$file$(
+    [ "$file" != "$test" ] && echo " -> $test"
+  )\033[0m\n"
 
-  # run the test file and print any errors or failures
+  # run the test, which will print errors and failures
   mix test "$test" "$@"
 done
