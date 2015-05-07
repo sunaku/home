@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
-# Grounds elastic tabstops globally for visual presentation.
+#
+# Grounds elastic tabstops globally for better visual presentation.
+#
 # ARGV or STDIN:: input files to be processed
-#--
-# Written in 2006 by Suraj N. Kurapati
+#
+# Written in 2006 by Suraj N. Kurapati <https://github.com/sunaku>
 
 class String
   def expand_elastic_tabstops

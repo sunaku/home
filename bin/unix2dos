@@ -1,2 +1,2 @@
 #!/bin/sh
-dos2unix --u2d "$@"
+exec dos2unix --u2d "$@"

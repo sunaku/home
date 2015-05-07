@@ -1,6 +1,6 @@
 # A small library for word wrapping text.
-#--
-# Written in 2007 by Suraj N. Kurapati
+#
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 
 class Array
   def sum

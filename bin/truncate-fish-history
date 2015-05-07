@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
+#
 # Truncates the Fish shell history to the given number of commands so that
 # the shell's performance is not hampered by history lookups and insertions.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 HISTORY_SIZE = 9999
 HISTORY_FILE = File.expand_path('~/.config/fish/fish_history')

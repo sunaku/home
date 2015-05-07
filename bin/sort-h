@@ -1,10 +1,12 @@
 #!/bin/sh
 #
+# Usage: du -h | sort-h
+# Usage: sort-h < FILE
+#
 # Reimplementation of `sort -h` for systems with a very old sort(1).
 # Sorts du(1) output, especially `du -h` output, in ascending order.
 #
-# Usage: du -h | sort-h
-# Usage: sort-h < FILE
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
 
 sort -h "$@" 2>/dev/null && exit # use the actual `sort -h` if available
 

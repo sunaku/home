@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 #
+# Usage: project-version-update HISTORY_FILE
+#
 # Updates all text files in the project that mention the current version
 # and/or date to match the first version and date from the HISTORY_FILE.
 #
-# Usage: project-version-update HISTORY_FILE
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
 HISTORY_FILE = ARGV.shift or raise ArgumentError, 'HISTORY_FILE not given'
 

@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
-# Removes redundant elements from PATH environment variables
-# (whose values are specified as command-line arguments).
+#
+# Usage: uniq-path-env [PATH_STRING|DIRECTORY]...
+#
+# Removes redundant elements from the given PATH environment variables.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 print ARGV.map {|s| s.split(/:+/) }.flatten.uniq.join(':')

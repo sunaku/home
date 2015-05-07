@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
 #
-# Converts xrdb(1) color schemes into Chrome Secure Shell preferences format
-# and prints the result to STDOUT.  Reads STDIN if no input files are given.
-#
 # Usage: xrdb2hterm FILE...
 # Usage: cat FILE... | xrdb2hterm
 # Usage: xrdb2hterm < INPUT
 #
-#--
-# Written in 2014 by Suraj N. Kurapati
+# Converts xrdb(1) color schemes into Chrome Secure Shell preferences format
+# and prints the result to STDOUT.  Reads STDIN if no input files are given.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 input = ARGF.read.gsub(/^!.*/, '') # strip comments from xrdb(1) file format
 

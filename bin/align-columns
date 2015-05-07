@@ -15,8 +15,7 @@
 #   really long text  =  bar
 #   wide operator    <=> moz
 #
-#--
-# Written in 2007 by Suraj N. Kurapati
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 
 class Column < Struct.new(:left, :delim, :right)
   def to_s

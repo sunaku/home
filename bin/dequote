@@ -1,3 +1,7 @@
 #!/bin/sh
-# remove stylized quotation marks from plain text
+#
+# Removes stylized quotation marks from plain text given on STDIN.
+#
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
+
 exec sed "s/[‘’]/'/g; s/[“”¿¿]/\"/g" "$@"

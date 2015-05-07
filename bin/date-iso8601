@@ -1,2 +1,7 @@
 #!/bin/sh
+#
+# Formats the output of date(1) according to the ISO-8601 format.
+#
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
+
 exec date +'%Y-%m-%dT%H:%M:%S%z' "$@"

@@ -1,14 +1,13 @@
 #!/bin/sh
 #
-# When *.exs files in or beneath lib/ or test/ are modified, this script runs
-# their corresponding test/*test.exs files and prints any errors or failures.
+# Setup: apt-get install inotify-tools
 #
 # Usage: inotifytest-elixir-mix [ADDITIONAL_ARGUMENTS_FOR_MIX_TEST...]
 #
-# Setup: apt-get install inotify-tools
+# When *.exs files in or beneath lib/ or test/ are modified, this script runs
+# their corresponding test/*test.exs files and prints any errors or failures.
 #
-#--
-# Written in 2014 by Suraj N. Kurapati
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 inotifywait -rqme close_write --format '%w%f' lib test | while read file; do
   # map the changed file to its corresponding test file

@@ -1,4 +1,7 @@
 #!/bin/sh
-# This file prevents the real ps2png (which
-# truncates large images) from being used.
+#
+# Prevents the real ps2png (which truncates large images) from being used.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
+
 convert "$@"

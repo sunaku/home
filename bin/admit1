@@ -6,8 +6,7 @@
 # Admits only one instance of the given command to run at a time (by running
 # it only if there are no other instances of this program already doing so).
 #
-#--
-# Written in 2014 by Suraj N. Kurapati
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 regex=$( ps ho cmd $$ | sed 's/[\^.[$()|*+?{\\]/\\&/g' ) # see `man 7 regex`
 

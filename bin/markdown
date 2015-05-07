@@ -1,4 +1,5 @@
 #!/bin/sh
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 exec redcarpet \
   --smarty \
   --parse-no_intra_emphasis \

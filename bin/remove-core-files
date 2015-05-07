@@ -1,2 +1,3 @@
 #!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 locate -b '^core\.?[0-9]*$' --regex | xargs file | fgrep ELF | awk '{print $1}' | sed 's,:$,,' | xargs rm -vf

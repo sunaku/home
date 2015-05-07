@@ -1,4 +1,8 @@
 #!/bin/sh
+#
 # workrave(1) calls this command to lock the screen
 # so delegate to xflock4(1) because this is Xubuntu
+#
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
+
 exec xflock4 "$@"

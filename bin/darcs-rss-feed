@@ -1,15 +1,17 @@
 #!/usr/bin/env ruby
+#
 # Emits an RSS feed from the current Darcs repository log to STDOUT.
 #
-# Usage: darcs-log-rss url-prefix num-entries
+# Usage: darcs-log-rss URL_PREFIX NUM_ENTRIES
 #
-# url-prefix:: the published location of the current
-#              Darcs repository (expressed as a URL)
+# URL_PREFIX is the published location of the current
+#            Darcs repository (expressed as a URL).
 #
-# num-entries:: the number of newest log entries you
-#               want to include in the RSS feed
-#--
-# Written in 2008 by Suraj N. Kurapati
+# NUM_ENTRIES is the number of newest
+#             log entries you want to
+#             include in the RSS feed.
+#
+# Written in 2008 by Suraj N. Kurapati <https://github.com/sunaku>
 
 require 'time'
 require 'erb'

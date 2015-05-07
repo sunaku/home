@@ -1,5 +1,8 @@
 #!/bin/sh
+#
 # Merges all branches up to and including current branch into master branch.
+#
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
 # abort if any shell commands fail
 set -e

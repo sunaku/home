@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
+#
 # Converts camelCase to snake_case in the given input.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 input = ARGF.read
 

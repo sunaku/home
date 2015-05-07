@@ -1,5 +1,9 @@
 #!/bin/sh
+#
 # Disk usage, in human friendly format.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
 { echo '---BEGIN-PREVIEW---'
   du -ch "$@"
   echo '----END-PREVIEW----'

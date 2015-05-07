@@ -1,4 +1,5 @@
 #!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 align-columns |                  # normal assignments
 align-columns -d '\s(?=\[)' |    # array ranges in variable declarations
 align-columns -d '\s(?=\S+\s*$)' # variable names in variable declarations

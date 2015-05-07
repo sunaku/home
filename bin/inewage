@@ -1,5 +1,9 @@
 #!/bin/sh
-# plays Happyday New Age Radio Station
+#
+# Plays the "Happyday New Age Radio" internet radio station.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
+
 exec mplayer -cache 128 "$@" $(
   curl 'http://inewage.com/listen.pls' |
   awk -F= '/^File/ { print $2 }' | sort -u

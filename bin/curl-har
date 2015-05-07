@@ -1,7 +1,12 @@
 #!/usr/bin/env ruby
-# Replay HAR given on stdin using curl(1).
+#
 # Usage: curl-har [ARGS_FOR_CURL]... < HAR
-# Written by Suraj N. Kurapati in 2012 :^)
+#
+# Replay HAR given on stdin using curl(1).
+#
+# Written in 2012 by Suraj N. Kurapati :-)
+# who's found at https://github.com/sunaku
+#
 rip = ->(hash){ hash.to_a.transpose.last }
 require 'json'
 req = JSON.load(STDIN.read)['request']

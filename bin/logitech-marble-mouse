@@ -1,4 +1,5 @@
 #!/bin/sh
+#
 # Handedness for Logitech Marble Mouse trackball & 4 buttons.
 #
 # Usage: logitech-marble-mouse [HANDEDNESS] [XINPUT_DEVICE_ID]
@@ -7,6 +8,8 @@
 # http://www.robmeerman.co.uk/unix/xinput
 # http://wiki.archlinux.org/index.php/Logitech_Marble_Mouse
 # https://help.ubuntu.com/community/Logitech_Marblemouse_USB
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 HANDED=${1:-left}
 DEVICE=${2:-Logitech USB Trackball}

@@ -1,4 +1,8 @@
 #!/bin/sh
+#
 # Finds all Git clones in the given directories and
 # upgrades them to the latest origin/master branch.
+#
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
+
 find -L "$@" -name '*.git' -exec sh -xc 'cd "${0%/*}" && git pull' '{}' ';'

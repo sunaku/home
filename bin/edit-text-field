@@ -1,12 +1,12 @@
-#!/bin/sh
+#!/bin/sh -e
+#
+# Usage: edit-text-field [ARGS_FOR_GVIM]
 #
 # This script lets you edit the contents of the currently focused text field
 # through a temporary file in GVim.  Any changes you write to the temporary
 # file will be stored into clipboard after you quit GVim, ready for pasting.
 #
-# Usage: edit-text-field [ARGS_FOR_GVIM]
-#
-set -e
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
 tmp=$(mktemp)               # create a temporary file
 trap "rm -f $tmp" EXIT      # ensure it is cleaned up

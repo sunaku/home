@@ -1,7 +1,10 @@
 #!/bin/bash
+#
+# Usage: p4-move-dir OLD_DIR NEW_DIR
+#
 # Moves a p4 directory to a new location.
 #
-# Usage:  p4-move-dir old_dir new_dir
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 
 src=$1
 shift

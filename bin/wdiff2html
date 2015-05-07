@@ -1,5 +1,6 @@
 #!/bin/sh
-wdiff \
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+exec wdiff \
   --start-delete='<del>' --end-delete='</del>' \
   --start-insert='<ins>' --end-insert='</ins>' \
   "$@"

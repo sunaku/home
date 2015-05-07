@@ -1,2 +1,3 @@
-#!/bin/bash
-mencoder -really-quiet "$1" -ovc lavc -oac mp3lame -o "${1%.*}".avi
+#!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
+exec mencoder -really-quiet "$1" -ovc lavc -oac mp3lame -o "${1%.*}".avi

@@ -1,4 +1,5 @@
 #!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 for c in red green blue black orange brown gray navy gold turquoise; do
   xterm -bg $c -cr $c -title $c -e read &
 done

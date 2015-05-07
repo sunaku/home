@@ -1,2 +1,7 @@
 #!/bin/sh
+#
+# Make the Chromium web browser always open in a new window.
+#
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
+
 exec /usr/bin/chromium --new-window "$@"

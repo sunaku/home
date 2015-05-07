@@ -9,8 +9,7 @@
 # Like a canary in a coal mine, this program exists to vocalize failures.
 # It also prints the given command and its failing exit status to stderr.
 #
-#--
-# Written in 2014 by Suraj N. Kurapati
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 output=$(
   # capture stderr alongside stdout

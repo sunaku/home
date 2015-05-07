@@ -1,12 +1,15 @@
 #!/usr/bin/env ruby
+#
 # Converts TTY color codes into hex codes or vice
-# versa, depending upon the name of this file.
+# versa, depending on the filename of this script.
 #
 # Usage: tty-to-hex < INPUT_FILE
 # Usage: cat INPUT_FILE | tty-to-hex
 #
 # Usage: hex-to-tty < INPUT_FILE
 # Usage: cat INPUT_FILE | hex-to-tty
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 # TTY color names and hex values, gotten from:
 # https://github.com/guns/xterm-color-table.vim

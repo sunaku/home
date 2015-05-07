@@ -1,5 +1,8 @@
 #!/bin/sh
+#
 # Uses external display if connected; or internal display otherwise.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 if grep -q '^connected' /sys/class/drm/card0-HDMI-A-1/status
 then xrandr --output HDMI1 --auto --dpi 96 --output eDP1 --off

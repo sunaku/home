@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
+#
+# Usage: select-columns INTEGER           # array index
+# Usage: select-columns INTEGER..INTEGER  # index range
+#
 # Copies the specified columns from STDIN to STDOUT.
-# Parameters: array index (integer) or range (integer .. integer)
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 slices = ARGV.map {|a| eval a }
 

@@ -1,2 +1,7 @@
 #!/bin/sh
+#
+# Copies stdin to the user's terminal device as well as to stdout.
+#
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
+
 exec tee /dev/tty "$@"

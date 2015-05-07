@@ -1,6 +1,9 @@
 #!/bin/sh
+#
 # When *.rb files in the current directory are modified, this script runs
 # their corresponding *test.rb files and prints any errors or test fails.
+#
+# Written in 2013 by Suraj N. Kurapati <https://github.com/sunaku>
 
 inotifywait -qme close_write --format '%w%f' . | while read file; do
   # only process *.rb files - ignore all other files

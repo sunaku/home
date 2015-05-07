@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+# Written in 2015 by Suraj N. Kurapati <https://github.com/sunaku>
 require 'pp'
 pp ARGV

@@ -1,3 +1,4 @@
 #!/bin/sh
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
 pkill -f dwm-statusbar
 exec dwm-statusbar

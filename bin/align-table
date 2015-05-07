@@ -16,8 +16,7 @@
 #   really long text  =  bar
 #   wide operator    <=> moz
 #
-#--
-# Written in 2007 by Suraj N. Kurapati
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 
 def align_table lines, delimiter, selector, rejector, justifier
   delim_regexp = /#{delimiter}/

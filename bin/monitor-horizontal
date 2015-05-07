@@ -1,2 +1,3 @@
 #!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 xrandr -o normal && xrandr --dpi 96

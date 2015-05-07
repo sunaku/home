@@ -1,7 +1,10 @@
 #!/bin/sh
+#
 # Runs the given command inside the working directory of
 # the currently focused X11 window if possible. Otherwise,
 # runs the given command in the present working directory.
+#
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
 
 xid=$(xdpyinfo | awk '/^focus:/{print $3; exit}' | tr -d ',') &&
 pid=$(xprop -id "$xid" _NET_WM_PID | cut -d' ' -f3) &&

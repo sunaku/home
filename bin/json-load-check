@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
-# Loads the given YAML document, reporting errors if any.
+#
+# Loads the given JSON document and reports any errors encountered.
+# If no errors were encountered, it prints "Syntax OK" to STDOUT.
+#
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
+
 require 'json'
 JSON.load(ARGF)
 puts 'Syntax OK'

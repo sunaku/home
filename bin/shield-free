@@ -1,5 +1,8 @@
 #!/system/bin/sh -ex
+#
 # Frees SHIELD from an external HDMI display.
+#
+# Written in 2013 by Suraj N. Kurapati <https://github.com/sunaku>
 
 # power on SHIELD's internal display
 echo 0 > /sys/class/graphics/fb0/blank

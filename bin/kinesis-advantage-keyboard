@@ -1,6 +1,9 @@
 #!/bin/sh
+#
 # I use Dvorak layout natively on my Kinesis Advantage keyboard
 # so I do not need any software emulation for the Dvorak layout.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 xinput list |
 awk -F'[=\t]' '/HID 05f3:0007/{print $3}' |

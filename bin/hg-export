@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
-# Exports revisions from mercurial.
-# @param  ... arguments for `hg log`
-#--
-# Written in 2006 by Suraj N. Kurapati
+#
+# Usage: hg-export [ARGUMENTS_FOR_HG_LOG...]
+#
+# Exports revisions from Mercurial as diff(1) patch files.
+#
+# Written in 2006 by Suraj N. Kurapati <https://github.com/sunaku>
 
 revs = `hg log #{ARGV.join(' ')}`.scan(/changeset:\s+(\d+):/)
 revs.flatten!

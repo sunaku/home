@@ -1,5 +1,8 @@
 #!/bin/sh
-# Reacts to hardware events and (re)configures the system accordingly.
+#
+# Reacts to hardware events and configures the system accordingly.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 trap "kill -- -$$" EXIT # terminate all background processes on exit
 trap exit INT TERM # ensure the above trap is triggered on interrupt

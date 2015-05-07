@@ -8,6 +8,8 @@
 # then waits for you to interrupt or kill this process, at which time it
 # disconnects the VPN.  See https://github.com/dnschneid/crouton/wiki/VPNC
 #
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
 test $UID -ne 0 && { echo "$0: Please run this command as root."; exit 1; }
 
 function ensure {

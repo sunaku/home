@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
+#
+# Usage: mp3-to-ogg MP3_FILE...
+#
 # Converts MP3 files into Ogg Vorbis files.
-# @param	...	files to be converted
-#--
-# Written in 2006 by Suraj N. Kurapati
+#
+# Written in 2006 by Suraj N. Kurapati <https://github.com/sunaku>
 
 require 'tempfile'
 require 'rubygems'

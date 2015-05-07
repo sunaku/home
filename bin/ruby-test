@@ -17,6 +17,7 @@
 #       The default value matches the
 #       entire test and spec suite.
 #
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
 
 $DEBUG   = true if ARGV.delete('-d')
 $VERBOSE = true if ARGV.delete('-v')

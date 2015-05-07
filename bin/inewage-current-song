@@ -1,3 +1,4 @@
 #!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 curl -s 'http://inewage.com/happyday/php/winamp_info_mb_songlist_ez.php' |
 tail -1 | sed 's,</.*,,; s,.*>,,'

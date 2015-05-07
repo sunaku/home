@@ -1,2 +1,3 @@
 #!/bin/sh
-curl-har -J -O "$@"
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
+exec curl-har -J -O "$@"

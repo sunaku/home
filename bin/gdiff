@@ -8,6 +8,7 @@
 #
 # See http://sunaku.github.io/minitest-colordiff.html for more information.
 #
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 require 'shellwords'
 

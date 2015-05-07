@@ -9,8 +9,7 @@
 # is considered to be a crown if (1) it contains a punctuation mark:
 # /[[:punct:]]/ or (2) it is entirely composed of whitespace: /\s+/.
 #
-#--
-# Written in 2007 by Suraj N. Kurapati
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 
 require File.join(File.dirname(__FILE__), 'wrap')
 

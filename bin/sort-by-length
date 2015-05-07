@@ -1,2 +1,3 @@
 #!/usr/bin/env ruby
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 puts readlines.sort_by {|s| s.length }

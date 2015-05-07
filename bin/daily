@@ -8,8 +8,7 @@
 #
 #   daily eval tail -F '$PWD/logs/*$(date +"%Y_%m_%d").log'
 #
-#--
-# Written in 2015 by Suraj N. Kurapati
+# Written in 2015 by Suraj N. Kurapati <https://github.com/sunaku>
 
 # kill background processes before exiting
 trap 'kill -- -$$' EXIT

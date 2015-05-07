@@ -3,6 +3,7 @@
 # Converts Textile into Markdown for the given input
 # (files or STDIN), and prints the result to STDOUT.
 #
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 print ARGF.read.
 

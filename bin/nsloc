@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
-# nsloc - reports the number of source lines of code per globbed file
-# usage: nsloc <FILE|GLOB>...
+#
+# Usage: nsloc {FILE|GLOB}...
+#
+# Reports the number of source lines of code (nsloc) for each globbed file.
+#
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
+
 total = 0
 require 'coverage'
 Coverage.start

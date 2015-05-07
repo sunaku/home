@@ -1,6 +1,9 @@
 #!/bin/sh
+#
 # Searches the Fish shell history for the given term.
 # If no term is given, then lists the entire history.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 cat ~/.config/fish/fish_history* |
 if [ $# -gt 0 ]; then

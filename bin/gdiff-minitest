@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby
 #
+# Usage: minitest-dwdiff [FILE]...
+# Usage: cat [FILE]... | minitest-dwdiff
+#
 # Runs dwdiff(1) on MiniTest assert_equal failure notices
 # (which are read from the given FILEs or else from STDIN)
 # so that you can easily see character-level differences!
 #
-# Usage: minitest-dwdiff [FILE]...
-# Usage: cat [FILE]... | minitest-dwdiff
-#
-#--
-# Written in 2013 by Suraj N. Kurapati
+# Written in 2013 by Suraj N. Kurapati <https://github.com/sunaku>
 
 require 'tempfile'
 

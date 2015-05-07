@@ -1,4 +1,5 @@
 #!/bin/sh
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 vim --version | fgrep -q '+cryptv' &&
 vim -u NONE -c "set $(tr '\n' ' ' <<SETTINGS)" -c 'colorscheme desert' "$@"
   nocompatible

@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 #
+# Usage: project-version-commit HISTORY_FILE
+#
 # Creates a new commit or updates an existing commit that is labelled with the
 # first version and date from the HISTORY_FILE.
 #
-# Usage: project-version-commit HISTORY_FILE
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
 raise 'nothing staged for commit' if system 'git diff --cached --quiet'
 

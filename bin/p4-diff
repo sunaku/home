@@ -1,3 +1,4 @@
 #!/bin/sh
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 export P4DIFF='diff -ub'
 p4 diff "$@" | colordiff | less -Rf

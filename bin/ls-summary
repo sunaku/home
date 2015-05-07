@@ -1,10 +1,12 @@
 #!/bin/sh
 #
+# Usage: ls-summary [DIRECTORY|FILE]...
+#
 # Summarizes the contents of the given DIRECTORY or FILE arguments.
 # If no arguments are given, then it assumes the current directory.
 #
-# Usage: ls-summary [DIRECTORY|FILE]...
-#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
 test $# -eq 0 && set -- $PWD
 for argument; do
   echo -n "$argument: "

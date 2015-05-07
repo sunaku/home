@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
-# Imports revisions exported from mercurial.
-# @param  .   path to manifest file. diffs should also be in the same place.
-# @param  ... arguments for `hg import`
-#--
-# Written in 2006 by Suraj N. Kurapati
+#
+# Usage: hg-import MANIFEST_FILE [ARGUMENTS_FOR_HG_IMPORT...]
+#
+# Imports revisions exported from Mercurial as diff(1) patches,
+# which need to be in the same directory as the MANIFEST_FILE.
+#
+# Written in 2006 by Suraj N. Kurapati <https://github.com/sunaku>
 
 if manifest = ARGV.shift
   diffDir = File.dirname(manifest)

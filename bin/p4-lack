@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
+#
 # Lists all files in the current working directory that p4 doesn't know about.
 # This is analagous to:  svn status | awk '/^\?/ {print $2}'  # in Subversion
+#
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 
 everything = Dir.glob(Dir.pwd + '/**/*', File::FNM_DOTMATCH).
              reject {|s| s =~ /\.{1,2}$/ }

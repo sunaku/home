@@ -1,2 +1,3 @@
 #!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 vim -c 'set hlsearch' -c '0' -c '/^[<=>]\{7\}/' "$@"

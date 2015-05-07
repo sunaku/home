@@ -1,4 +1,5 @@
 #!/bin/sh
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 acer-c720-display
 logitech-marble-mouse
 kinesis-advantage-keyboard

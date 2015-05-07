@@ -3,6 +3,7 @@
 # Performs conversion of simple Bourne shell into Fish.
 # Only variable assignments and exporting are converted.
 #
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 puts STDIN.read.
   gsub(/([A-Z0-9_]+)=/, 'set \1 ').

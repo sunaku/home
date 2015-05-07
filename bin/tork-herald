@@ -1,3 +1,4 @@
 #!/bin/sh
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 exec inotifywait --recursive . @./.git --excludei '\.log$' \
   --event close_write --format '["%w%f"]' --monitor --quiet

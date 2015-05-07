@@ -1,5 +1,9 @@
 #!/bin/sh
-# Undo apt-get installation history.
+#
+# Formats `apt-get install` history in an easy, run-to-undo manner.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
 for log in $(ls -tr /var/log/apt/history.log*)
 do
   case "$log" in

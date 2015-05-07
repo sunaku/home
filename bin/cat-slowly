@@ -1,3 +1,8 @@
 #!/usr/bin/env ruby
+#
+# Prints each line of input on STDIN slowly, after a small delay.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
+
 delay = (ENV['DELAY'] || 0.03).to_f
 ARGV.each {|f| IO.foreach(f) {|l| puts l; sleep delay } }

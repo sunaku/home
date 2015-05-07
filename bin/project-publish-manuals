@@ -1,5 +1,8 @@
 #!/bin/sh -ex
+#
 # Publishes manuals to the GitHub pages website after a project release.
+#
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
 trap 'git checkout master' EXIT
 bundle exec rake binman

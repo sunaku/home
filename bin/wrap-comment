@@ -8,8 +8,7 @@
 # such common prefix, then the leading whitespace of the first
 # line is assumed to be the common prefix for subsequent lines.
 #
-#--
-# Written in 2007 by Suraj N. Kurapati
+# Written in 2007 by Suraj N. Kurapati <https://github.com/sunaku>
 
 load File.join(File.dirname(__FILE__), 'wrap-text')
 

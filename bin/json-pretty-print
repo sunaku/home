@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 require 'json'
 puts JSON.pretty_generate(JSON.load(ARGF.read))

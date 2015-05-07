@@ -1,8 +1,10 @@
 #!/bin/sh -x
-# Secure editing of GPG-encrypted files.
+#
 # Usage: secure-edit FILE
-#--
-# Written in 2005 by Suraj N. Kurapati
+#
+# Secure editing of GPG-encrypted files.
+#
+# Written in 2005 by Suraj N. Kurapati <https://github.com/sunaku>
 
 ENCRYPT='gpg2 --encrypt --sign --armor'
 DECRYPT='gpg2 --decrypt' # also verifies signature if found

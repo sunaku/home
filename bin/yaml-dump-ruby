@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
+#
 # Pretty-prints the given YAML document it in Ruby syntax.
+#
+# Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
+
 require 'psych'
 require 'pp'
 Psych.load_stream(ARGF) {|doc| pp doc }

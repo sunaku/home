@@ -4,7 +4,6 @@
 #
 # Escapes the given regular expression, as defined in the regex(7) manual.
 #
-#--
-# Written in 2014 by Suraj N. Kurapati
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 echo "$*" | sed 's/[\^.[$()|*+?{\\]/\\&/g'

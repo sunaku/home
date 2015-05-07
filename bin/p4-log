@@ -1,2 +1,3 @@
 #!/bin/sh
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 exec p4 changes -l "$@" | less

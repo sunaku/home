@@ -1,9 +1,11 @@
 #!/bin/sh
 #
+# Usage: tcsh-source FILE_TO_SOURCE
+#
 # Sources the given file inside TCSH and
 # immediately runs FISH as a sub-shell.
 #
-# Usage:  tcsh-source FILE_TO_SOURCE
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 fish=$(which fish)
 

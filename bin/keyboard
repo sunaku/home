@@ -1,7 +1,10 @@
 #!/bin/sh
-# Changes the keyboard layout to the given value (such as "us" or "dvorak").
 #
 # Usage: keyboard [LAYOUT]
+#
+# Changes the keyboard layout to the given value (such as "us" or "dvorak").
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 if [ -n "$DISPLAY" ]; then
   setxkbmap -layout "$@"

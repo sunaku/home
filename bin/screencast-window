@@ -1,6 +1,10 @@
 #!/bin/sh
+#
+# Usage: screencast-window [ARGUMENTS_FOR_BYZANZ_RECORD...]
+#
 # Take a video capture, in GIF format, of a single window.
-# @param	...	arguments for byzanz-record
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 echo Select the window you want to video capture.
 byzanz-record `xwininfo | awk '

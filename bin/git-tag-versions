@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
-# Tags all commits that have a version number in their message.
+#
 # Usage: git-tag-versions ARGUMENTS_FOR_GIT_LOG
+#
+# Tags all commits that have a version number in their message.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 require 'shellwords'
 

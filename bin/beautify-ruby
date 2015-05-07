@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
+#
+# Beautifies the Ruby code given on STDIN and prints it to STDOUT.
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
 print ARGF.read.
 

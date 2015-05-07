@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
+#
 # Prints release notes ranging from the current branch to the master branch.
+#
+# Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
 branches = [:major, :minor, :patch, :other, :master]
 current_branch = `git name-rev --name-only HEAD`.chomp.to_sym
