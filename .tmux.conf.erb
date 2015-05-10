@@ -239,10 +239,10 @@ bind-key -n M-V select-layout even-horizontal
 bind-key -n M-z select-layout tiled
 
 # main-horizontal layout with the main pane occupying half of the screen
-bind-key -n M-w select-layout main-horizontal \; run-shell 'tmux resize-pane -t 1 -y $(expr #{window_height} / 2)'
+bind-key -n M-w select-layout main-horizontal \; run-shell 'tmux resize-pane -t 1 -y $((#{window_height} / 2))'
 
 # main-vertical layout with the main pane occupying half of the screen
-bind-key -n M-v select-layout main-vertical \; run-shell 'tmux resize-pane -t 1 -x $(expr #{window_width} / 2)'
+bind-key -n M-v select-layout main-vertical \; run-shell 'tmux resize-pane -t 1 -x $((#{window_width} / 2))'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
