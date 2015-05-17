@@ -12,9 +12,10 @@ DESTROY='shred --force --zero --remove'
 EDIT='vim -n -i NONE' # disable swap file and viminfo
 
 source=$1; shift
-encrypt=`mktemp`
-decrypt=`mktemp`
-trap "$DESTROY $encrypt $decrypt" EXIT
+encrypt=$(mktemp)
+decrypt=$(mktemp)
+trap '$DESTROY "$encrypt" "$decrypt"' EXIT
+trap 'exit' TERM INT
 echo "secure-edit: source=$source decrypt=$decrypt encrypt=$encrypt"
 
 # create new source file if necessary.  this

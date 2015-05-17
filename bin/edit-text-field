@@ -9,7 +9,8 @@
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
 tmp=$(mktemp)               # create a temporary file
-trap "rm -f $tmp" EXIT      # ensure it is cleaned up
+trap 'rm -f "$tmp"' EXIT    # ensure it is cleaned up
+trap 'exit' TERM INT
 
 if [ -n "$DISPLAY" -a -z "$CROUTON" ]; then
   xdotool key ctrl+a ctrl+c # copy text into clipboard

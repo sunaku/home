@@ -26,18 +26,16 @@
 buf=$( cat "$@" )
 
 # copy to tmux if possible
-[ -n "$TMUX" ] && tmux set-buffer "$buf"
+test -n "$TMUX" && tmux set-buffer "$buf"
 
 # copy to X11 if possible...
-[ -n "$DISPLAY" ] && echo -n "$buf" | { xsel -i -b || xclip -sel c ;} ||
+test -n "$DISPLAY" && printf %s "$buf" | { xsel -ib || xclip -sel c ;} && exit
 
 # ...otherwise copy to terminal
-{
-  len=$( echo -n "$buf" | wc -c ) max=74994
-  [ $len -gt $max ] && echo "$0: input is $(( len - max )) bytes too long" >&2
+len=$( printf %s "$buf" | wc -c ) max=74994
+test $len -gt $max && echo "$0: input is $(( len - max )) bytes too long" >&2
 
-  esc="\033]52;c;$( echo -n "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
-  [ -n "$TMUX" ] && esc="\033Ptmux;\033$esc\033\\"
+esc="\033]52;c;$( printf %s "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
+test -n "$TMUX" && esc="\033Ptmux;\033$esc\033\\"
 
-  printf "$esc"
-}
+printf "$esc"

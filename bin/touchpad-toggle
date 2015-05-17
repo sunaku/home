@@ -1,5 +1,6 @@
 #!/bin/sh
 # Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
-synclient -l | grep -q 'TouchpadOff *= *0' &&
-synclient TouchpadOff=1 ||
-synclient TouchpadOff=0
+if synclient -l | grep -q 'TouchpadOff *= *0'
+then synclient TouchpadOff=1
+else synclient TouchpadOff=0
+fi

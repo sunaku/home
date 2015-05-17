@@ -4,8 +4,7 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-for log in $(ls -tr /var/log/apt/history.log*)
-do
+ls -tr /var/log/apt/history.log* | while read log; do
   case "$log" in
     (*.gz) zcat "$log" ;;
     (*)     cat "$log" ;;

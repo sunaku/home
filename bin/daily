@@ -21,7 +21,7 @@ while :; do
   child=$!
 
   # wait for next day to arrive and refresh
-  sleep $(expr $(date -d '12am tomorrow' +'%s') - $(date +'%s'))
+  sleep $(( $(date -d '12am tomorrow' +'%s') - $(date +'%s') ))
   kill $child
 
 done

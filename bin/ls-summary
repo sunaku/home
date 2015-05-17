@@ -7,7 +7,7 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-test $# -eq 0 && set -- $PWD
+test $# -eq 0 && set -- "$PWD"
 for argument; do
   echo -n "$argument: "
   ls -1F "$argument" | awk '
@@ -31,4 +31,3 @@ for argument; do
     }
   '
 done
-

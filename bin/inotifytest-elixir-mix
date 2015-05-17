@@ -20,9 +20,9 @@ inotifywait -rqme close_write --format '%w%f' lib test | while read file; do
   esac
 
   # show which file changed and which test will be run
-  printf "\033[33m$(date -r "$file" +'%X') -> \033[36m$file$(
-    [ "$file" != "$test" ] && echo " -> $test"
-  )\033[0m\n"
+  printf '\033[33m%s -> \033[36m%s\033[0m\n' \
+    "$(date -r "$file" +'%X')" \
+    "$file$(test "$file" != "$test" && echo " -> $test")"
 
   # run the test, which will print errors and failures
   mix test "$test" "$@"

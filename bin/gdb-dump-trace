@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/bin/sh -e
 #
 # Dumps the full backtrace from the given GDB invocation.
 #
 # Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
-echo "bt full" > $$ &&
-trap "rm -f $$" INT TERM &&
-gdb -batch -x $$ "$@" < /dev/null
+trap 'rm -f $$' EXIT
+trap 'exit' TERM INT
+echo 'bt full' > $$
+gdb -batch -x $$ "$@" </dev/null

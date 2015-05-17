@@ -13,8 +13,7 @@ pid=$(xprop -id "$xid" _NET_WM_PID | cut -d' ' -f3) &&
   cid=$(pgrep -P "$pid") && test -n "$cid" && pid=$cid
 
   # travel to current window's present working directory
-  cwd=/proc/$pid/cwd
-  test -L $cwd && cd "$(readlink $cwd)"
+  cwd="/proc/$pid/cwd"
+  test -L "$cwd" && cd "$(readlink "$cwd")"
 }
-
-eval "$@"
+"$@"
