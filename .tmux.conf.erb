@@ -153,6 +153,11 @@ set-option -g visual-activity on
 set-option -g visual-silence on
 set-option -g bell-on-alert on
 bind-key -n M-k set-window-option monitor-activity \; display-message 'monitor-activity #{?monitor-activity,on,off}'
+bind-key -n M-K if-shell \
+  'tmux show-window-option -g monitor-activity | grep -q off$' \
+    'set-window-option -g monitor-activity on' \
+    'set-window-option -g monitor-activity off' \
+  \; display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 bind-key -n M-j command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-option monitor-silence %% ; display-message "monitor-silence #{?monitor-silence,on,off}"'
 <% if tmux_version < '2' %>
 bind-key -n M-q command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-option monitor-silence %%'
