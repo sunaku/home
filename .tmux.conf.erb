@@ -41,31 +41,41 @@ set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
 # appearance
 #-----------------------------------------------------------------------------
 
-# Colors from the "lucius" and "bubblegum" themes in the vim-airline plugin:
+# Colors from the "lucius" and "gruvbox" themes in the vim-airline plugin:
 # https://github.com/bling/vim-airline/blob/master/autoload/airline/themes/lucius.vim
-# https://github.com/bling/vim-airline/blob/master/autoload/airline/themes/bubblegum.vim
-<% if light_theme %>
-set-option -g pane-border-style fg=colour253 # lucius normal airline_c
-set-option -g pane-active-border-style fg=colour250,bg=colour250 # lucius normal airline_b
-set-option -g status-style fg=colour238,bg=colour253 # lucius normal airline_c
-set-window-option -g window-status-current-style fg=colour231,bg=colour67 # lucius visual airline_a
-<% else %>
-set-option -g pane-border-style fg=colour238
-set-option -g pane-active-border-style fg=colour109
-set-option -g status-style fg=colour188,bg=colour238 # lucius normal airline_c
-set-window-option -g window-status-current-style fg=colour235,bg=colour109 # gruvbox modified airline_c
-<% end %>
+# https://github.com/morhetz/gruvbox/blob/master/autoload/airline/themes/gruvbox.vim
+<%
+  if light_theme
+    status_style                = 'fg=colour238,bg=colour253' # lucius normal airline_c
+    window_status_current_style = 'fg=colour231,bg=colour67'  # lucius visual airline_a
+    pane_border_style           = 'fg=colour253'              # lucius normal airline_c
+    pane_active_border_style    = 'fg=colour250,bg=colour250' # lucius normal airline_b
+    status_right_ruler_style    = 'fg=colour231,bg=colour244'
+    status_right_login_style    = 'fg=colour231,bg=colour204'
+  else
+    status_style                = 'fg=colour246,bg=colour237' # gruvbox normal airline_c
+    window_status_current_style = 'fg=colour208,bg=colour236' # gruvbox visual airline_c
+    pane_border_style           = 'fg=colour239'              # gruvbox normal airline_b
+    pane_active_border_style    = 'fg=colour246'              # gruvbox normal airline_b
+    status_right_ruler_style    = window_status_current_style
+    status_right_login_style    = 'bold,reverse'
+  end
+%>
+set-option        -g status-style                <%= status_style                %>
+set-window-option -g window-status-current-style <%= window_status_current_style %>
+set-option        -g pane-border-style           <%= pane_border_style           %>
+set-option        -g pane-active-border-style    <%= pane_active_border_style    %>
 
 # Common UI interaction cues from Blueprint CSS:
 # http://blueprintcss.org/tests/parts/forms.html
-set-option -g message-style bg='#514721',fg='#ffd324' # notice (yellow)
-set-window-option -g mode-style bg='#514721',fg='#ffd324' # notice (yellow)
-set-window-option -g window-status-bell-style bg='#d5edf8',fg='#205791' # info (blue)
+set-option        -g message-style                'fg=#ffd324,bg=#514721' # notice (yellow)
+set-window-option -g mode-style                   'fg=#ffd324,bg=#514721' # notice (yellow)
+set-window-option -g window-status-bell-style     'fg=#205791,bg=#d5edf8' # info (blue)
+set-window-option -g window-status-activity-style 'fg=#8a1f11,bg=#fbe3e4' # error (red)
 <% if tmux_version < '2' %>
-set-window-option -g window-status-content-bg '#e6efc2' # success (green)
-set-window-option -g window-status-content-fg '#264409' # success (green)
+set-window-option -g window-status-content-fg     '#264409'               # success (green)
+set-window-option -g window-status-content-bg     '#e6efc2'               # success (green)
 <% end %>
-set-window-option -g window-status-activity-style bg='#fbe3e4',fg='#8a1f11' # error (red)
 
 #-----------------------------------------------------------------------------
 # status bar
@@ -90,22 +100,10 @@ set-option -g status-left-length 0
 # make window list easier to scan
 set-window-option -g window-status-format         ' #[bold]#I#F#[nobold]#W '
 set-window-option -g window-status-current-format ' #[bold]#I#F#[nobold]#W '
-set-window-option -g window-status-separator ''
+set-window-option -g window-status-separator      ''
 
 # show pane title, pane identifier, and hostname on right side of status bar
-set-option -g status-right '#{=26:pane_title} <%=
-  if light_theme
-    '#[fg=colour231,bg=colour244]'
-  else
-    '#[fg=colour109,bg=colour235]'
-  end
-%> #S:#I.#P #(test -n "$SSH_TTY" && echo "\<%=
-  if light_theme
-    '#[fg=colour231,bg=colour204]'
-  else
-    '#[reverse]'
-  end
-%> #H ")'
+set-option -g status-right '#{=26:pane_title} #[<%= status_right_ruler_style %>] #S:#I.#P #(test -n "$SSH_TTY" && echo "\#[<%= status_right_login_style %>] #H ")'
 set-option -g status-right-length 48
 
 #-----------------------------------------------------------------------------
@@ -121,7 +119,7 @@ bind-key -n M-x command-prompt -p '(break-window)' -I '#W' "break-pane ; rename-
 bind-key -n M-X break-pane
 
 # rename window
-bind-key -n M-q command-prompt -I '#W' "rename-window '%%'"
+bind-key -n M-O command-prompt -I '#W' "rename-window '%%'"
 
 # focus window
 <% if tmux_version < '2' %>
@@ -164,13 +162,13 @@ bind-key -n M-q command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-o
 # panes
 #-----------------------------------------------------------------------------
 
-# create pane
+# create pane (below, right, above, left)
 bind-key -n M-c split-window -c '#{pane_current_path}'
-bind-key -n M-C split-window -c '#{pane_current_path}' \; run-shell 'tmux last-pane \; swap-pane -d -s #D'
 bind-key -n M-r split-window -c '#{pane_current_path}' -h
+bind-key -n M-C split-window -c '#{pane_current_path}'    \; run-shell 'tmux last-pane \; swap-pane -d -s #D'
 bind-key -n M-R split-window -c '#{pane_current_path}' -h \; run-shell 'tmux last-pane \; swap-pane -d -s #D'
 
-# join pane
+# join pane (above, left, below, right)
 bind-key -n M-g move-pane    -t .-1 -s .    # join pane at bottom of prev pane
 bind-key -n M-l move-pane    -t .-1 -s . -h # join pane at right of prev pane
 bind-key -n M-G move-pane -d -s .+1 -t .    # join next pane at bottom
@@ -179,7 +177,7 @@ bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 # focus pane or Vim split (if pane running Vim)
 # but if current pane is maximized: do nothing
 # https://sunaku.github.io/tmux-select-pane.html
-bind-key -n M-d if-shell 'test #{window_zoomed_flag} -eq 0' 'select-pane -l'
+bind-key -n M-d if-shell  'test #{window_zoomed_flag} -eq 0' 'select-pane -l'
 bind-key -n M-h run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; set -- "tmux select-pane -L" "" "tmux send-keys M-h" "tmux send-keys C-w h"; shift $(( 2*vim + max )); eval "$1"'
 bind-key -n M-t run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; set -- "tmux select-pane -U" "" "tmux send-keys M-t" "tmux send-keys C-w k"; shift $(( 2*vim + max )); eval "$1"'
 bind-key -n M-n run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; set -- "tmux select-pane -D" "" "tmux send-keys M-n" "tmux send-keys C-w j"; shift $(( 2*vim + max )); eval "$1"'
@@ -238,11 +236,10 @@ bind-key -n M-v select-layout main-vertical
 bind-key -n M-V select-layout even-horizontal
 bind-key -n M-z select-layout tiled
 
-# main-horizontal layout with the main pane occupying half of the screen
-bind-key -n M-w select-layout main-horizontal \; run-shell 'tmux resize-pane -t 1 -y $((#{window_height} / 2))'
-
-# main-vertical layout with the main pane occupying half of the screen
-bind-key -n M-v select-layout main-vertical \; run-shell 'tmux resize-pane -t 1 -x $((#{window_width} / 2))'
+# half-screen tiling layouts (horizontal, vertical)
+# https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
+bind-key -n M-w select-layout main-horizontal \; run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
+bind-key -n M-v select-layout main-vertical   \; run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
@@ -306,6 +303,6 @@ set -g @tpm_plugins "         \
   tmux-plugins/tmux-copycat   \
 "
 
-set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-capture-pane-contents on
 
 run-shell ~/.tmux/plugins/tpm/tpm
