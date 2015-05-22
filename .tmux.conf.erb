@@ -70,11 +70,11 @@ set-option        -g pane-active-border-style    <%= pane_active_border_style   
 # http://blueprintcss.org/tests/parts/forms.html
 set-option        -g message-style                'fg=#ffd324,bg=#514721' # notice (yellow)
 set-window-option -g mode-style                   'fg=#ffd324,bg=#514721' # notice (yellow)
-set-window-option -g window-status-bell-style     'fg=#205791,bg=#d5edf8' # info (blue)
-set-window-option -g window-status-activity-style 'fg=#8a1f11,bg=#fbe3e4' # error (red)
+set-window-option -g window-status-bell-style     'bg=#205791,fg=#d5edf8' # info (blue)
+set-window-option -g window-status-activity-style 'bg=#8a1f11,fg=#fbe3e4' # error (red)
 <% if tmux_version < '2' %>
-set-window-option -g window-status-content-fg     '#264409'               # success (green)
-set-window-option -g window-status-content-bg     '#e6efc2'               # success (green)
+set-window-option -g window-status-content-bg     '#264409'               # success (green)
+set-window-option -g window-status-content-fg     '#e6efc2'               # success (green)
 <% end %>
 
 #-----------------------------------------------------------------------------
