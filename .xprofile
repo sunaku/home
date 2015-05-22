@@ -2,7 +2,7 @@
 # This script is run _before_ the window manager starts up.
 
 # appearance
-xset +fp ~/.fonts
+xset +fp ~/.fonts/tamzen-font/bdf
 xset fp rehash
 #xrdb -merge ~/.Xdefaults
 
