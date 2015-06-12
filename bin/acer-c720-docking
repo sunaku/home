@@ -1,5 +1,8 @@
 #!/bin/sh
+#
+# Docks the Acer C720 Chromebook to an external display and inputs.
+#
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
 acer-c720-display
-logitech-marble-mouse
-kinesis-advantage-keyboard
+acer-c720-input
