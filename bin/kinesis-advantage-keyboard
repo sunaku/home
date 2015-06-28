@@ -6,5 +6,5 @@
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 xinput list |
-awk -F'[=\t]' '/HID 05f3:0007/{print $3}' |
+awk -F'[=\t]' '/\<HID [[:xdigit:]]{4}:[[:xdigit:]]{4}\>/{print $3}' |
 xargs -trn1 setxkbmap -layout us -device
