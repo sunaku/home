@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 #
 # Usage: keyboard [LAYOUT]
 #
@@ -7,7 +7,9 @@
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 if [ -n "$DISPLAY" ]; then
-  setxkbmap -layout "$@"
+  # only affect the laptop's native keyboard; ignore externally attached ones
+  id=$(xinput list --id-only 'AT Translated Set 2 keyboard')
+  setxkbmap -model chromebook -device "$id" -layout "$@"
 else
   sudo loadkeys "$1"
 fi
