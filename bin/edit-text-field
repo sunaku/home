@@ -8,21 +8,22 @@
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
-tmp=$(mktemp)               # create a temporary file
-trap 'rm -f "$tmp"' EXIT    # ensure it is cleaned up
+tmp=$(mktemp)            # create a temporary file
+trap 'rm -f "$tmp"' EXIT # ensure it is cleaned up
 trap 'exit' TERM INT
 
 if [ -n "$DISPLAY" -a -z "$CROUTON" ]; then
-  xdotool key ctrl+a ctrl+c # copy text into clipboard
-  xsel -b -o > "$tmp"       # dump clipboard into file
-  gvim -f "$@" "$tmp"       # edit the dumped contents
-  xsel -b -i < "$tmp"       # load file into clipboard
-else # using ChromeOS
+  xdotool key ctrl+a     # select all text in field
+  xdotool key ctrl+c     # copy text into clipboard
+  xsel -b -o > "$tmp"    # dump clipboard into file
+  gvim -f "$@" "$tmp"    # edit the dumped contents
+  xsel -b -i < "$tmp"    # load file into clipboard
+else                     # using ChromeOS
   echo 'Press CONTROL+SHIFT+V and then ENTER and then CONTROL+D:' >&2
   echo '--------------------------------------------------------' >&2
-  cat > "$tmp"              # dump clipboard into file
+  cat > "$tmp"           # dump clipboard into file
   echo '--------------------------------------------------------' >&2
-  vim -f "$@" "$tmp"        # edit the dumped contents
-  cat "$tmp"                # for user's own reference
-  yank < "$tmp"             # load file into clipboard
+  vim -f "$@" "$tmp"     # edit the dumped contents
+  cat "$tmp"             # for user's own reference
+  yank < "$tmp"          # load file into clipboard
 fi

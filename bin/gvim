@@ -1,0 +1,3 @@
+#!/bin/sh
+# A poor man's graphical Vim, which launches it inside a new terminal window.
+exec xterm -e vim "$@"
