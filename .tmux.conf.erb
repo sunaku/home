@@ -103,7 +103,7 @@ set-window-option -g window-status-current-format ' #[bold]#I#F#[nobold]#W '
 set-window-option -g window-status-separator      ''
 
 # show pane title, pane identifier, and hostname on right side of status bar
-set-option -g status-right '#{=26:pane_title} #[<%= status_right_ruler_style %>] #S:#I.#P #(test -n "$SSH_TTY" && echo "\#[<%= status_right_login_style %>] #H ")'
+set-option -g status-right '#{=26:pane_title} #[<%= status_right_ruler_style %>] #S:#I.#P #(test -n "$SSH_TTY" && echo "#[<%= status_right_login_style %>] #H ")'
 set-option -g status-right-length 48
 
 #-----------------------------------------------------------------------------
