@@ -259,8 +259,8 @@ bind-key -n M-/ copy-mode \; send-keys ?
 # search buffer using Vim or less
 bind-key -n M-? capture-pane -S -32767 -J \; new-window -a ' \
   tmux save-buffer - \; delete-buffer | {                    \
-    vim -R -c "set nofen is hls ic" -;                       \
-    test $? -eq 127 && less;                                 \
+    env vim -R -c "set nofen is hls ic" -;                   \
+    test $? -eq 127 && env less;                             \
   };                                                         \
 ' \; send-keys G ? # go to bottom of capture and search upward
 
