@@ -15,3 +15,8 @@ setopt NO_FLOW_CONTROL # this is for ZSH itself
 stty -ixon # this is for apps launched from ZSH
 setopt INTERACTIVE_COMMENTS
 setopt SHORT_LOOPS
+#
+# delete WORDs without stopping at sub-delimiters
+#
+bindkey "^[^[[3~" delete-word       # <Alt-Delete> for WORD ahead of cursor
+bindkey "^[^?" backward-delete-word # <Alt-Backspace> for WORD behind cursor
