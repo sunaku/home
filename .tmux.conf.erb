@@ -280,7 +280,15 @@ bind-key -t vi-copy y copy-selection -x
 bind-key -t vi-copy Y copy-pipe 'yank > #{pane_tty}'
 # open the visual selection with xdg-open(1)
 bind-key -t vi-copy O copy-pipe 'xargs xdg-open'
-<% if tmux_version < '2' %>
+<% if tmux_version >= '2' %>
+# https://groups.google.com/d/msg/tmux-users/XTrSVUR15Zk/3iyJLMyQ7PwJ
+bind-key -T root WheelUpPane \
+  if-shell -Ft= '#{mouse_any_flag}' 'send-keys -M' \
+  'if-shell -Ft= "#{pane_in_mode}" "send-keys -M" "copy-mode"'
+bind-key -T root WheelDownPane \
+  if-shell -Ft= '#{mouse_any_flag}' 'send-keys -M' \
+  'if-shell -Ft= "#{pane_in_mode}" "send-keys -M"'
+<% else %>
 set-window-option -g mode-mouse on
 <% end %>
 
