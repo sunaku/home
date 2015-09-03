@@ -190,11 +190,59 @@ bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 # 2        | 10       | Yes          | No              | Use vim-tmux-navigator.
 # 3        | 11       | Yes          | Yes             | Select Vim split.
 #
-bind-key -n M-d run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; if test $max -eq 1 -a $vim -eq 1; then tmux send-keys C-w p; else tmux select-pane -l; fi'
-bind-key -n M-h run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; set -- "tmux select-pane -L" "" "tmux send-keys M-h" "tmux send-keys C-w h"; shift $(( 2*vim + max )); eval "$1"'
-bind-key -n M-t run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; set -- "tmux select-pane -U" "" "tmux send-keys M-t" "tmux send-keys C-w k"; shift $(( 2*vim + max )); eval "$1"'
-bind-key -n M-n run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; set -- "tmux select-pane -D" "" "tmux send-keys M-n" "tmux send-keys C-w j"; shift $(( 2*vim + max )); eval "$1"'
-bind-key -n M-s run-shell 'test #{window_zoomed_flag} -eq 0; max=$?; cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; set -- "tmux select-pane -R" "" "tmux send-keys M-s" "tmux send-keys C-w l"; shift $(( 2*vim + max )); eval "$1"'
+bind-key -n M-d run-shell                                     ' \
+  test #{window_zoomed_flag} -eq 0; max=$?;                     \
+  cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; \
+  if test $max -eq 1 -a $vim -eq 1; then                        \
+    tmux send-keys C-w p;                                       \
+  else                                                          \
+    tmux select-pane -l;                                        \
+  fi                                                            \
+'
+bind-key -n M-h run-shell                                     ' \
+  test #{window_zoomed_flag} -eq 0; max=$?;                     \
+  cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; \
+  set --                                                        \
+    "tmux select-pane -L"                                       \
+    ""                                                          \
+    "tmux send-keys M-h"                                        \
+    "tmux send-keys C-w h";                                     \
+  shift $(( 2*vim + max ));                                     \
+  eval "$1";                                                    \
+'
+bind-key -n M-t run-shell                                     ' \
+  test #{window_zoomed_flag} -eq 0; max=$?;                     \
+  cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; \
+  set --                                                        \
+    "tmux select-pane -U"                                       \
+    ""                                                          \
+    "tmux send-keys M-t"                                        \
+    "tmux send-keys C-w k";                                     \
+  shift $(( 2*vim + max ));                                     \
+  eval "$1";                                                    \
+'
+bind-key -n M-n run-shell                                     ' \
+  test #{window_zoomed_flag} -eq 0; max=$?;                     \
+  cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; \
+  set --                                                        \
+    "tmux select-pane -D"                                       \
+    ""                                                          \
+    "tmux send-keys M-n"                                        \
+    "tmux send-keys C-w j";                                     \
+  shift $(( 2*vim + max ));                                     \
+  eval "$1";                                                    \
+'
+bind-key -n M-s run-shell                                     ' \
+  test #{window_zoomed_flag} -eq 0; max=$?;                     \
+  cmd="#{pane_current_command}"; test -n "${cmd#*vim}"; vim=$?; \
+  set --                                                        \
+    "tmux select-pane -R"                                       \
+    ""                                                          \
+    "tmux send-keys M-s"                                        \
+    "tmux send-keys C-w l";                                     \
+  shift $(( 2*vim + max ));                                     \
+  eval "$1";                                                    \
+'
 <% if tmux_version < '2' %>
 set-option -g mouse-select-pane on
 <% end %>
