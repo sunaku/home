@@ -1,0 +1,37 @@
+# https://developer.pidgin.im/wiki/Using%20Pidgin#HowdoIchangethefontPidginusesThebackgroundcolor
+
+# This is the style section.  You need this for the examples below.
+# If you are going to copy the example, copy the entire block,
+# including the "{" and "}" lines.
+style "imhtml-fix"
+{
+    font_name = "Ubuntu 11"
+
+    # colors from GreyBird theme
+    text[NORMAL] = "#212121"
+    base[NORMAL] = "#EBEBEB"
+}
+
+# This will apply the font style just shown to various components.
+# If you are going to copy the example, copy the line that does
+# what you want.
+
+# Conversation entry box--where you type.
+widget "*pidgin_conv_entry" style "imhtml-fix"
+
+# Conversation history pane--where you read the conversation.
+widget "*pidgin_conv_imhtml" style "imhtml-fix"
+
+# Log viewer--where you read stored logs
+widget "*pidgin_log_imhtml" style "imhtml-fix"
+
+# formatting-capable entry areas (IMHtml widgets) in request dialogs
+widget "*pidgin_request_imhtml" style "imhtml-fix"
+
+# formatting-capable notification areas in dialogs (again, IMHtml widgets)
+widget "*pidgin_notify_imhtml" style "imhtml-fix"
+
+# IRC user list
+# https://developer.pidgin.im/ticket/9377
+# http://hg.pidgin.im/pidgin/main/rev/f9f308f6b29356070fb2c91a1aa9194de9984c7a
+widget "*pidgin_conv_userlist" style "imhtml-fix"
