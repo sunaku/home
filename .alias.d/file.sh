@@ -1,15 +1,36 @@
-alias .,='cd -'
-alias ..='cd ..'
-alias ,=la
-alias ,,='ls-summary'
-alias ,.='ll -d'
+# navigate
+alias i='cd'
+alias o='cd -'
+alias O='dirs -v'
+u() { # go up $1 directories
+  i=0
+  while test $i -lt ${1:-1}; do
+    i=$(( i + 1 ))
+    cd ..
+  done
+}
+
+# inspect
 alias ls='ls -h --color=auto'
 alias ll='ls -ltr'
 alias la='ll -A'
+alias ,='la'
+alias ,.='ll -d'
+alias ,,='ls-summary'
+alias ,t='tree'
+
+# modify
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-alias RM='rm -vfr'
+alias d='rm -r'
+alias D='rm -rf'
+alias M='mkdir -p'
+alias m='mcd'
+
+mcd() { # Make Dir and go in
+  mkdir -p "$@" && cd "$@"
+}
 
 bam() { # backup with move
   for file; do
