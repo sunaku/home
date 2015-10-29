@@ -167,6 +167,9 @@ bind-key -n M-q command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-o
 # panes
 #-----------------------------------------------------------------------------
 
+# send input to all panes in window (toggle)
+bind-key C-a set-option synchronize-panes \; display-message 'synchronize-panes #{?synchronize-panes,on,off}'
+
 # create pane (below, right, above, left)
 bind-key -n M-c split-window -c '#{pane_current_path}'
 bind-key -n M-r split-window -c '#{pane_current_path}' -h
