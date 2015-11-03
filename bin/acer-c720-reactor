@@ -7,48 +7,25 @@
 trap "kill -- -$$" EXIT # terminate all background processes on exit
 trap exit INT TERM # ensure the above trap is triggered on interrupt
 
-dmesg='dmesg --facility auth'
-depth=$($dmesg | awk '
-  / systemd-logind.+: New session c.+ of user .+/ { depth=NR }
-  END { print depth-1 }
-')
-$dmesg --follow | {
-  # discard old events
-  i=1
-  while [ $i -le $depth ]; do
-    read _discard
-    i=$(( i + 1 ))
-  done
-
-  # process new events
-  while read event; do
-    case "$event" in
-      # lock screen was unlocked after initial login
-      # ... or after laptop was resumed from suspend
-      (*' systemd-logind'*': New session c'*'of user '*\
-      |*' systemd-logind'*': Lid opened.'\
-      |*' systemd-logind'*': Operation finished.')
-        acer-c720-docking
-        ;;
-    esac
-  done
-} &
+acpi_listen | while read event; do
+  case "$event" in
+    # lock the screen when laptop lid is closed
+    ('button/lid LID close')
+      admit1 acer-c720-lock
+      ;;
+  esac
+done &
 
 stdbuf -oL udevadm monitor --udev | while read event; do
   case "$event" in
-    # HDMI cable was either plugged in or unplugged
+    # HDMI cable was unplugged or plugged in
     (*' change '*'/devices/pci0000:00/0000:00:02.0/drm/card0 (drm)')
       acer-c720-display
       ;;
 
-    # mouse was plugged in
+    # Logitech Marble Mouse was plugged in
     (*' add '*'/devices/'*'/usb'*'/0003:046D:C408.'*' (hid)')
-      logitech-marble-mouse
-      ;;
-
-    # keyboard was plugged in
-    (*' add '*'/devices/'*'/usb'*'/0003:05F3:0007.'*' (hid)')
-      kinesis-advantage-keyboard
+      acer-c720-input
       ;;
   esac
 done &

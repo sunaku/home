@@ -4,5 +4,6 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-logitech-marble-mouse
-kinesis-advantage-keyboard
+acer-c720-keyboard -layout dvorak
+acer-c720-touchpad
+logitech-marble-mouse left

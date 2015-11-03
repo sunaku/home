@@ -1,0 +1,12 @@
+#!/bin/sh -e
+#
+# Configures the built-in keyboard on the Acer C720 Chromebook.
+#
+# Usage: acer-c720-keyboard [ARGUMENTS_FOR_SETXKBMAP...]
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
+if ! setxkbmap -print | grep -q 'xkb_compat.*chromebook' ; then
+  device=$(xinput list --id-only 'AT Translated Set 2 keyboard')
+  setxkbmap -device "$device" -model chromebook "$@"
+fi

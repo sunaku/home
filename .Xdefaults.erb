@@ -1,16 +1,15 @@
 ! vim:filetype=xdefaults:
 <% light_theme = ENV['THEME'] == 'light' %>
 
-! see "font4" in /usr/share/X11/app-defaults/XTerm
-*font                    : -*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*
+*font                    : -*-tamzen-medium-r-*-*-16-*-*-*-*-*-*-*
 
 ! enable colors in native X applications
 #ifdef COLOR
 *customization           : -color
 #endif
 
-! use the Human cursor theme from Ubuntu
-Xcursor.theme            : Human
+Xcursor.theme            : whiteglass
+Xcursor.size             : 24
 
 ! choose color scheme to use in terminals
 <% if light_theme %>

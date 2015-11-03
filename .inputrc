@@ -1,2 +1,3 @@
+$include /etc/inputrc
 "\C-w": backward-kill-word
 "\e[3;2~": delete-char

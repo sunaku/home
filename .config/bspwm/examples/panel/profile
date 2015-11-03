@@ -1,0 +1,5 @@
+PANEL_FIFO=/tmp/panel-fifo
+PANEL_HEIGHT=24
+PANEL_FONT_FAMILY="-*-tamzen-medium-*-normal-*-15-*-*-*-*-*-*-*"
+PANEL_WM_NAME=lemonpanel
+export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY PANEL_WM_NAME

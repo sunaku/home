@@ -4,12 +4,28 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-if grep -q '^connected' /sys/class/drm/card0-HDMI-A-1/status
-then xrandr --output HDMI1 --auto --dpi 96 --output eDP1 --off
-else xrandr --auto
+# detect and register active displays as variables in this script
+eval $(xrandr --verbose | awk '
+  $2 ~  /connected/ { display=$1 }
+  $2 == "connected" { print display "_connected=1" }
+  /\*current/       { print display "_active=1" ;
+                      print display "_size=" $1 }
+  /\+preferred/     { print display "_prefer_size=" $1 }
+')
+
+if test -n "$HDMI1_connected" ; then
+  # turn off internal display and use external one
+  test -n "$eDP1_active" && xrandr --output eDP1 --off
+  test -z "$HDMI1_active" && xrandr --output HDMI1 --auto
+  test "$HDMI1_prefer_size" != "$HDMI1_size" && xrandr -s "$HDMI1_prefer_size"
+
+elif test -n "$eDP1_connected" ; then
+  # there is no external display, so use internal one
+  test -z "$eDP1_active" && xrandr --output eDP1 --auto
+  test "$eDP1_prefer_size" != "$eDP1_size" && xrandr -s "$eDP1_prefer_size"
+
+  # reduce brightness of internal display
+  xbacklight | grep -q '^100' && xbacklight = 5
 fi
 
-# reduce display brightness
-if xbacklight | grep -q '^100'
-then xbacklight = 5
-fi
+xrandr --dpi 96

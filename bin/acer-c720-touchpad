@@ -1,0 +1,22 @@
+#!/bin/sh -e
+#
+# Configures the built-in touchpad on the Acer C720 Chromebook.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
+device=$(xinput list --id-only 'Cypress APA Trackpad (cyapa)')
+
+# http://virtuallyhyper.com/2013/03/install-chrubuntu-12-04-on-samsung-chromebook/
+xinput set-prop "$device" "Synaptics Finger" 15 20 256
+xinput set-prop "$device" "Synaptics Two-Finger Scrolling" 1 1
+# Synaptics Tap Action
+#     8 bit, up to MAX_TAP values (see  synaptics.h),  0  disables  an
+#     element. order: RT, RB, LT, LB, F1, F2, F3.
+# Synaptics Tap Action (285):     2, 3, 0, 0, 1, 3, 0
+xinput set-prop "$device" "Synaptics Click Action" 1 3 2
+xinput set-prop "$device" "Synaptics Tap Action" 2 3 0 0 1 3 2
+# xinput set-prop "$device" "Synaptics Palm Detection" 1
+
+# http://wiki.archlinux.org/index.php/Touchpad_Synaptics
+pgrep -x syndaemon || syndaemon -t -k -i 1 -d
+#synclient HorizTwoFingerScroll=1 TapButton2=3 TapButton3=2

@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Locks the current working session on the Acer C720 Chromebook.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
+xrandr --auto # enable all displays
+slock  # lock the screen
+acer-c720-dock

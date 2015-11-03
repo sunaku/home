@@ -1,0 +1,1 @@
+unset LS_COLORS

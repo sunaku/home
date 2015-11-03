@@ -1,0 +1,70 @@
+# Default rc.local for void; add your custom commands here.
+#
+# This is run by runit in stage 2 before the services are executed
+# (see /etc/runit/2).
+
+#       _          _
+#   ___| |__   ___(_)   ___ _ __ _ __ ___  _ __ ___
+#  / _ \ '_ \ / __| |  / _ \ '__| '__/ _ \| '__/ __|
+# |  __/ | | | (__| | |  __/ |  | | | (_) | |  \__ \
+#  \___|_| |_|\___|_|  \___|_|  |_|  \___/|_|  |___/
+#
+
+# prevent ehci-pci errors that occur after resume from suspend:
+# [  386.093443] ehci-pci 0000:00:1d.0: port 2 resume error -19
+# [  386.093699] ehci-pci 0000:00:1d.0: port 1 resume error -19
+echo -n 0000:00:1d.0 > /sys/bus/pci/drivers/ehci-pci/unbind
+
+#                               _
+#  _ __   _____      _____ _ __| |_ ___  _ __
+# | '_ \ / _ \ \ /\ / / _ \ '__| __/ _ \| '_ \
+# | |_) | (_) \ V  V /  __/ |  | || (_) | |_) |
+# | .__/ \___/ \_/\_/ \___|_|   \__\___/| .__/
+# |_|                                   |_|
+
+# turn off bluetooth, which drains battery
+rfkill block bluetooth
+
+# Wireless Power Saving for interface wlp1s0
+iwconfig wlp1s0 power on
+
+# VM writeback timeout
+echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
+
+# NMI watchdog should be turned off
+echo 0 > /proc/sys/kernel/nmi_watchdog
+
+# Enable audio codec power management
+echo 1 > /sys/module/snd_hda_intel/parameters/power_save
+
+# Enable SATA link power Management for *
+for policy in /sys/class/scsi_host/*/link_power_management_policy; do
+  echo min_power > $policy
+done
+
+# Runtime PM for PCI Device *
+for control in /sys/bus/pci/devices/*/power/control ; do
+  if ! grep -q 'DRIVER=xhci' ${control%power/control}uevent; then
+    echo auto > $control
+  fi
+done
+
+echo on > /sys/bus/usb/devices/usb2/power/control
+echo on > /sys/bus/usb/devices/usb3/power/control
+
+# # Runtime PM for USB Device *
+# for control in /sys/bus/usb/devices/*/power/control
+# do
+  # mfg=${control%power/control}manufacturer
+  # if test -s $mfg && ! grep -q '^Linux' $mfg; then
+    # echo on > $control
+  # else
+    # echo auto > $control
+  # fi
+# done
+
+# # Runtime PM for PCI Device Intel Corporation 8 Series USB xHCI HC
+# echo auto > /sys/bus/pci/devices/0000:00:14.0/power/control
+
+# # Runtime PM for PCI Device Intel Corporation 8 Series USB EHCI #1
+# echo auto > /sys/bus/pci/devices/0000:00:1d.0/power/control

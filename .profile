@@ -3,7 +3,6 @@
 . ~/.pathrc
 export LANG=en_US.utf8
 export XDG_DESKTOP_DIR=$HOME
-export XDG_DOWNLOAD_DIR=$HOME/get
 export XAUTHORITY=$HOME/.Xauthority
 test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
 

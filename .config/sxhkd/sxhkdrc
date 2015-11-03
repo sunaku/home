@@ -1,0 +1,113 @@
+#
+# bspwm hotkeys
+#
+
+alt + ctrl + Escape
+	pkill -USR1 -x sxhkd; \
+	bspwm-panel
+
+# FIXME: if bspwm crashes, this state won't be saved!
+alt + ctrl + shift + Escape
+	bspc query -T > "$BSPWM_TREE"; \
+	bspc query -H > "$BSPWM_HISTORY"; \
+	bspc query -S > "$BSPWM_STACK"; \
+	bspc quit
+
+alt + ctrl + BackSpace
+	bspc window --close
+
+alt + ctrl + shift + BackSpace
+	bspc window --kill
+
+alt + ctrl + m
+	bspc desktop --layout next
+
+alt + ctrl + z
+	bspc desktop --balance
+
+alt + ctrl + {w,shift + m}
+	bspc window --toggle {floating,fullscreen}
+
+alt + ctrl + {d,o}
+	bspc {window,desktop} --focus last
+
+# alt + ctrl + shift + {d,o}
+	# bspc {window,desktop} --swap last
+
+# alt + ctrl + shift + {o,i}
+	# bspc ctrl --record-history off; \
+	# bspc window {older,newer} --focus; \
+	# bspc ctrl --record-history on
+
+alt + ctrl + y
+	bspc window --to-window last.manual
+
+alt + ctrl + v
+	bspc window --swap biggest
+
+alt + ctrl + {_,shift + }{h,n,t,s}
+	bspc window --{focus,swap} {left,down,up,right}
+
+alt + ctrl + {_,shift + }minus
+	bspc window --focus {next,prev}
+
+alt + ctrl + {_,shift + }c
+	bspc desktop --circulate {backward,forward}
+
+alt + ctrl + {comma,period}
+	bspc desktop --focus {prev,next}
+
+alt + ctrl + shift + {comma,period}
+	bspc desktop --swap {prev,next}
+
+alt + ctrl + {h,n,t,s}
+	bspc window -p {left,down,up,right}
+
+alt + ctrl + {_,shift + }space
+	bspc {window -p cancel,desktop -c}
+
+alt + ctrl + b : {h,n,t,s}
+	bspc window -e {left -10,down +10,up -10,right +10}
+
+alt + ctrl + b : shift + {h,n,t,s}
+	bspc window -e {right -10,up +10,down -10,left +10}
+
+alt + ctrl + b : {1-9}
+	bspc window --ratio 0.{1-9}
+
+alt + ctrl + {_,shift + }{1-9,0}
+	bspc {desktop --focus,window --to-desktop} ^{1-9,10}
+
+~button1
+	bspc pointer -g focus
+
+alt + ctrl + button{1-3}
+	bspc pointer -g {move,resize_side,resize_corner}
+
+alt + ctrl + !button{1-3}
+	bspc pointer -t %i %i
+
+alt + ctrl + @button{1-3}
+	bspc pointer -u
+
+#
+# wm independent hotkeys
+#
+
+alt + ctrl + x
+	xterm
+
+alt + ctrl + k
+	firefox
+
+alt + ctrl + j
+	pcmanfm
+
+alt + ctrl + e
+	dmenu_run
+
+alt + ctrl + a
+	acer-c720-dock
+
+alt + ctrl + Delete
+	acer-c720-lock

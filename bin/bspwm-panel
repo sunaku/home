@@ -1,0 +1,10 @@
+#!/bin/sh -ex
+# (Re)starts the bspwm panel.
+
+pgrep -x panel && pkill -x panel
+
+cd ~/.config/bspwm/examples/panel
+export PATH=.:$PATH
+
+. profile
+exec panel
