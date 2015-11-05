@@ -16,6 +16,12 @@ fi
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS="-j$(fgrep -c processor /proc/cpuinfo)"
 
+# start X when logging into the first Virtual Terminal
+# https://wiki.archlinux.org/index.php/Start_X_at_Login
+# see also /etc/X11/xinit/xserverrc for $XDG_VTNR trick
+test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 &&
+exec env XDG_VTNR=1 startx > ~/.xsession-errors 2>&1
+
 # reattach last tmux session after logging in through Crouton or through SSH,
 # in which case we must also not be SSH'ing into the same machine from itself
 test -z "$TMUX" && {
