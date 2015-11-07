@@ -11,7 +11,7 @@ acpi_listen | while read event; do
   case "$event" in
     # lock the screen when laptop lid is closed
     ('button/lid LID close')
-      admit1 acer-c720-lock
+      admit1 acer-c720-locker
       ;;
   esac
 done &

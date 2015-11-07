@@ -4,6 +4,6 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-xrandr --auto # enable all displays
-slock         # lock the screen
-acer-c720-display
+xrandr --auto     # enable all displays
+slock             # lock all displays
+acer-c720-display # readjust displays
