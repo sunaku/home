@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# Configures external input devices for the Acer C720 Chromebook.
-#
-# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
-
-acer-c720-keyboard -layout dvorak
-acer-c720-touchpad
-logitech-marble-mouse left

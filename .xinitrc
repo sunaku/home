@@ -7,7 +7,7 @@
 . ~/.profile
 
 # hardware
-acer-c720-dock
+acer-c720-display
 acer-c720-reactor &
 
 # appearance

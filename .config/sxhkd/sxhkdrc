@@ -107,7 +107,7 @@ alt + ctrl + e
 	dmenu_run
 
 alt + ctrl + a
-	acer-c720-dock
+	acer-c720-display
 
 alt + ctrl + Delete
 	acer-c720-lock

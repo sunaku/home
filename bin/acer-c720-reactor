@@ -22,11 +22,6 @@ stdbuf -oL udevadm monitor --udev | while read event; do
     (*' change '*'/devices/pci0000:00/0000:00:02.0/drm/card0 (drm)')
       acer-c720-display
       ;;
-
-    # Logitech Marble Mouse was plugged in
-    (*' add '*'/devices/'*'/usb'*'/0003:046D:C408.'*' (hid)')
-      acer-c720-input
-      ;;
   esac
 done &
 
