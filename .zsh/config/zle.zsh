@@ -27,3 +27,34 @@ bindkey '\C-x\C-e' edit-command-line
 # http://blog.viridian-project.de/2008/07/03/zsh-tip-handling-urls-with-url-quote-magic/
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
+
+# replace command with pager
+function _run_with_pager {
+  BUFFER="$PAGER ${BUFFER#* }"
+  zle accept-line
+}
+zle -N _run_with_pager
+bindkey '^Xr' _run_with_pager
+
+# pipe command to pager
+function _pipe_to_pager {
+  zle end-of-line
+  zle -U ' PAGE'
+}
+zle -N _pipe_to_pager
+bindkey '^Xs' _pipe_to_pager
+
+# peek while piping to pager
+function _peek_to_pager {
+  zle end-of-line
+  zle -U ' PEEK'
+}
+zle -N _peek_to_pager
+bindkey '^XS' _peek_to_pager
+
+# insert /dev/null
+function _insert_dev_null {
+  zle -U '/dev/null'
+}
+zle -N _insert_dev_null
+bindkey '^XN' _insert_dev_null
