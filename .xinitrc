@@ -18,6 +18,7 @@ xset +fp ~/.fonts/tamzen-font/bdf
 # xset +fp ~/.fonts
 xset fp rehash
 xrdb -merge ~/.Xdefaults
+export FONT=$( xrdb -query | awk '$1 == "*font:" { print $2; exit }' )
 
 # # encryption
 # eval `gpg-agent --daemon` &&
