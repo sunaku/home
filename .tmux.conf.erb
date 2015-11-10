@@ -111,15 +111,14 @@ set-option -g status-right-length 48
 #-----------------------------------------------------------------------------
 
 # create new window
-bind-key -n M-e command-prompt "new-window -n '%%'"
-bind-key -n M-E new-window
+bind-key -n M-e new-window
 
 # create window from current pane
 bind-key -n M-x command-prompt -p '(break-window)' -I '#W' "break-pane ; rename-window '%%'"
 bind-key -n M-X break-pane
 
 # rename window
-bind-key -n M-O command-prompt -I '#W' "rename-window '%%'"
+bind-key -n M-E command-prompt -I '#W' "rename-window '%%'"
 
 # focus window
 <% if tmux_version < '2' %>
