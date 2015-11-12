@@ -49,7 +49,7 @@ xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 -e \
 while xterm & do bspwm
   xmessage 'INSERT COIN TO CONTINUE' \
   -buttons 'Insert Coin:0,Game Over' \
-  -default 'Insert Coin' -timeout 30 \
+  -default 'Insert Coin' -timeout 10 \
   -center || break
   . ~/.pathrc # pick up $PATH changes
 done
