@@ -201,7 +201,7 @@ bind-key -n M-d run-shell                                     ' \
   if test $max -eq 1 -a $vim -eq 1; then                        \
     tmux send-keys C-w p;                                       \
   else                                                          \
-    tmux select-pane -l;                                        \
+    tmux select-pane -l || tmux select-pane -t 1;               \
   fi                                                            \
 '
 bind-key -n M-h run-shell                                     ' \
