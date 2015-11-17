@@ -14,9 +14,9 @@ eval $(xrandr --verbose | awk '
 ')
 
 if test -n "$HDMI1_connected" ; then
-  # turn off internal display and use external one
-  test -n "$eDP1_active" && xrandr --output eDP1 --off
+  # use external display and switch off internal one
   test -z "$HDMI1_active" && xrandr --output HDMI1 --auto
+  test -n "$eDP1_active" && xrandr --output eDP1 --off
   test "$HDMI1_prefer_size" != "$HDMI1_size" && xrandr -s "$HDMI1_prefer_size"
 
 elif test -n "$eDP1_connected" ; then
