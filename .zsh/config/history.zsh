@@ -12,5 +12,5 @@ setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
 
 HISTFILE=~/.zsh_history
-HISTSIZE=4294967296 # 2^32
-SAVEHIST=$HISTSIZE
+HISTSIZE=2147483647 # value of 32-bit LONG_MAX from /usr/include/limits.h
+SAVEHIST=$HISTSIZE  # see http://www.zsh.org/mla/users/2013/msg00691.html
