@@ -1,0 +1,22 @@
+#!/bin/sh -x
+#
+# Reacts to hardware events and configures the system accordingly.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
+acpi_listen | while read event; do
+  case "$event" in
+    # lock the screen when laptop is put to sleep
+    ('button/power PBTN 00000080 00000000')
+      admit1 laptop-locker &
+      ;;
+    # readjust displays when HDMI is plugged in
+    ('jack/videoout VIDEOOUT plug')
+      laptop-display
+      ;;
+    # turn on the screen when HDMI is unplugged
+    ('jack/videoout VIDEOOUT unplug')
+      xrandr --auto
+      ;;
+  esac
+done

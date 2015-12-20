@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# Locks the current working session on my laptop.
+#
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+
+xrandr --auto  # enable all displays
+slock          # lock all displays
+laptop-display # readjust displays

@@ -7,8 +7,8 @@
 . ~/.profile
 
 # hardware
-acer-c720-display
-acer-c720-reactor &
+laptop-display
+laptop-reactor &
 
 # appearance
 xsetroot -cursor_name left_ptr
@@ -35,7 +35,7 @@ eval `dbus-launch --sh-syntax --exit-with-session`
 # scim -d &
 
 # screen locking
-xautolock -time 10 -locker admit1 acer-c720-locker &
+xautolock -time 10 -locker admit1 laptop-locker &
 
 # break reminder
 # xwrits typetime=25 breaktime=1 +mouse +top &
