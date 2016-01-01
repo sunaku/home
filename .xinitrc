@@ -13,40 +13,35 @@ laptop-reactor &
 # appearance
 xsetroot -cursor_name left_ptr
 xset +fp /usr/share/fonts/TTF
-xset +fp /usr/share/fonts/OTF
 xset +fp ~/.fonts/tamzen-font/bdf
-# xset +fp ~/.fonts
 xset fp rehash
 xrdb -merge ~/.Xdefaults
-export FONT=$( xrdb -query | awk '$1 == "*font:" { print $2; exit }' )
+export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')
 
-# # encryption
-# eval `gpg-agent --daemon` &&
-# trap 'killall gpg-agent' EXIT
+# desktop
+test -z "$DBUS_SESSION_BUS_ADDRESS" &&
+eval $(dbus-launch --sh-syntax --exit-with-session)
 
-# dbus (for libnotify and other stuff)
-test -n "$DBUS_SESSION_BUS_ADDRESS" ||
-eval `dbus-launch --sh-syntax --exit-with-session`
+# encryption
+eval $(gpg-agent --daemon) &&
+trap 'killall gpg-agent' EXIT
 
-# # input methods
-# export XMODIFIERS='@im=SCIM'
-# export GTK_IM_MODULE=scim
-# export QT_IM_MODULE=scim
-# scim -d &
+# input method
+export XMODIFIERS='@im=SCIM'
+export GTK_IM_MODULE=scim
+export QT_IM_MODULE=scim
+scim -d &
 
-# screen locking
-xautolock -time 10 -locker admit1 laptop-locker &
-
-# break reminder
-# xwrits typetime=25 breaktime=1 +mouse +top &
-# workrave &
-
-# system status
-xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 -e \
-  'tail -f /var/log/*.log & dmesg -wHP' &
+# system logs
+xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 -e '
+  tail -f /var/log/*.log \
+      ~/.xsession-errors \
+      ~/.wmii/wmiirc.log &
+  dmesg -wHP
+' &
 
 # window manager
-while xterm & do bspwm
+while xterm & do wmii
   xmessage 'INSERT COIN TO CONTINUE' \
   -buttons 'Insert Coin:0,Game Over' \
   -default 'Insert Coin' -timeout 10 \
