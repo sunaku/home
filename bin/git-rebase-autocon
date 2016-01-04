@@ -1,0 +1,70 @@
+#!/bin/sh -e
+#
+# Usage: git-rebase-autocon [TARGET] [ARGUMENTS_FOR_GIT_REBASE...]
+#
+# Rebases the given TARGET while automatically resolving conflicts
+# by substituting empty-tree commits labeled "fixup!" that log all
+# conflicting hunks in their commit messages in git-diff(1) format.
+#
+# If TARGET is not specified, the upstream tracking branch is used.
+# Optional ARGUMENTS_FOR_GIT_REBASE... are passed to git-rebase(1).
+#
+# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
+# Documented at <https://sunaku.github.io/git-rebase-autocon.html>
+
+# parse command-line arguments
+test $# -gt 0 && TARGET=$1 && shift || TARGET='@{u}'
+
+# ensure working tree is clean
+git rebase HEAD --quiet
+
+# rebase current branch atop TARGET
+commit=$(git rev-parse --short HEAD)
+branch=$(git name-rev --name-only HEAD)
+if ! git rebase "$TARGET" --quiet "$@" >/dev/null; then
+  cat <<EOF
+
+    +-------------------------IMPORTANT!----------------------------+
+    |                                                               |
+    | Some of YOUR COMMITS WERE SET ASIDE to solve merge conflicts: |
+    | empty commits labeled as "fixup!" have now taken their place. |
+    |                                                               |
+    | But rest assured, THEY STILL EXIST in Git history at $commit, |
+    | and your working tree has all changes from those commits too! |
+    |                                                               |
+    | You can UNDO THIS REBASE at any time by running this command: |
+    |                                                               |
+    |                 git reset --hard $commit                      |
+    |                                                               |
+    +-------------------------IMPORTANT!----------------------------+
+
+EOF
+  # "solve" all merge conflicts by setting conflicting commits aside
+  while test -d .git/rebase-apply; do
+    conflict=$(cat .git/rebase-apply/original-commit)
+    headline=$(head -1 .git/rebase-apply/msg-clean)
+    if ! git branch -r --contains "$conflict" | fgrep -q '/HEAD -> '; then
+      # in place of the conflicting commit, record an empty commit whose
+      # message contains the changes introduced by the conflicting commit
+      git reset --mixed --quiet # empty the index so we can make a commit
+      git commit --allow-empty --reuse-message="$conflict" --quiet
+      {
+        echo "fixup! $(git rev-parse --short "$conflict") $headline"
+        echo # adds blank line after message headline, per Git convention
+        git diff -U9
+      } |
+      git commit --amend --allow-empty --file=-
+    fi
+    git rebase --skip >/dev/null 2>&1 || true
+  done
+fi
+
+# drop changes that rebased without conflict but were removed upstream
+env GIT_SEQUENCE_EDITOR="sed -i -e '/^# pick.*fixup!/s/^# //; 2,\${$(
+  git log --format='%s' "$TARGET"  |                  # grab subject lines
+  sed 's/[\^.[$()|*+?{\\\/]/\\&/g' |                  # escape as regex(7)
+  awk '{print "/^pick [[:xdigit:]]\\{7\\} "$0"$/d;"}' # build sed commands
+)}'" git rebase --interactive "$TARGET"~
+
+# show discarded changes from conflicting commits that were set aside
+git --no-pager diff --summary --find-copies --ignore-all-space "$commit"
