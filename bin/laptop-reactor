@@ -9,7 +9,7 @@ while inotifywait -qqe close_write /sys/power/state; do
   admit1 laptop-locker &
 done &
 
-acpi_listen | while read event; do
+acpi_listen | while read event; do : $event
   case "$event" in
     # readjust displays when laptop is opened or closed
     ('button/lid LID '*)

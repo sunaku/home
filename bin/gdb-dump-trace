@@ -1,8 +1,8 @@
 #!/bin/sh -e
 #
-# Dumps the full backtrace from the given GDB invocation.
+# Dumps the full backtrace from the given GNU Debugger invocation.
 #
-# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
+# Written in 2009 by Suraj N. Kurapati <https://github.com/sunaku>
 
 trap 'rm -f $$' EXIT
 trap 'exit' TERM INT

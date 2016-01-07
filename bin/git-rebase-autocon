@@ -42,9 +42,9 @@ EOF
   # "solve" all merge conflicts by setting conflicting commits aside
   while test -d .git/rebase-apply; do
     conflict=$(cat .git/rebase-apply/original-commit)
-    headline=$(head -1 .git/rebase-apply/msg-clean)
+    headline=$(head -1 .git/rebase-apply/final-commit)
     if ! git branch -r --contains "$conflict" | fgrep -q '/HEAD -> '; then
-      # in place of the conflicting commit, record an empty commit whose
+      # in place of each conflicting commit, record an empty commit whose
       # message contains the changes introduced by the conflicting commit
       git reset --mixed --quiet # empty the index so we can make a commit
       git commit --allow-empty --reuse-message="$conflict" --quiet
