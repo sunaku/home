@@ -3,13 +3,17 @@
 #
 # http://zsh.sourceforge.net/Doc/Release/Options.html#History
 #
-setopt HIST_FCNTL_LOCK
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_VERIFY
-setopt INC_APPEND_HISTORY
 setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_SAVE_BY_COPY
+setopt HIST_FCNTL_LOCK
+
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+
+setopt BANG_HIST
+setopt HIST_VERIFY
 
 HISTFILE=~/.zsh_history
 HISTSIZE=2147483647 # value of 32-bit LONG_MAX from /usr/include/limits.h
