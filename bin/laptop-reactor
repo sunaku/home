@@ -11,13 +11,9 @@ done &
 
 acpi_listen | while read event; do
   case "$event" in
-    # readjust displays when HDMI is plugged in
-    ('jack/videoout VIDEOOUT plug')
+    # readjust displays when laptop is opened or closed
+    ('button/lid LID '*)
       laptop-display
-      ;;
-    # turn on the screen when HDMI is unplugged
-    ('jack/videoout VIDEOOUT unplug')
-      xrandr --auto
       ;;
   esac
 done
