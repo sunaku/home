@@ -6,7 +6,8 @@
 
 # detect and register active displays as variables in this script
 eval $(xrandr --verbose | awk '
-  $2 ~  /connected/ { gsub("-", "", $1); display=$1 }
+  $2 ~  /connected/ { original=$1; gsub("-", "", $1); display=$1;
+                      print display "=" original }
   $2 == "connected" { print display "_connected=1" }
   /\*current/       { print display "_active=1" ;
                       print display "_size=" $1 }
@@ -15,13 +16,13 @@ eval $(xrandr --verbose | awk '
 
 if test -n "$HDMI1_connected" ; then
   # use external display and switch off internal one
-  test -z "$HDMI1_active" && xrandr --output HDMI-1 --auto
-  test -n "$eDP1_active" && xrandr --output eDP-1 --off
+  test -z "$HDMI1_active" && xrandr --output "$HDMI1" --auto
+  test -n "$eDP1_active" && xrandr --output "$eDP1" --off
   test "$HDMI1_prefer_size" != "$HDMI1_size" && xrandr -s "$HDMI1_prefer_size"
 
 elif test -n "$eDP1_connected" ; then
   # there is no external display, so use internal one
-  test -z "$eDP1_active" && xrandr --output eDP-1 --auto
+  test -z "$eDP1_active" && xrandr --output "$eDP1" --auto
   test "$eDP1_prefer_size" != "$eDP1_size" && xrandr -s "$eDP1_prefer_size"
 
   # reduce brightness of internal display
