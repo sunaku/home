@@ -4,12 +4,13 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
+while inotifywait -qqe close_write /sys/power/state; do
+  # lock the screen when laptop is put to sleep
+  admit1 laptop-locker &
+done &
+
 acpi_listen | while read event; do
   case "$event" in
-    # lock the screen when laptop is put to sleep
-    ('button/power PBTN 00000080 00000000')
-      admit1 laptop-locker &
-      ;;
     # readjust displays when HDMI is plugged in
     ('jack/videoout VIDEOOUT plug')
       laptop-display
