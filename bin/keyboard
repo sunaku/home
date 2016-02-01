@@ -1,15 +1,15 @@
 #!/bin/sh -e
 #
-# Usage: keyboard [LAYOUT]
+# Usage: keyboard [OPTIONS_FOR_SETXKBMAP...]
 #
-# Changes the keyboard layout to the given value (such as "us" or "dvorak").
+# Changes the keyboard layout to the given value: "us" or "dvorak".
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 if [ -n "$DISPLAY" ]; then
   # only affect the laptop's native keyboard; ignore externally attached ones
   id=$(xinput list --id-only 'AT Translated Set 2 keyboard')
-  setxkbmap -model chromebook -device "$id" -layout "$@"
+  setxkbmap -device "$id" -model chromebook -option altwin:meta_alt "$@"
 else
   sudo loadkeys "$1"
 fi
