@@ -13,7 +13,8 @@ HISTORY_FILE = ARGV.shift or raise ArgumentError, 'HISTORY_FILE not given'
   File.read(HISTORY_FILE, encoding: 'utf-8').
   scan(/^## Version (\S+) \((\S+?)\)/).first(2)
 
-`git grep -I -l "#{old_version}\\|#{old_date}"`.split(/\n/).each do |file|
+`git grep -I -l -E "#{old_version}|#{old_date}"`.each_line do |file|
+  puts file.chomp!
   next if file == HISTORY_FILE
   body = File.read(file)
   body.gsub! /\b#{old_version}\b/, new_version
