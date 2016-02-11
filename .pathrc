@@ -2,6 +2,7 @@
 # Sets up PATHs for the shell session that sources this file.
 
 ROOT=$HOME/app
+export GEM_HOME=$ROOT/rubygems
 
 # update cache of PATHs
 find_paths() {
