@@ -4,7 +4,8 @@
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
-branches = [:major, :minor, :patch, :other, :master]
+last_version_tag = `git tag -l`.lines.last.chomp
+branches = [:major, :minor, :patch, :other, :master, last_version_tag]
 current_branch = `git name-rev --name-only HEAD`.chomp.to_sym
 branches.shift branches.index(current_branch)
 
@@ -18,7 +19,7 @@ branches.each_cons(2) do |head, tail|
   sections[head] = output if output.length > 2
 end
 
-version = `git tag -l | tail -1`.scan(/\d+/)
+version = last_version_tag.scan(/\d+/)
 if sections.key? :major
   version[0].next!
   version[1] = '0'
@@ -26,7 +27,7 @@ if sections.key? :major
 elsif sections.key? :minor
   version[1].next!
   version[2] = '0'
-elsif sections.key? :patch or sections.key? :other
+else
   version[2].next!
 end
 
