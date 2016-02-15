@@ -1,17 +1,36 @@
 #!/bin/sh
+#
+# Converts markdown(7) input into HTML using GitHub README styling.
+#
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
-exec redcarpet \
-  --smarty \
-  --parse-no_intra_emphasis \
-  --parse-tables \
-  --parse-fenced_code_blocks \
-  --parse-autolink \
-  --parse-strikethrough \
-  --parse-superscript \
-  --parse-highlight \
-  --parse-footnotes \
-  --render-xhtml \
-  --render-safe_links_only \
-  --render-with_toc_data \
-  --render-prettify \
-  "$@"
+
+cat <<HTML
+<!DOCTYPE html>
+<html>
+  <body class="container readme">
+    <article class="markdown-body">$(
+      redcarpet \
+        --smarty \
+        --parse-no_intra_emphasis \
+        --parse-tables \
+        --parse-fenced_code_blocks \
+        --parse-autolink \
+        --parse-strikethrough \
+        --parse-superscript \
+        --parse-highlight \
+        --parse-footnotes \
+        --render-xhtml \
+        --render-safe_links_only \
+        --render-with_toc_data \
+        --render-prettify \
+      "$@"
+    )</article>
+    <style>$(cat "$0".css*)</style>
+  </body>
+</html>
+HTML
+
+    # <style>$(
+      # wget -O "$0.css" -N https://github.com/sindresorhus/github-markdown-css/raw/gh-pages/github-markdown.css
+      # cat "$0.css"
+    # )</style>
