@@ -4,13 +4,14 @@
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
-trap 'git checkout master' EXIT
-bundle exec rake binman
+branch=$(git name-rev --name-only HEAD)
+trap 'git checkout "$branch"' EXIT
+bundle exec binman-rake || binman-rake
 rsync -La man/ man-publish/ --delete # resolve symlinks inside man/man0/
 git clean -fd man/
 git checkout gh-pages
 rm -rf man
 mv man-publish man
 git add man
-git commit -c master --no-edit
-git push
+git commit -C "$branch"
+git push "$@"
