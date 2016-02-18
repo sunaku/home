@@ -10,9 +10,9 @@ XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-
 XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
 XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
 XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
-XTerm*font4                     : lucidasanstypewriter-14
-XTerm*font5                     : lucidasanstypewriter-18
-XTerm*font6                     : lucidasanstypewriter-24
+XTerm*font4                     : -*-lucidatypewriter-medium-*-*-*-20-*-*-*-*-*-*-*
+XTerm*font5                     : -*-lucidatypewriter-medium-*-*-*-26-*-*-*-*-*-*-*
+XTerm*font6                     : -*-lucidatypewriter-medium-*-*-*-34-*-*-*-*-*-*-*
 XTerm*vt100.colorMode           : True
 XTerm*vt100.boldColors          : False
 XTerm*vt100.colorBDMode         : True
