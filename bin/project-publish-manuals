@@ -6,12 +6,22 @@
 
 branch=$(git name-rev --name-only HEAD)
 trap 'git checkout "$branch"' EXIT
+# mkdir -p man/man0
+rsync -av [A-Z]*.m* man/man0/
 bundle exec binman-rake || binman-rake
 rsync -La man/ man-publish/ --delete # resolve symlinks inside man/man0/
+tree man/
+
 git clean -fd man/
+git checkout -- man/
 git checkout gh-pages
 rm -rf man
+
 mv man-publish man
 git add man
+
+echo '<meta http-equiv="refresh" content="0;url=man/man0/README.html">' > index.html
+git add index.html
+
 git commit -C "$branch"
 git push "$@"
