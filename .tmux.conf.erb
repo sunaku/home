@@ -25,9 +25,18 @@ set-window-option -g xterm-keys on
 # prevent tmux from catching modifier keys meant for Vim
 set-option -s escape-time 1
 
+# enable 24-bit true color RGB escape sequences under st
+# https://sunaku.github.io/tmux-24bit-color.html
+set-option -ga terminal-overrides ',st-256color:Tc'
+
 # allow set-titles to change the window title under XTerm
 # http://opennomad.com/content/goodbye-screen-hello-tmux
 set-option -ga terminal-overrides ',xterm*:XT'
+
+# allow set-titles to change the window title under XTerm
+# http://opennomad.com/content/goodbye-screen-hello-tmux
+# http://stackoverflow.com/questions/15195624
+set-option -ga terminal-overrides ',st-256color:smkx=\E='
 
 # yank to system clipboard rather than primary selection
 # http://invisible-island.net/xterm/terminfo-contents.html#tic-xterm_tmux
