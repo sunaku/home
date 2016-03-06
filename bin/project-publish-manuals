@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/bash -ex
 #
 # Publishes manuals to the GitHub pages website after a project release.
 #
@@ -6,8 +6,10 @@
 
 branch=$(git name-rev --name-only HEAD)
 trap 'git checkout "$branch"' EXIT
-# mkdir -p man/man0
-rsync -av [A-Z]*.m* man/man0/
+
+shopt -s extglob nullglob
+rsync -av [A-Z]*.{md,mkd,markdown} man/man0/
+
 bundle exec binman-rake || binman-rake
 rsync -La man/ man-publish/ --delete # resolve symlinks inside man/man0/
 tree man/
