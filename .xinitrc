@@ -32,6 +32,20 @@ export GTK_IM_MODULE=scim
 export QT_IM_MODULE=scim
 scim -d &
 
+# desktop apps
+# mpc || mpd &                   # music
+{
+  sleep 3 # wait for window manager to start
+  # witray &                       # tray
+  redshift-gtk &                 # color
+  wpa_gui -t &                   # wifi
+  system-config-printer-applet & # printer
+  blueman-applet &               # bluetooth
+  pasystray &                    # PulseAudio
+  claws-mail & # email
+  workrave &
+} &
+
 # system logs
 xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 -e '
   tail -f /var/log/*.log \
