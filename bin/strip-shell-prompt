@@ -4,7 +4,7 @@
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
-print ARGF.read.gsub(/^(?:\S+ )?(.+?)>(.+?)(?:\s*#\S+@\S+)?$/) { |original|
+print ARGF.read.gsub(/^(?:\S+[ \t]+)*(.+?)>(.+?)(?:\s*#(?: \d|\d{2})\w+\d+:\d+[ap]m)?$/) { |original|
   if File.directory? File.expand_path($1)
     "\n$#{$2}"
   else

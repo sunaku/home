@@ -4,11 +4,12 @@
 setopt PROMPT_SUBST
 
 PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
+'${SSH_TTY:+%F{cyan\}%n@%m%f }'\
 '$(vcs_info && echo $vcs_info_msg_0_)'\
 '%(!.%F{red}.%F{green})%~%f'\
 '%(!.#.>) '
 
-RPROMPT='${SSH_TTY:+%F{cyan\}#%n@%m%f}'
+RPROMPT='%F{%k}#%F{cyan}%D{%e%b}%F{yellow}%D{%-l:%M%P}%f'
 
 # VCS integration for command prompt using vcs_info
 # http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
