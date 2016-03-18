@@ -12,3 +12,5 @@ bind generic P !git format-patch -1 %(commit)
 bind generic R !git revert %(commit)
 
 bind generic B !git rebase -i %(commit)^
+
+bind generic Y !sh -ec "echo %(commit) | yank"
