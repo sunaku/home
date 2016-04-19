@@ -1,0 +1,11 @@
+#!/bin/sh
+# https://wiki.ubuntu.com/X/Config/SessionStartup
+
+# register fonts
+#xset +fp /usr/share/fonts/TTF
+xset +fp ~/.fonts/tamzen-font/bdf
+xset fp rehash
+
+# apply settings
+xrdb -merge ~/.Xdefaults
+export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')

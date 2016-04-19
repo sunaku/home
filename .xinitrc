@@ -11,12 +11,7 @@ laptop-display
 laptop-reactor &
 
 # appearance
-xsetroot -cursor_name left_ptr
-xset +fp /usr/share/fonts/TTF
-xset +fp ~/.fonts/tamzen-font/bdf
-xset fp rehash
-xrdb -merge ~/.Xdefaults
-export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')
+. ~/.xprofile
 
 # desktop
 test -z "$DBUS_SESSION_BUS_ADDRESS" &&

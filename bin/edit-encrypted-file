@@ -1,7 +1,7 @@
 #!/bin/sh -e
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
-vim-normal --version | fgrep -q '+cryptv'
-vim-normal -u NONE -c "set $(tr '\n' ' ' <<SETTINGS)" -c 'colorscheme desert' "$@"
+vim --version | fgrep -q '+cryptv'
+vim -u NONE -c "set $(tr '\n' ' ' <<SETTINGS)" -c 'colorscheme desert' "$@"
   nocompatible
   secure
   viminfo=

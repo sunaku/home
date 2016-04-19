@@ -1,0 +1,10 @@
+; generated_rule rdesktop
+( if 
+( begin 
+( is ( window_class ) "rdesktop" )
+) 
+( begin 
+( center )
+( println "match" )
+)
+)
