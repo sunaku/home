@@ -1,0 +1,49 @@
+// This mapping assumes that inet(evdev) will also be sourced
+partial
+xkb_symbols "overlay" {
+    key <LWIN> { [ Overlay1_Enable ], overlay1=<LWIN> };
+    key <I225> { [ Overlay1_Enable ], overlay1=<I225> };
+
+    key <AB09> { overlay1=<INS> };
+
+    key <LEFT> { overlay1=<HOME> };
+    key <RGHT> { overlay1=<END> };
+    key <UP>   { overlay1=<PGUP> };
+    key <DOWN> { overlay1=<PGDN> };
+
+    key <I166> { overlay1=<FK01> };
+    key <I167> { overlay1=<FK02> };
+    key <I181> { overlay1=<FK03> };
+    key <I160> { overlay1=<FK04> };
+    key <I235> { overlay1=<FK05> };
+    key <I232> { overlay1=<FK06> };
+    key <I233> { overlay1=<FK07> };
+    key <MUTE> { overlay1=<FK08> };
+    key <VOL-> { overlay1=<FK09> };
+    key <VOL+> { overlay1=<FK10> };
+
+    key <AE01> { overlay1=<FK01> };
+    key <AE02> { overlay1=<FK02> };
+    key <AE03> { overlay1=<FK03> };
+    key <AE04> { overlay1=<FK04> };
+    key <AE05> { overlay1=<FK05> };
+    key <AE06> { overlay1=<FK06> };
+    key <AE07> { overlay1=<FK07> };
+    key <AE08> { overlay1=<FK08> };
+    key <AE09> { overlay1=<FK09> };
+    key <AE10> { overlay1=<I236> }; // KEY_KBDILLUMTOGGLE
+    key <AE11> { overlay1=<I237> }; // KEY_KBDILLUMDOWN
+    key <AE12> { overlay1=<I238> }; // KEY_KBDILLUMUP
+    key <BKSP> { overlay1=<DELE> };
+
+    key <LALT> { overlay1=<CAPS> };
+    key <RALT> { overlay1=<CAPS> };
+
+    // For some strange reason, some Super_R events are triggered when
+    // the Search key is released (i.e. with overlay on).
+    // This maps RWIN to a dummy key (<I253>), to make sure we catch it.
+    key <RWIN> { [ NoSymbol ], overlay1=<I253> };
+
+    // Map dummy key to no symbol
+    key <I253> { [ NoSymbol ] };
+};

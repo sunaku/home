@@ -1,0 +1,24 @@
+default xkb_keycodes "media" {
+	<FK01> = 166; //Back
+	<FK02> = 167; //Forward
+	<FK03> = 181; //Refresh
+	<FK04> = 160; //Video next
+	<FK05> = 235; //Video mode
+	<FK06> = 232; //Brightness down
+	<FK07> = 233; //Brightness up
+	<FK08> = 121; //Mute
+	<FK09> = 122; //Volume -
+	<FK10> = 123; //Volume +
+
+        <I166> = 67;   // #define KEY_BACK
+        <I167> = 68;   // #define KEY_FORWARD
+        <I181> = 69;   // #define KEY_REFRESH
+        <I160> = 70;   // #define KEY_COFFEE
+        <I235> = 71;   // #define KEY_SWITCHVIDEOMODE
+        <I232> = 72;   // #define KEY_BRIGHTNESSDOWN
+        <I233> = 73;   // #define KEY_BRIGHTNESSUP
+        <MUTE> = 74;
+        <VOL-> = 75;
+        <VOL+> = 76;
+};
+

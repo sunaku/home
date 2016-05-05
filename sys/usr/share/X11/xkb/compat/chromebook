@@ -1,0 +1,7 @@
+// Overlay1_Enable is a latch key for overlay1
+
+default partial xkb_compatibility "overlay"  {
+    interpret Overlay1_Enable+AnyOfOrNone(all) {
+        action= SetControls(controls=Overlay1);
+    };
+};
