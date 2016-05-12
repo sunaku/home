@@ -1,0 +1,90 @@
+#!/bin/sh -eu
+#
+# Usage: tmux-layout-dwindle [top-left|top-right|bottom-left|bottom-right]
+#
+# Arranges panes in the current window into Binary Space Partitions
+# of dwindling dimensions towards one of the following four corners.
+# If no corner is given, the bottom-right corner is used by default.
+#
+#
+#     top-left                                      top-right
+#
+#     +--+--+-----+-----------+     +-----------+-----+--+--+
+#     |.-| 5|     |           |     |           |     | 5|-.|
+#     +-----+  3  |           |     |           |  3  +-----+
+#     |  4  |     |           |     |           |     |  4  |
+#     +--+--+-----+     1     |     |     1     +-----+--+--+
+#     |           |           |     |           |           |
+#     |     2     |           |     |           |     2     |
+#     |           |           |     |           |           |
+#     +-----+-----+-----------+     +-----------+-----+-----+
+#
+#     +-----------+-----------+     +-----------+-----------+
+#     |           |           |     |           |           |
+#     |     2     |           |     |           |     2     |
+#     |           |           |     |           |           |
+#     +-----+-----+     1     |     |     1     +-----+-----+
+#     |  4  |     |           |     |           |     |  4  |
+#     +--+--+  3  |           |     |           |  3  +--+--+
+#     |.-| 5|     |           |     |           |     | 5|-.|
+#     +-----+-----+-----------+     +-----------+-----+-----+
+#
+#     bottom-left                                bottom-right
+#
+#
+# Inspired by <http://dwm.suckless.org/patches/fibonacci> for dwm.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+
+case "${1:-bottom-right}" in
+  (top-left)     move_vertical=-b move_horizontal=-bh ;;
+  (top-right)    move_vertical=-b move_horizontal=-h  ;;
+  (bottom-left)  move_vertical=   move_horizontal=-bh ;;
+  (bottom-right) move_vertical=   move_horizontal=-h  ;;
+  (*) echo "${0##*/}: invalid corner: $1" >&2; exit 2 ;;
+esac
+
+set -- $(tmux list-panes -F '#{pane_id}')
+selected_pane=$(tmux display-message -p '#{pane_id}')
+window_height=$(tmux display-message -p '#{window_height}')
+
+# execute all tmux commands in one shot to avoid flickering and slowness
+exec tmux $({
+
+  # flatten current layout, stacking all panes vertically like pancakes
+  echo select-layout even-vertical
+
+  # transform pane stack into binary space partitions of dwindling size
+  count=1
+  for pane_id; do
+    echo resize-pane -t $pane_id -y $window_height # make room for move
+    echo select-pane -t $pane_id # for relative pane addressing in move
+    if [ $count -eq $# ]; then
+      break # skip last pane because .+1 wraps around to the first pane
+    elif [ $(( count % 2 )) -eq 1 ]; then
+      echo move-pane -d -s .+1 -t . $move_horizontal # attach next pane
+    else
+      echo move-pane -d -s .+1 -t . $move_vertical   # attach next pane
+    fi
+    count=$(( count + 1 ))
+  done
+
+  # divide available space evenly among panes (binary space partitions)
+  branch_height=$window_height
+  count=1
+  for pane_id; do
+    if [ $count -eq $# ]; then
+      break # skip last pane because it will already be sized correctly
+    elif [ $(( count % 2 )) -eq 1 ]; then
+      # every other pane is a branch in the binary space partition tree
+      branch_height=$(( branch_height / 2 ))
+    else
+      echo resize-pane -t $pane_id -y $branch_height
+    fi
+    count=$(( count + 1 ))
+  done
+
+  # restore pane selection back to how it was before we did any of this
+  echo select-pane -t $selected_pane
+
+} | sed 's/$/ ;/')
