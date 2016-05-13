@@ -1,51 +1,98 @@
 #!/bin/sh -eu
 #
-# Usage: tmux-layout-dwindle [top-left|top-right|bottom-left|bottom-right]
+# Usage: tmux-layout-dwindle [tblrhv]...
 #
 # Arranges panes in the current window into Binary Space Partitions
-# of dwindling dimensions towards one of the following four corners.
-# If no corner is given, the bottom-right corner is used by default.
+# of dwindling size towards a corner of the screen (tl, tr, bl, br)
+# while laying out each BSP branch pane either tall (v) or wide (h)
+# according to one of eight possible orientations illustrated below
+# and then restores the current and last pane selection afterwards.
+#
+# If no orientation given, defaults to bottom right vertical (brv).
 #
 #
-#     top-left                                      top-right
+#                tlv                             trv
+#        (top left vertical)             (top right vertical)
 #
-#     +--+--+-----+-----------+     +-----------+-----+--+--+
-#     |.-| 5|     |           |     |           |     | 5|-.|
-#     +-----+  3  |           |     |           |  3  +-----+
-#     |  4  |     |           |     |           |     |  4  |
-#     +--+--+-----+     1     |     |     1     +-----+--+--+
-#     |           |           |     |           |           |
-#     |     2     |           |     |           |     2     |
-#     |           |           |     |           |           |
-#     +-----+-----+-----------+     +-----------+-----+-----+
-#
-#     +-----------+-----------+     +-----------+-----------+
-#     |           |           |     |           |           |
-#     |     2     |           |     |           |     2     |
-#     |           |           |     |           |           |
-#     +-----+-----+     1     |     |     1     +-----+-----+
-#     |  4  |     |           |     |           |     |  4  |
-#     +--+--+  3  |           |     |           |  3  +--+--+
-#     |.-| 5|     |           |     |           |     | 5|-.|
-#     +-----+-----+-----------+     +-----------+-----+-----+
-#
-#     bottom-left                                bottom-right
+#     +--+--+-----+-----------+       +-----------+-----+--+--+
+#     |.-| 5|     |           |       |           |     | 5|-.|
+#     +-----+  3  |           |       |           |  3  +-----+
+#     |  4  |     |           |       |           |     |  4  |
+#     +--+--+-----+     1     |       |     1     +-----+--+--+
+#     |           |           |       |           |           |
+#     |     2     |           |       |           |     2     |
+#     |           |           |       |           |           |
+#     +-----------+-----------+       +-----------+-----------+
 #
 #
-# Inspired by <http://dwm.suckless.org/patches/fibonacci> for dwm.
+#                blv                             brv
+#       (bottom left vertical)         (bottom right vertical)
+#
+#     +-----------+-----------+       +-----------+-----------+
+#     |           |           |       |           |           |
+#     |     2     |           |       |           |     2     |
+#     |           |           |       |           |           |
+#     +-----+-----+     1     |       |     1     +-----+-----+
+#     |  4  |     |           |       |           |     |  4  |
+#     +--+--+  3  |           |       |           |  3  +--+--+
+#     |.-| 5|     |           |       |           |     | 5|-.|
+#     +-----+-----+-----------+       +-----------+-----+-----+
+#
+#
+#                tlh                             trh
+#       (top left horizontal)           (top right horizontal)
+#
+#     +-----+-----+-----------+       +-----------+-----+-----+
+#     | .-  |  4  |           |       |           |  4  |  -. |
+#     +-----+-----+     2     |       |     2     +-----+-----+
+#     |     3     |           |       |           |     3     |
+#     +-----------+-----------+       +-----------+-----------+
+#     |                       |       |                       |
+#     |           1           |       |           1           |
+#     |                       |       |                       |
+#     +-----------------------+       +-----------------------+
+#
+#
+#                blh                             brh
+#      (bottom left horizontal)       (bottom right horizontal)
+#
+#     +-----------+-----------+       +-----------+-----------+
+#     |                       |       |                       |
+#     |           1           |       |           1           |
+#     |                       |       |                       |
+#     +-----------+-----------+       +-----------+-----------+
+#     |     3     |           |       |           |     3     |
+#     +-----+-----+     2     |       |     2     +-----+-----+
+#     | .-  |  4  |           |       |           |  4  |  -. |
+#     +-----+-----+-----------+       +-----------+-----+-----+
+#
+#
+# Inspired by Niki Yoshiuchi's dwindle layout concept in dwm's
+# fibonacci patch <http://dwm.suckless.org/patches/fibonacci>.
 #
 # Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+# Documented at <https://sunaku.github.io/tmux-layout-dwindle.html>
 
-case "${1:-bottom-right}" in
-  (top-left)     move_vertical=-b move_horizontal=-bh ;;
-  (top-right)    move_vertical=-b move_horizontal=-h  ;;
-  (bottom-left)  move_vertical=   move_horizontal=-bh ;;
-  (bottom-right) move_vertical=   move_horizontal=-h  ;;
-  (*) echo "${0##*/}: invalid corner: $1" >&2; exit 2 ;;
+# parse any orientation flags specified among the command-line arguments
+case "$*" in
+  (*t*)   top_bottom=-b ;; # top
+  (*b*|*) top_bottom=   ;; # bottom
+esac
+case "$*" in
+  (*l*)   left_right=-b ;; # left
+  (*r*|*) left_right=   ;; # right
+esac
+case "$*" in
+  (*h*)   horiz_vert=0 ;; # horizontal
+  (*v*|*) horiz_vert=1 ;; # vertical
 esac
 
+# gather information about the current state of the window and its panes
 set -- $(tmux list-panes -F '#{pane_id}')
 selected_pane=$(tmux display-message -p '#{pane_id}')
+historic_pane=$(tmux last-pane 2>/dev/null \;\
+                     display-message -p '#{pane_id}' \;\
+                     last-pane) || : # exit 1: no last pane
 window_height=$(tmux display-message -p '#{window_height}')
 
 # execute all tmux commands in one shot to avoid flickering and slowness
@@ -61,10 +108,10 @@ exec tmux $({
     echo select-pane -t $pane_id # for relative pane addressing in move
     if [ $count -eq $# ]; then
       break # skip last pane because .+1 wraps around to the first pane
-    elif [ $(( count % 2 )) -eq 1 ]; then
-      echo move-pane -d -s .+1 -t . $move_horizontal # attach next pane
+    elif [ $(( count % 2 )) -eq $horiz_vert ]; then
+      echo move-pane -d -s .+1 -t . -h $left_right # move the next pane
     else
-      echo move-pane -d -s .+1 -t . $move_vertical   # attach next pane
+      echo move-pane -d -s .+1 -t .    $top_bottom # move the next pane
     fi
     count=$(( count + 1 ))
   done
@@ -73,18 +120,23 @@ exec tmux $({
   branch_height=$window_height
   count=1
   for pane_id; do
-    if [ $count -eq $# ]; then
+    if [ $count -eq $# -a $horiz_vert -eq 0 ]; then
       break # skip last pane because it will already be sized correctly
     elif [ $(( count % 2 )) -eq 1 ]; then
       # every other pane is a branch in the binary space partition tree
+      parent_height=$branch_height
       branch_height=$(( branch_height / 2 ))
-    else
-      echo resize-pane -t $pane_id -y $branch_height
+      if [ $horiz_vert -eq 0 ]
+      then divide_height=$branch_height
+      else divide_height=$parent_height
+      fi
+      echo resize-pane -t $pane_id -y $divide_height
     fi
     count=$(( count + 1 ))
   done
 
   # restore pane selection back to how it was before we did any of this
+  test -n "$historic_pane" && echo select-pane -t $historic_pane
   echo select-pane -t $selected_pane
 
 } | sed 's/$/ ;/')
