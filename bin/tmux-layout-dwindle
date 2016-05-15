@@ -1,90 +1,229 @@
 #!/bin/sh -eu
 #
-# Usage: tmux-layout-dwindle [tblrhv]...
+# Usage: tmux-layout-dwindle [tblrhvsc]...
 #
-# Arranges panes in the current window into Binary Space Partitions
-# of dwindling size towards a corner of the screen (tl, tr, bl, br)
-# while laying out each BSP branch pane either tall (v) or wide (h)
-# according to one of eight possible orientations illustrated below
-# and then restores the current and last pane selection afterwards.
+# Arranges panes in the current window into Binary Space Partitions of
+# dwindling size towards a corner of the screen (tl, tr, bl, br) along
+# a straight line (c) or spiral trajectory (s) while laying out branch
+# panes either vertically (v) or horizontally (h) to produce one of 16
+# possible orientations, illustrated below, of which "brvc" is default.
 #
-# If no orientation given, defaults to bottom right vertical (brv).
-#
-#
-#                tlv                             trv
-#        (top left vertical)             (top right vertical)
-#
-#     +--+--+-----+-----------+       +-----------+-----+--+--+
-#     |.-| 5|     |           |       |           |     | 5|-.|
-#     +-----+  3  |           |       |           |  3  +-----+
-#     |  4  |     |           |       |           |     |  4  |
-#     +--+--+-----+     1     |       |     1     +-----+--+--+
-#     |           |           |       |           |           |
-#     |     2     |           |       |           |     2     |
-#     |           |           |       |           |           |
-#     +-----------+-----------+       +-----------+-----------+
+# Inspired by the dwindle and spiral layout concepts by Niki Yoshiuchi
+# in dwm's fibonacci patch <http://dwm.suckless.org/patches/fibonacci>.
 #
 #
-#                blv                             brv
-#       (bottom left vertical)         (bottom right vertical)
-#
-#     +-----------+-----------+       +-----------+-----------+
-#     |           |           |       |           |           |
-#     |     2     |           |       |           |     2     |
-#     |           |           |       |           |           |
-#     +-----+-----+     1     |       |     1     +-----+-----+
-#     |  4  |     |           |       |           |     |  4  |
-#     +--+--+  3  |           |       |           |  3  +--+--+
-#     |.-| 5|     |           |       |           |     | 5|-.|
-#     +-----+-----+-----------+       +-----------+-----+-----+
 #
 #
-#                tlh                             trh
-#       (top left horizontal)           (top right horizontal)
-#
-#     +-----+-----+-----------+       +-----------+-----+-----+
-#     | .-  |  4  |           |       |           |  4  |  -. |
-#     +-----+-----+     2     |       |     2     +-----+-----+
-#     |     3     |           |       |           |     3     |
-#     +-----------+-----------+       +-----------+-----------+
-#     |                       |       |                       |
-#     |           1           |       |           1           |
-#     |                       |       |                       |
-#     +-----------------------+       +-----------------------+
+#                        oooo    ooo  .ooooo.
+#                         `88.  .8'  d88' `"Y8
+#                          `88..8'   888
+#                           `888'    888   .o8
+#                            `8'     `Y8bod8P'
 #
 #
-#                blh                             brh
-#      (bottom left horizontal)       (bottom right horizontal)
 #
-#     +-----------+-----------+       +-----------+-----------+
-#     |                       |       |                       |
-#     |           1           |       |           1           |
-#     |                       |       |                       |
-#     +-----------+-----------+       +-----------+-----------+
-#     |     3     |           |       |           |     3     |
-#     +-----+-----+     2     |       |     2     +-----+-----+
-#     | .-  |  4  |           |       |           |  4  |  -. |
-#     +-----+-----+-----------+       +-----------+-----+-----+
+#                           vertical corner
 #
 #
-# Inspired by Niki Yoshiuchi's dwindle layout concept in dwm's
-# fibonacci patch <http://dwm.suckless.org/patches/fibonacci>.
+#
+#         tlvc                                           trvc
+#
+#         +--+--+-----+-----------+ +-----------+-----+--+--+
+#         |\\|5 |     |           | |           |     | 5|//|
+#         +--+--+  3  |           | |           |  3  +--+--+
+#         |  4  |     |           | |           |     |  4  |
+#         +-----+-----+     1     | |     1     +-----+-----+
+#         |           |           | |           |           |
+#         |     2     |           | |           |     2     |
+#         |           |           | |           |           |
+#         +-----------+-----------+ +-----------+-----------+
+#
+#         +-----------+-----------+ +-----------+-----------+
+#         |           |           | |           |           |
+#         |     2     |           | |           |     2     |
+#         |           |           | |           |           |
+#         +-----+-----+     1     | |     1     +-----+-----+
+#         |  4  |     |           | |           |     |  4  |
+#         +--+--+  3  |           | |           |  3  +--+--+
+#         |//|5 |     |           | |           |     | 5|\\|
+#         +--+--+-----+-----------+ +-----------+-----+--+--+
+#
+#         blvc                                           brvc
+#
+#
+#
+#
+#
+#                        oooo    ooo  .oooo.o
+#                         `88.  .8'  d88(  "8
+#                          `88..8'   `"Y88b.
+#                           `888'    o.  )88b
+#                            `8'     8""888P'
+#
+#
+#
+#                           vertical spiral
+#
+#
+#
+#         tlvs                                           trvs
+#
+#         +-----+-----+-----------+ +-----------+-----+-----+
+#         |     |  4  |           | |           |  4  |     |
+#         |  3  +--+--+           | |           +--+--+  3  |
+#         |     |\\|5 |           | |           | 5|//|     |
+#         +-----+--+--+     1     | |     1     +--+--+-----+
+#         |           |           | |           |           |
+#         |     2     |           | |           |     2     |
+#         |           |           | |           |           |
+#         +-----------+-----------+ +-----------+-----------+
+#
+#         +-----------+-----------+ +-----------+-----------+
+#         |           |           | |           |           |
+#         |     2     |           | |           |     2     |
+#         |           |           | |           |           |
+#         +-----+--+--+     1     | |     1     +--+--+-----+
+#         |     |//|5 |           | |           | 5|\\|     |
+#         |  3  +--+--+           | |           +--+--+  3  |
+#         |     |  4  |           | |           |  4  |     |
+#         +-----+-----+-----------+ +-----------+-----+-----+
+#
+#         blvs                                           brvs
+#
+#
+#
+#                        oooo
+#                        `888
+#                         888 .oo.    .ooooo.
+#                         888P"Y88b  d88' `"Y8
+#                         888   888  888
+#                         888   888  888   .o8
+#                        o888o o888o `Y8bod8P'
+#
+#
+#
+#                          horizontal corner
+#
+#
+#
+#         tlhc                                           trhc
+#
+#         +-----+-----+-----------+ +-----------+-----+-----+
+#         | \\\ |     |           | |           |     | /// |
+#         +-----+  4  |           | |           |  4  +-----+
+#         |  5  |     |           | |           |     |  5  |
+#         +-----+-----+     2     | |     2     +-----+-----+
+#         |           |           | |           |           |
+#         |     3     |           | |           |     3     |
+#         |           |           | |           |           |
+#         +-----------+-----------+ +-----------+-----------+
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |           1           | |           1           |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         +-----------------------+ +-----------------------+
+#
+#         +-----------------------+ +-----------------------+
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |           1           | |           1           |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         +-----------+-----------+ +-----------+-----------+
+#         |           |           | |           |           |
+#         |     3     |           | |           |     3     |
+#         |           |           | |           |           |
+#         +-----+-----+     2     | |     2     +-----+-----+
+#         |  5  |     |           | |           |     |  5  |
+#         +-----+  4  |           | |           |  4  +-----+
+#         | /// |     |           | |           |     | \\\ |
+#         +-----+-----+-----------+ +-----------+-----+-----+
+#
+#         blhc                                           brhc
+#
+#
+#
+#                        oooo
+#                        `888
+#                         888 .oo.    .oooo.o
+#                         888P"Y88b  d88(  "8
+#                         888   888  `"Y88b.
+#                         888   888  o.  )88b
+#                        o888o o888o 8""888P'
+#
+#
+#
+#                          horizontal spiral
+#
+#
+#
+#         tlhs                                           trhs
+#
+#         +-----------+-----------+ +-----------+-----------+
+#         |           |           | |           |           |
+#         |     3     |           | |           |     3     |
+#         |           |           | |           |           |
+#         +-----+-----+     2     | |     2     +-----+-----+
+#         |     | \\\ |           | |           | /// |     |
+#         |  4  +-----+           | |           +-----+  4  |
+#         |     |  5  |           | |           |  5  |     |
+#         +-----+-----+-----------+ +-----------+-----+-----+
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |           1           | |           1           |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         +-----------------------+ +-----------------------+
+#
+#         +-----------------------+ +-----------------------+
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |           1           | |           1           |
+#         |                       | |                       |
+#         |                       | |                       |
+#         |                       | |                       |
+#         +-----+-----+-----------+ +-----------+-----+-----+
+#         |     |  5  |           | |           |  5  |     |
+#         |  4  +-----+           | |           +-----+  4  |
+#         |     | /// |           | |           | \\\ |     |
+#         +-----+-----+     2     | |     2     +-----+-----+
+#         |           |           | |           |           |
+#         |     3     |           | |           |     3     |
+#         |           |           | |           |           |
+#         +-----------+-----------+ +-----------+-----------+
+#
+#         blhs                                           brhs
+#
+#
+#
 #
 # Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
 # Documented at <https://sunaku.github.io/tmux-layout-dwindle.html>
 
 # parse any orientation flags specified among the command-line arguments
 case "$*" in
-  (*t*)   top_bottom=-b ;; # top
-  (*b*|*) top_bottom=   ;; # bottom
+  (*t*)   tb_corner=-b tb_spiral=     ;; # top
+  (*b*|*) tb_corner=   tb_spiral=-b   ;; # bottom
 esac
 case "$*" in
-  (*l*)   left_right=-b ;; # left
-  (*r*|*) left_right=   ;; # right
+  (*l*)   lr_corner=-b lr_spiral=     ;; # left
+  (*r*|*) lr_corner=   lr_spiral=-b   ;; # right
 esac
 case "$*" in
-  (*h*)   horiz_vert=0 ;; # horizontal
-  (*v*|*) horiz_vert=1 ;; # vertical
+  (*h*)   hv_branch=0  vertical=false ;; # horizontal branches
+  (*v*|*) hv_branch=1  vertical=true  ;; # vertical branches
+esac
+case "$*" in
+  (*s*)   spiraling=true              ;; # spiral trajectory
+  (*c*|*) spiraling=false             ;; # straight line
 esac
 
 # gather information about the current state of the window and its panes
@@ -104,15 +243,24 @@ exec tmux $({
   # transform pane stack into binary space partitions of dwindling size
   count=1
   for pane_id; do
-    echo resize-pane -t $pane_id -y $window_height # make room for move
-    echo select-pane -t $pane_id # for relative pane addressing in move
     if [ $count -eq $# ]; then
       break # skip last pane because .+1 wraps around to the first pane
-    elif [ $(( count % 2 )) -eq $horiz_vert ]; then
-      echo move-pane -d -s .+1 -t . -h $left_right # move the next pane
+    elif [ $(( count % 2 )) -eq $hv_branch ]; then
+      move_h=-h
+      if $spiraling && [ $(( count % 5 )) -gt 2 ]
+      then move_b=$lr_spiral
+      else move_b=$lr_corner
+      fi
     else
-      echo move-pane -d -s .+1 -t .    $top_bottom # move the next pane
+      move_h=
+      if $spiraling && [ $(( count % 5 )) -gt 2 ]
+      then move_b=$tb_spiral
+      else move_b=$tb_corner
+      fi
     fi
+    echo resize-pane -t $pane_id -y $window_height # make room for move
+    echo select-pane -t $pane_id # for relative pane addressing in move
+    echo move-pane -d -s .+1 -t . $move_h $move_b # move next pane here
     count=$(( count + 1 ))
   done
 
@@ -120,17 +268,17 @@ exec tmux $({
   branch_height=$window_height
   count=1
   for pane_id; do
-    if [ $count -eq $# -a $horiz_vert -eq 0 ]; then
+    if [ $count -eq $# ] && ! $vertical; then
       break # skip last pane because it will already be sized correctly
     elif [ $(( count % 2 )) -eq 1 ]; then
       # every other pane is a branch in the binary space partition tree
       parent_height=$branch_height
       branch_height=$(( branch_height / 2 ))
-      if [ $horiz_vert -eq 0 ]
-      then divide_height=$branch_height
-      else divide_height=$parent_height
+      if $vertical
+      then resize_y=$parent_height
+      else resize_y=$branch_height
       fi
-      echo resize-pane -t $pane_id -y $divide_height
+      echo resize-pane -t $pane_id -y $resize_y
     fi
     count=$(( count + 1 ))
   done
