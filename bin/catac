@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+#
+# Like cat(1) but prints characters in each line in reverse order.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+
+ARGF.each_line do |line|
+  puts line.chomp.reverse
+end

@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Like tac(1) but prints characters in each line in reverse order.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+
+tac "$@" | catac
