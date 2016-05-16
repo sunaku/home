@@ -347,6 +347,13 @@ bind-key -n M-w select-layout main-horizontal \;\
 bind-key -n M-v select-layout main-vertical   \;\
   run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
 
+# binary space partitioned layouts (dwindle, spiral)
+# https://sunaku.github.io/tmux-layout-dwindle.html
+bind-key -n M-w run-shell 'tmux-layout-dwindle brhc'
+bind-key -n M-W run-shell 'tmux-layout-dwindle trhc'
+bind-key -n M-v run-shell 'tmux-layout-dwindle brvc'
+bind-key -n M-V run-shell 'tmux-layout-dwindle blvc'
+
 #-----------------------------------------------------------------------------
 # scrollback buffer
 #-----------------------------------------------------------------------------
