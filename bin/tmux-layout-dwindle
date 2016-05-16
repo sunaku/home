@@ -210,20 +210,20 @@
 
 # parse any orientation flags specified among the command-line arguments
 case "$*" in
-  (*t*)   tb_corner=-b tb_spiral=     ;; # top
-  (*b*|*) tb_corner=   tb_spiral=-b   ;; # bottom
+  (*t*)   corner_tb=+ spiral_tb=        ;; # top
+  (*b*|*) corner_tb=  spiral_tb=+       ;; # bottom
 esac
 case "$*" in
-  (*l*)   lr_corner=-b lr_spiral=     ;; # left
-  (*r*|*) lr_corner=   lr_spiral=-b   ;; # right
+  (*l*)   corner_lr=+ spiral_lr=        ;; # left
+  (*r*|*) corner_lr=  spiral_lr=+       ;; # right
 esac
 case "$*" in
-  (*h*)   hv_branch=0  vertical=false ;; # horizontal branches
-  (*v*|*) hv_branch=1  vertical=true  ;; # vertical branches
+  (*h*)   modulo_hv=0 is_vertical=false ;; # horizontal
+  (*v*|*) modulo_hv=1 is_vertical=true  ;; # vertical
 esac
 case "$*" in
-  (*s*)   spiraling=true              ;; # spiral trajectory
-  (*c*|*) spiraling=false             ;; # straight line
+  (*s*)   is_spiral=true                ;; # spiral
+  (*c*|*) is_spiral=false               ;; # corner
 esac
 
 # gather information about the current state of the window and its panes
@@ -245,22 +245,22 @@ exec tmux $({
   for pane_id; do
     if [ $count -eq $# ]; then
       break # skip last pane because .+1 wraps around to the first pane
-    elif [ $(( count % 2 )) -eq $hv_branch ]; then
-      move_h=-h
-      if $spiraling && [ $(( count % 5 )) -gt 2 ]
-      then move_b=$lr_spiral
-      else move_b=$lr_corner
+    elif [ $(( count % 2 )) -eq $modulo_hv ]; then
+      move_h=+
+      if $is_spiral && [ $(( count % 5 )) -gt 2 ]
+      then move_b=$spiral_lr
+      else move_b=$corner_lr
       fi
     else
       move_h=
-      if $spiraling && [ $(( count % 5 )) -gt 2 ]
-      then move_b=$tb_spiral
-      else move_b=$tb_corner
+      if $is_spiral && [ $(( count % 5 )) -gt 2 ]
+      then move_b=$spiral_tb
+      else move_b=$corner_tb
       fi
     fi
     echo resize-pane -t $pane_id -y $window_height # make room for move
     echo select-pane -t $pane_id # for relative pane addressing in move
-    echo move-pane -d -s .+1 -t . $move_h $move_b # move next pane here
+    echo move-pane -d -s .+1 -t . ${move_h:+-h} ${move_b:+-b} # move it
     count=$(( count + 1 ))
   done
 
@@ -268,13 +268,13 @@ exec tmux $({
   branch_height=$window_height
   count=1
   for pane_id; do
-    if [ $count -eq $# ] && ! $vertical; then
+    if [ $count -eq $# ] && ! $is_vertical; then
       break # skip last pane because it will already be sized correctly
     elif [ $(( count % 2 )) -eq 1 ]; then
       # every other pane is a branch in the binary space partition tree
       parent_height=$branch_height
       branch_height=$(( branch_height / 2 ))
-      if $vertical
+      if $is_vertical
       then resize_y=$parent_height
       else resize_y=$branch_height
       fi
