@@ -94,8 +94,8 @@ set-window-option -g window-status-content-fg     '#e6efc2'               # succ
 bind-key -n M-` set-option -g status
 
 # toggle status bar position
-bind-key -n M-~ if-shell \
-  'tmux show-option -g status-position | grep -q top$' \
+bind-key -n M-~ \
+  if-shell 'tmux show-option -g status-position | grep -q top$' \
     'set-option -g status-position bottom' \
     'set-option -g status-position top'
 
@@ -103,8 +103,8 @@ bind-key -n M-~ if-shell \
 set-option -g status-position top
 
 # list windows on left side of status bar
-set-option -g status-left ''
 set-option -g status-left-length 0
+set-option -g status-left ''
 
 # make window list easier to scan
 set-window-option -g window-status-format         ' #[bold]#I#F#[nobold]#W '
@@ -112,22 +112,29 @@ set-window-option -g window-status-current-format ' #[bold]#I#F#[nobold]#W '
 set-window-option -g window-status-separator      ''
 
 # show pane title, pane identifier, and hostname on right side of status bar
-set-option -g status-right '#{=26:pane_title} #[<%= status_right_ruler_style %>] #S:#I.#P #(test -n "$SSH_TTY" && echo "#[<%= status_right_login_style %>] #H ")'
 set-option -g status-right-length 48
+set-option -g status-right \
+  '#{=26:pane_title} #[<%=
+    status_right_ruler_style
+  %>] #S:#I.#P #(test -n "$SSH_TTY" && echo "#[<%=
+    status_right_login_style
+  %>] #H ")'
 
 #-----------------------------------------------------------------------------
 # windows
 #-----------------------------------------------------------------------------
 
-# create new window
+# create window
 bind-key -n M-e new-window
-
-# create window from current pane
-bind-key -n M-x command-prompt -p '(break-window)' -I '#W' "break-pane ; rename-window '%%'"
-bind-key -n M-X break-pane
 
 # rename window
 bind-key -n M-E command-prompt -I '#W' "rename-window '%%'"
+
+# break off pane to a new window
+bind-key -n M-x \
+  command-prompt -p '(break-pane)' -I '#W' \
+    "break-pane ; rename-window '%%'"
+bind-key -n M-X break-pane
 
 # focus window
 <% if tmux_version < '2' %>
@@ -160,15 +167,26 @@ bind-key -n M-> swap-window -t :+1
 set-option -g visual-activity on
 set-option -g visual-silence on
 set-option -g bell-on-alert on
-bind-key -n M-k set-window-option monitor-activity \; display-message 'monitor-activity #{?monitor-activity,on,off}'
-bind-key -n M-K if-shell \
-  'tmux show-window-option -g monitor-activity | grep -q off$' \
+
+bind-key -n M-k \
+  set-window-option monitor-activity \;\
+  display-message 'monitor-activity #{?monitor-activity,on,off}'
+
+bind-key -n M-K \
+  if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
     'set-window-option -g monitor-activity on' \
-    'set-window-option -g monitor-activity off' \
-  \; display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
-bind-key -n M-j command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-option monitor-silence %% ; display-message "monitor-silence #{?monitor-silence,on,off}"'
+    'set-window-option -g monitor-activity off' \;\
+  display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
+
+bind-key -n M-j \
+  command-prompt -p 'monitor-silence (seconds)' -I 0 \
+    'set-window-option monitor-silence %% ;\
+      display-message "monitor-silence #{?monitor-silence,on,off}"'
+
 <% if tmux_version < '2' %>
-bind-key -n M-q command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-option monitor-silence %%'
+bind-key -n M-q \
+  command-prompt -p 'monitor-silence (seconds)' -I 0 \
+    'set-window-option monitor-silence %%'
 <% end %>
 
 #-----------------------------------------------------------------------------
@@ -176,16 +194,21 @@ bind-key -n M-q command-prompt -p 'monitor-silence (seconds)' -I 0 'set-window-o
 #-----------------------------------------------------------------------------
 
 # send input to all panes in window (toggle)
-bind-key C-a set-option synchronize-panes \; display-message 'synchronize-panes #{?synchronize-panes,on,off}'
+bind-key C-a \
+  set-option synchronize-panes \;\
+  display-message 'synchronize-panes #{?synchronize-panes,on,off}'
 
 # clear the screen in all panes in window
-bind-key C-l set-option synchronize-panes on \; send-keys C-l \; set-option synchronize-panes off
+bind-key C-l \
+  set-option synchronize-panes on \;\
+  send-keys C-l \;\
+  set-option synchronize-panes off
 
-# create pane (below, right, above, left)
+# create pane (below, above, left, right)
 bind-key -n M-c split-window -c '#{pane_current_path}'
-bind-key -n M-r split-window -c '#{pane_current_path}' -h
-bind-key -n M-C split-window -c '#{pane_current_path}'    \; run-shell 'tmux last-pane \; swap-pane -d -s #D'
-bind-key -n M-R split-window -c '#{pane_current_path}' -h \; run-shell 'tmux last-pane \; swap-pane -d -s #D'
+bind-key -n M-C split-window -c '#{pane_current_path}' -b
+bind-key -n M-R split-window -c '#{pane_current_path}' -b -h
+bind-key -n M-r split-window -c '#{pane_current_path}'    -h
 
 # join pane (above, left, below, right)
 bind-key -n M-g move-pane    -t .-1 -s .    # join pane at bottom of prev pane
@@ -193,16 +216,17 @@ bind-key -n M-l move-pane    -t .-1 -s . -h # join pane at right of prev pane
 bind-key -n M-G move-pane -d -s .+1 -t .    # join next pane at bottom
 bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 
-# focus pane or Vim split (if pane running Vim)
-# but if current pane is maximized: do nothing
-# https://sunaku.github.io/tmux-select-pane.html
+# focus the directional pane (or Vim split if inside Vim) unless maximized:
+# (see https://sunaku.github.io/tmux-select-pane.html for more information)
 #
-# Encoding | Bit pair | Pane is Vim? | Pane is zoomed? | Action
-# -------- | -------- | ------------ | --------------- | ------
-# 0        | 00       | No           | No              | Select tmux pane.
-# 1        | 01       | No           | Yes             | Do nothing.
-# 2        | 10       | Yes          | No              | Use vim-tmux-navigator.
-# 3        | 11       | Yes          | Yes             | Select Vim split.
+#     +----------+---------+------------+-----------------------------+
+#     | Encoding | in Vim? | Maximized? | Action taken by key binding |
+#     +----------+---------+------------+-----------------------------+
+#     | 00 (0)   | no      | no         | focus directional tmux pane |
+#     | 01 (1)   | no      | yes        | nothing: ignore key binding |
+#     | 10 (2)   | yes     | no         | delegate vim-tmux-navigator |
+#     | 11 (3)   | yes     | yes        | focus directional Vim split |
+#     +----------+---------+------------+-----------------------------+
 #
 bind-key -n M-d run-shell                                     ' \
   test #{window_zoomed_flag} -eq 0; max=$?;                     \
@@ -291,11 +315,16 @@ bind-key -n 'M-%' join-pane -t :5
 bind-key -n 'M-^' join-pane -t :6
 bind-key -n 'M-&' join-pane -t :7
 bind-key -n 'M-*' join-pane -t :8
-bind-key -n 'M-(' run-shell 'tmux select-window -t :1 \; select-window -t :-1 \; join-pane -s "#{pane_id}"'
+bind-key -n 'M-(' run-shell 'tmux select-window -t :1 \;\
+                                  select-window -t :-1 \;\
+                                  join-pane -s "#{pane_id}"'
 bind-key -n 'M-)' choose-window 'join-pane -t "%%"'
 
 # promote pane (toggle)
-bind-key -n M-Enter if-shell 'test #P -ne 1' 'select-pane -t 1' 'last-pane; swap-pane -s 1'
+bind-key -n M-Enter \
+  if-shell 'test #P -ne 1' \
+    'select-pane -t 1' \
+    'last-pane; swap-pane -s 1'
 
 # rotate panes
 bind-key -n M-a rotate-window -D
@@ -313,8 +342,10 @@ bind-key -n M-z select-layout tiled
 
 # half-screen tiling layouts (horizontal, vertical)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
-bind-key -n M-w select-layout main-horizontal \; run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
-bind-key -n M-v select-layout main-vertical   \; run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
+bind-key -n M-w select-layout main-horizontal \;\
+  run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
+bind-key -n M-v select-layout main-vertical   \;\
+  run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
