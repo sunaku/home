@@ -349,10 +349,10 @@ bind-key -n M-v select-layout main-vertical   \;\
 
 # binary space partitioned layouts (dwindle, spiral)
 # https://sunaku.github.io/tmux-layout-dwindle.html
-bind-key -n M-w run-shell 'tmux-layout-dwindle brhc'
-bind-key -n M-W run-shell 'tmux-layout-dwindle trhc'
-bind-key -n M-v run-shell 'tmux-layout-dwindle brvc'
-bind-key -n M-V run-shell 'tmux-layout-dwindle blvc'
+bind-key -n M-w run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
+bind-key -n M-W run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
+bind-key -n M-v run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
+bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
