@@ -1,0 +1,8 @@
+alias xbs='xbps-query -Rs'
+alias xbi='sudo xbps-install'
+alias xbr='sudo xbps-remove -R'
+alias xbu='sudo xbps-install -Su'
+alias xbR='sudo xbps-remove -Oo'
+alias xbq='xbps-query -R'
+alias xbl='xbps-query -f'
+alias xbf='xbps-query -o'
