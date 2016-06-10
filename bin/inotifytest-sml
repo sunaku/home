@@ -5,7 +5,8 @@
 #
 # Written in 2013 by Suraj N. Kurapati <https://github.com/sunaku>
 
-inotifywait -qme close_write --format '%w%f' . | while read file; do
+inotifywait -qme close_write --format '%w%f' . | while read -r file; do {
+
   # only process *.sml files - ignore all other files
   test "${file%.sml}" = "$file" && continue
 
@@ -26,4 +27,6 @@ inotifywait -qme close_write --format '%w%f' . | while read file; do
     -e '/ Warning: /p' \
     -e '/ = false : bool$/p' \
     -e '/ = <hidden-value> : bool$/p'
+
+} </dev/null
 done

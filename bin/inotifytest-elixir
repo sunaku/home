@@ -5,7 +5,8 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-inotifywait -qme close_write --format '%w%f' . | while read file; do
+inotifywait -qme close_write --format '%w%f' . | while read -r file; do {
+
   # only process *.exs files - ignore all other files
   test "${file%.exs}" = "$file" && continue
 
@@ -22,4 +23,6 @@ inotifywait -qme close_write --format '%w%f' . | while read file; do
 
   # run test file and print any errors or test fails
   elixir "$file"
+
+} </dev/null
 done

@@ -22,7 +22,7 @@ map_file_to_test() { file=$1
 }
 
 inotifywait -rqme close_write --format '%w%f' lib/ test/ |
-while read changed_file; do
+while read -r changed_file; do {
 
   changed_file_test=$(map_file_to_test "$changed_file") || continue
 
@@ -42,4 +42,5 @@ while read changed_file; do
 
   mix test "$@" $changed_file_test $compiled_file_tests
 
+} </dev/null
 done
