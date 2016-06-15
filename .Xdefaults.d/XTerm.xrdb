@@ -21,6 +21,7 @@ XTerm*vt100.colorRVMode         : False
 XTerm*vt100.veryBoldColors      : 6
 XTerm*vt100.showBlinkAsBold     : True
 XTerm*vt100.internalBorder      : 0
+XTerm*vt100.pointerMode         : 2 /* hide the mouse pointer while typing */
 
 ! prevent Alt+Enter keys from toggling fullscreen mode
 XTerm*fullscreen                : never
