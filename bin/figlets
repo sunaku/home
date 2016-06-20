@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Usage: figlets ARGUMENTS_FOR_FIGLET..
+#
+# Runs figlet(1) with the given arguments once for every available font.
+
+ls "$(figlet -I2)" | sed -n 's/\.flf$//p' | xargs -tI% figlet -f% "$@"
