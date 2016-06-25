@@ -22,44 +22,30 @@ target=$(git name-rev --name-only "$target")
 target=${target#remotes/}
 
 # rebase target and ensure that only merge conflicts made it fail
-git rebase "$target" "$@" && exit || test -d .git/rebase-apply
-
-# identify all commits that can be considered as being leftovers
-# by searching the reflog for prior versions of the target: each
-# version is the HEAD of an alternate branch/timeline of history
-leftovers=$(git reflog --format='%gd%gs' |
-            sed -n "s|rebase: checkout $target$||p" |
-            xargs git rev-list 2>/dev/null || :)
+git rebase --fork-point "$target" "$@" && exit || test -d .git/rebase-apply
 
 # solve merge conflicts by absorbing leftover commits from prior
 # versions of the target or by setting aside conflicting commits
 trap 'git rebase --abort' TERM INT
 while test -d .git/rebase-apply; do
-  conflict=$(cat .git/rebase-apply/original-commit)
   headline=$(head -1 .git/rebase-apply/final-commit)
-  callout="$(git rev-parse --short "$conflict") $headline"
+  conflict=$(cat .git/rebase-apply/original-commit)
+  shortish=$(git rev-parse --short "$conflict")
 
-  if test -n "$leftovers" && echo "$leftovers" | grep -F -q "$conflict"
-  then echo "git-rebase-autocon: absorbing leftover commit: $callout"
-  else echo "git-rebase-autocon: resolving conflict commit: $callout"
-
-    # in place of each conflicting commit, record an empty commit whose
-    # message contains the changes introduced by the conflicting commit
-    git reset --mixed --quiet # empty the index so we can make a commit
-    git commit --allow-empty --reuse-message="$conflict" --quiet
-    {
-      printf 'fixup! %s\n\n' "$callout"
-      git format-patch --stdout -- "$conflict~..$conflict"
-    } |
-    git commit --amend --allow-empty --file=- --quiet
-
-    were_any_commits_set_aside_to_resolve_conflicts=true
-  fi
+  # in place of each conflicting commit, record an empty commit whose
+  # message contains the changes introduced by the conflicting commit
+  git reset --mixed --quiet # empty the index so we can make a commit
+  git commit --allow-empty --reuse-message="$conflict" --quiet
+  {
+    printf 'fixup! %s %s\n\n' "$shortish" "$headline"
+    git format-patch --stdout -- "$conflict~..$conflict"
+  } |
+  git commit --amend --allow-empty --file=-
 
   git rebase --skip >/dev/null 2>&1 || :
 done
 
-if ${were_any_commits_set_aside_to_resolve_conflicts:-false}; then cat <<END
+cat <<END
 
     +-------------------------IMPORTANT!----------------------------+
     |                                                               |
@@ -79,4 +65,3 @@ if ${were_any_commits_set_aside_to_resolve_conflicts:-false}; then cat <<END
     +-------------------------IMPORTANT!----------------------------+
 
 END
-fi
