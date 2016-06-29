@@ -4,16 +4,24 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-while inotifywait -qqe close_write /sys/power/state; do
-  # lock the screen when laptop is put to sleep
-  admit1 laptop-locker &
+trap wait EXIT
+
+# lock the session whenever laptop is put to sleep
+while inotifywait -qe close_write /sys/power/state
+do admit1 laptop-locker &
 done &
 
-acpi_listen | while read event; do : $event
+# put laptop to sleep when battery is critically low
+while sleep 90
+do acpi -b | grep -q 'Discharging, [0-3]%' && laptop-suspend
+done &
+
+# handle hardware events reported by the ACPI daemon
+acpi_listen | while read -r event; do : $event
   case "$event" in
     # readjust displays when laptop is opened or closed
     ('button/lid LID '*)
-      laptop-display
+      admit1 laptop-display &
       ;;
   esac
-done
+done &
