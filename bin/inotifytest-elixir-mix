@@ -33,8 +33,9 @@ while read -r changed_file; do {
     "$(date -r "$changed_file" '+%X')" "$changed_file"
 
   compiled_files=$(
-    MIX_ENV=test mix compile | tee /dev/tty |
-    awk '/^Compiled/ { $1=""; print } /^==/ { error=1 } END { exit error }'
+    MIX_ENV=test mix compile --verbose | tee /dev/tty |
+    awk '/^Compiled .+\.ex$/ { $1=""; print }
+         /^==/ { error=1 } END { exit error }'
   ) || continue
 
   compiled_file_tests=$(
