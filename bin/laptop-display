@@ -15,18 +15,31 @@ eval $(xrandr --verbose | awk '
 ')
 
 if test -n "$HDMI1_connected" ; then
-  # use external display and switch off internal one
-  test -z "$HDMI1_active" && xrandr --output "$HDMI1" --auto
-  test -n "$eDP1_active" && xrandr --output "$eDP1" --off
-  test "$HDMI1_prefer_size" != "$HDMI1_size" && xrandr -s "$HDMI1_prefer_size"
+  # switch off internal display and use external one
+
+  test -n "$eDP1_active" &&
+    set -- "$@" --output "$eDP1" --off
+
+  test -z "$HDMI1_active" &&
+    set -- "$@" --output "$HDMI1" --auto
+
+  test "$HDMI1_prefer_size" != "$HDMI1_size" &&
+    set -- "$@" --output "$HDMI1" --auto \
+                --size "$HDMI1_prefer_size"
 
 elif test -n "$eDP1_connected" ; then
-  # there is no external display, so use internal one
-  test -z "$eDP1_active" && xrandr --output "$eDP1" --auto
-  test "$eDP1_prefer_size" != "$eDP1_size" && xrandr -s "$eDP1_prefer_size"
+  # external display not connected; use internal one
+
+  test -z "$eDP1_active" &&
+    set -- "$@" --output "$HDMI1" --off \
+                --output "$eDP1" --auto
+
+  test "$eDP1_prefer_size" != "$eDP1_size" &&
+    set -- "$@" --output "$eDP1" --auto \
+                --size "$eDP1_prefer_size"
 
   # reduce brightness of internal display
-  xbacklight | grep -q '^100' && xbacklight = 5
+  xbacklight | grep -q '^100' && xbacklight = 15
 fi
 
-xrandr --dpi 96
+test $# -gt 0 && xrandr "$@" --dpi 96
