@@ -14,3 +14,5 @@ bind generic R !git revert %(commit)
 bind generic B !git rebase -i %(commit)^
 
 bind generic Y !sh -ec "echo %(commit) | yank"
+
+bind generic T !sh -ec "printf 'tag: '; git tag $(head -1) %(commit)"
