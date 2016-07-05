@@ -65,7 +65,10 @@ alt + ctrl + j
 
 # program launcher
 alt + ctrl + e
-	dmenu_run -fn Tamzen
+	rofi -show run
+
+alt + ctrl + a
+	rofi -show window
 
 # make sxhkd reload its configuration files:
 alt + ctrl + Escape
