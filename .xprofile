@@ -9,3 +9,4 @@ xset fp rehash
 # apply settings
 xrdb -merge ~/.Xdefaults
 export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')
+xsetroot -cursor_name left_ptr

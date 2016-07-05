@@ -1,99 +1,59 @@
 #
-# bspwm hotkeys
-#
-
-alt + ctrl + Escape
-	pkill -USR1 -x sxhkd; \
-	bspwm-panel
-
-# FIXME: if bspwm crashes, this state won't be saved!
-alt + ctrl + shift + Escape
-	bspc query -T > "$BSPWM_TREE"; \
-	bspc query -H > "$BSPWM_HISTORY"; \
-	bspc query -S > "$BSPWM_STACK"; \
-	bspc quit
-
-alt + ctrl + BackSpace
-	bspc window --close
-
-alt + ctrl + shift + BackSpace
-	bspc window --kill
-
-alt + ctrl + m
-	bspc desktop --layout next
-
-alt + ctrl + z
-	bspc desktop --balance
-
-alt + ctrl + {w,shift + m}
-	bspc window --toggle {floating,fullscreen}
-
-alt + ctrl + {d,o}
-	bspc {window,desktop} --focus last
-
-# alt + ctrl + shift + {d,o}
-	# bspc {window,desktop} --swap last
-
-# alt + ctrl + shift + {o,i}
-	# bspc ctrl --record-history off; \
-	# bspc window {older,newer} --focus; \
-	# bspc ctrl --record-history on
-
-alt + ctrl + y
-	bspc window --to-window last.manual
-
-alt + ctrl + v
-	bspc window --swap biggest
-
-alt + ctrl + {_,shift + }{h,n,t,s}
-	bspc window --{focus,swap} {left,down,up,right}
-
-alt + ctrl + {_,shift + }minus
-	bspc window --focus {next,prev}
-
-alt + ctrl + {_,shift + }c
-	bspc desktop --circulate {backward,forward}
-
-alt + ctrl + {comma,period}
-	bspc desktop --focus {prev,next}
-
-alt + ctrl + shift + {comma,period}
-	bspc desktop --swap {prev,next}
-
-alt + ctrl + {h,n,t,s}
-	bspc window -p {left,down,up,right}
-
-alt + ctrl + {_,shift + }space
-	bspc {window -p cancel,desktop -c}
-
-alt + ctrl + b : {h,n,t,s}
-	bspc window -e {left -10,down +10,up -10,right +10}
-
-alt + ctrl + b : shift + {h,n,t,s}
-	bspc window -e {right -10,up +10,down -10,left +10}
-
-alt + ctrl + b : {1-9}
-	bspc window --ratio 0.{1-9}
-
-alt + ctrl + {_,shift + }{1-9,0}
-	bspc {desktop --focus,window --to-desktop} ^{1-9,10}
-
-~button1
-	bspc pointer -g focus
-
-alt + ctrl + button{1-3}
-	bspc pointer -g {move,resize_side,resize_corner}
-
-alt + ctrl + !button{1-3}
-	bspc pointer -t %i %i
-
-alt + ctrl + @button{1-3}
-	bspc pointer -u
-
-#
 # wm independent hotkeys
 #
 
+XF86Display
+	laptop-display
+
+XF86ApplicationRight
+	xcalib -invert -alter
+
+XF86MonBrightnessUp
+	xbacklight + 7
+
+shift + XF86MonBrightnessUp
+	xbacklight + 21
+
+ctrl + XF86MonBrightnessUp
+	xbacklight = 100
+
+XF86MonBrightnessDown
+	xbacklight - 7
+
+shift + XF86MonBrightnessDown
+	xbacklight - 21
+
+ctrl + XF86MonBrightnessDown
+	xbacklight = 0
+
+XF86AudioRaiseVolume
+	ponymix increase 5
+
+shift + XF86AudioRaiseVolume
+	ponymix increase 15
+
+ctrl + XF86AudioRaiseVolume
+	ponymix set-volume 100
+
+XF86AudioLowerVolume
+	ponymix decrease 5
+
+shift + XF86AudioLowerVolume
+	ponymix decrease 15
+
+ctrl + XF86AudioLowerVolume
+	ponymix set-volume 0
+
+XF86AudioMute
+	ponymix toggle
+
+XF86PowerOff
+	laptop-locker
+
+ctrl + XF86PowerOff
+	laptop-suspend
+
+# terminal emulator
 alt + ctrl + x
 	xterm
 
@@ -103,11 +63,134 @@ alt + ctrl + k
 alt + ctrl + j
 	pcmanfm
 
+# program launcher
 alt + ctrl + e
-	dmenu_run
+	dmenu_run -fn Tamzen
 
-alt + ctrl + a
-	acer-c720-display
+# make sxhkd reload its configuration files:
+alt + ctrl + Escape
+	pkill -USR1 -x sxhkd
 
-alt + ctrl + Delete
-	acer-c720-locker
+#
+# bspwm hotkeys
+#
+
+# quit bspwm normally
+alt + ctrl + shift + Escape
+	bspc wm -d > "$BSPWM_STATE" && bspc quit
+
+# close and kill
+alt + ctrl + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+alt + ctrl + m
+	bspc desktop -l next
+
+# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
+alt + ctrl + y
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
+# swap the current node and the biggest node
+alt + ctrl + Return
+	bspc node -s biggest
+
+#
+# state/flags
+#
+
+# set the window state
+alt + ctrl + {w,v,z,b}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+alt + ctrl + {l,c,r}
+	bspc node -g {locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+alt + ctrl + {_,shift + }{h,n,t,s}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+# alt + ctrl + {f,g,comma,period}
+alt + ctrl + {f,g,bracketleft,bracketright}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node
+alt + ctrl + {_,shift + }minus
+	bspc node -f {next,prev}
+
+# focus the next/previous desktop
+# alt + ctrl + bracket{left,right}
+alt + ctrl + {comma,period}
+	bspc desktop -f {prev,next}
+
+# focus the last node/desktop
+alt + ctrl + {d,o}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+alt + ctrl + {u,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+alt + ctrl + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+alt + ctrl + shift + {h,n,t,s}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+alt + ctrl + shift + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+alt + ctrl + shift + d
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+alt + ctrl + shift + o
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# resize tiled/floating
+#
+
+# expand the tiled space in the given direction
+alt + ctrl + {Left,Down,Up,Right}
+	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+
+# contract the tiled space in the given direction
+alt + ctrl + shift + {Left,Down,Up,Right}
+	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+# move a floating window
+alt + ctrl + super + {Left,Down,Up,Right}
+	xdo move {-x -20,-y +20,-y -20,-x +20}
+
+#
+# pointer focus/move/resize
+#
+
+# focus
+~button1
+	bspc pointer -g focus
+
+# start move/resize
+alt + button{1-3}
+	; bspc pointer -g {move,resize_side,resize_corner}
+
+# end move/resize
+alt + @button{1-3}
+	bspc pointer -u

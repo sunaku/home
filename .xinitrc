@@ -28,32 +28,31 @@ export QT_IM_MODULE=scim
 scim -d &
 
 # desktop apps
-# mpc || mpd &                   # music
-{
-  sleep 3 # wait for window manager to start
-  # witray &                       # tray
-  redshift-gtk &                 # color
-  wpa_gui -t &                   # wifi
-  system-config-printer-applet & # printer
-  blueman-applet &               # bluetooth
-  pasystray &                    # PulseAudio
-  claws-mail & # email
-  workrave &
-} &
+workrave &                      # health
+redshift-gtk &                  # f.lux
+pasystray &                     # sound
+# mpc || mpd &                  # music
+system-config-printer-applet &  # printer
+blueman-applet &                # bluetooth
+wpa_gui -t &                    # network
+claws-mail &                    # email
+xterm -e 'tmux has-session &&
+          tmux attach -d ||
+          tmux' &               # terminal
 
 # system logs
 xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 -e '
-  tail -f /var/log/*.log \
-      ~/.xsession-errors \
-      ~/.wmii/wmiirc.log &
-  dmesg -wHP
+  tail -f /var/log/*.log ~/.xsession-errors &
+  dmesg --follow --human --nopager
 ' &
 
 # window manager
-while xterm & do wmii
+export BSPWM_STATE=/tmp/bspwm-state.json
+while :; do bspwm
   xmessage 'INSERT COIN TO CONTINUE' \
   -buttons 'Insert Coin:0,Game Over' \
   -default 'Insert Coin' -timeout 10 \
   -center || break
   . ~/.pathrc # pick up $PATH changes
 done
+rm -f "$BSPWM_STATE"

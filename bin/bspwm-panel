@@ -1,10 +1,43 @@
-#!/bin/sh -ex
-# (Re)starts the bspwm panel.
+#!/bin/sh
+#
+# Starts (or restarts if running) a status bar and a system tray for bspwm.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
 
-pgrep -x panel && pkill -x panel
+trap wait EXIT
 
-cd ~/.config/bspwm/examples/panel
-export PATH=.:$PATH
+#-----------------------------------------------------------------------------
+# status bar
+#-----------------------------------------------------------------------------
 
-. profile
-exec panel
+dir=~/.config/bspwm/examples/panel
+cfg="$dir"/profile
+exe="$dir"/panel
+
+. "$cfg"
+PANEL_FONT='-*-tamzen-medium-r-*-*-16-*-*-*-*-*-*-*'
+PANEL_HEIGHT=18
+. "$exe"_colors
+
+# The panel script sets up a `kill 0` exit trap that inadvertently kills this
+# process, its parent (usually sxhkd if this script is invoked via a shortcut)
+# and any other processes that share its Process Group ID (PGID).  The setsid
+# shields us from this massacre by giving the panel script its very own PGID.
+pkill -f "$exe"
+PATH="$dir:$PATH" setsid --wait "$exe" &
+
+#-----------------------------------------------------------------------------
+# system tray
+#-----------------------------------------------------------------------------
+
+pkill -x trayer
+trayer                                      \
+  --edge            top                     \
+  --align           right                   \
+  --distance        88                      \
+  --distancefrom    right                   \
+  --widthtype       request                 \
+  --height          $PANEL_HEIGHT           \
+  --transparent     true                    \
+  --tint            0x${COLOR_DEFAULT_BG#?} \
+  --padding         2                       &

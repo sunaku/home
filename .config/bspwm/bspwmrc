@@ -1,9 +1,12 @@
 #!/bin/sh
 
-bspc config border_width               2
-bspc config window_gap                 12
+pkill -x sxhkd
+sxhkd -m -1 & # the `-m -1` handles newly connected keyboards
 
-bspc config split_ratio                0.52
+bspc config border_width               1
+bspc config window_gap                 0
+
+bspc config split_ratio                0.50
 bspc config borderless_monocle         true
 bspc config gapless_monocle            true
 bspc config focus_by_distance          true
@@ -14,18 +17,26 @@ bspc config remove_disabled_monitors   true
 bspc config remove_unplugged_monitors  true
 bspc config merge_overlapping_monitors true
 
-# bspc monitor -d I II III IV V VI VII VIII IX X
-bspc monitor -d 1 2 3 4 5 6 7 8 9 a
+bspc monitor -d 1.home 2.webs 3.mail 4.work 5.term 6.docs 7.note 8 9 0
 
-bspc rule -a Gimp desktop=^8 follow=on floating=on
+bspc rule -a Gimp desktop=^8 state=floating follow=on
 bspc rule -a Chromium desktop=^2
-bspc rule -a mplayer2 floating=on
+bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+bspc rule -a Claws-mail desktop=^3
+bspc rule -a rdesktop desktop=^4 state=floating
+bspc rule -a Lxappearance state=floating
+bspc rule -a fontforge desktop=^9 state=floating
+bspc rule -a Blueman-manager state=floating
 
-# restore windows into current session
-. ~/.config/bspwm/examples/loop/profile
-. ~/.config/bspwm/examples/loop/bspwmrc
+# re-parent existing windows into the current session
+if [ -e "$BSPWM_STATE" ]; then
+	bspc wm -l "$BSPWM_STATE"
+	rm "$BSPWM_STATE"
+else
+	bspc wm --adopt-orphans
+fi
 
+pkill -x bspwm-panel
 bspwm-panel &
-sxhkd -m -1 & # the -1 ensures new keyboards are mapped
