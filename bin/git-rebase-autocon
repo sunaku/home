@@ -38,7 +38,7 @@ while test -d .git/rebase-apply; do
   git commit --allow-empty --reuse-message="$conflict" --quiet
   {
     printf 'fixup! %s %s\n\n' "$shortish" "$headline"
-    git format-patch --stdout -- "$conflict~..$conflict"
+    git format-patch --stdout "$conflict~..$conflict"
   } |
   git commit --amend --allow-empty --file=-
 
