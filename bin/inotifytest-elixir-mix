@@ -2,12 +2,11 @@
 #
 # Setup: apt-get install inotify-tools
 #
-# Usage: [CLEAR=1] inotifytest-elixir-mix [ARGUMENTS_FOR_MIX_TEST...]
+# Usage: inotifytest-elixir-mix [ARGUMENTS_FOR_MIX_TEST...]
 #
 # When *.exs files in or beneath lib/ or test/ are modified, this script runs
 # their corresponding test/*test.exs files and prints any errors or failures.
 # If any other test/*.exs file is modified, then all available tests are run.
-# When CLEAR=1 is given, the screen is first clear(1)ed before tests are run.
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
@@ -22,13 +21,13 @@ map_file_to_test() { file=$1
   test -n "$test" -a -f "$test" && echo "$test" || : # print only if exist
 }
 
+test_exit_status=0
 inotifywait -rqme close_write --format '%w%f' lib/ test/ |
 while read -r changed_file; do {
 
   changed_file_test=$(map_file_to_test "$changed_file") || continue
 
-  ${CLEAR:+clear} # clear the screen when $CLEAR is specified
-
+  test $test_exit_status -eq 0 && clear
   printf '\033[33m%s -> \033[36m%s\033[0m\n' \
     "$(date -r "$changed_file" '+%X')" "$changed_file"
 
@@ -45,6 +44,7 @@ while read -r changed_file; do {
   )
 
   mix test "$@" $changed_file_test $compiled_file_tests
+  test_exit_status=$?
 
 } </dev/null
 done
