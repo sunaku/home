@@ -59,15 +59,15 @@ set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
     window_status_current_style = 'fg=colour231,bg=colour67'  # lucius visual airline_a
     pane_border_style           = 'fg=colour253'              # lucius normal airline_c
     pane_active_border_style    = 'fg=colour250,bg=colour250' # lucius normal airline_b
-    status_right_ruler_style    = 'fg=colour231,bg=colour244'
-    status_right_login_style    = 'fg=colour231,bg=colour204'
+    status_ruler_style          = 'fg=colour231,bg=colour244'
+    status_login_style          = 'fg=colour231,bg=colour204'
   else
     status_style                = 'fg=colour246,bg=colour237' # gruvbox normal airline_c
     window_status_current_style = 'fg=colour208,bg=colour236' # gruvbox visual airline_c
     pane_border_style           = 'fg=colour239'              # gruvbox normal airline_b
     pane_active_border_style    = 'fg=colour208'              # gruvbox visual airline_c
-    status_right_ruler_style    = window_status_current_style
-    status_right_login_style    = 'bold,reverse'
+    status_ruler_style          = window_status_current_style
+    status_login_style          = window_status_current_style + ',bold,reverse'
   end
 %>
 set-option        -g status-style                <%= status_style                %>
@@ -103,8 +103,9 @@ bind-key -n M-~ \
 set-option -g status-position top
 
 # list windows on left side of status bar
-set-option -g status-left-length 0
-set-option -g status-left ''
+set-option -g status-left-length 16
+set-option -g status-left \
+  '#(test -n "$SSH_TTY" && echo "#[<%= status_login_style %>] #H ")'
 
 # make window list easier to scan
 set-window-option -g window-status-format         ' #[bold]#I#F#[nobold]#W '
@@ -114,11 +115,7 @@ set-window-option -g window-status-separator      ''
 # show pane title, pane identifier, and hostname on right side of status bar
 set-option -g status-right-length 48
 set-option -g status-right \
-  '#{=26:pane_title} #[<%=
-    status_right_ruler_style
-  %>] #S:#I.#P #(test -n "$SSH_TTY" && echo "#[<%=
-    status_right_login_style
-  %>] #H ")'
+  '#{=26:pane_title} #[<%= status_ruler_style %>] #S:#I.#P'
 
 #-----------------------------------------------------------------------------
 # windows
