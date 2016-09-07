@@ -1,4 +1,4 @@
-export LESS='-iLR'
+export LESS='-iR'
 export PAGER='less'
 
 export VISUAL='vim'
