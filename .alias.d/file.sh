@@ -12,12 +12,11 @@ u() { # go up $1 directories
 
 # inspect
 alias ls='ls -h --color=auto'
-alias ll='ls -ltr'
-alias la='ll -A'
-alias ,='la'
-alias ,.='ll -d'
-alias ,,='ls-summary'
-alias ,t='tree'
+alias ,='ls -Altr'
+alias ,.='ls -ld'
+alias ,-='ls-sizetime -Ahtr'
+alias ,_='ls-summary'
+alias ,+='tree'
 
 # modify
 alias cp='cp -i'
