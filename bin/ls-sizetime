@@ -1,0 +1,12 @@
+#!/bin/sh -e
+#
+# Usage: ls-sizetime [ARGUMENTS_FOR_LS]...
+#
+# Runs ls(1) and prints file size, modification time, and pathname.
+# If the standard output stream is a terminal, output is colorized.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+
+test -t 1 && tty=+ || tty=
+
+ls -g -o ${tty:+--color} "$@" | sed 's/^\S\+\s\+\S\+//; /^$/d'
