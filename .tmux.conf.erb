@@ -176,7 +176,7 @@ bind-key -n M-K \
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
 bind-key -n M-j \
-  command-prompt -p 'monitor-silence (seconds)' -I 0 \
+  command-prompt -p 'monitor-silence (seconds)' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
 
