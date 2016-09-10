@@ -418,12 +418,10 @@ bind-key -n M-Y choose-buffer 'run-shell "tmux save-buffer -b \"%%\" - | yank > 
 # TMUX plugin manager https://github.com/tmux-plugins/tpm
 #-----------------------------------------------------------------------------
 
-set -g @tpm_plugins "         \
-  tmux-plugins/tpm            \
-  tmux-plugins/tmux-resurrect \
-  tmux-plugins/tmux-copycat   \
-"
-
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-capture-pane-contents on
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-copycat'
+set -g @plugin 'tmux-plugins/tmux-open'
 
 run-shell ~/.tmux/plugins/tpm/tpm
