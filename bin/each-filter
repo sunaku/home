@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# Usage: each-filter EXPRESSION [ARGUMENT]...
+#
+# Evaluates EXPRESSION (which may use "$1" to refer to each ARGUMENT in turn)
+# for each ARGUMENT, printing it to stdout if the evaluation was successful.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+
+exec each-partition "$@" 2>/dev/null

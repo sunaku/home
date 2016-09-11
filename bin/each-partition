@@ -1,0 +1,21 @@
+#!/bin/sh -eu
+#
+# Usage: each-partition EXPRESSION [ARGUMENT]...
+#
+# Evaluates EXPRESSION (which may use "$1" to refer to each ARGUMENT in turn)
+# for each ARGUMENT, printing it to either (1) stdout if the evaluation was
+# successful or (2) stderr if the evaluation returned a nonzero exit status.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+
+expression=$1
+shift
+
+while test $# -gt 0
+do
+  if eval "$expression" >/dev/null 2>&1
+  then echo "$1"
+  else echo "$1" >&2
+  fi
+  shift
+done
