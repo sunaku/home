@@ -1,0 +1,12 @@
+#!/bin/sh -e
+#
+# Usage: har-audio-mpeg HAR_INPUT > AUDIO_MPEG_FILE
+# Usage: cat HAR_INPUT | har-audio-mpeg > AUDIO_MPEG_FILE
+#
+# Decodes the first "audio/mpeg" payload from HAR_INPUT to stdout.
+#
+# Written in 2016 by Suraj N. Kurapati <https://github.com/sunaku>
+
+grep -F -A1 -m1 '"mimeType": "audio/mpeg",' "$@" |
+sed -n 's/^ *"text": "\([^"]*\)".*$/\1/p' |
+base64 -d
