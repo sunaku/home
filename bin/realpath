@@ -1,3 +1,0 @@
-#!/usr/bin/env ruby
-# Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
-puts File.expand_path ARGV.join(' ')
