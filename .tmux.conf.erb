@@ -383,6 +383,8 @@ set-window-option -g mode-keys vi
 bind-key -t vi-copy C-V rectangle-toggle
 bind-key -t vi-copy v begin-selection
 bind-key -t vi-copy y copy-selection -x
+bind-key -t vi-copy - jump-again
+bind-key -t vi-copy _ jump-reverse
 # transfer copied text to attached terminal with yank:
 # https://github.com/sunaku/home/blob/master/bin/yank
 bind-key -t vi-copy Y copy-pipe 'yank > #{pane_tty}'
