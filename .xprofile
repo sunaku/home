@@ -10,3 +10,7 @@ xset fp rehash
 xrdb -merge ~/.Xdefaults
 export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')
 xsetroot -cursor_name left_ptr
+
+# subpixel hinting
+# https://github.com/voidlinux/void-packages/issues/4444
+export FREETYPE_PROPERTIES='truetype:interpreter-version=35'
