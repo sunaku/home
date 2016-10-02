@@ -1,0 +1,14 @@
+set font                    "Tamzen 13"
+set guioptions              ""
+set scroll-page-aware       true
+set window-title-basename   true
+set window-title-page       true
+
+map <C-Home>    goto     top
+map <BackSpace> navigate previous
+map <Home>      scroll   page-top
+map <PageUp>    scroll   full-up
+map <PageDown>  scroll   full-down
+map <End>       scroll   page-bottom
+map <Space>     navigate next
+map <C-End>     goto     bottom
