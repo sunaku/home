@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 #
 # Uses external display if connected; or internal display otherwise.
 #

@@ -23,14 +23,14 @@ PANEL_HEIGHT=18
 # process, its parent (usually sxhkd if this script is invoked via a shortcut)
 # and any other processes that share its Process Group ID (PGID).  The setsid
 # shields us from this massacre by giving the panel script its very own PGID.
-pkill -f "$exe"
+pkill -f "lemonbar|$exe" && sleep 0.125
 PATH="$dir:$PATH" setsid --wait "$exe" &
 
 #-----------------------------------------------------------------------------
 # system tray
 #-----------------------------------------------------------------------------
 
-pkill -x trayer
+pkill -x trayer && sleep 0.125
 trayer                                      \
   --edge            top                     \
   --align           right                   \

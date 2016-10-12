@@ -29,6 +29,5 @@ done &
 # reposition bspwm panel when screen resolution changes
 while sleep 1; do bspc subscribe monitor_geometry; done |
 while read -r event; do : $event
-  admit1 laptop-display
-  pkill -x bspwm-panel && bspwm-panel &
+  admit1 laptop-display && bspwm-panel &
 done &
