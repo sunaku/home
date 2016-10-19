@@ -224,7 +224,7 @@ alias gM='git merge --no-ff'
 #-----------------------------------------------------------------------------
 
 alias gr='git rebase --preserve-merges'
-alias gR='git rebase' # don't preserve merges
+alias gR='git rebase --fork-point'
 alias gri='gr --interactive'
 alias gRi='gR --interactive'
 alias grc='git rebase --continue'
