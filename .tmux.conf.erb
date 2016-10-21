@@ -413,6 +413,9 @@ bind-key -n M-Y choose-buffer 'run-shell "tmux save-buffer -b \"%%\" - | yank > 
 
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-capture-pane-contents on
-set -g @plugin 'tmux-plugins/tmux-copycat'
+
+set -g @plugin 'Morantron/tmux-fingers'
+set -g @fingers-compact-hints 0
+set -g @fingers-key '-n M-U'
 
 run-shell ~/.tmux/plugins/tpm/tpm
