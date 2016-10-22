@@ -108,6 +108,12 @@ alias gtX='git stash clear'
 # commit staged changes
 alias gc='git commit'
 
+# commit changes as a fixup of existing commit
+alias gcF='git commit --fixup'
+
+# commit changes as a fixup of existing commit chosen from menu
+alias gcf='gll | fzf | sed "s/^. //; s/ .*/^/" | read && gcF $REPLY'
+
 # commit staged changes with the given message
 alias gcm='git commit -m'
 
@@ -212,21 +218,18 @@ gbH() {
 #-----------------------------------------------------------------------------
 
 alias gm='git merge'
+alias gmm='git merge --no-ff'
 alias gmc='git merge --continue'
 alias gma='git merge --abort'
 alias gms='git merge --skip'
-
-# merge then record a special merge commit
-alias gM='git merge --no-ff'
 
 #-----------------------------------------------------------------------------
 # r = rebase
 #-----------------------------------------------------------------------------
 
-alias gr='git rebase --preserve-merges'
-alias gR='git rebase --fork-point'
-alias gri='gr --interactive'
-alias gRi='gR --interactive'
+alias gr='git rebase --fork-point'
+alias grm='git rebase --preserve-merges'
+alias gri='git rebase --interactive --autosquash'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
@@ -394,10 +397,10 @@ alias ggr='gg && gr $(gbh)'
 alias ggR='git pull --rebase'
 
 # clone a repository
-alias ggg='git clone --recursive'
+alias ggg='git clone --recurse-submodules'
 
 # shallow clone a repository
-alias ggG='ggg --depth=1'
+alias gg1='ggg --depth=1 --shallow-submodules'
 
 #-----------------------------------------------------------------------------
 # u = submodule
