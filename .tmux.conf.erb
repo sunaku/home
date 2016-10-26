@@ -415,7 +415,15 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-capture-pane-contents on
 
 set -g @plugin 'Morantron/tmux-fingers'
-set -g @fingers-compact-hints 0
 set -g @fingers-key '-n M-U'
+set -g @fingers-compact-hints 0
+set -g @fingers-hint-labels ' \
+  a o e u i d h t n s         \
+        p y f g c r l         \
+    q j k x b m w v z         \
+  A O E U I D H T N S         \
+        P Y F G C R L         \
+    Q J K X B M W V Z         \
+'
 
 run-shell ~/.tmux/plugins/tpm/tpm
