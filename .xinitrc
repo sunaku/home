@@ -4,6 +4,7 @@
 # before this point.  Otherwise, this script might fail
 # because the programs it executes might not be found.
 
+killall=
 . ~/.profile
 
 # hardware
@@ -19,7 +20,7 @@ eval $(dbus-launch --sh-syntax --exit-with-session)
 
 # encryption
 eval $(gpg-agent --daemon) &&
-trap 'killall gpg-agent' EXIT
+killall="gpg-agent $killall"
 
 # input method
 export XMODIFIERS='@im=SCIM'
@@ -31,6 +32,7 @@ scim -d &
 workrave &                      # health
 redshift-gtk &                  # f.lux
 pasystray &                     # sound
+killall="pulseaudio $killall"
 # mpc || mpd &                  # music
 system-config-printer-applet &  # printer
 blueman-applet &                # bluetooth
@@ -56,3 +58,6 @@ while :; do bspwm
   . ~/.pathrc # pick up $PATH changes
 done
 rm -f "$BSPWM_STATE"
+
+# kill daemons
+test -n "$killall" && killall $killall
