@@ -43,3 +43,4 @@ elif test -n "$eDP1_connected" ; then
 fi
 
 test $# -gt 0 && xrandr "$@" --dpi 96
+nitrogen --restore # desktop wallpaper

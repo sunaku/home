@@ -29,6 +29,7 @@ bspc rule -a rdesktop desktop=^4 state=floating
 bspc rule -a Lxappearance state=floating
 bspc rule -a fontforge desktop=^9 state=floating
 bspc rule -a Blueman-manager state=floating
+bspc rule -a Nitrogen state=pseudo_tiled
 
 # re-parent existing windows into the current session
 if [ -e "$BSPWM_STATE" ]; then
