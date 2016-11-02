@@ -70,13 +70,13 @@ alt + ctrl + e
 alt + ctrl + a
 	rofi -show window
 
-# make sxhkd reload its configuration files:
-alt + ctrl + Escape
-	pkill -USR1 -x sxhkd
-
 #
 # bspwm hotkeys
 #
+
+# reload bspwm config
+alt + ctrl + Escape
+	~/.config/bspwm/bspwmrc
 
 # quit bspwm normally
 alt + ctrl + shift + Escape
@@ -119,7 +119,6 @@ alt + ctrl + {_,shift + }{h,n,t,s}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
-# alt + ctrl + {f,g,comma,period}
 alt + ctrl + {f,g,bracketleft,bracketright}
 	bspc node -f @{parent,brother,first,second}
 
@@ -128,7 +127,6 @@ alt + ctrl + {_,shift + }minus
 	bspc node -f {next,prev}
 
 # focus the next/previous desktop
-# alt + ctrl + bracket{left,right}
 alt + ctrl + {comma,period}
 	bspc desktop -f {prev,next}
 
@@ -167,33 +165,17 @@ alt + ctrl + shift + o
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
-# resize tiled/floating
+# move/resize
 #
 
-# expand the tiled space in the given direction
+# expand a window by moving one of its side outward
 alt + ctrl + {Left,Down,Up,Right}
-	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
-# contract the tiled space in the given direction
+# contract a window by moving one of its side inward
 alt + ctrl + shift + {Left,Down,Up,Right}
-	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
 alt + ctrl + super + {Left,Down,Up,Right}
-	xdo move {-x -20,-y +20,-y -20,-x +20}
-
-#
-# pointer focus/move/resize
-#
-
-# focus
-~button1
-	bspc pointer -g focus
-
-# start move/resize
-alt + button{1-3}
-	; bspc pointer -g {move,resize_side,resize_corner}
-
-# end move/resize
-alt + @button{1-3}
-	bspc pointer -u
+	bspc node -v {-20 0,0 20,0 -20,20 0}
