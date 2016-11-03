@@ -58,7 +58,7 @@ alt + ctrl + x
 	xterm
 
 alt + ctrl + k
-	firefox
+	chromium
 
 alt + ctrl + j
 	pcmanfm

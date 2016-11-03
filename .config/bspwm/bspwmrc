@@ -20,7 +20,6 @@ bspc config merge_overlapping_monitors true
 bspc monitor -d 1.home 2.webs 3.mail 4.work 5.term 6.docs 7.note 8 9 0
 
 bspc rule -a Gimp desktop=^8 state=floating follow=on
-bspc rule -a Chromium desktop=^2
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
@@ -30,6 +29,7 @@ bspc rule -a Lxappearance state=floating
 bspc rule -a fontforge desktop=^9 state=floating
 bspc rule -a Blueman-manager state=floating
 bspc rule -a Nitrogen state=pseudo_tiled
+bspc rule -a "Page Unresponsive" state=floating
 
 # re-parent existing windows into the current session
 if [ -e "$BSPWM_STATE" ]; then

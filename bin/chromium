@@ -1,7 +1,35 @@
-#!/bin/sh
+#!/bin/sh -e
 #
-# Make the Chromium web browser always open in a new window.
+# Run the Chromium web browser in a sandbox, opening a new window,
+# limiting memory usage to half the available memory or 1 GiB max.
 #
 # Written in 2011 by Suraj N. Kurapati <https://github.com/sunaku>
 
-exec /usr/bin/chromium --new-window "$@"
+memory=$(
+  free --bytes | awk '
+    BEGIN {
+      GiB = 2 ^ 30
+      print 1 * GiB
+    }
+    /Mem:/ {
+      total=$2
+      avail=$7
+      print total/2
+      print avail/2
+    }
+  ' | sort -n | head -1
+)
+
+exec \
+nice \
+prlimit --data=$memory --rss=$memory \
+firejail \
+  --whitelist=~/.config/fontconfig \
+  --whitelist=~/.fonts \
+  --whitelist=~/lab \
+  --whitelist=~/dev \
+  --whitelist=~/.vim \
+  --whitelist=~/.claws-mail/mimetmp \
+  --whitelist=~/Documents/blog/content \
+  -- \
+/usr/bin/chromium --new-window "$@"
