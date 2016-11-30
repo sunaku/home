@@ -112,7 +112,7 @@ alias gc='git commit'
 alias gcF='git commit --fixup'
 
 # commit changes as a fixup of existing commit chosen from menu
-alias gcf='gll | fzf | sed "s/^. //; s/ .*/^/" | read && gcF $REPLY'
+alias gcf='gcF $(gl0)'
 
 # commit staged changes with the given message
 alias gcm='git commit -m'
@@ -229,10 +229,21 @@ alias gms='git merge --skip'
 
 alias gr='git rebase --fork-point'
 alias grm='git rebase --preserve-merges'
-alias gri='git rebase --interactive --autosquash'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
+
+# rebase interactively
+gri() {
+  git rebase HEAD || return $? # make sure working tree is ready for rebasing
+  test $# -eq 0 && set -- "$(gl0)~" # choose a target with fzf if unspecified
+  git rebase --interactive "$@"
+}
+
+# rebase interactively to squash fixup commits
+grf() {
+  gri --autosquash "$(glf)^"
+}
 
 #-----------------------------------------------------------------------------
 # k = conflict
@@ -289,13 +300,10 @@ alias gfc='git rev-list --all'
 #-----------------------------------------------------------------------------
 
 # show commit log
-alias gl='git log --decorate --graph'
+alias gl='git log --decorate --graph --name-status --find-copies'
 
 # show most recent log entry
-alias gl1='glf -1'
-
-# show log with affected files
-alias glf='gl --name-status --find-copies'
+alias gl1='gl -1'
 
 # show log like `ls -l`
 alias gll='gl --oneline'
@@ -308,6 +316,18 @@ alias glD="$intra_line_less gld $intra_line_diff"
 
 # pretty git changelog
 alias glp='git log --pretty="  * %s. %b"'$'\n'
+
+# show chosen commit's SHA
+gl0() {
+  git log --oneline --decorate --graph | fzf | cut -f2 -d' ' |
+  xargs -r git rev-parse # convert short commitish to full SHA
+}
+
+# show earliest fixup commit's target commit SHA
+glf() {
+  git log --grep '^fixup!' --format='%s' | sed -n '$s/^fixup! //p' |
+  xargs -rI@ git log --grep=@ --fixed-strings --format='%H' | tail -1
+}
 
 #-----------------------------------------------------------------------------
 # L = reflog
