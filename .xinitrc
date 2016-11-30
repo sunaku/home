@@ -17,6 +17,7 @@ laptop-reactor &
 # desktop
 test -z "$DBUS_SESSION_BUS_ADDRESS" &&
 eval $(dbus-launch --sh-syntax --exit-with-session)
+killall="dbus-daemon $killall"
 
 # encryption
 eval $(gpg-agent --daemon) &&
@@ -58,6 +59,7 @@ while :; do bspwm
   . ~/.pathrc # pick up $PATH changes
 done
 rm -f "$BSPWM_STATE"
+killall="bspwm-panel panel $killall"
 
 # kill daemons
 test -n "$killall" && killall $killall
