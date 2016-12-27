@@ -1,39 +1,36 @@
 #!/bin/sh
 
-pkill -USR1 -x sxhkd || # make sxhkd reload its configuration
+pkill -x sxhkd
 sxhkd -m -1 & # the `-m -1` handles newly connected keyboards
-
-bspc monitor -d 1.home 2.webs 3.mail 4.work 5.term 6 7 8 9 0
 
 bspc config border_width               1
 bspc config window_gap                 0
 
 bspc config split_ratio                0.50
-bspc config initial_polarity           second_child
 bspc config borderless_monocle         true
 bspc config gapless_monocle            true
+bspc config focus_by_distance          true
+bspc config history_aware_focus        true
 bspc config focus_follows_pointer      true
 bspc config pointer_follows_monitor    true
 bspc config remove_disabled_monitors   true
 bspc config remove_unplugged_monitors  true
 bspc config merge_overlapping_monitors true
 
-bspc config pointer_modifier           mod1
-bspc config pointer_action1            move
-bspc config pointer_action2            resize_side
-bspc config pointer_action3            resize_corner
+bspc monitor -d 1.home 2.webs 3.mail 4.work 5.term 6.docs 7.note 8 9 0
 
-bspc rule -a mpv state=floating
+bspc rule -a Gimp desktop=^8 state=floating follow=on
+bspc rule -a Chromium desktop=^2
+bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
-bspc rule -a Lxappearance state=floating
-bspc rule -a fontforge state=floating
-bspc rule -a Blueman-manager state=floating
-bspc rule -a Nitrogen state=pseudo_tiled
-bspc rule -a 'Page Unresponsive' state=floating
-bspc rule -a "System-config-printer.py" state=floating
 bspc rule -a Claws-mail desktop=^3
 bspc rule -a rdesktop desktop=^4 state=floating
+bspc rule -a Lxappearance state=floating
+bspc rule -a fontforge desktop=^9 state=floating
+bspc rule -a Blueman-manager state=floating
+bspc rule -a Nitrogen state=pseudo_tiled
+bspc rule -a "Page Unresponsive" state=floating
 
 # re-parent existing windows into the current session
 if [ -e "$BSPWM_STATE" ]; then
@@ -43,4 +40,5 @@ else
 	bspc wm --adopt-orphans
 fi
 
+pkill -x bspwm-panel
 bspwm-panel &
