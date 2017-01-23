@@ -22,6 +22,7 @@ memory=$(
 
 exec \
 nice \
+taskset 0xFE \
 prlimit --data=$memory --rss=$memory \
 firejail \
   --whitelist=~/.config/fontconfig \
