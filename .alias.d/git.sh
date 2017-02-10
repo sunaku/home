@@ -319,7 +319,8 @@ alias glp='git log --pretty="  * %s. %b"'$'\n'
 
 # show chosen commit's SHA
 gl0() {
-  git log --oneline --decorate --graph | fzf | cut -f2 -d' ' |
+  git log --oneline --decorate --graph | fzf |
+  sed 's/^[^[:xdigit:]]*//; s/ .*$//; /^$/d' |
   xargs -r git rev-parse # convert short commitish to full SHA
 }
 
