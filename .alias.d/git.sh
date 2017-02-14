@@ -227,7 +227,8 @@ alias gms='git merge --skip'
 # r = rebase
 #-----------------------------------------------------------------------------
 
-alias gr='git rebase --fork-point'
+alias gr='git rebase'
+alias grr='git rebase --fork-point'
 alias grm='git rebase --preserve-merges'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
@@ -412,7 +413,7 @@ alias gg='git fetch'
 alias ggm='git pull'
 
 # fetch and rebase commits while preserving merges
-alias ggr='gg && gr $(gbh)'
+alias ggr='gg && grm $(gbh)'
 
 # fetch and rebase commits without preserving merges
 alias ggR='git pull --rebase'
