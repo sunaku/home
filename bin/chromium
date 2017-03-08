@@ -30,6 +30,7 @@ firejail \
   --whitelist=~/lab \
   --whitelist=~/dev \
   --whitelist=~/.vim \
+  --whitelist=~/.local/share/dasht \
   --whitelist=~/.claws-mail/mimetmp \
   --whitelist=~/Documents/blog/content \
   -- \
