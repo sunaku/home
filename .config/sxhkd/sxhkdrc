@@ -57,8 +57,8 @@ ctrl + XF86PowerOff
 alt + ctrl + x
 	xterm
 
-alt + ctrl + k
-	chromium
+alt + ctrl + {_,shift + }k
+	chromium {_,--incognito}
 
 alt + ctrl + j
 	pcmanfm
