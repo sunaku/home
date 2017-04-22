@@ -39,9 +39,11 @@ system-config-printer-applet &  # printer
 blueman-applet &                # bluetooth
 wpa_gui -t &                    # network
 claws-mail &                    # email
-xterm -e 'tmux has-session &&
-          tmux attach -d ||
-          tmux' &               # terminal
+st -e sh -c '
+  tmux has-session &&
+  tmux attach -d ||
+  tmux
+' &                             # shell
 
 # system logs
 xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 -e '

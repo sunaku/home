@@ -55,7 +55,7 @@ ctrl + XF86PowerOff
 
 # terminal emulator
 alt + ctrl + x
-	xterm
+	st
 
 alt + ctrl + {_,shift + }k
 	chromium {_,--incognito}
