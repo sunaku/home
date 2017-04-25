@@ -30,7 +30,9 @@ zle -N self-insert url-quote-magic
 
 # replace command with pager
 function _run_with_pager {
-  BUFFER="$PAGER ${BUFFER#* }"
+  local command="$PAGER ${BUFFER#* }"
+  zle push-line
+  BUFFER=$command
   zle accept-line
 }
 zle -N _run_with_pager
