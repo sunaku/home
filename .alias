@@ -1,4 +1,0 @@
-#!/bin/sh
-for file in ~/.alias.d/*; do
-  source $file
-done
