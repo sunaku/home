@@ -7,7 +7,7 @@ done
 
 # load plugin bundles
 source_if_exist() { test -s $1 && source $1 }
-for bundle in ~/.zsh/bundle/?/*; do
+for bundle in ~/.zsh/bundle/*; do
   # load the bundle itself
   source_if_exist $bundle/${bundle##*/}.plugin.zsh ||
   source_if_exist $bundle/${bundle##*/}.zsh ||
