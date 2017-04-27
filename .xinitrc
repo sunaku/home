@@ -46,10 +46,8 @@ st -e sh -c '
 ' &                             # shell
 
 # system logs
-xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 -e '
-  tail -f /var/log/*.log ~/.xsession-errors &
-  dmesg --follow --human --nopager
-' &
+xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 +sb \
+-e 'tail -F /var/log/*.log ~/.xsession-errors' &
 
 # window manager
 export BSPWM_STATE=/tmp/bspwm-state.json
