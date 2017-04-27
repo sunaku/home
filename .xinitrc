@@ -4,7 +4,7 @@
 # before this point.  Otherwise, this script might fail
 # because the programs it executes might not be found.
 
-killall=
+daemons=
 . ~/.profile
 
 # hardware
@@ -16,12 +16,12 @@ laptop-reactor &
 
 # desktop
 test -z "$DBUS_SESSION_BUS_ADDRESS" &&
-eval $(dbus-launch --sh-syntax --exit-with-session)
-killall="dbus-daemon $killall"
+eval $(dbus-launch --sh-syntax --exit-with-session) &&
+daemons="dbus-daemon $daemons"
 
 # encryption
 eval $(gpg-agent --daemon) &&
-killall="gpg-agent $killall"
+daemons="gpg-agent $daemons"
 
 # input method
 export XMODIFIERS='@im=SCIM'
@@ -30,14 +30,14 @@ export QT_IM_MODULE=scim
 scim -d &
 
 # desktop apps
-workrave &                      # health
 redshift-gtk &                  # f.lux
+workrave &                      # health
 pasystray &                     # sound
-killall="pulseaudio $killall"
+daemons="pulseaudio $daemons"
 # mpc || mpd &                  # music
 system-config-printer-applet &  # printer
 blueman-applet &                # bluetooth
-wpa_gui -t &                    # network
+wpa_gui -t &                    # wifi
 claws-mail &                    # email
 st -e sh -c '
   tmux has-session &&
@@ -59,7 +59,7 @@ while :; do bspwm
   . ~/.pathrc # pick up $PATH changes
 done
 rm -f "$BSPWM_STATE"
-killall="bspwm-panel panel $killall"
+daemons="bspwm-panel panel $daemons"
 
 # kill daemons
-test -n "$killall" && killall $killall
+test -n "$daemons" && killall $daemons
