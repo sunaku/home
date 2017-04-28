@@ -1,22 +1,43 @@
-#!/bin/sh
+#!/bin/sh -x
 
 daemons=
+trap 'killall $daemons' EXIT TERM INT
+
+#-----------------------------------------------------------------------------
+# appearance
+#-----------------------------------------------------------------------------
+
+# fonts
+xset +fp ~/.fonts/tamzen-font/bdf
+xset fp rehash
+
+# resources
+xrdb -merge ~/.Xdefaults
+export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')
+
+# pointer
+xsetroot -cursor_name left_ptr
+
+# subpixel hinting
+# https://github.com/voidlinux/void-packages/issues/4444
+export FREETYPE_PROPERTIES='truetype:interpreter-version=35'
+
+#-----------------------------------------------------------------------------
+# services
+#-----------------------------------------------------------------------------
 
 # hardware
 laptop-display
 laptop-reactor &
 
-# appearance
-. ~/.xprofile
-
-# desktop
-test -z "$DBUS_SESSION_BUS_ADDRESS" &&
-eval $(dbus-launch --sh-syntax --exit-with-session) &&
-daemons="dbus-daemon $daemons"
-
 # encryption
 eval $(gpg-agent --daemon) &&
 daemons="gpg-agent $daemons"
+
+# notification
+test -z "$DBUS_SESSION_BUS_ADDRESS" &&
+eval $(dbus-launch --sh-syntax --exit-with-session) &&
+daemons="dbus-daemon $daemons"
 
 # input method
 export XMODIFIERS='@im=SCIM'
@@ -24,12 +45,15 @@ export GTK_IM_MODULE=scim
 export QT_IM_MODULE=scim
 scim -d &
 
-# desktop apps
+#-----------------------------------------------------------------------------
+# desktop
+#-----------------------------------------------------------------------------
+
 redshift-gtk &                  # f.lux
 workrave &                      # health
 pasystray &                     # sound
 daemons="pulseaudio $daemons"
-# mpc || mpd &                  # music
+mpc || mpd &                    # music
 system-config-printer-applet &  # printer
 blueman-applet &                # bluetooth
 wpa_gui -t &                    # wifi
@@ -52,7 +76,4 @@ while :; do bspwm
   -default 'Insert Coin' -timeout 10 \
   -center || break
 done
-rm -f "$BSPWM_STATE"
-
-# kill daemons
-test -n "$daemons" && killall $daemons
+rm -f $BSPWM_STATE
