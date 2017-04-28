@@ -59,7 +59,6 @@ while :; do bspwm
   . ~/.pathrc # pick up $PATH changes
 done
 rm -f "$BSPWM_STATE"
-daemons="bspwm-panel panel $daemons"
 
 # kill daemons
 test -n "$daemons" && killall $daemons

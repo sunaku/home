@@ -72,7 +72,7 @@ alt + ctrl + a
 
 # make sxhkd reload its configuration files:
 alt + ctrl + Escape
-	pkill -USR1 -x sxhkd
+	killall -USR1 sxhkd polybar
 
 #
 # bspwm hotkeys

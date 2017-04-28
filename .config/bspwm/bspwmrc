@@ -39,5 +39,4 @@ else
 	bspc wm --adopt-orphans
 fi
 
-pkill -x bspwm-panel
 bspwm-panel &
