@@ -6,10 +6,6 @@ export XDG_DESKTOP_DIR=$HOME
 export XAUTHORITY=$HOME/.Xauthority
 test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
 
-# LaTeX binaries are not found in default /bin folders
-texlive=/etc/profile.d/texlive.sh
-test -f $texlive && . $texlive
-
 # use ChromeOS' existing X11 server when inside crouton
 if test -z "$DISPLAY" -a -n "$CROUTON" ; then
   export XAUTHORITY=/var/host/Xauthority
