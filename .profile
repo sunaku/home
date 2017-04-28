@@ -1,6 +1,12 @@
 #!/bin/sh
 
-. ~/.pathrc
+# search paths for locally installed apps
+export PATH=$HOME/bin:$HOME/opt/bin:$PATH
+export CPATH=$HOME/opt/include:$CPATH
+export MANPATH=$HOME/opt/share/man:$MANPATH
+export INFOPATH=$HOME/opt/share/info:$INFOPATH
+export LD_LIBRARY_PATH=$HOME/opt/lib:$LD_LIBRARY_PATH
+
 export LANG=en_US.utf8
 export XDG_DESKTOP_DIR=$HOME
 export XAUTHORITY=$HOME/.Xauthority

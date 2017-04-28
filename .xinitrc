@@ -1,11 +1,6 @@
 #!/bin/sh
-# IMPORTANT: This file must be run from a login shell so
-# that ~/.profile (which sets up the $PATH) is sourced
-# before this point.  Otherwise, this script might fail
-# because the programs it executes might not be found.
 
 daemons=
-. ~/.profile
 
 # hardware
 laptop-display
@@ -56,7 +51,6 @@ while :; do bspwm
   -buttons 'Insert Coin:0,Game Over' \
   -default 'Insert Coin' -timeout 10 \
   -center || break
-  . ~/.pathrc # pick up $PATH changes
 done
 rm -f "$BSPWM_STATE"
 

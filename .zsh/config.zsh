@@ -1,5 +1,3 @@
-source ~/.pathrc
-
 # delegate configuration
 for config in ~/.zsh/config/**/*sh; do
   source $config
