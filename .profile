@@ -5,6 +5,11 @@ export MANPATH=$HOME/opt/share/man:$MANPATH
 export INFOPATH=$HOME/opt/share/info:$INFOPATH
 export LD_LIBRARY_PATH=$HOME/opt/lib:$LD_LIBRARY_PATH
 
+# search paths for programming libraries
+export GOPATH=$HOME/opt/install/golang
+export GEM_HOME=$HOME/opt/install/rubygems
+export NODE_PATH=$HOME/opt/install/nodejs
+
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS=-j$(grep -c ^processor /proc/cpuinfo)
 
