@@ -68,7 +68,7 @@ set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
     status_login_style          = 'fg=colour231,bg=colour204'
   else
     status_style                = 'fg=colour246,bg=colour237' # gruvbox normal airline_c
-    window_status_current_style = 'fg=colour208,bg=colour236' # gruvbox visual airline_c
+    window_status_current_style = 'fg=colour214,bg=colour239' # gruvbox bright_yellow dark2
     pane_border_style           = 'fg=colour239'              # gruvbox normal airline_b
     pane_active_border_style    = 'fg=colour208'              # gruvbox visual airline_c
     status_ruler_style          = window_status_current_style
@@ -104,9 +104,7 @@ bind-key -n M-~ \
 set-option -g status-position top
 
 # list windows on left side of status bar
-set-option -g status-left-length 16
-set-option -g status-left \
-  '#(test -n "$SSH_TTY" && echo "#[<%= status_login_style %>] #H ")'
+set-option -g status-left-length 0
 
 # make window list easier to scan
 set-window-option -g window-status-format         ' #[bold]#I#F#[nobold]#W '
@@ -114,9 +112,10 @@ set-window-option -g window-status-current-format ' #[bold]#I#F#[nobold]#W '
 set-window-option -g window-status-separator      ''
 
 # show pane title, pane identifier, and hostname on right side of status bar
-set-option -g status-right-length 48
-set-option -g status-right \
-  '#{=26:pane_title} #[<%= status_ruler_style %>] #S:#I.#P'
+set-option -g status-right-length 64
+set-option -g status-right '#{=32:pane_title} \
+#[<%= status_ruler_style %>] #S:#I.#P \
+#[<%= status_login_style %>] #H '
 
 #-----------------------------------------------------------------------------
 # windows
