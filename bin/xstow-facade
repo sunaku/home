@@ -1,0 +1,46 @@
+#!/bin/sh -eu
+#
+# Usage: xstow-facade DIRECTORY...
+#
+# Builds a symlink facade friendly to xstow(1) for each DIRECTORY.
+# Each facade is built inside the current working directory and is
+# designed to expose only the relevant Linux Filesystem Hierarchy:
+# http://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html
+#
+# Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
+
+for DIRECTORY; do
+  stowable=${DIRECTORY##*/}
+
+  # expose standard directories
+  for folder in bin lib include share; do
+    linkable=$DIRECTORY/$folder
+    if test -d "$linkable"; then
+      mkdir -vp "$stowable"
+      ln -vsf "$linkable" "$stowable"
+    fi
+  done
+
+  # expose loose documentation
+  shareable=$stowable/share
+  if ! test -L "$shareable"; then
+    for folder in man info doc; do
+      linkable=$DIRECTORY/$folder
+      if test -d "$linkable"; then
+        mkdir -vp "$shareable"
+        ln -vsf "$linkable" "$shareable"
+      fi
+    done
+  fi
+
+  # expose loose executables
+  executable=$stowable/bin
+  if ! test -L "$executable"; then
+    for linkable in "$DIRECTORY"/*; do
+      if test -f "$linkable" -a -x "$linkable"; then
+        mkdir -vp "$executable"
+        ln -vsf "$linkable" "$executable"
+      fi
+    done
+  fi
+done
