@@ -27,6 +27,7 @@ prlimit --data=$memory --rss=$memory \
 firejail \
   --whitelist=~/.config/fontconfig \
   --whitelist=~/.fonts \
+  --whitelist=~/.icons \
   --whitelist=~/lab \
   --whitelist=~/dev \
   --whitelist=~/.vim \
