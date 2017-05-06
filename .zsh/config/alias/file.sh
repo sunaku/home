@@ -12,22 +12,19 @@ u() { # go up $1 directories
 
 # inspect
 alias ls='ls -h --color=auto'
+alias .,='ls-summary'
 alias ,='ls -Altr'
 alias ,.='ls -ld'
-alias ,-='ls-sizetime -Ahtr'
-alias ,_='ls-summary'
-alias ,+='tree'
+alias ,..='ls-sizetime -Ahtr'
+alias ,,='tree -d'
+alias ,,,='tree'
 
 # modify
 alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
-alias d='rm -r'
-alias D='rm -rf'
-alias M='mkdir -p'
-alias m='mcd'
 
-mcd() { # Make Dir and go in
+md() { # Make Dir and go in
   mkdir -p "$@" && cd "$@"
 }
 
