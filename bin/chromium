@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -eu
 #
 # Run the Chromium web browser in a sandbox, opening a new window,
 # limiting memory usage to half the available memory or 1 GiB max.
@@ -22,17 +22,5 @@ memory=$(
 
 exec \
 nice \
-taskset 0xFE \
 prlimit --data=$memory --rss=$memory \
-firejail \
-  --whitelist=~/.config/fontconfig \
-  --whitelist=~/.fonts \
-  --whitelist=~/.icons \
-  --whitelist=~/lab \
-  --whitelist=~/dev \
-  --whitelist=~/.vim \
-  --whitelist=~/.local/share/dasht \
-  --whitelist=~/.claws-mail/mimetmp \
-  --whitelist=~/Documents/blog/content \
-  -- \
 /usr/bin/chromium --new-window "$@"
