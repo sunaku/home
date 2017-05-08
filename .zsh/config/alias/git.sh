@@ -304,19 +304,19 @@ alias gfc='git rev-list --all'
 alias gl='git log --decorate --graph --name-status --find-copies'
 
 # show most recent log entry
-alias gl1='gl -1'
+alias gl1='git --no-pager log -1 --decorate --name-status --find-copies'
 
 # show log like `ls -l`
-alias gll='gl --oneline'
+alias gll='git log --decorate --graph --oneline'
 
 # show log with diffs
-alias gld='LESS="-R +/^\*.*" gl --patch-with-stat'
+alias gld='LESS="-R +/^commit [[:xdigit:]]{40}$" git log --patch-with-stat'
 
 # ... while showing changes within a line
 alias glD="$intra_line_less gld $intra_line_diff"
 
 # pretty git changelog
-alias glp='git log --pretty="  * %s. %b"'$'\n'
+alias glp='git log --pretty="  * %s.%n    %b"'
 
 # show chosen commit's SHA
 gl0() {
