@@ -1,0 +1,22 @@
+#!/bin/sh -e
+#
+# Read a line securely via GnuPG's pinentry(1) and print to stdout.
+#
+# Usage: pinentry-readline < /dev/null
+# Usage: echo [INPUT_FOR_PINENTRY] |
+#        [env PINENTRY_PROGRAM=pinentry-gtk-2] \
+#        pinentry-readline [ARGS_FOR_PINENTRY]
+#
+# Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
+
+{ cat; echo GETPIN; } | ${PINENTRY_PROGRAM:-pinentry-gtk-2} "$@" | awk '
+  {
+    if ($1 == "D") {
+      print substr($0, 3)
+    }
+    else {
+      print > "/dev/stderr"
+    }
+  }
+  END { exit $1 != "OK" }
+'
