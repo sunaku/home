@@ -70,6 +70,12 @@ alt + ctrl + e
 alt + ctrl + a
 	rofi -show window
 
+# swap PRIMARY and CLIPBOARD selection
+alt + ctrl + y
+	xsel -po | xsel -si && \
+	xsel -bo | xsel -pi && \
+	xsel -so | xsel -bi
+
 # make sxhkd reload its configuration files:
 alt + ctrl + Escape
 	killall -USR1 sxhkd polybar
