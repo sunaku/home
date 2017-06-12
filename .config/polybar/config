@@ -68,7 +68,7 @@ wm-restack = bspwm
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:64:...%
+label-maxlen = 48
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -111,7 +111,7 @@ label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
-label-empty = .
+label-empty =
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
