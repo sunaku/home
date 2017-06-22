@@ -3,7 +3,7 @@ export PAGER='less'
 
 export VISUAL='vim'
 export EDITOR='vim'
-function vim_() {
+vim_() {
   if [ $# -gt 1 ]; then
     env "$@"
   elif [ -f Session.vim ]; then
@@ -24,7 +24,7 @@ alias tree='tree -ACF'
 alias grep='grep --perl-regexp --color=auto'
 
 alias a='where'
-function A() { where "$@" | xargs -rn1 realpath ;}
+A() { where "$@" | xargs -rn1 realpath ;}
 alias E='vim -u NONE -c "set term=ansi smd"'
 alias e='vim'
 alias g='grep'
