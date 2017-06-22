@@ -24,6 +24,7 @@ alias tree='tree -ACF'
 alias grep='grep --perl-regexp --color=auto'
 
 alias a='where'
+function A() { where "$@" | xargs -rn1 realpath ;}
 alias E='vim -u NONE -c "set term=ansi smd"'
 alias e='vim'
 alias g='grep'
