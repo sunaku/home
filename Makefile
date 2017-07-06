@@ -34,7 +34,7 @@ theme-tmux: ~/.tmux/plugins/tpm
 
 stow:
 	cd ~/opt/symlink && xstow-facade ~/opt/install/*
-	xstow -t ~/opt -d ~/opt/symlink -v ~/opt/symlink/*
+	xstow -t ~/opt -d ~/opt/symlink -v ~/opt/symlink/* -f
 	makewhatis ~/opt/share/man
 
 .PHONY: all help dark light theme theme-tig theme-tmux stow
