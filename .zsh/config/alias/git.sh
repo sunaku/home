@@ -413,10 +413,10 @@ alias gg='git fetch'
 alias ggm='git pull'
 
 # fetch and rebase commits while preserving merges
-alias ggr='gg && grm $(gbh)'
+alias ggmr='gg && grm $(gbh)'
 
 # fetch and rebase commits without preserving merges
-alias ggR='git pull --rebase'
+alias ggr='git pull --rebase'
 
 # clone a repository
 alias ggg='git clone --recurse-submodules'
