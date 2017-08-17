@@ -1,9 +1,14 @@
 #!/usr/bin/env ruby
 #
-# Usage: project-version-commit HISTORY_FILE
+# Usage: floss-commit HISTORY_FILE
 #
-# Creates a new commit or updates an existing commit that is labelled with the
-# first version and date from the HISTORY_FILE.
+# Records a new Git commit (or updates the current one if applicable) that is
+# labelled according to the first version NUMBER and DATE in the HISTORY_FILE:
+#
+#   $ cat HISTORY_FILE
+#   ... optional content ...
+#   ## Version NUMBER (DATE)
+#   ... optional content ...
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 

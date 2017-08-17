@@ -1,9 +1,16 @@
 #!/usr/bin/env ruby
 #
-# Usage: project-version-update HISTORY_FILE
+# Usage: floss-reflect HISTORY_FILE
 #
-# Updates all text files in the project that mention the current version
-# and/or date to match the first version and date from the HISTORY_FILE.
+# Updates all files in the project that mention the *second* version NUMBER
+# and DATE in the HISTORY_FILE to match the *first* version NUMBER and DATE:
+#
+#   $ cat HISTORY_FILE
+#   ... optional content ...
+#   ## Version NUMBER (DATE)
+#   ... optional content ...
+#   ## Version NUMBER (DATE)
+#   ... optional content ...
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
