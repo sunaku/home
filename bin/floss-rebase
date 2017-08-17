@@ -1,12 +1,9 @@
-#!/bin/sh
+#!/bin/sh -eu
 #
 # Reapplies the stacked branch architecture:
 # master => other => patch => minor => major
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
-
-# abort if any shell commands fail
-set -e
 
 # ensure that working tree is clean
 git rebase HEAD --quiet

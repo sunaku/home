@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -eux
 #
 # Publishes manuals to the GitHub pages website after a project release.
 #
