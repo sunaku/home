@@ -4,8 +4,8 @@
 #
 # Written in 2012 by Suraj N. Kurapati <https://github.com/sunaku>
 
-branch=$(git name-rev --name-only HEAD)
-trap 'git checkout "$branch"' EXIT
+branch=$(git symbolic-ref --short HEAD)
+trap "git checkout '$branch'" EXIT
 
 shopt -s extglob nullglob
 rsync -av [A-Z]*.{md,mkd,markdown} man/man0/

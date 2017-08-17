@@ -10,7 +10,7 @@ set -e
 # ensure that working tree is clean
 git rebase HEAD --quiet
 
-current=$(git name-rev --name-only HEAD)
+current=$(git symbolic-ref --short HEAD)
 git checkout master
 
 for branch in other patch minor major; do

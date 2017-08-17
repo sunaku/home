@@ -13,7 +13,7 @@ git rebase HEAD --quiet
 git branch -v # for user's reference
 
 # reapply stacked branch architecture
-original=$(git name-rev --name-only HEAD)
+original=$(git symbolic-ref --short HEAD)
 previous=
 for branch in master other patch minor major; do
   if [ -n "$previous" ]; then
