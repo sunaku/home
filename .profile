@@ -4,6 +4,7 @@ export CPATH=$HOME/opt/include:$CPATH
 export MANPATH=$HOME/opt/share/man:$MANPATH
 export INFOPATH=$HOME/opt/share/info:$INFOPATH
 export LD_LIBRARY_PATH=$HOME/opt/lib:$LD_LIBRARY_PATH
+export PKG_CONFIG_PATH=$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # search paths for programming libraries
 export GOPATH=$HOME/opt/install/golang
