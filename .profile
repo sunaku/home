@@ -7,9 +7,9 @@ export LD_LIBRARY_PATH=$HOME/opt/lib:$LD_LIBRARY_PATH
 export PKG_CONFIG_PATH=$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # search paths for programming libraries
-export GOPATH=$HOME/opt/install/golang
-export GEM_HOME=$HOME/opt/install/rubygems
-export NODE_PATH=$HOME/opt/install/nodejs
+export GOPATH=$HOME/opt/install/GOPATH
+export GEM_HOME=$HOME/opt/install/GEM_HOME
+export NODE_PATH=$HOME/opt/install/NODE_PATH
 
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS=-j$(grep -c ^processor /proc/cpuinfo)
