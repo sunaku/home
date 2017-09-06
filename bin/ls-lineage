@@ -1,0 +1,16 @@
+#!/bin/sh -eu
+#
+# Usage: ls-lineage [DIRECTORY|FILE] [ARGUMENTS_FOR_LS...]
+#
+# Long-lists each element in the given path, ascending to the root.
+# If no arguments are given, then it assumes the current directory.
+#
+# Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
+
+test $# -gt 0 && path=$1 && shift || path=$PWD
+test "${path#/}" = "$path" && path="$PWD/$path"
+
+while test -n "$path"; do
+  ls -l -d "$path" "$@"
+  path=${path%/*}
+done | column -t
