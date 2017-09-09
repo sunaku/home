@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+#
+# Pretty-prints the given JSON document as YAML.
+#
+# Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
+
+require 'json'
+require 'psych'
+puts Psych.dump(JSON.load(ARGF))
