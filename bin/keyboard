@@ -8,8 +8,10 @@
 
 if [ -n "$DISPLAY" ]; then
   # only affect the laptop's native keyboard; ignore externally attached ones
-  id=$(xinput list --id-only 'AT Translated Set 2 keyboard')
-  setxkbmap -device "$id" -model chromebook -option altwin:meta_alt "$@"
+  if id=$(xinput list --id-only 'AT Translated Set 2 keyboard' 2>/dev/null)
+  then setxkbmap -device "$id" -model chromebook -option altwin:meta_alt "$@"
+  else setxkbmap "$@"
+  fi
 else
   sudo loadkeys "$1"
 fi
