@@ -1,0 +1,10 @@
+#!/bin/sh -eu
+#
+# Usage: xstow-unlink DIRECTORY...
+#
+# Deletes broken symlinks and also any resulting empty directories.
+#
+# Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
+
+find "$@" -type l ! -exec test -e {} \; -exec rm -v {} \;
+find "$@" -mindepth 1 -depth -type d -empty -exec rmdir -v {} \;
