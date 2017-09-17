@@ -1,0 +1,4 @@
+#!/bin/sh
+# Performs the equivalent of startx(1) but under Crouton's xiwi(1) wrapper.
+export XMETHOD='xiwi-window'
+exec xinit xiwi / ~/.xinitrc > ~/.xsession-errors 2>&1

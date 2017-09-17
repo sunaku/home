@@ -21,12 +21,9 @@ export MAKEFLAGS=-j$(grep -c ^processor /proc/cpuinfo)
 export LANG=en_US.utf8
 export XDG_DESKTOP_DIR=$HOME
 export XAUTHORITY=$HOME/.Xauthority
-test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
-
-# use ChromeOS' existing X11 server when inside crouton
-if test -z "$DISPLAY" -a -n "$CROUTON" ; then
-  export XAUTHORITY=/var/host/Xauthority
-  export DISPLAY=:0.0
+if test -s /etc/crouton/name; then
+  export CROUTON=$(cat /etc/crouton/name)
+  test -z "$DISPLAY" && export DISPLAY=:1
 fi
 
 #-----------------------------------------------------------------------------
