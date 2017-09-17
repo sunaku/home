@@ -1,0 +1,2 @@
+# allow defining custom shortcuts in ROX-Filer
+gtk-can-change-accels=1
