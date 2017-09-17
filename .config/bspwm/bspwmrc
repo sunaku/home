@@ -42,4 +42,6 @@ else
 	bspc wm --adopt-orphans
 fi
 
-bspwm-panel &
+# reposition the panel when screen resolution changes
+{ echo ignition; bspc subscribe monitor_geometry; } |
+while read -r event; do bspwm-panel & done &
