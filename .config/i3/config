@@ -48,10 +48,11 @@ bindsym $mod+a exec rofi -show window
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+n focus down
-bindsym $mod+t focus up
-bindsym $mod+s focus right
+bindsym $mod+h mark recent, focus left
+bindsym $mod+n mark recent, focus down
+bindsym $mod+t mark recent, focus up
+bindsym $mod+s mark recent, focus right
+bindsym $mod+d mark current, [con_mark=recent] focus; [con_mark=current] mark recent
 
 # # alternatively, you can use the cursor keys:
 # bindsym $mod+Left focus left
