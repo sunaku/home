@@ -48,7 +48,7 @@ bindsym $mod+a exec rofi -show window
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # start file manager
-bindsym $mod+j exec rox-filer
+bindsym $mod+j exec pcmanfm
 
 # change focus
 bindsym $mod+h mark recent, focus left
