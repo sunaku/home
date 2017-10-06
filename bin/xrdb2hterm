@@ -9,14 +9,15 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-input = ARGF.read.gsub(/^!.*/, '') # strip comments from xrdb(1) file format
+input = ARGF.read.gsub(/^!.*/, ''). # strip comments from xrdb(1) file format
+                  gsub(/\/\*.*?\*\//m, '') # strip comments from preprocessor
 
 # expand preprocessor definitions
 defines = Hash[ input.prepend(DATA.read).scan /\#define\s+(\w+)\s+(.*)\s*/ ]
 while defines.any? {|k,v| input.gsub! k, v } do end
 
 # convert xrdb(1) colors to hterm
-xrdb = Hash[ input.scan /(\w+)\s*:\s*(.*)\s*/ ]
+xrdb = Hash[ input.scan /(\w+)\s*:\s*(\S+)/ ]
 puts <<HTERM
 term_.prefs_.set("background-color", "#{ xrdb['background'] }");
 term_.prefs_.set("foreground-color", "#{ xrdb['foreground'] }");
