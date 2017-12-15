@@ -14,12 +14,9 @@ XTerm*font4                     : -*-lucidatypewriter-medium-*-*-*-20-*-*-*-*-*-
 XTerm*font5                     : -*-lucidatypewriter-medium-*-*-*-26-*-*-*-*-*-*-*
 XTerm*font6                     : -*-lucidatypewriter-medium-*-*-*-34-*-*-*-*-*-*-*
 XTerm*vt100.colorMode           : True
-XTerm*vt100.boldColors          : False
 XTerm*vt100.colorBDMode         : True
 XTerm*vt100.colorULMode         : True
 XTerm*vt100.colorRVMode         : False
-XTerm*vt100.veryBoldColors      : 6
-XTerm*vt100.showBlinkAsBold     : True
 XTerm*vt100.internalBorder      : 0
 XTerm*vt100.pointerMode         : 2 /* hide the mouse pointer while typing */
 
