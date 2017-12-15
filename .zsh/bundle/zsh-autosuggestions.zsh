@@ -1,0 +1,1 @@
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='bold,standout'
