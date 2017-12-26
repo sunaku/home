@@ -11,6 +11,19 @@ PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 
 RPROMPT='%F{%k}#%F{cyan}%D{%e%b}%F{yellow}%D{%-l:%M%P}%f'
 
+# VI keybindings: 'set showmode' emulation
+function zle-line-init zle-keymap-select {
+  if [[ $KEYMAP == vicmd ]]; then
+      RPROMPT_VIINS=$RPROMPT
+      RPROMPT='-- NORMAL --'
+  else
+      RPROMPT=${RPROMPT_VIINS:-$RPROMPT}
+  fi
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 # VCS integration for command prompt using vcs_info
 # http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
 
