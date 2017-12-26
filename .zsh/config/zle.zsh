@@ -8,6 +8,10 @@ setopt BEEP
 # use EMACS-style keybindings for command line editing
 bindkey -e
 
+# ...while allowing activation of VI-style keybindings
+bindkey "^[" vi-cmd-mode
+KEYTIMEOUT=1 # short 0.1 second delay for mode changes
+
 # bind special keys according to readline configuration
 eval "$(sed -n 's/^\( *[^#][^:]*\):/bindkey \1/p' /etc/inputrc ~/.inputrc)"
 
