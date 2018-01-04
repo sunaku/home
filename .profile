@@ -9,6 +9,7 @@ export PKG_CONFIG_PATH=$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH
 # search paths for programming libraries
 export GOPATH=$HOME/opt/install/GOPATH
 export GEM_HOME=$HOME/opt/install/GEM_HOME
+export GEM_PATH=$GEM_HOME:$GEM_PATH
 export NODE_PATH=$HOME/opt/install/NODE_PATH
 
 # use all processors for fast, parallel make(1) builds
