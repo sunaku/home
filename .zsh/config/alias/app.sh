@@ -1,19 +1,5 @@
-export LESS='-iR'
-export PAGER='less'
-
+export PAGER='less' LESS='-iR'
 export VISUAL='vim'
-export EDITOR='vim'
-vim_() {
-  if [ $# -gt 1 ]; then
-    env "$@"
-  elif [ -f Session.vim ]; then
-    env "$1" -S
-  else
-    env "$1" -c Obsession
-  fi
-}
-alias vim='vim_ vim'
-alias nvim='vim_ nvim'
 
 alias open='xdg-open'
 alias scp='rsync --archive --update --compress --verbose'
@@ -26,7 +12,7 @@ alias grep='grep --perl-regexp --color=auto'
 alias a='where'
 A() { where "$@" | xargs -rn1 realpath ;}
 alias E='vim -u NONE -c "set term=ansi smd"'
-alias e='vim'
+alias e="$VISUAL"
 alias g='grep'
 alias H='apropos'
 alias h='man'
