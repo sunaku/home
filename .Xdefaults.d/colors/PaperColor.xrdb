@@ -1,0 +1,23 @@
+! Colors from "PaperColor" colorscheme for Vim
+! https://github.com/NLKNguyen/papercolor-theme
+
+#define Background_Color #eeeeee
+#define Foreground_Color #444444
+#define Cursor_Color     #005f87
+
+#define Ansi_0_Color     #1c1c1c
+#define Ansi_8_Color     #1c1c1c
+#define Ansi_1_Color     #af0000
+#define Ansi_9_Color     #af0000
+#define Ansi_2_Color     #008700
+#define Ansi_10_Color    #008700
+#define Ansi_3_Color     #d75f00
+#define Ansi_11_Color    #d75f00
+#define Ansi_4_Color     #005faf
+#define Ansi_12_Color    #005faf
+#define Ansi_5_Color     #d70087
+#define Ansi_13_Color    #d70087
+#define Ansi_6_Color     #0087af
+#define Ansi_14_Color    #0087af
+#define Ansi_7_Color     #e4e4e4
+#define Ansi_15_Color    #e4e4e4
