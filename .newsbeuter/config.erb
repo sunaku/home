@@ -1,0 +1,37 @@
+# this file was generated from <%= __FILE__ %> by ~/makefile
+
+<% if ENV['THEME'] == 'dark' %>
+# Colors from "gruvbox" colorscheme https://github.com/morhetz/gruvbox
+color article                              color223 color236
+color background                           color100 color236
+color info                                 color142 color235
+color listfocus                            color214 color239
+color listfocus_unread                     color214 color96
+color listnormal                           color246 color237
+color listnormal_unread                    color175 color237
+highlight article "^Feed:.*"               color175 color237
+highlight article "^Title:.*"              color214 color237 bold
+highlight article "^Author:.*"             color167 color237
+highlight article "^Link:.*"               color109 color237
+highlight article "^Date:.*"               color142 color237
+highlight article "\\[[0-9]\\+\\]"         color208 color237 bold
+highlight article "\\[[^0-9].*[0-9]\\+\\]" color167 color237 bold
+<% else %>
+# Colors from PaperColor https://github.com/NLKNguyen/papercolor-theme
+color article                              color238 color255
+color background                           color238 color255
+color info                                 color255 color31
+color listfocus                            color238 color254
+color listfocus_unread                     color162 color254
+color listnormal                           color238 color255
+color listnormal_unread                    color162 color255
+highlight article "^Feed:.*"               color162 color255
+highlight article "^Title:.*"              color160 color255
+highlight article "^Author:.*"             color166 color255
+highlight article "^Link:.*"               color24 color255
+highlight article "^Date:.*"               color28 color255
+highlight article "\\[[0-9]\\+\\]"         color160 color255 bold
+highlight article "\\[[^0-9].*[0-9]\\+\\]" color91 color255 bold
+<% end %>
+
+# See also newsbeuter configuration https://gist.github.com/ivoarch/8256644
