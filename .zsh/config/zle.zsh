@@ -9,7 +9,7 @@ setopt BEEP
 bindkey -e
 
 # ...while allowing activation of VI-style keybindings
-bindkey "^[" vi-cmd-mode
+bindkey "^[^[" vi-cmd-mode # double tap the Escape key
 KEYTIMEOUT=1 # short 0.1 second delay for mode changes
 
 # bind special keys according to readline configuration
