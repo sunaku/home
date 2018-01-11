@@ -389,7 +389,8 @@ set -g @resurrect-capture-pane-contents on
 
 set -g @plugin 'Morantron/tmux-fingers'
 set -g @fingers-key '-n M-U'
-set -g @fingers-compact-hints 0
+set -g @fingers-compact-hints 1
+set -g @fingers-hint-format '#[fg=yellow,bold,reverse]%s'
 set -g @fingers-hint-labels ' \
   a o e u i d h t n s         \
         p y f g c r l         \
