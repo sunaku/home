@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Prints the number of times each line occurs, sorted by frequency.
+#
+# Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
+
+sort | uniq -c | sort -n -r
