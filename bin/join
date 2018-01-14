@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Usage: join [DELIMITER]
+#
+# Joins lines from stdin, except last one, separated by DELIMITER.
+#
+# Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
+
+awk -v DELIMITER="$1" -v ORS="" '
+  NR > 1  { print line DELIMITER }
+          { line = $0 }
+  END     { print line }
+'
