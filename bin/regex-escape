@@ -1,8 +1,8 @@
 #!/bin/sh
 #
-# Usage: regesc PATTERN
+# Usage: regex-escape PATTERN
 #
-# Escapes the given regular expression, as defined in the regex(7) manual.
+# Prints an escaped version of the PATTERN, according to regex(7).
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 

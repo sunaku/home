@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Prints a regular expression, joining lines from stdin with OR's.
+#
+# Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
+
+sed 's/[[:punct:]]/\\&/; s/$/|/; $s/.$//' | tr -d '\n'
