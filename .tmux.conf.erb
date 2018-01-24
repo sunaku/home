@@ -127,6 +127,9 @@ bind-key -n M-e new-window
 
 # rename window
 bind-key -n M-E command-prompt -I '#W' 'rename-window "%%%"'
+<% if tmux_version >= '2.6' %>
+set-window-option -g automatic-rename off
+<% end %>
 
 # break off pane to a new window
 bind-key -n M-x \
@@ -161,7 +164,9 @@ bind-key -n M-> swap-window -t :+1
 # monitor window
 set-option -g visual-activity on
 set-option -g visual-silence on
+<% if tmux_version < '2.6' %>
 set-option -g bell-on-alert on
+<% end %>
 
 bind-key -n M-k \
   set-window-option monitor-activity \;\
