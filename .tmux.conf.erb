@@ -121,7 +121,7 @@ set-window-option -g window-status-separator      ''
 set-option -g status-right-length 64
 set-option -g status-right '#{=32:pane_title} \
 #[<%= status_ruler_style %>] #S:#I.#P \
-#[<%= status_login_style %>] #H '
+#(test -n "$SSH_TTY" && echo "#[<%= status_login_style %>] #H ")'
 
 #-----------------------------------------------------------------------------
 # windows
