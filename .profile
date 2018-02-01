@@ -50,6 +50,6 @@ test -z "$TMUX" && {
   tmux has-session 2>/dev/null && tmux -2 attach -d || {
     printf 'No tmux sessions found.  Start one? (y/N) '
     read answer && echo "$answer" | grep -qi '^y' &&
-    eval "${CROUTON:+env TERM=st-256color} tmux -2"
+    eval "${CROUTON:+env TERM=xterm-256color} tmux -2"
   }
 }
