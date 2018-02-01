@@ -1,30 +1,7 @@
 #!/bin/sh -x
 
-#-----------------------------------------------------------------------------
 # appearance
-#-----------------------------------------------------------------------------
-
-# resolution
-xrandr --dpi 96
-
-# fonts
-xset +fp ~/.fonts/tamzen-font/bdf
-xset fp rehash
-
-# resources
-xrdb -merge ~/.Xdefaults
-export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')
-
-# pointer
-xsetroot -cursor_name left_ptr
-
-# subpixel hinting
-# https://github.com/voidlinux/void-packages/issues/4444
-export FREETYPE_PROPERTIES='truetype:interpreter-version=35'
-
-#-----------------------------------------------------------------------------
-# desktop
-#-----------------------------------------------------------------------------
+. ~/.xprofile
 
 # terminal
 st -e sh -c 'tmux has-session && tmux attach -d || tmux' &
