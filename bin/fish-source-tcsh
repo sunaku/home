@@ -7,7 +7,7 @@
 #
 # Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
 
-fish=$(which fish)
+fish=$(command -v fish)
 
 # prevent "word too long" error in tcsh
 export PATH=/bin:/usr/bin
