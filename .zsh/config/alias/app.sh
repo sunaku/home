@@ -1,5 +1,16 @@
 export PAGER='less' LESS='-iR'
-export VISUAL='vim'
+export VISUAL='nvim'
+
+# shim for many kinds of VISUAL
+nvim() {
+  for editor in nvim vim vi; do
+    command $editor "$@"
+    case $? in
+      (126|127) continue ;;
+      (*)       return ;;
+    esac
+  done
+}
 
 alias open='xdg-open'
 alias scp='rsync --archive --update --compress --verbose'
@@ -11,10 +22,10 @@ alias grep='grep --perl-regexp --color=auto'
 
 alias a='where'
 A() { where "$@" | grep / | xargs -rn1 realpath ;}
-alias E='vim -u NONE -c "set term=ansi smd"'
-alias e="$VISUAL"
+alias E='$VISUAL -u NONE -c "set term=ansi smd"'
+alias e='$VISUAL'
 alias g='grep'
 alias H='apropos'
 alias h='man'
-alias s="$PAGER"
+alias s='$PAGER'
 alias t='tee /dev/tty'
