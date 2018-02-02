@@ -38,6 +38,6 @@ theme-newsbeuter:
 stow:
 	xstow-unlink ~/opt
 	cd ~/opt/symlink && xstow-facade ~/opt/install/*
-	xstow -t ~/opt -d ~/opt/symlink -v ~/opt/symlink/* | sed '/^$$/d'
+	xstow -t ~/opt -d ~/opt/symlink -v ~/opt/symlink/* -f | sed '/^$$/d'
 
 .PHONY: all help dark light theme theme-tig theme-tmux stow
