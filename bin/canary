@@ -3,8 +3,8 @@
 # Usage: canary COMMAND [ARGUMENTS...]
 # Usage: canary SHELL_EVAL_EXPRESSION
 #
-# Silences (both stdout and stderr) the given command only if it succeeds
-# (exits with status 0) and then propagates its exit status to the caller.
+# Silences the given command (both stdout and stderr) if its exit status
+# is zero (a success) and then propagates that status back to the caller.
 #
 # Like a canary in a coal mine, this program exists to vocalize failures.
 # It also prints the given command and its failing exit status to stderr.
@@ -24,7 +24,7 @@ output=$(
 status=$?
 
 if [ $status -ne 0 ]; then
-  echo "canary: command exited with nonzero exit status: $status" >&2
+  echo "canary: command '$*' exited with nonzero status: $status" >&2
   echo "$output" # propagate output of failed command back to caller
 fi
 

@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# Usage: pigeon COMMAND [ARGUMENTS...]
+# Usage: pigeon SHELL_EVAL_EXPRESSION
+#
+# Silences the given command (both stdout and stderr) if its exit status
+# is different this time (compared to the last time it was run) and then
+# propagates that status back to the caller.  Memory of previous statuses
+# is kept in files in the $PIGEON_STATUS_DIR directory, which defaults to
+# $XDG_DATA_HOME/pigeon/status or ~/.local/share/pigeon/status otherwise.
+#
+# Like a carrier pigeon, this program exists to convey changes in status.
+# It also prints the given command and its changed exit status to stderr.
+#
+# Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
+
+: ${PIGEON_STATUS_DIR:=${XDG_DATA_HOME:-$HOME/.local/share}/pigeon/status}
+mkdir -p "$PIGEON_STATUS_DIR" || exit $?
+storage="$PIGEON_STATUS_DIR/$(echo "$*" | sha1sum | cut -f 1 -d ' ')"
+previous=$(test -s "$storage" && cat "$storage" || echo undefined)
+
+output=$(
+  # capture stderr alongside stdout
+  exec 2>&1
+
+  # SHELL_EVAL_EXPRESSION was given
+  test $# -eq 1 && set -- eval "$@"
+
+  # execute the given command line
+  "$@"
+)
+status=$?
+
+if [ $status != $previous ]; then
+  echo "pigeon: command '$*' exit status changed from $previous to $status" >&2
+  echo $status > "$storage" # store exit status for next time
+  echo "$output" # propagate output of command back to caller
+fi
+
+exit $status
