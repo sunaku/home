@@ -22,10 +22,7 @@ export MAKEFLAGS=-j$(grep -c ^processor /proc/cpuinfo)
 export LANG=en_US.utf8
 export XDG_DESKTOP_DIR=$HOME
 export XAUTHORITY=$HOME/.Xauthority
-if test -s /etc/crouton/name; then
-  export CROUTON=$(cat /etc/crouton/name)
-  test -z "$DISPLAY" && export DISPLAY=:1
-fi
+test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
 
 #-----------------------------------------------------------------------------
 # desktop
