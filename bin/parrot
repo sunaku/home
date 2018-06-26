@@ -1,0 +1,16 @@
+#!/bin/sh
+#
+# Usage: parrot MESSAGE [TITLE]
+#
+# Sends a desktop notification with the given MESSAGE and optional TITLE using
+# the OSC 777 escape sequence, as defined by rxvt-unicode terminal extensions.
+#
+# https://chromium.googlesource.com/apps/libapps/+/master/hterm/doc/ControlSequences.md#osc
+# http://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Operating-System-Commands
+#
+# Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
+
+esc="\033]777;notify;$2;$1\a"
+test -n "$TMUX" && esc="\033Ptmux;\033$esc\033\\"
+
+printf "$esc"
