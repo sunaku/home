@@ -21,7 +21,7 @@ alias tree='tree -ACF'
 alias grep='grep --perl-regexp --color=auto'
 
 alias a='where'
-A() { command -v "$@" | xargs -rn1 realpath ;}
+A() { /usr/bin/which "$@" | xargs -r realpath ;}
 alias E='$VISUAL -u NONE -c "set term=ansi smd"'
 alias e='$VISUAL'
 alias g='grep'
