@@ -1,8 +1,8 @@
 export PAGER='less' LESS='-iR'
-export VISUAL='nvim'
+export VISUAL='editor'
 
 # shim for many kinds of VISUAL
-nvim() {
+editor() {
   for editor in nvim vim vi; do
     command $editor "$@"
     case $? in
