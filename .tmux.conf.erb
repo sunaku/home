@@ -227,48 +227,48 @@ bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 # | yes (1)     | yes (1)    | 11       | focus directional Vim split |
 # +-------------+------------+----------+-----------------------------+
 
-bind-key -n M-d run-shell                              ' \
-  case "#{pane_current_command}" in (*vi*) vim=1;; esac; \
-  case "${vim:-0}#{window_zoomed_flag}" in               \
-  (11) tmux send-keys C-w p                           ;; \
-  (??) tmux select-pane -l || tmux select-pane -t 1   ;; \
-  esac                                                   \
+bind-key -n M-d run-shell '                                  \
+  case "#{pane_current_command}" in (*vim*) inside=1;; esac; \
+  case "${inside:-0}#{window_zoomed_flag}" in                \
+  (11) tmux send-keys C-w p                         ;;       \
+  (??) tmux select-pane -l || tmux select-pane -t 1 ;;       \
+  esac                                                       \
 '
 
-bind-key -n M-h run-shell                              ' \
-  case "#{pane_current_command}" in (*vi*) vim=1;; esac; \
-  case "${vim:-0}#{window_zoomed_flag}" in               \
-  (00) tmux select-pane -L                            ;; \
-  (10) tmux send-keys M-h                             ;; \
-  (11) tmux send-keys C-w h                           ;; \
-  esac                                                   \
+bind-key -n M-h run-shell '                                  \
+  case "#{pane_current_command}" in (*vim*) inside=1;; esac; \
+  case "${inside:-0}#{window_zoomed_flag}" in                \
+  (00) tmux select-pane -L                          ;;       \
+  (10) tmux send-keys M-h                           ;;       \
+  (11) tmux send-keys C-w h                         ;;       \
+  esac                                                       \
 '
 
-bind-key -n M-t run-shell                              ' \
-  case "#{pane_current_command}" in (*vi*) vim=1;; esac; \
-  case "${vim:-0}#{window_zoomed_flag}" in               \
-  (00) tmux select-pane -U                            ;; \
-  (10) tmux send-keys M-t                             ;; \
-  (11) tmux send-keys C-w k                           ;; \
-  esac                                                   \
+bind-key -n M-t run-shell '                                  \
+  case "#{pane_current_command}" in (*vim*) inside=1;; esac; \
+  case "${inside:-0}#{window_zoomed_flag}" in                \
+  (00) tmux select-pane -U                          ;;       \
+  (10) tmux send-keys M-t                           ;;       \
+  (11) tmux send-keys C-w k                         ;;       \
+  esac                                                       \
 '
 
-bind-key -n M-n run-shell                              ' \
-  case "#{pane_current_command}" in (*vi*) vim=1;; esac; \
-  case "${vim:-0}#{window_zoomed_flag}" in               \
-  (00) tmux select-pane -D                            ;; \
-  (10) tmux send-keys M-n                             ;; \
-  (11) tmux send-keys C-w j                           ;; \
-  esac                                                   \
+bind-key -n M-n run-shell '                                  \
+  case "#{pane_current_command}" in (*vim*) inside=1;; esac; \
+  case "${inside:-0}#{window_zoomed_flag}" in                \
+  (00) tmux select-pane -D                          ;;       \
+  (10) tmux send-keys M-n                           ;;       \
+  (11) tmux send-keys C-w j                         ;;       \
+  esac                                                       \
 '
 
-bind-key -n M-s run-shell                              ' \
-  case "#{pane_current_command}" in (*vi*) vim=1;; esac; \
-  case "${vim:-0}#{window_zoomed_flag}" in               \
-  (00) tmux select-pane -R                            ;; \
-  (10) tmux send-keys M-s                             ;; \
-  (11) tmux send-keys C-w l                           ;; \
-  esac                                                   \
+bind-key -n M-s run-shell '                                  \
+  case "#{pane_current_command}" in (*vim*) inside=1;; esac; \
+  case "${inside:-0}#{window_zoomed_flag}" in                \
+  (00) tmux select-pane -R                          ;;       \
+  (10) tmux send-keys M-s                           ;;       \
+  (11) tmux send-keys C-w l                         ;;       \
+  esac                                                       \
 '
 
 # resize pane
