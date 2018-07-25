@@ -1,16 +1,11 @@
 export PAGER='less' LESS='-iR'
-export VISUAL='editor'
 
-# shim for many kinds of VISUAL
-editor() {
-  for editor in nvim vim vi; do
-    command $editor "$@"
-    case $? in
-      (126|127) continue ;;
-      (*)       return ;;
-    esac
-  done
-}
+for editor in nvim vim vi; do
+  if command -v $editor >/dev/null; then
+    export VISUAL=$editor
+    break
+  fi
+done
 
 alias open='xdg-open'
 alias scp='rsync --archive --update --compress --verbose'
