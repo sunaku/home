@@ -21,17 +21,10 @@
 # See http://sourceforge.net/p/tmux/mailman/message/32221257 for copy limits.
 # See http://sourceforge.net/p/tmux/tmux-code/ci/a0295b4c2f6 for DCS in tmux.
 #
-# Written in 2014 by Suraj N. Kurapati and documented at http://goo.gl/NwYqfW
+# Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
+# Also documented at https://sunaku.github.io/tmux-yank-osc52.html
 
 buf=$( cat "$@" )
-
-# copy to tmux if possible
-test -n "$TMUX" && tmux set-buffer "$buf"
-
-# copy to X11 if possible...
-test -n "$DISPLAY" && printf %s "$buf" | { xsel -ib || xclip -sel c ;} && exit
-
-# ...otherwise copy to terminal
 len=$( printf %s "$buf" | wc -c ) max=74994
 test $len -gt $max && echo "$0: input is $(( len - max )) bytes too long" >&2
 
@@ -39,3 +32,9 @@ esc="\033]52;c;$( printf %s "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
 test -n "$TMUX" && esc="\033Ptmux;\033$esc\033\\"
 
 printf "$esc"
+
+# also copy to tmux clipboard
+test -n "$TMUX" && tmux set-buffer "$buf"
+
+# also copy to X11 clipboard
+test -n "$DISPLAY" && printf %s "$buf" | { xsel -i -b || xclip -sel c ;} || :
