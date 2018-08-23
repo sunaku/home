@@ -14,9 +14,12 @@ RPROMPT='%F{magenta}#%F{cyan}%D{%e%b}%F{yellow}%D{%-l:%M%P}%f'
 # VI keybindings: 'set showmode' emulation
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == vicmd ]]; then
+      PROMPT_VIINS=$PROMPT
+      PROMPT="%S$PROMPT%s"
       RPROMPT_VIINS=$RPROMPT
-      RPROMPT='-- NORMAL --'
+      RPROMPT='%S-- NORMAL --%s'
   else
+      PROMPT=${PROMPT_VIINS:-$PROMPT}
       RPROMPT=${RPROMPT_VIINS:-$RPROMPT}
   fi
   zle reset-prompt
