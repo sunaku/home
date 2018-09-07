@@ -215,67 +215,64 @@ bind-key -n M-l move-pane    -t .-1 -s . -h # join pane at right of prev pane
 bind-key -n M-G move-pane -d -s .+1 -t .    # join next pane at bottom
 bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 
-# Focus the directional pane (or split if inside Vim) unless maximized.
+# Intelligently navigate tmux panes and Vim splits using the same keys.
 # See https://sunaku.github.io/tmux-select-pane.html for documentation.
 #
-# +-------------+------------+----------+-----------------------------+
-# | inside Vim? | Maximized? | Encoding | Action taken by key binding |
-# +-------------+------------+----------+-----------------------------+
-# | no  (0)     | no  (0)    | 00       | focus directional tmux pane |
-# | no  (0)     | yes (1)    | 01       | nothing: ignore key binding |
-# | yes (1)     | no  (0)    | 10       | delegate vim-tmux-navigator |
-# | yes (1)     | yes (1)    | 11       | focus directional Vim split |
-# +-------------+------------+----------+-----------------------------+
+#      +-------------+------------+-----------------------------+
+#      | inside Vim? | is Zoomed? | Action taken by key binding |
+#      +-------------+------------+-----------------------------+
+#      | No          | No         | Focus directional tmux pane |
+#      | No          | Yes        | Nothing: ignore key binding |
+#      | Yes         | No         | Seamlessly focus Vim / tmux |
+#      | Yes         | Yes        | Focus directional Vim split |
+#      +-------------+------------+-----------------------------+
+#
+vim_navigation_timeout=0.05 # number of seconds we give Vim to navigate
+navigate='                                                             \
+  pane_is_zoomed() {                                                   \
+    test #{window_zoomed_flag} -eq 1;                                  \
+  };                                                                   \
+  pane_title_changed() {                                               \
+    test "#{pane_title}" != "$(tmux display -p "##{pane_title}")";     \
+  };                                                                   \
+  pane_contains_vim() {                                                \
+    title="#{pane_title}";                                             \
+    case ",#{pane_current_command},${title%% *}," in                   \
+      (*,vi,*|*view,*|*vim*) true ;;                                   \
+      (*) false ;;                                                     \
+    esac;                                                              \
+  };                                                                   \
+  navigate() {                                                         \
+    tmux_navigation_command=$1;                                        \
+    vim_navigation_command=$2;                                         \
+    vim_navigation_only_if=${3:-true};                                 \
+    if pane_contains_vim && eval "$vim_navigation_only_if"; then       \
+      eval "$vim_navigation_command";                                  \
+      if ! pane_is_zoomed; then                                        \
+        sleep $vim_navigation_timeout; : wait for Vim to change title; \
+        if ! pane_title_changed; then                                  \
+          eval "$tmux_navigation_command";                             \
+        fi;                                                            \
+      fi;                                                              \
+    elif ! pane_is_zoomed; then                                        \
+      eval "$tmux_navigation_command";                                 \
+    fi;                                                                \
+  };                                                                   \
+navigate '
 
-bind-key -n M-d run-shell '                                   \
-  is_vim=#{m:*vim*,#{pane_current_command}|#{=4:pane_title}}; \
-  is_max=#{window_zoomed_flag};                               \
-  case "${is_vim}${is_max}" in                                \
-  (11) tmux send-keys C-w p  ;;                               \
-  (??) tmux select-pane -l   ||                               \
-       tmux select-pane -t 1 ;;                               \
-  esac                                                        \
-'
+## QWERTY keys - comment these out if you don't use QWERTY layout!
+#bind-key -n M-h run-shell "$navigate 'tmux select-pane -L' 'tmux send-keys C-w h'"
+#bind-key -n M-j run-shell "$navigate 'tmux select-pane -D' 'tmux send-keys C-w j'"
+#bind-key -n M-k run-shell "$navigate 'tmux select-pane -U' 'tmux send-keys C-w k'"
+#bind-key -n M-l run-shell "$navigate 'tmux select-pane -R' 'tmux send-keys C-w l'"
+#bind-key -n M-; run-shell "$navigate 'tmux select-pane -l || tmux select-pane -t 1' 'tmux send-keys C-w p' 'pane_is_zoomed'"
 
-bind-key -n M-h run-shell '                                   \
-  is_vim=#{m:*vim*,#{pane_current_command}|#{=4:pane_title}}; \
-  is_max=#{window_zoomed_flag};                               \
-  case "${is_vim}${is_max}" in                                \
-  (00) tmux select-pane -L  ;;                                \
-  (10) tmux send-keys M-h   ;;                                \
-  (11) tmux send-keys C-w h ;;                                \
-  esac                                                        \
-'
-
-bind-key -n M-t run-shell '                                   \
-  is_vim=#{m:*vim*,#{pane_current_command}|#{=4:pane_title}}; \
-  is_max=#{window_zoomed_flag};                               \
-  case "${is_vim}${is_max}" in                                \
-  (00) tmux select-pane -U  ;;                                \
-  (10) tmux send-keys M-t   ;;                                \
-  (11) tmux send-keys C-w k ;;                                \
-  esac                                                        \
-'
-
-bind-key -n M-n run-shell '                                   \
-  is_vim=#{m:*vim*,#{pane_current_command}|#{=4:pane_title}}; \
-  is_max=#{window_zoomed_flag};                               \
-  case "${is_vim}${is_max}" in                                \
-  (00) tmux select-pane -D  ;;                                \
-  (10) tmux send-keys M-n   ;;                                \
-  (11) tmux send-keys C-w j ;;                                \
-  esac                                                        \
-'
-
-bind-key -n M-s run-shell '                                   \
-  is_vim=#{m:*vim*,#{pane_current_command}|#{=4:pane_title}}; \
-  is_max=#{window_zoomed_flag};                               \
-  case "${is_vim}${is_max}" in                                \
-  (00) tmux select-pane -R  ;;                                \
-  (10) tmux send-keys M-s   ;;                                \
-  (11) tmux send-keys C-w l ;;                                \
-  esac                                                        \
-'
+# Dvorak keys - comment these out if you don't use Dvorak layout!
+bind-key -n M-d run-shell "$navigate 'tmux select-pane -l || tmux select-pane -t 1' 'tmux send-keys C-w p' 'pane_is_zoomed'"
+bind-key -n M-h run-shell "$navigate 'tmux select-pane -L' 'tmux send-keys C-w h'"
+bind-key -n M-t run-shell "$navigate 'tmux select-pane -U' 'tmux send-keys C-w k'"
+bind-key -n M-n run-shell "$navigate 'tmux select-pane -D' 'tmux send-keys C-w j'"
+bind-key -n M-s run-shell "$navigate 'tmux select-pane -R' 'tmux send-keys C-w l'"
 
 # resize pane
 bind-key -r H resize-pane -L 5
