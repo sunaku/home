@@ -48,6 +48,10 @@ set-option -ga terminal-overrides ',st-256color:smkx=\E='
 # http://invisible-island.net/xterm/terminfo-contents.html#tic-xterm_tmux
 set-option -ga terminal-overrides ',xterm*:Ms=\E]52;c;%p2%s\007'
 
+# KiTTY always appends to clipboard; must clear it first
+# https://sw.kovidgoyal.net/kitty/protocol-extensions.html#pasting-to-clipboard
+set-option -ga terminal-overrides ',xterm-kitty:Ms=\E]52;c;!\007\E]52;c;%p2%s\007'
+
 # prevent standout from appearing as italics under URxvt
 # http://comments.gmane.org/gmane.comp.terminal-emulators.tmux.user/1927
 set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
