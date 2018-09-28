@@ -25,8 +25,9 @@
 # Also documented at https://sunaku.github.io/tmux-yank-osc52.html
 
 put() {
-  test -n "$TMUX" && sequence="\033Ptmux;\033$1\033\\" || sequence=$1
-  printf "$sequence"
+  esc=$1
+  test -n "$TMUX" -o -z "${TERM##screen*}" && esc="\033Ptmux;\033$esc\033\\"
+  printf "$esc"
 }
 
 put "\033]52;c;!\a" # KiTTY always appends to the clipboard, so clear it first
