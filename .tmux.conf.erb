@@ -352,10 +352,12 @@ bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
 set-option -g history-limit 32767
 
 # search buffer using copy mode
-bind-key -n M-/ copy-mode \; command-prompt -p 'search-backward (press up):' -i 'send-keys -X search-backward-incremental "%%%"'
+bind-key -n M-/ copy-mode \;\
+  command-prompt -p 'search-backward (press up):' \
+    -i 'send-keys -X search-backward-incremental "%%%"'
 
 # search buffer using Vim or less
-bind-key -n M-?                               \
+bind-key -n M-|                               \
   capture-pane -J -S - \;                     \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
@@ -368,7 +370,7 @@ bind-key -n M-?                               \
   run-shell 'tmux send-keys G \?'
 
 # search colored buffer using less
-bind-key -n M-+                           \
+bind-key -n M-?                           \
   capture-pane -e -J -S - \;              \
   new-window -n '#S:#I.#P' -a '           \
     tmux save-buffer - \; delete-buffer | \
