@@ -355,18 +355,26 @@ set-option -g history-limit 32767
 bind-key -n M-/ copy-mode \; command-prompt -p 'search-backward (press up):' -i 'send-keys -X search-backward-incremental "%%%"'
 
 # search buffer using Vim or less
-bind-key -n M-? capture-pane -S -32767 -J \; new-window -a ' \
-  tmux save-buffer - \; delete-buffer | {                    \
-    env vim -R -c "set nofen is hls ic" -;                   \
-    test $? -eq 127 && env less;                             \
-  };                                                         \
-' \; run-shell 'tmux send-keys G \?' # go to end and search up
+bind-key -n M-?                               \
+  capture-pane -J -S - \;                     \
+  new-window -n '#S:#I.#P' -a '               \
+    tmux save-buffer - \; delete-buffer | {   \
+      if command -v vim;                      \
+      then vim -R -c "set nofen is hls ic" -; \
+      else less;                              \
+      fi;                                     \
+    };                                        \
+  ' \;                                        \
+  run-shell 'tmux send-keys G \?'
 
-# view buffer with colors in less
-bind-key -n M-+ \
-  capture-pane -e -J -S - \;\
-  new-window -a 'tmux save-buffer - \; delete-buffer | less -R' \;\
-  run-shell 'tmux send-keys G' # start at the bottom of the buffer
+# search colored buffer using less
+bind-key -n M-+                           \
+  capture-pane -e -J -S - \;              \
+  new-window -n '#S:#I.#P' -a '           \
+    tmux save-buffer - \; delete-buffer | \
+    less -R                               \
+  ' \;                                    \
+  run-shell 'tmux send-keys G \?'
 
 # scroll buffer
 # NOTE: set "URxvt.saveLines: 0" in ~/.Xdefaults to make Shift+PageUp bindable
