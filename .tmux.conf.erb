@@ -362,6 +362,12 @@ bind-key -n M-? capture-pane -S -32767 -J \; new-window -a ' \
   };                                                         \
 ' \; run-shell 'tmux send-keys G \?' # go to end and search up
 
+# view buffer with colors in less
+bind-key -n M-+ \
+  capture-pane -e -J -S - \;\
+  new-window -a 'tmux save-buffer - \; delete-buffer | less -R' \;\
+  run-shell 'tmux send-keys G' # start at the bottom of the buffer
+
 # scroll buffer
 # NOTE: set "URxvt.saveLines: 0" in ~/.Xdefaults to make Shift+PageUp bindable
 # NOTE: see http://aperiodic.net/screen/interface for doing the same in XTerm
