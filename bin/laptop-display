@@ -14,7 +14,19 @@ eval $(xrandr --verbose | awk '
   /\+preferred/     { print display "_prefer_size=" $1 }
 ')
 
-if test -n "$HDMI1_connected" ; then
+if test -n "$DP22_connected" ; then
+  # switch off internal display and use external one
+
+  test -n "$eDP1_active" &&
+    set -- "$@" --output "$eDP1" --off
+
+  test -z "$DP22_active" &&
+    set -- "$@" --output "$DP22" --auto
+
+  test -n "$DP22_prefer_size" -a "$DP22_prefer_size" != "$DP22_size" &&
+    set -- "$@" --output "$DP22" --auto --size "$DP22_prefer_size"
+
+elif test -n "$HDMI1_connected" ; then
   # switch off internal display and use external one
 
   test -n "$eDP1_active" &&
@@ -23,24 +35,22 @@ if test -n "$HDMI1_connected" ; then
   test -z "$HDMI1_active" &&
     set -- "$@" --output "$HDMI1" --auto
 
-  test "$HDMI1_prefer_size" != "$HDMI1_size" &&
-    set -- "$@" --output "$HDMI1" --auto \
-                --size "$HDMI1_prefer_size"
+  test -n "$HDMI1_prefer_size" -a "$HDMI1_prefer_size" != "$HDMI1_size" &&
+    set -- "$@" --output "$HDMI1" --auto --size "$HDMI1_prefer_size"
 
 elif test -n "$eDP1_connected" ; then
   # external display not connected; use internal one
 
   test -z "$eDP1_active" &&
-    set -- "$@" --output "$HDMI1" --off \
+    set -- "$@" --output "$DP22" --off \
+                --output "$HDMI1" --off \
                 --output "$eDP1" --auto
 
-  test "$eDP1_prefer_size" != "$eDP1_size" &&
-    set -- "$@" --output "$eDP1" --auto \
-                --size "$eDP1_prefer_size"
+  test -n "$eDP1_prefer_size" -a "$eDP1_prefer_size" != "$eDP1_size" &&
+    set -- "$@" --output "$eDP1" --auto --size "$eDP1_prefer_size"
 
   # reduce brightness of internal display
   xbacklight | grep -q '^100' && xbacklight = 15
 fi
 
 test $# -gt 0 && xrandr "$@" --dpi 96
-nitrogen --restore # desktop wallpaper
