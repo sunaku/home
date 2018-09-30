@@ -65,4 +65,4 @@ elif test -n "$eDP1_connected" ; then
   xbacklight | grep -q '^100' && xbacklight = 15
 fi
 
-test $# -gt 0 && xrandr "$@" --dpi 96
+test $# -gt 0 && xrandr "$@" --dpi 96 ||:
