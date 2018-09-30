@@ -231,7 +231,7 @@ set -- $(tmux list-panes -F '#{pane_id}')
 selected_pane=$(tmux display-message -p '#{pane_id}')
 historic_pane=$(tmux last-pane 2>/dev/null \;\
                      display-message -p '#{pane_id}' \;\
-                     last-pane) || : # exit 1: no last pane
+                     last-pane) ||: # exit 1 - no last pane
 window_height=$(tmux display-message -p '#{window_height}')
 
 # execute all tmux commands in one shot to avoid flickering and slowness

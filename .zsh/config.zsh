@@ -12,5 +12,5 @@ for bundle in ~/.zsh/bundle/*; do
   source_if_exist $bundle/init.zsh
 
   # load bundle configuration
-  source_if_exist $bundle.zsh || :
+  source_if_exist $bundle.zsh ||:
 done
