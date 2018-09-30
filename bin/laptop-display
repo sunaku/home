@@ -6,12 +6,24 @@
 
 # detect and register active displays as variables in this script
 eval $(xrandr --verbose | awk '
-  $2 ~  /connected/ { original=$1; gsub("-", "", $1); display=$1;
-                      print display "=" original }
-  $2 == "connected" { print display "_connected=1" }
-  /\*current/       { print display "_active=1" ;
-                      print display "_size=" $1 }
-  /\+preferred/     { print display "_prefer_size=" $1 }
+  $2 ~  /connected/ {
+    device=$1
+    gsub("-", "", $1)
+    display=$1
+    print display "=" device
+  }
+  $2 == "connected" {
+    print display "_connected=1"
+    preferred=""
+  }
+  /\+preferred/ || (!preferred && $1 ~ /^[[:digit:]]+x[[:digit:]]+$/) {
+    print display "_preferred_size=" $1
+    preferred=$1
+  }
+  /\*current/ {
+    print display "_active=1"
+    print display "_size=" $1
+  }
 ')
 
 if test -n "$DP22_connected" ; then
@@ -23,8 +35,8 @@ if test -n "$DP22_connected" ; then
   test -z "$DP22_active" &&
     set -- "$@" --output "$DP22" --auto
 
-  test -n "$DP22_prefer_size" -a "$DP22_prefer_size" != "$DP22_size" &&
-    set -- "$@" --output "$DP22" --auto --size "$DP22_prefer_size"
+  test "$DP22_preferred_size" != "$DP22_size" &&
+    set -- "$@" --output "$DP22" --auto --size "$DP22_preferred_size"
 
 elif test -n "$HDMI1_connected" ; then
   # switch off internal display and use external one
@@ -35,8 +47,8 @@ elif test -n "$HDMI1_connected" ; then
   test -z "$HDMI1_active" &&
     set -- "$@" --output "$HDMI1" --auto
 
-  test -n "$HDMI1_prefer_size" -a "$HDMI1_prefer_size" != "$HDMI1_size" &&
-    set -- "$@" --output "$HDMI1" --auto --size "$HDMI1_prefer_size"
+  test "$HDMI1_preferred_size" != "$HDMI1_size" &&
+    set -- "$@" --output "$HDMI1" --auto --size "$HDMI1_preferred_size"
 
 elif test -n "$eDP1_connected" ; then
   # external display not connected; use internal one
@@ -46,8 +58,8 @@ elif test -n "$eDP1_connected" ; then
                 --output "$HDMI1" --off \
                 --output "$eDP1" --auto
 
-  test -n "$eDP1_prefer_size" -a "$eDP1_prefer_size" != "$eDP1_size" &&
-    set -- "$@" --output "$eDP1" --auto --size "$eDP1_prefer_size"
+  test "$eDP1_preferred_size" != "$eDP1_size" &&
+    set -- "$@" --output "$eDP1" --auto --size "$eDP1_preferred_size"
 
   # reduce brightness of internal display
   xbacklight | grep -q '^100' && xbacklight = 15
