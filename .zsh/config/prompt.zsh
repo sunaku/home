@@ -9,7 +9,7 @@ PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 '%(!.%F{red}.%F{green})%~%f'\
 '%(!.#.>) '
 
-RPROMPT='%F{magenta}#%F{cyan}%D{%e%b}%F{yellow}%D{%-l:%M%p}%f'
+RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%p}%f'
 
 # VI keybindings: 'set showmode' emulation
 function zle-line-init zle-keymap-select {
