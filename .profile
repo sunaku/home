@@ -10,7 +10,8 @@ export PKG_CONFIG_PATH=$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH
 export GOPATH=$HOME/opt/install/GOPATH
 export GEM_HOME=$HOME/opt/install/GEM_HOME
 export GEM_PATH=$GEM_HOME:$GEM_PATH
-export NODE_PATH=$HOME/opt/install/NODE_PATH
+export NPM_CONFIG_PREFIX=$HOME/opt/install/NPM_CONFIG_PREFIX
+export NODE_PATH=$NPM_CONFIG_PREFIX/lib/node_modules:$NODE_PATH
 
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS=-j$(grep -c ^processor /proc/cpuinfo)
