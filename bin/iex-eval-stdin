@@ -1,0 +1,21 @@
+#!/usr/bin/expect -f
+#
+# Usage: iex-eval-stdin -- [ARGUMENTS_FOR_IEX...]
+# Usage: iex-eval-stdin < YOUR_ELIXIR_SCRIPT_FILE
+# Usage: echo YOUR_ELIXIR_SCRIPT | iex-eval-stdin
+#
+# Runs each line from the standard input stream using iex(1), as if
+# each line were interactively typed into iex(1) in the first place.
+#
+# Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
+# and documented at <https://sunaku.github.io/iex-eval-stdin.html>
+
+set prompt {\n(iex|\.\.\.)(\(\d+\)|\(.+@.+\)\d+)> $}
+
+eval spawn -noecho iex $argv
+while {[gets stdin line] >= 0} {
+  expect -re $prompt
+  send -- "$line\r"
+}
+expect -re $prompt ;# await last result
+puts "\033\[1K"    ;# clear last prompt
