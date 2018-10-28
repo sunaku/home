@@ -4,20 +4,9 @@
 #
 # When *.exs files in the current directory are modified, this script runs
 # their contents using iex(1) as if they were interactively typed into it.
+# See associated iex-eval-stdin(1) script for details on how this is done.
 #
 # Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
-
-iex_eval_stdin() {
-  {
-    echo spawn iex "$@"
-    echo 'expect "iex(*)> "'
-    while read -r line; do
-      echo "$line" | sed 's/["$\[\\]/\\&/g; s/^/send -- "/; s/$/\\r"/'
-      echo 'expect "???(*)> "'
-    done
-  } | expect -
-  echo -n -e '\033[2K\r' # clear the very last prompt
-}
 
 inotifywait -qme close_write --format '%w%f' . | while read -r file; do {
 
@@ -32,7 +21,7 @@ inotifywait -qme close_write --format '%w%f' . | while read -r file; do {
   echo "\033[36m$file @ $(date)\033[0m"
 
   # run file as if it were interactively typed into iex
-  iex_eval_stdin "$@" < "$file"
+  iex-eval-stdin -- "$@" < "$file"
 
 } </dev/null
 done
