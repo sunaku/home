@@ -324,11 +324,11 @@ bind-key -n M-A rotate-window -U
 # layouts
 #-----------------------------------------------------------------------------
 
-bind-key -n M-w select-layout main-horizontal
-bind-key -n M-W select-layout even-vertical
-bind-key -n M-v select-layout main-vertical
-bind-key -n M-V select-layout even-horizontal
-bind-key -n M-z select-layout tiled
+bind-key M-w select-layout main-horizontal
+bind-key M-W select-layout even-vertical
+bind-key M-v select-layout main-vertical
+bind-key M-V select-layout even-horizontal
+bind-key M-z select-layout tiled
 
 # half-screen tiling layouts (horizontal, vertical)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
@@ -343,6 +343,7 @@ bind-key -n M-w run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
 bind-key -n M-W run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
 bind-key -n M-v run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
 bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
+bind-key -n M-z select-layout tiled
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
