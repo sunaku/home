@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# Usage: inotifytest FILE_SUFFIX TEST_COMMAND [WATCH_DIRECTORIES...]
+# Usage: inotifytest .rb ruby
+# Usage: inotifytest .py pytest
+# Usage: inotifytest .rkt racket
+# Usage: inotifytest .exs elixir
+#
+# When *.FILE_SUFFIX files in or under WATCH_DIRECTORIES are written, this
+# script runs TEST_COMMAND on their corresponding *test.FILE_SUFFIX files.
+# If no WATCH_DIRECTORIES are given, the current working directory is used.
+#
+# Written in 2013 by Suraj N. Kurapati <https://github.com/sunaku>
+
+test $# -lt 2 && exit 1
+ext=${1#.} cmd=$2; shift 2
+test $# -eq 0 && set -- .
+
+inotifywait -rqme close_write --format '%w%f' "$@" | while read -r file; do {
+
+  # only process *.$ext files - ignore all other files
+  test "${file%.$ext}" = "$file" && continue
+
+  # map the source file to its corresponding test file
+  test "${file%test.$ext}" = "$file" &&
+  file=$(ls "${file%.$ext}"*"test.$ext" 2>/dev/null)
+
+  # make sure the test file exists before running it
+  test -f "$file" || continue
+
+  # keep track of which test file is being run & when
+  clear
+  echo "\033[36m$file @ $(date)\033[0m"
+
+  # run test file and print any errors or test fails
+  $cmd "$file"
+
+} </dev/null
+done
