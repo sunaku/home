@@ -36,7 +36,7 @@ if test -n "$DP22_connected" ; then
     set -- "$@" --output "$DP22" --auto
 
   test "$DP22_preferred_size" != "$DP22_size" &&
-    set -- "$@" --size "$DP22_preferred_size"
+    set -- "$@" ';' xrandr --size "$DP22_preferred_size"
 
 elif test -n "$HDMI1_connected" ; then
   # switch off internal display and use external one
@@ -48,7 +48,7 @@ elif test -n "$HDMI1_connected" ; then
     set -- "$@" --output "$HDMI1" --auto
 
   test "$HDMI1_preferred_size" != "$HDMI1_size" &&
-    set -- "$@" --size "$HDMI1_preferred_size"
+    set -- "$@" ';' xrandr --size "$HDMI1_preferred_size"
 
 elif test -n "$eDP1_connected" ; then
   # external display not connected; use internal one
@@ -59,10 +59,10 @@ elif test -n "$eDP1_connected" ; then
                 --output "$eDP1" --auto
 
   test "$eDP1_preferred_size" != "$eDP1_size" &&
-    set -- "$@" --size "$eDP1_preferred_size"
+    set -- "$@" ';' xrandr --size "$eDP1_preferred_size"
 
   # reduce brightness of internal display
   xbacklight | grep -q '^100' && xbacklight = 15
 fi
 
-test $# -gt 0 && xrandr "$@" ||:
+test $# -gt 0 && eval xrandr "$@" ||:
