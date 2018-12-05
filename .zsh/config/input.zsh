@@ -23,7 +23,6 @@ bindkey "^[^[[3~" delete-word       # <Alt-Delete> for WORD ahead of cursor
 bindkey "^[^?" backward-delete-word # <Alt-Backspace> for WORD behind cursor
 #
 # enable the <Delete> key in st-256color
-# (this apears to be harmless for xterm)
 # http://git.suckless.org/st/tree/FAQ#n32
 #
-tput smkx
+test "$TERM" = st-256color && tput smkx
