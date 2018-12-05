@@ -20,7 +20,7 @@ export MAKEFLAGS=-j$(grep -c ^processor /proc/cpuinfo)
 # crouton
 #-----------------------------------------------------------------------------
 
-export LANG=en_US.utf8
+export LANG=en_US.UTF-8
 export XDG_DESKTOP_DIR=$HOME
 export XAUTHORITY=$HOME/.Xauthority
 test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
