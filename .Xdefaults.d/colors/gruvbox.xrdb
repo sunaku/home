@@ -1,7 +1,7 @@
 ! Colors from "gruvbox" colorscheme for Vim
 ! https://github.com/morhetz/gruvbox#palette
 
-#define Ansi_0_Color     #1d2021 /* bg0_h         *//* normal black   */
+#define Ansi_0_Color     #504945 /* fg2           *//* normal black   */
 #define Ansi_1_Color     #fb4934 /* red bright    *//* normal red     */
 #define Ansi_2_Color     #b8bb26 /* green bright  *//* normal green   */
 #define Ansi_3_Color     #fabd2f /* yellow bright *//* normal yellow  */
@@ -9,7 +9,7 @@
 #define Ansi_5_Color     #d3869b /* purple bright *//* normal magenta */
 #define Ansi_6_Color     #8ec07c /* aqua bright   *//* normal cyan    */
 #define Ansi_7_Color     #ebdbb2 /* fg            *//* normal white   */
-#define Ansi_8_Color     #1d2021 /* bg0_h         *//* bright black   */
+#define Ansi_8_Color     #7c6f64 /* gray          *//* bright black   */
 #define Ansi_9_Color     #fb4934 /* red bright    *//* bright red     */
 #define Ansi_10_Color    #b8bb26 /* green bright  *//* bright green   */
 #define Ansi_11_Color    #fabd2f /* yellow bright *//* bright yellow  */
