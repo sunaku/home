@@ -4,7 +4,7 @@
 . ~/.xprofile
 
 # terminal
-st -e sh -c 'tmux has-session && tmux attach -d || tmux' &
+kitty sh -c 'if tmux has-session; then tmux attach -d; else tmux; fi' &
 
 # system logs
 xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 +sb \
