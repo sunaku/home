@@ -1,0 +1,20 @@
+#!/bin/sh -eu
+#
+# Setup: apt-get install inotify-tools
+#
+# Usage: inotifywait-relay HOSTNAME [DIRECTORIES...] [INOTIFYWAIT_OPTIONS...]
+#
+# When any files in or beneath DIRECTORIES are modified, this script relays
+# those events to HOSTNAME by remotely running touch(1) on them on HOSTNAME.
+#
+# Written in 2019 by Suraj N. Kurapati <https://github.com/sunaku>
+
+remote=$1
+shift
+
+inotifywait -rqme close_write --format '%w%f' "${@:-.}" |
+while read -r file; do
+  if test -e "$file"; then
+    ssh -q "$remote" touch -c -h -m "$(realpath "$file")"
+  fi
+done
