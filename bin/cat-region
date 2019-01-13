@@ -1,0 +1,15 @@
+#!/bin/sh -eu
+#
+# Usage: cat-region FILENAME FROM_OFFSET UPTO_OFFSET [CONTEXT_SIZE]
+#
+# Prints text from FILENAME starting at FROM_OFFSET and ending at UPTO_OFFSET,
+# optionally extending the region by CONTEXT_SIZE in both directions if given.
+#
+# Written in 2019 by Suraj N. Kurapati <https://github.com/sunaku>
+
+file=$1 from=$2 upto=$3 wing=${4:-0}
+from=$(( from - wing ))
+upto=$(( upto + wing ))
+size=$(( upto - from ))
+
+dd status=none bs=1 skip=$from count=$size if="$file"
