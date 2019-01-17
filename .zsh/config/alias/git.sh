@@ -3,6 +3,13 @@ intra_line_diff='--word-diff-regex="[^[:space:]]|([[:alnum:]]|UTF_8_GUARD)+"'
 intra_line_less='LESS="-R +/-\]|\{\+"' # jump directly to changes in diffs
 
 #-----------------------------------------------------------------------------
+# n = no repository
+#-----------------------------------------------------------------------------
+
+alias gnd='git diff --no-index --'
+alias gnD='git diff --no-index --word-diff=color --'
+
+#-----------------------------------------------------------------------------
 # o = working copy
 #-----------------------------------------------------------------------------
 
@@ -112,7 +119,7 @@ alias gc='git commit'
 alias gcF='git commit --fixup'
 
 # commit changes as a fixup of existing commit chosen from menu
-alias gcf='gcF $(gl0)'
+alias gcf='git commit --fixup $(gl0)'
 
 # commit staged changes with the given message
 alias gcm='git commit -m'
