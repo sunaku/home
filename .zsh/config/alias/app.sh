@@ -13,8 +13,6 @@ test -e $SUDO_ASKPASS || unset SUDO_ASKPASS
 alias open='xdg-open'
 alias scp='rsync --archive --update --compress --verbose'
 alias sloc='cloc --by-file-by-lang --exclude-dir .git'
-alias diff='git diff --no-index --'
-alias wdiff='git diff --no-index --word-diff=color --'
 alias tree='tree -ACF'
 alias grep='grep --perl-regexp --color=auto'
 
