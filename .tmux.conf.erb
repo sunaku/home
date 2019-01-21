@@ -246,11 +246,20 @@ navigate='                                                             \
       (*) false ;;                                                     \
     esac;                                                              \
   };                                                                   \
+  pane_contains_neovim_terminal() {                                    \
+    case "#{pane_title}" in                                            \
+      (nvim?term://*) true ;;                                          \
+      (*) false ;;                                                     \
+    esac;                                                              \
+  };                                                                   \
   navigate() {                                                         \
     tmux_navigation_command=$1;                                        \
     vim_navigation_command=$2;                                         \
     vim_navigation_only_if=${3:-true};                                 \
     if pane_contains_vim && eval "$vim_navigation_only_if"; then       \
+      if pane_contains_neovim_terminal; then                           \
+        tmux send-keys C-\\ C-n;                                       \
+      fi;                                                              \
       eval "$vim_navigation_command";                                  \
       if ! pane_is_zoomed; then                                        \
         sleep $vim_navigation_timeout; : wait for Vim to change title; \
