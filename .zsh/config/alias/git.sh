@@ -242,9 +242,9 @@ gri() {
   git rebase --interactive "$@"
 }
 
-# rebase interactively to squash fixup commits
+# rebase interactively to squash fixup commits up to the nearest fixup target
 grf() {
-  gri --autosquash "$(glf)^"
+  gri --autosquash "$(glf | head -1)^"
 }
 
 #-----------------------------------------------------------------------------
@@ -326,10 +326,13 @@ gl0() {
   xargs -r git rev-parse # convert short commitish to full SHA
 }
 
-# show earliest fixup commit's target commit SHA
+# show fixup commit targets
 glf() {
-  git log --grep '^fixup!' --format='%s' | sed -n '$s/^fixup! //p' |
-  xargs -rI@ git log --grep=@ --fixed-strings --format='%H' | tail -1
+  regexp='^fixup! '
+  titles=$(git log --grep "$regexp" --format='%s' | sed "s/$regexp//")
+  test -n "$titles" &&
+    git log --grep="$titles" --fixed-strings \
+            --format='%s %H' | grep -v "$regexp" | sed 's/.* //'
 }
 
 #-----------------------------------------------------------------------------
