@@ -4,6 +4,11 @@ set scroll-page-aware       true
 set window-title-basename   true
 set window-title-page       true
 
+set recolor true
+set recolor-keephue true
+set recolor-darkcolor "#93A1A1"
+set recolor-lightcolor "#002B36"
+
 map <C-Home>    goto     top
 map <BackSpace> navigate previous
 map <Home>      scroll   page-top
