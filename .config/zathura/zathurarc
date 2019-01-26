@@ -1,4 +1,4 @@
-set font                    "Tamzen 13"
+set font                    "Fira Code 9"
 set guioptions              ""
 set window-title-basename   true
 set window-title-page       true
