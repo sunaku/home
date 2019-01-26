@@ -1,6 +1,5 @@
 set font                    "Tamzen 13"
 set guioptions              ""
-set scroll-page-aware       true
 set window-title-basename   true
 set window-title-page       true
 
