@@ -239,11 +239,16 @@ navigate='                                                             \
   pane_title_changed() {                                               \
     test "#{pane_title}" != "$(tmux display -p "##{pane_title}")";     \
   };                                                                   \
-  pane_contains_vim() {                                                \
-    title="#{pane_title}";                                             \
-    case ",#{pane_current_command},${title%% *}," in                   \
-      (*,vi,*|*view,*|*vim*) true ;;                                   \
+  command_is_vim() {                                                   \
+    case "${1%% *}" in                                                 \
+      (vi|?vi|vim*|?vim*|view|?view|vi??*) true ;;                     \
       (*) false ;;                                                     \
+    esac;                                                              \
+  };                                                                   \
+  pane_contains_vim() {                                                \
+    case "#{=3:pane_current_command}" in                               \
+      (ssh|sh) command_is_vim "#{=5:pane_title}" ;;                    \
+      (*) command_is_vim "#{=5:pane_current_command}" ;;               \
     esac;                                                              \
   };                                                                   \
   pane_contains_neovim_terminal() {                                    \
