@@ -252,10 +252,7 @@ navigate='                                                             \
     esac;                                                              \
   };                                                                   \
   pane_contains_neovim_terminal() {                                    \
-    case "#{pane_title}" in                                            \
-      (nvim?term://*) true ;;                                          \
-      (*) false ;;                                                     \
-    esac;                                                              \
+    test "#{=12:pane_title}" = "nvim term://";                         \
   };                                                                   \
   navigate() {                                                         \
     tmux_navigation_command=$1;                                        \
