@@ -14,7 +14,7 @@ shift
 
 inotifywait -rqme close_write --format '%w%f' "${@:-.}" |
 while read -r file; do
-  if test -e "$file"; then
-    ssh -q "$remote" touch -c -h -m "$(realpath "$file")"
+  if timestamp=$(date -Is -r "$file" 2>/dev/null); then
+    ssh -q "$remote" touch -d "$timestamp" -c -h -m "$(realpath "$file")"
   fi
 done
