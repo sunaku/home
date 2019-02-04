@@ -10,10 +10,12 @@ set recolor-lightcolor "#002B36"
 
 map <C-Home>    goto     top
 map <Home>      scroll   page-top
+map <A-Up>      scroll   page-top
 map <PageUp>    scroll   full-up
 map <BackSpace> scroll   half-up
 map <S-Space>   scroll   half-up
 map <Space>     scroll   half-down
 map <PageDown>  scroll   full-down
+map <A-Down>    scroll   page-bottom
 map <End>       scroll   page-bottom
 map <C-End>     goto     bottom
