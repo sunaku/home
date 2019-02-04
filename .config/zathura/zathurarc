@@ -9,10 +9,11 @@ set recolor-darkcolor "#93A1A1"
 set recolor-lightcolor "#002B36"
 
 map <C-Home>    goto     top
-map <BackSpace> navigate previous
 map <Home>      scroll   page-top
 map <PageUp>    scroll   full-up
+map <BackSpace> scroll   half-up
+map <S-Space>   scroll   half-up
+map <Space>     scroll   half-down
 map <PageDown>  scroll   full-down
 map <End>       scroll   page-bottom
-map <Space>     navigate next
 map <C-End>     goto     bottom
