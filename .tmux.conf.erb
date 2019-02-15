@@ -283,18 +283,18 @@ navigate_back=" $navigate 'tmux select-pane -l || tmux select-pane -t1'\
                           'pane_is_zoomed'                             "
 
 ## QWERTY keys - comment these out if you don't use QWERTY layout!
-#bind-key -n M-h run-shell "$navigate_left  &"
-#bind-key -n M-j run-shell "$navigate_down  &"
-#bind-key -n M-k run-shell "$navigate_up    &"
-#bind-key -n M-l run-shell "$navigate_right &"
-#bind-key -n M-\ run-shell "$navigate_back  &"
+#bind-key -n M-h run-shell -b "$navigate_left"
+#bind-key -n M-j run-shell -b "$navigate_down"
+#bind-key -n M-k run-shell -b "$navigate_up"
+#bind-key -n M-l run-shell -b "$navigate_right"
+#bind-key -n M-\ run-shell -b "$navigate_back"
 
 # Dvorak keys - comment these out if you don't use Dvorak layout!
-bind-key -n M-d run-shell "$navigate_back  &"
-bind-key -n M-h run-shell "$navigate_left  &"
-bind-key -n M-t run-shell "$navigate_up    &"
-bind-key -n M-n run-shell "$navigate_down  &"
-bind-key -n M-s run-shell "$navigate_right &"
+bind-key -n M-d run-shell -b "$navigate_back"
+bind-key -n M-h run-shell -b "$navigate_left"
+bind-key -n M-t run-shell -b "$navigate_up"
+bind-key -n M-n run-shell -b "$navigate_down"
+bind-key -n M-s run-shell -b "$navigate_right"
 
 # resize pane
 bind-key -r H resize-pane -L 5
