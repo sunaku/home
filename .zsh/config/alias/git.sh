@@ -122,7 +122,7 @@ alias gcF='git commit --fixup'
 alias gcf='git commit --fixup $(gl0)'
 
 # commit staged changes with the given message
-alias gcm='git commit -m'
+gcm() { git commit -m "$*" ;}
 
 # commit staged changes with the default message
 alias gcM='git commit --no-edit'
