@@ -247,7 +247,7 @@ navigate='                                                             \
   };                                                                   \
   pane_contains_vim() {                                                \
     case "#{=3:pane_current_command}" in                               \
-      (ssh|sh) command_is_vim "#{=5:pane_title}" ;;                    \
+      (git|ssh|sh) command_is_vim "#{=5:pane_title}" ;;                \
       (*) command_is_vim "#{=5:pane_current_command}" ;;               \
     esac;                                                              \
   };                                                                   \
