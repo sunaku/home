@@ -1,0 +1,11 @@
+; generated_rule KiTTY
+( if
+( begin
+( is ( window_class ) "kitty" )
+)
+( begin
+( undecorate )
+( maximize )
+( println "match" )
+)
+)
