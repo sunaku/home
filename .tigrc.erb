@@ -9,7 +9,7 @@ color title-focus black blue
 # http://who-t.blogspot.com/2009/04/git-format-patch-for-single-commit.html
 bind generic P !git format-patch -1 %(commit)
 
-bind generic R !git revert %(commit)
+bind generic R !git revert %(commit) --no-edit
 
 bind generic B !git rebase -i %(commit)^
 
