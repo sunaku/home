@@ -1,0 +1,5 @@
+/* https://www.downloadsource.net/how-to-change-the-firefox-new-tab-and-aboutblank-page-color/n/13700/ */
+.browserContainer {
+  background-color: #3d3d3d;
+  color: darkgray;
+}

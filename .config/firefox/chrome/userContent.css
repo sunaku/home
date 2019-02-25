@@ -1,0 +1,22 @@
+/* https://www.downloadsource.net/how-to-change-the-firefox-new-tab-and-aboutblank-page-color/n/13700/ */
+@-moz-document url-prefix(about:) {
+  *:not(button) {
+    background-color: #3d3d3d !important;
+    color: darkgray !important;
+  }
+}
+@-moz-document url-prefix(moz-extension:) {
+  body {
+    background-color: #3d3d3d !important;
+    color: darkgray !important;
+  }
+  input, textarea, .CodeMirror {
+    background-color: gray !important;
+  }
+  a {
+    color: lightblue;
+  }
+  a:visited {
+    color: magenta;
+  }
+}
