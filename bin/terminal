@@ -1,8 +1,11 @@
 #!/bin/sh
 #
-# Launches a URxvt client, starting the URxvt server if necessary.
+# Launches KiTTY in single-instance mode if available.  Otherwise,
+# launches a URxvt client, starting the URxvt server if necessary.
 #
 # Written in 2010 by Suraj N. Kurapati <https://github.com/sunaku>
+
+command -v kitty >/dev/null && exec kitty --single-instance "$@"
 
 urxvtc "$@"; status=$?
 test $status -eq 2 && urxvtd -q -o -f && { sleep 1; exec "$0" "$@"; }
