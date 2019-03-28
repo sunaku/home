@@ -19,3 +19,5 @@ map <PageDown>  scroll   full-down
 map <A-Down>    scroll   page-bottom
 map <End>       scroll   page-bottom
 map <C-End>     goto     bottom
+map [           navigate previous
+map ]           navigate next
