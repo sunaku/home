@@ -8,7 +8,7 @@ cat <<HTML
 <!DOCTYPE html>
 <html>
   <body class="container readme">
-    <article class="markdown-body">$(cmark --smart --safe "$@")</article>
+    <article class="markdown-body">$(cmark --smart "$@")</article>
     <style>$(
       test -s "$0.css" || wget -q -O "$0.css" -N \
         https://github.com/sindresorhus/github-markdown-css/raw/gh-pages/github-markdown.css
