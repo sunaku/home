@@ -11,14 +11,16 @@ PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 
 RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%p}%f'
 
-# VI keybindings: 'set showmode' emulation
+# VI keybindings: 'set showmode' emulation and cursor styles (DECSCUSR, VT520)
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == vicmd ]]; then
+      printf '%b' '\e[2 q' # steady block cursor
       PROMPT_VIINS=$PROMPT
       PROMPT="%S$PROMPT%s"
       RPROMPT_VIINS=$RPROMPT
       RPROMPT='%S-- NORMAL --%s'
   else
+      printf '%b' '\e[6 q' # steady bar cursor
       PROMPT=${PROMPT_VIINS:-$PROMPT}
       RPROMPT=${RPROMPT_VIINS:-$RPROMPT}
   fi
