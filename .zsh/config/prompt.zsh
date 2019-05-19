@@ -15,10 +15,8 @@ RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%p}%f'
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == vicmd ]]; then
       printf '%b' '\e[2 q' # steady block cursor
-      PROMPT_VIINS=$PROMPT
-      PROMPT="%S$PROMPT%s"
-      RPROMPT_VIINS=$RPROMPT
-      RPROMPT='%S-- NORMAL --%s'
+      PROMPT_VIINS=$PROMPT RPROMPT_VIINS=$RPROMPT
+      PROMPT="%S$PROMPT%s" RPROMPT="%S$RPROMPT%s"
   else
       printf '%b' '\e[6 q' # steady bar cursor
       PROMPT=${PROMPT_VIINS:-$PROMPT}
