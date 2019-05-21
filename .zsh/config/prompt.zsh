@@ -11,18 +11,13 @@ PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 
 RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%p}%f'
 
-# VI keybindings: 'set showmode' emulation and cursor styles (DECSCUSR, VT520)
+# VI keybindings: indicate VI/EMACS mode using cursor styles (DECSCUSR, VT520)
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == vicmd ]]; then
-      _zsh_prompt_block_cursor
-      PROMPT_VIINS=$PROMPT RPROMPT_VIINS=$RPROMPT
-      PROMPT="%S$PROMPT%s" RPROMPT="%S$RPROMPT%s"
+    _zsh_prompt_block_cursor
   else
-      _zsh_prompt_bar_cursor
-      PROMPT=${PROMPT_VIINS:-$PROMPT}
-      RPROMPT=${RPROMPT_VIINS:-$RPROMPT}
+    _zsh_prompt_bar_cursor
   fi
-  zle reset-prompt
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
