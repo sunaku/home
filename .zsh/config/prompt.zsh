@@ -14,11 +14,11 @@ RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%p}%f'
 # VI keybindings: 'set showmode' emulation and cursor styles (DECSCUSR, VT520)
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == vicmd ]]; then
-      printf '%b' '\e[2 q' # steady block cursor
+      _zsh_prompt_block_cursor
       PROMPT_VIINS=$PROMPT RPROMPT_VIINS=$RPROMPT
       PROMPT="%S$PROMPT%s" RPROMPT="%S$RPROMPT%s"
   else
-      printf '%b' '\e[6 q' # steady bar cursor
+      _zsh_prompt_bar_cursor
       PROMPT=${PROMPT_VIINS:-$PROMPT}
       RPROMPT=${RPROMPT_VIINS:-$RPROMPT}
   fi
@@ -26,6 +26,13 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
+
+_zsh_prompt_default_cursor() { print -n "\e[0 q" }
+_zsh_prompt_block_cursor()   { print -n "\e[2 q" }
+_zsh_prompt_bar_cursor()     { print -n "\e[6 q" }
+
+autoload -Uz add-zsh-hook
+add-zsh-hook preexec _zsh_prompt_default_cursor
 
 # VCS integration for command prompt using vcs_info
 # http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
