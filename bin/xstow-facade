@@ -9,6 +9,13 @@
 #
 # Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
 
+symlink() {
+  source=$1
+  target=$2
+  symlink=$(realpath --relative-to="$target" "$source") || symlink=$source
+  ln -vsf "$symlink" "$target"
+}
+
 for DIRECTORY; do
   stowable=${DIRECTORY##*/}
 
@@ -17,7 +24,7 @@ for DIRECTORY; do
     linkable=$DIRECTORY/$folder
     if test -d "$linkable"; then
       mkdir -vp "$stowable"
-      ln -vsf "$linkable" "$stowable"
+      symlink "$linkable" "$stowable"
     fi
   done
 
@@ -28,7 +35,7 @@ for DIRECTORY; do
       linkable=$DIRECTORY/$folder
       if test -d "$linkable"; then
         mkdir -vp "$shareable"
-        ln -vsf "$linkable" "$shareable"
+        symlink "$linkable" "$shareable"
       fi
     done
   fi
@@ -39,7 +46,7 @@ for DIRECTORY; do
     for linkable in "$DIRECTORY"/*; do
       if test -f "$linkable" -a -x "$linkable"; then
         mkdir -vp "$executable"
-        ln -vsf "$linkable" "$executable"
+        symlink "$linkable" "$executable"
       fi
     done
   fi
