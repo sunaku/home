@@ -1,10 +1,13 @@
 #!/bin/sh -eu
 #
-# Usage: rm-dangling DIRECTORY...
+# Usage: rm-dangling [-f] DIRECTORY...
 #
 # Deletes broken symlinks and also any resulting empty directories.
 #
+# Pass `-f` flag to force the removal (don't ask for confirmation).
+#
 # Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
 
-find "$@" -type l ! -exec test -e {} \; -exec rm -v {} \;
-find "$@" -mindepth 1 -depth -type d -empty -exec rmdir -v {} \;
+case "${1:-}" in (-*) flags=$1; shift;; (*) flags=;; esac
+find "$@" -type l ! -exec test -e {} \; -exec rm -vi $flags {} \;
+find "$@" -mindepth 1 -depth -type d -empty -exec rm -rvi $flags {} \;

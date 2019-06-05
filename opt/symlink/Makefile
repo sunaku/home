@@ -1,7 +1,7 @@
 all: stow
 
 tidy:
-	rm-dangling
+	rm-dangling -f
 
 link: tidy
 	stow-facade ../install/*
