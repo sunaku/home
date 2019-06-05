@@ -12,7 +12,7 @@ light:
 	$(MAKE) THEME=$@
 
 theme: ~/.theme
-	$(MAKE) theme-xrdb theme-tig theme-tmux theme-newsbeuter THEME=`cat $^`
+	$(MAKE) theme-xrdb theme-tig theme-tmux theme-newsboat THEME=`cat $^`
 
 ~/.theme:
 	@test -n "$$THEME" || ($(MAKE) help; false)
@@ -29,8 +29,8 @@ theme-tmux: ~/.tmux/plugins/tpm
 	erb ~/.tmux.conf.erb > ~/.tmux.conf
 	if test -n "$$TMUX" ; then tmux source ~/.tmux.conf ; fi
 
-theme-newsbeuter:
-	erb ~/.newsbeuter/config.erb > ~/.newsbeuter/config
+theme-newsboat:
+	erb ~/.newsboat/config.erb > ~/.newsboat/config
 
 ~/.tmux/plugins/tpm:
 	git clone https://github.com/tmux-plugins/tpm $@
