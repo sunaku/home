@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 #
-# Usage: stow-facade DIRECTORY...
+# Usage: stow-facade [-v] DIRECTORY...
 #
 # Builds a stow(1) friendly facade of symlinks for each DIRECTORY.
 #
@@ -8,13 +8,17 @@
 # designed to expose only the relevant Linux Filesystem Hierarchy:
 # http://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html
 #
+# Pass `-v` flag to enable verbose mode for underlying ln(1) tool.
+#
 # Written in 2017 by Suraj N. Kurapati <https://github.com/sunaku>
+
+case "${1:-}" in (-*) flags=$1; shift;; (*) flags=;; esac
 
 symlink() {
   source=$1
   target=$2
   symlink=$(realpath --relative-to="$target" "$source") || symlink=$source
-  ln -vsf "$symlink" "$target"
+  ln -sf $flags "$symlink" "$target"
 }
 
 for DIRECTORY; do
