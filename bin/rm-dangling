@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 #
-# Usage: xstow-unlink DIRECTORY...
+# Usage: rm-dangling DIRECTORY...
 #
 # Deletes broken symlinks and also any resulting empty directories.
 #

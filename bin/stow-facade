@@ -1,8 +1,9 @@
 #!/bin/sh -eu
 #
-# Usage: xstow-facade DIRECTORY...
+# Usage: stow-facade DIRECTORY...
 #
-# Builds a symlink facade friendly to xstow(1) for each DIRECTORY.
+# Builds a stow(1) friendly facade of symlinks for each DIRECTORY.
+#
 # Each facade is built inside the current working directory and is
 # designed to expose only the relevant Linux Filesystem Hierarchy:
 # http://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html
