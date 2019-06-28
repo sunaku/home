@@ -233,11 +233,13 @@ bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
 #
 vim_navigation_timeout=0.05 # number of seconds we give Vim to navigate
 navigate='                                                             \
+  pane_title="#{q:pane_title}";                                        \
+  pane_current_command="#{q:pane_current_command}";                    \
   pane_is_zoomed() {                                                   \
     test #{window_zoomed_flag} -eq 1;                                  \
   };                                                                   \
   pane_title_changed() {                                               \
-    test "#{pane_title}" != "$(tmux display -p "##{pane_title}")";     \
+    test "$pane_title" != "$(tmux display -p "##{q:pane_title}")";     \
   };                                                                   \
   command_is_vim() {                                                   \
     case "${1%% *}" in                                                 \
@@ -246,13 +248,16 @@ navigate='                                                             \
     esac;                                                              \
   };                                                                   \
   pane_contains_vim() {                                                \
-    case "#{=3:pane_current_command}" in                               \
-      (git|ssh|sh) command_is_vim "#{=5:pane_title}" ;;                \
-      (*) command_is_vim "#{=5:pane_current_command}" ;;               \
+    case "$pane_current_command" in                                    \
+      (git|*sh) command_is_vim "$pane_title" ;;                        \
+      (*) command_is_vim "$pane_current_command" ;;                    \
     esac;                                                              \
   };                                                                   \
   pane_contains_neovim_terminal() {                                    \
-    test "#{=12:pane_title}" = "nvim term://";                         \
+    case "$pane_title" in                                              \
+      (nvim?term://*) true ;;                                          \
+      (*) false ;;                                                     \
+    esac;                                                              \
   };                                                                   \
   navigate() {                                                         \
     tmux_navigation_command=$1;                                        \
