@@ -131,7 +131,7 @@ alias gcM='git commit --no-edit'
 alias gct='git commit --date'
 
 # commit staged changes as if on the modification date of the given file
-gctf() { git commit --date="$(date -r "$1")" ;}
+gctf() { file=$1 && shift && git commit --date="$(date -r "$file")" "$@" ;}
 
 # commit staged changes with the given version string as the message
 gcv() { git commit -m "Version $1" && git tag "v$1" ;}
