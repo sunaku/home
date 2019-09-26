@@ -1,6 +1,5 @@
 ! interaction
 XTerm*vt100.metaSendsEscape     : True
-XTerm*vt100.saveLines           : 0
 XTerm*vt100.eightBitInput       : False
 XTerm*vt100.bellIsUrgent        : True
 
