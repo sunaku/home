@@ -1,0 +1,29 @@
+#!/bin/sh -u
+#
+# Usage: recur SCHEDULE COMMAND [ARGUMENTS...]
+#
+# Runs COMMAND immediately and repeats it again at every SCHEDULEed interval.
+#
+# COMMAND is sh(1) expression, supporting variables and command substitution:
+#
+#   recur '12am tomorrow' tail -F '$PWD/logs/*$(date +"%Y_%m_%d").log'
+#
+# SCHEDULE is defined by "--date=STRING" and "DATE STRING" in date(1) manual:
+# https://gnu.org/software/coreutils/manual/html_node/General-date-syntax.html
+#
+# Written in 2019 by Suraj N. Kurapati <https://github.com/sunaku>
+
+getsid() { ps -o 'pgid=' "$@" | tr -d ' ' ;}; SCHEDULE=$1; shift; while :; do
+
+  # run the given command in the background
+  setsid sh -xc 'eval "$@"' - "$@" & pid=$!; sid=$(getsid $pid)
+  end='test $sid = "$(getsid $pid)" && kill $pid -$sid && wait'
+  trap "$end; exit" TERM INT
+
+  # wait for arrival of next scheduled time
+  sleep $(( $(date --date="$SCHEDULE" +'%s') - $(date +'%s') ))
+
+  # stop current run so we can repeat again
+  eval "$end"
+
+done
