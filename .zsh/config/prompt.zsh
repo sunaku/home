@@ -5,7 +5,7 @@ setopt PROMPT_SUBST
 
 PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 '${SSH_TTY:+%F{cyan\}%n@%m%f }'\
-'$(vcs_info && echo $vcs_info_msg_0_)'\
+'$(vcs_info 2>/dev/null && echo $vcs_info_msg_0_)'\
 '%(!.%F{red}.%F{green})%~%f'\
 '%(!.#.>) '
 
