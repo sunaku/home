@@ -1,4 +1,4 @@
 if get_application_name() == "kitty" then
-  undecorate_window()
   maximize()
+  undecorate_window()
 end
