@@ -16,6 +16,10 @@ export NODE_PATH=$NPM_CONFIG_PREFIX/lib/node_modules:$NODE_PATH
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS=-j$(grep -c ^processor /proc/cpuinfo)
 
+# enable shell history remembrance in iex(1) and erl(1)
+# https://hexdocs.pm/iex/IEx.html#module-shell-history
+export ERL_AFLAGS='-kernel shell_history enabled'
+
 #-----------------------------------------------------------------------------
 # crouton
 #-----------------------------------------------------------------------------
