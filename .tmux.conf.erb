@@ -373,7 +373,7 @@ bind-key -n M-z select-layout tiled
 #-----------------------------------------------------------------------------
 
 # buffer length
-set-option -g history-limit 32767
+set-option -g history-limit 9999 # NOTE: the maximum allowed limit is 32767
 
 # search buffer using copy mode
 bind-key -n M-/ copy-mode \;\
