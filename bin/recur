@@ -13,15 +13,12 @@
 #
 # Written in 2019 by Suraj N. Kurapati <https://github.com/sunaku>
 
-getsid() { ps -o 'pgid=' "$@" | tr -d ' ' ;}; SCHEDULE=$1; shift; while :; do
+SCHEDULE=$1; shift; while :; do
 
   # run the given command in the background
-  setsid sh -x -c 'eval "$@"' : "$@" & pid=$!; sid=$(getsid $pid); stop() {
-    test -n "$sid" -a "$sid" = "$(getsid $pid)" &&
-    kill -- -$pid &&
-    wait $pid
-  }
-  trap 'stop; exit' TERM INT
+  setsid sh -x -c 'eval "$@"' "$0" "$@" &
+  run=$! stop='pkill -s $run && wait $run'
+  trap "$stop; exit" TERM INT
 
   # wait for arrival of next scheduled time
   now=$(date +'%s')
@@ -29,6 +26,6 @@ getsid() { ps -o 'pgid=' "$@" | tr -d ' ' ;}; SCHEDULE=$1; shift; while :; do
   sleep $(( then - now ))
 
   # stop current run so we can repeat again
-  stop
+  eval "$stop"
 
 done
