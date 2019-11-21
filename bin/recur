@@ -16,14 +16,19 @@
 getsid() { ps -o 'pgid=' "$@" | tr -d ' ' ;}; SCHEDULE=$1; shift; while :; do
 
   # run the given command in the background
-  setsid sh -xc 'eval "$@"' - "$@" & pid=$!; sid=$(getsid $pid)
-  end='test $sid = "$(getsid $pid)" && kill $pid -$sid && wait'
-  trap "$end; exit" TERM INT
+  setsid sh -x -c 'eval "$@"' : "$@" & pid=$!; sid=$(getsid $pid); stop() {
+    test -n "$sid" -a "$sid" = "$(getsid $pid)" &&
+    kill -- -$pid &&
+    wait $pid
+  }
+  trap 'stop; exit' TERM INT
 
   # wait for arrival of next scheduled time
-  sleep $(( $(date --date="$SCHEDULE" +'%s') - $(date +'%s') ))
+  now=$(date +'%s')
+  then=$(date +'%s' --date="$SCHEDULE")
+  sleep $(( then - now ))
 
   # stop current run so we can repeat again
-  eval "$end"
+  stop
 
 done
