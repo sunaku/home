@@ -16,7 +16,7 @@
 SCHEDULE=$1; shift; while :; do
 
   # run the given command in the background
-  setsid sh -x -c 'eval "$@"' "$0" "$@" &
+  setsid -w sh -xc 'eval "$@"' "$0" "$@" &
   run=$! stop='pkill -s $run && wait $run'
   trap "$stop; exit" TERM INT
 
