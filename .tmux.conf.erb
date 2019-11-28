@@ -167,8 +167,13 @@ bind-key -n M-8 select-window -t :8
 bind-key -n M-9 select-window -t :1 \; select-window -t :-1
 
 # swap window
+<% if tmux_version >= '3.0' %>
+bind-key -n M-< swap-window -t :-1 \; select-window -t :-1
+bind-key -n M-> swap-window -t :+1 \; select-window -t :+1
+<% else %>
 bind-key -n M-< swap-window -t :-1
 bind-key -n M-> swap-window -t :+1
+<% end %>
 
 # monitor window
 set-option -g visual-activity on
