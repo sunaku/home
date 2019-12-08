@@ -32,6 +32,14 @@ bindkey '\C-x\C-e' edit-command-line
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
 
+# run command using sudo(1)
+function _run_with_sudo {
+  BUFFER="sudo $BUFFER"
+  zle accept-line
+}
+zle -N _run_with_sudo
+bindkey '^XR' _run_with_sudo
+
 # replace command with pager
 function _run_with_pager {
   local command="$PAGER ${BUFFER#* }"
