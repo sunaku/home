@@ -53,7 +53,7 @@ bindkey '^Xr' _run_with_pager
 # pipe command to pager
 function _pipe_to_pager {
   zle end-of-line
-  zle -U ' | $PAGER'
+  zle -U " | $PAGER"
 }
 zle -N _pipe_to_pager
 bindkey '^Xs' _pipe_to_pager
@@ -61,7 +61,7 @@ bindkey '^Xs' _pipe_to_pager
 # peek while piping to pager
 function _peek_to_pager {
   zle end-of-line
-  zle -U ' | tee /dev/tty | $PAGER'
+  zle -U " | tee /dev/tty | $PAGER"
 }
 zle -N _peek_to_pager
 bindkey '^XS' _peek_to_pager
