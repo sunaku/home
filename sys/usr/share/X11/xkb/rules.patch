@@ -1,0 +1,564 @@
+This patch updates xkb/rules/ to enable GalliumOS chromebook layouts.  See also
+https://github.com/GalliumOS/xkeyboard-config/blob/master/debian/patches/chromebook.patch
+
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/base xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/base
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/base	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/base	2019-12-12 00:01:45.943312969 -0800
+@@ -936,7 +936,6 @@
+   btc5126t      =       +inet(nav_acpi_common)
+   btc9116u      =       +inet(btc9019u)
+   btc6301urf    =       +inet(media_nav_acpi_common)
+-  chromebook    =       +inet(chromebook)
+   dellsk8125    =       +inet(dell)
+   dellsk8135    =       +inet(dell)
+   cherrybunlim  =       +inet(nav_common)
+@@ -1035,6 +1034,15 @@
+   jp       $sun_compat  =   +complete+japan(kana_lock):4
+ 
+ ! model		layout		=	compat
++  chromebook              *               =       complete+chromebook
++  chromebook_ralt         *               =       complete+chromebook
++  chromebook_m            *               =       complete+chromebook
++  chromebook_m_ralt       *               =       complete+chromebook
++  chromebook_falco        *               =       complete+chromebook
++  chromebook_falco_ralt   *               =       complete+chromebook
++  chromebook_m_falco      *               =       complete+chromebook
++  chromebook_m_falco_ralt *               =       complete+chromebook
++  chromebook_no_m         *               =       complete
+   pc98		nec_vndr/jp	=	pc98(basic)
+   *		jp		=	complete+japan
+   olpc          *               =       olpc
+@@ -1042,6 +1050,15 @@
+   *		*		=	complete
+ 
+ ! model		layout[1]	=	compat
++  chromebook              *       =       complete+chromebook
++  chromebook_ralt         *       =       complete+chromebook
++  chromebook_m            *       =       complete+chromebook
++  chromebook_m_ralt       *       =       complete+chromebook
++  chromebook_falco        *       =       complete+chromebook
++  chromebook_falco_ralt   *       =       complete+chromebook
++  chromebook_m_falco      *       =       complete+chromebook
++  chromebook_m_falco_ralt *       =       complete+chromebook
++  chromebook_no_m         *       =       complete
+   *		*		=	complete
+ 
+ ! model		=	types
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/base.lst xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/base.lst
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/base.lst	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/base.lst	2019-12-11 23:55:58.537323240 -0800
+@@ -1,4 +1,13 @@
+ ! model
++  chromebook      Chromebook (most models) | Search overlay
++  chromebook_ralt Chromebook (most models) | Right alt overlay
++  chromebook_m    Chromebook (most models) | Search overlay | F keys mapped to media keys
++  chromebook_m_ralt Chromebook (most models) | Right alt overlay | F keys mapped to media keys
++  chromebook_falco Chromebook Falco/Pixel/Pixel2 | Search overlay
++  chromebook_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay
++  chromebook_m_falco Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys
++  chromebook_m_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys
++  chromebook_no_m Chromebook (most models) | No overlay | F keys mapped to media keys
+   pc101           Generic 101-key PC
+   pc102           Generic 102-key PC (intl.)
+   pc104           Generic 104-key PC
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/base.xml xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/base.xml
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/base.xml	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/base.xml	2019-12-12 00:00:31.293315176 -0800
+@@ -1318,10 +1318,66 @@
+     </model>
+     <model>
+       <configItem>
+-       <name>chromebook</name>
+-       <description>Chromebook</description>
+-       <vendor>Google</vendor>
+-     </configItem>
++        <name>chromebook</name>
++        <description>Chromebook (most models) | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m</name>
++        <description>Chromebook (most models) | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_no_m</name>
++        <description>Chromebook (most models) | No overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
+     </model>
+     <model>
+       <configItem>
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/evdev xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/evdev
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/evdev	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/evdev	2019-12-12 00:02:52.257311009 -0800
+@@ -97,6 +97,12 @@
+  $jollamodels   =       evdev+jolla(jolla)
+   olpc          =       evdev+olpc(olpc)
+   olpcm         =       evdev+olpc(olpcm)
++  chromebook_m  =       evdev+chromebook_m(media)
++  chromebook_m_ralt  =  evdev+chromebook_m(media)
++  chromebook_falco_m  = evdev+chromebook_m_falco(media)
++  chromebook_falco  = evdev+chromebook_falco(fkeys)
++  chromebook_falco_ralt  = evdev+chromebook_falco(fkeys)
++  chromebook_no_m  =    evdev+chromebook_m(media)
+   *		=	evdev
+ 
+ ! layout[1]	=	keycodes
+@@ -866,7 +872,15 @@
+ 
+ ! model		=	symbols
+   $evdevkbds    =   +inet(evdev)+inet(%m)
+-  chromebook    =   +inet(evdev)+inet(chromebook)
++  chromebook               =   +inet(evdev)+chromebook(overlay)
++  chromebook_ralt          =   +inet(evdev)+chromebook_ralt(overlay)
++  chromebook_m             =   +inet(evdev)+chromebook_m(overlay)
++  chromebook_m_ralt        =   +inet(evdev)+chromebook_m_ralt(overlay)
++  chromebook_falco         =   +inet(evdev)+chromebook(overlay)
++  chromebook_falco_ralt    =   +inet(evdev)+chromebook_ralt(overlay)
++  chromebook_m_falco       =   +inet(evdev)+chromebook_m(overlay)
++  chromebook_m_falco_ralt  =   +inet(evdev)+chromebook_m_ralt(overlay)
++  chromebook_no_m          =   +inet(evdev)
+   applealu_jis  =   +inet(evdev)+macintosh_vndr/jp(alujiskeys)
+   *             =   +inet(evdev)
+ 
+@@ -923,6 +937,15 @@
+   jp       $sun_compat  =   +complete+japan(kana_lock):4
+ 
+ ! model		layout		=	compat
++  chromebook              *               =       complete+chromebook
++  chromebook_ralt         *               =       complete+chromebook
++  chromebook_m            *               =       complete+chromebook
++  chromebook_m_ralt       *               =       complete+chromebook
++  chromebook_falco        *               =       complete+chromebook
++  chromebook_falco_ralt   *               =       complete+chromebook
++  chromebook_m_falco      *               =       complete+chromebook
++  chromebook_m_falco_ralt *               =       complete+chromebook
++  chromebook_no_m         *               =       complete
+   pc98		nec_vndr/jp	=	pc98(basic)
+   *		jp		=	complete+japan
+   olpc          *               =       olpc
+@@ -930,6 +953,15 @@
+   *		*		=	complete
+ 
+ ! model		layout[1]	=	compat
++  chromebook              *       =       complete+chromebook
++  chromebook_ralt         *       =       complete+chromebook
++  chromebook_m            *       =       complete+chromebook
++  chromebook_m_ralt       *       =       complete+chromebook
++  chromebook_falco        *       =       complete+chromebook
++  chromebook_falco_ralt   *       =       complete+chromebook
++  chromebook_m_falco      *       =       complete+chromebook
++  chromebook_m_falco_ralt *       =       complete+chromebook
++  chromebook_no_m         *       =       complete
+   *		*		=	complete
+ 
+ ! model		=	types
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/evdev.lst xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/evdev.lst
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/evdev.lst	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/evdev.lst	2019-12-11 23:58:24.682318919 -0800
+@@ -187,7 +187,15 @@
+   teck227         Truly Ergonomic 227
+   teck229         Truly Ergonomic 229
+   apex300         SteelSeries Apex 300 (Apex RAW)
+-  chromebook      Chromebook
++  chromebook      Chromebook (most models) | Search overlay
++  chromebook_ralt Chromebook (most models) | Right alt overlay
++  chromebook_m    Chromebook (most models) | Search overlay | F keys mapped to media keys
++  chromebook_m_ralt Chromebook (most models) | Right alt overlay | F keys mapped to media keys
++  chromebook_falco Chromebook Falco/Pixel/Pixel2 | Search overlay
++  chromebook_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay
++  chromebook_m_falco Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys
++  chromebook_m_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys
++  chromebook_no_m Chromebook (most models) | No overlay | F keys mapped to media keys
+   teck227         Truly Ergonomic Computer Keyboard Model 227 (Wide Alt keys)
+   teck229         Truly Ergonomic Computer Keyboard Model 229 (Standard sized Alt keys, additional Super and Menu key)
+ 
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/evdev.xml xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/evdev.xml
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/evdev.xml	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/evdev.xml	2019-12-11 23:58:11.064319322 -0800
+@@ -1318,10 +1318,66 @@
+     </model>
+     <model>
+       <configItem>
+-       <name>chromebook</name>
+-       <description>Chromebook</description>
+-       <vendor>Google</vendor>
+-     </configItem>
++        <name>chromebook</name>
++        <description>Chromebook (most models) | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m</name>
++        <description>Chromebook (most models) | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_no_m</name>
++        <description>Chromebook (most models) | No overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
+     </model>
+     <model>
+       <configItem>
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/xfree86 xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xfree86
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/xfree86	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xfree86	2019-12-12 00:01:45.943312969 -0800
+@@ -936,7 +936,6 @@
+   btc5126t      =       +inet(nav_acpi_common)
+   btc9116u      =       +inet(btc9019u)
+   btc6301urf    =       +inet(media_nav_acpi_common)
+-  chromebook    =       +inet(chromebook)
+   dellsk8125    =       +inet(dell)
+   dellsk8135    =       +inet(dell)
+   cherrybunlim  =       +inet(nav_common)
+@@ -1035,6 +1034,15 @@
+   jp       $sun_compat  =   +complete+japan(kana_lock):4
+ 
+ ! model		layout		=	compat
++  chromebook              *               =       complete+chromebook
++  chromebook_ralt         *               =       complete+chromebook
++  chromebook_m            *               =       complete+chromebook
++  chromebook_m_ralt       *               =       complete+chromebook
++  chromebook_falco        *               =       complete+chromebook
++  chromebook_falco_ralt   *               =       complete+chromebook
++  chromebook_m_falco      *               =       complete+chromebook
++  chromebook_m_falco_ralt *               =       complete+chromebook
++  chromebook_no_m         *               =       complete
+   pc98		nec_vndr/jp	=	pc98(basic)
+   *		jp		=	complete+japan
+   olpc          *               =       olpc
+@@ -1042,6 +1050,15 @@
+   *		*		=	complete
+ 
+ ! model		layout[1]	=	compat
++  chromebook              *       =       complete+chromebook
++  chromebook_ralt         *       =       complete+chromebook
++  chromebook_m            *       =       complete+chromebook
++  chromebook_m_ralt       *       =       complete+chromebook
++  chromebook_falco        *       =       complete+chromebook
++  chromebook_falco_ralt   *       =       complete+chromebook
++  chromebook_m_falco      *       =       complete+chromebook
++  chromebook_m_falco_ralt *       =       complete+chromebook
++  chromebook_no_m         *       =       complete
+   *		*		=	complete
+ 
+ ! model		=	types
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/xfree86.lst xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xfree86.lst
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/xfree86.lst	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xfree86.lst	2019-12-11 23:55:58.537323240 -0800
+@@ -1,4 +1,13 @@
+ ! model
++  chromebook      Chromebook (most models) | Search overlay
++  chromebook_ralt Chromebook (most models) | Right alt overlay
++  chromebook_m    Chromebook (most models) | Search overlay | F keys mapped to media keys
++  chromebook_m_ralt Chromebook (most models) | Right alt overlay | F keys mapped to media keys
++  chromebook_falco Chromebook Falco/Pixel/Pixel2 | Search overlay
++  chromebook_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay
++  chromebook_m_falco Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys
++  chromebook_m_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys
++  chromebook_no_m Chromebook (most models) | No overlay | F keys mapped to media keys
+   pc101           Generic 101-key PC
+   pc102           Generic 102-key PC (intl.)
+   pc104           Generic 104-key PC
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/xfree86.xml xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xfree86.xml
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/xfree86.xml	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xfree86.xml	2019-12-12 00:00:31.293315176 -0800
+@@ -1318,10 +1318,66 @@
+     </model>
+     <model>
+       <configItem>
+-       <name>chromebook</name>
+-       <description>Chromebook</description>
+-       <vendor>Google</vendor>
+-     </configItem>
++        <name>chromebook</name>
++        <description>Chromebook (most models) | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m</name>
++        <description>Chromebook (most models) | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_no_m</name>
++        <description>Chromebook (most models) | No overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
+     </model>
+     <model>
+       <configItem>
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/xorg xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xorg
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/xorg	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xorg	2019-12-12 00:01:45.943312969 -0800
+@@ -936,7 +936,6 @@
+   btc5126t      =       +inet(nav_acpi_common)
+   btc9116u      =       +inet(btc9019u)
+   btc6301urf    =       +inet(media_nav_acpi_common)
+-  chromebook    =       +inet(chromebook)
+   dellsk8125    =       +inet(dell)
+   dellsk8135    =       +inet(dell)
+   cherrybunlim  =       +inet(nav_common)
+@@ -1035,6 +1034,15 @@
+   jp       $sun_compat  =   +complete+japan(kana_lock):4
+ 
+ ! model		layout		=	compat
++  chromebook              *               =       complete+chromebook
++  chromebook_ralt         *               =       complete+chromebook
++  chromebook_m            *               =       complete+chromebook
++  chromebook_m_ralt       *               =       complete+chromebook
++  chromebook_falco        *               =       complete+chromebook
++  chromebook_falco_ralt   *               =       complete+chromebook
++  chromebook_m_falco      *               =       complete+chromebook
++  chromebook_m_falco_ralt *               =       complete+chromebook
++  chromebook_no_m         *               =       complete
+   pc98		nec_vndr/jp	=	pc98(basic)
+   *		jp		=	complete+japan
+   olpc          *               =       olpc
+@@ -1042,6 +1050,15 @@
+   *		*		=	complete
+ 
+ ! model		layout[1]	=	compat
++  chromebook              *       =       complete+chromebook
++  chromebook_ralt         *       =       complete+chromebook
++  chromebook_m            *       =       complete+chromebook
++  chromebook_m_ralt       *       =       complete+chromebook
++  chromebook_falco        *       =       complete+chromebook
++  chromebook_falco_ralt   *       =       complete+chromebook
++  chromebook_m_falco      *       =       complete+chromebook
++  chromebook_m_falco_ralt *       =       complete+chromebook
++  chromebook_no_m         *       =       complete
+   *		*		=	complete
+ 
+ ! model		=	types
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/xorg.lst xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xorg.lst
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/xorg.lst	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xorg.lst	2019-12-11 23:55:58.537323240 -0800
+@@ -1,4 +1,13 @@
+ ! model
++  chromebook      Chromebook (most models) | Search overlay
++  chromebook_ralt Chromebook (most models) | Right alt overlay
++  chromebook_m    Chromebook (most models) | Search overlay | F keys mapped to media keys
++  chromebook_m_ralt Chromebook (most models) | Right alt overlay | F keys mapped to media keys
++  chromebook_falco Chromebook Falco/Pixel/Pixel2 | Search overlay
++  chromebook_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay
++  chromebook_m_falco Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys
++  chromebook_m_falco_ralt Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys
++  chromebook_no_m Chromebook (most models) | No overlay | F keys mapped to media keys
+   pc101           Generic 101-key PC
+   pc102           Generic 102-key PC (intl.)
+   pc104           Generic 104-key PC
+diff -ur xkeyboard-config-2.28_1.noarch.xbps/rules/xorg.xml xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xorg.xml
+--- xkeyboard-config-2.28_1.noarch.xbps/rules/xorg.xml	2019-11-09 14:01:52.000000000 -0800
++++ xkb-data_2.23.1-1ubuntu1-galliumos1_all.deb/rules/xorg.xml	2019-12-12 00:00:31.293315176 -0800
+@@ -1318,10 +1318,66 @@
+     </model>
+     <model>
+       <configItem>
+-       <name>chromebook</name>
+-       <description>Chromebook</description>
+-       <vendor>Google</vendor>
+-     </configItem>
++        <name>chromebook</name>
++        <description>Chromebook (most models) | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m</name>
++        <description>Chromebook (most models) | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_ralt</name>
++        <description>Chromebook (most models) | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Search overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_m_falco_ralt</name>
++        <description>Chromebook Falco/Pixel/Pixel2 | Right alt overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
++    </model>
++    <model>
++      <configItem>
++        <name>chromebook_no_m</name>
++        <description>Chromebook (most models) | No overlay | F keys mapped to media keys</description>
++        <vendor>Google</vendor>
++      </configItem>
+     </model>
+     <model>
+       <configItem>
