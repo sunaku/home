@@ -21,6 +21,10 @@ xkb_symbols "overlay" {
     key <VOL-> { overlay1=<FK09> };
     key <VOL+> { overlay1=<FK10> };
 
+    # Volume rocker for convertibles
+    key <VLR-> { [ XF86AudioLowerVolume ] };
+    key <VLR+> { [ XF86AudioRaiseVolume ] };
+
     key <AE01> { overlay1=<FK01> };
     key <AE02> { overlay1=<FK02> };
     key <AE03> { overlay1=<FK03> };
@@ -30,9 +34,12 @@ xkb_symbols "overlay" {
     key <AE07> { overlay1=<FK07> };
     key <AE08> { overlay1=<FK08> };
     key <AE09> { overlay1=<FK09> };
-    key <AE10> { overlay1=<I236> }; // KEY_KBDILLUMTOGGLE
-    key <AE11> { overlay1=<I237> }; // KEY_KBDILLUMDOWN
-    key <AE12> { overlay1=<I238> }; // KEY_KBDILLUMUP
+    key <AE10> { overlay1=<FK10> };
+    key <AE11> { overlay1=<FK11> };
+    key <AE12> { overlay1=<FK12> };
+    key <BKSL> { overlay1=<I236> }; // KEY_KBDILLUMTOGGLE
+    key <AD11> { overlay1=<I237> }; // KEY_KBDILLUMDOWN
+    key <AD12> { overlay1=<I238> }; // KEY_KBDILLUMUP
     key <BKSP> { overlay1=<DELE> };
 
     key <RTSH> { overlay1=<CAPS> };
