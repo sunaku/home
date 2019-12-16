@@ -1,0 +1,10 @@
+#!/bin/sh -eu
+#
+# Usage: rmdir-recursive [-f] DIRECTORY...
+#
+# Deletes empty directories recursively.  Pass `-f` flag to force.
+#
+# Written in 2019 by Suraj N. Kurapati <https://github.com/sunaku>
+
+case "${1:-}" in (-*) flags=$1; shift;; (*) flags=;; esac
+find "$@" -depth -type d -empty -exec rm -rvi $flags {} \;
