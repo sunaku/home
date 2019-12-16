@@ -1,17 +1,26 @@
-# my "sunaku" prompt for ZSH using vcs_info stdlib
-# http://snk.tuxfamily.org/log/sunaku-zsh-prompt.png
+# my "sunaku" prompt for ZSH using vcs_info with zsh-async
+# https://sunaku.github.io/switching-from-fish-to-zsh.html
+
+autoload -Uz add-zsh-hook
+
+#-----------------------------------------------------------------------------
+# prompt elements: exit status, SSH login, vcs_info, super user; date and time
+#-----------------------------------------------------------------------------
 
 setopt PROMPT_SUBST
 
 PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 '${SSH_TTY:+%F{cyan\}%n@%m%f }'\
-'$(vcs_info 2>/dev/null && echo $vcs_info_msg_0_)'\
+'${vcs_info_msg_0_}'\
 '%(!.%F{red}.%F{green})%~%f'\
 '%(!.#.>) '
 
 RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%p}%f'
 
+#-----------------------------------------------------------------------------
 # VI keybindings: indicate VI/EMACS mode using cursor styles (DECSCUSR, VT520)
+#-----------------------------------------------------------------------------
+
 function zle-line-init zle-keymap-select {
   if [[ $KEYMAP == vicmd ]]; then
     _zsh_prompt_block_cursor
@@ -26,12 +35,13 @@ _zsh_prompt_default_cursor() { print -n "\e[0 q" }
 _zsh_prompt_block_cursor()   { print -n "\e[2 q" }
 _zsh_prompt_bar_cursor()     { print -n "\e[6 q" }
 
-autoload -Uz add-zsh-hook
 add-zsh-hook preexec _zsh_prompt_default_cursor
 
+#-----------------------------------------------------------------------------
 # VCS integration for command prompt using vcs_info
-# http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
+#-----------------------------------------------------------------------------
 
+# https://github.com/zsh-users/zsh/blob/master/Misc/vcs_info-examples
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr     '%B%F{green}$%f%b'
@@ -89,3 +99,30 @@ function +vi-git-remotebranch() {
         hook_com[branch]="${hook_com[branch]}(%F{cyan}${remote}%f)"
     fi
 }
+
+#-----------------------------------------------------------------------------
+# asynchronous vcs_info using zsh-async workers
+#-----------------------------------------------------------------------------
+
+# https://vincent.bernat.ch/en/blog/2019-zsh-async-vcs-info
+_zsh_prompt_async_vcs_info() {
+  async_job vcs_info _zsh_prompt_async_vcs_info_job $PWD
+}
+
+_zsh_prompt_async_vcs_info_job() {
+  cd -q $1
+  vcs_info
+  print $vcs_info_msg_0_
+}
+
+_zsh_prompt_async_vcs_info_done() {
+  vcs_info_msg_0_=$3 # stdout
+  zle reset-prompt
+}
+
+# https://github.com/mafredri/zsh-async
+async_init
+async_start_worker vcs_info
+async_register_callback vcs_info _zsh_prompt_async_vcs_info_done
+
+add-zsh-hook precmd _zsh_prompt_async_vcs_info
