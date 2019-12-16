@@ -1,8 +1,3 @@
-# delegate configuration
-for config in ~/.zsh/config/**/*sh; do
-  source $config
-done
-
 # load plugin bundles
 source_if_exist() { test -s $1 && source $1 }
 for bundle in ~/.zsh/bundle/*; do
@@ -13,4 +8,9 @@ for bundle in ~/.zsh/bundle/*; do
 
   # load bundle configuration
   source_if_exist $bundle.zsh ||:
+done
+
+# delegate configuration
+for config in ~/.zsh/config/**/*sh; do
+  source $config
 done
