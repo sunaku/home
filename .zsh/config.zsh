@@ -3,6 +3,8 @@ source_if_exist() {
 }
 source_bundles() {
   for bundle; do
+    test -d $bundle || continue
+
     # load the bundle itself
     source_if_exist $bundle/${bundle##*/}.plugin.zsh ||
     source_if_exist $bundle/${bundle##*/}.zsh ||
