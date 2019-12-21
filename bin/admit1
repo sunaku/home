@@ -2,18 +2,22 @@
 #
 # Usage: admit1 COMMAND [ARGUMENTS...]
 # Usage: admit1 SHELL_EVAL_EXPRESSION
+# Usage: env ADMIT1_DENIED=... admit1 ...
 #
-# Admits only one instance of the given command to run at a time (by running
-# it only if there are no other instances of this program already doing so).
+# Admits only one instance of the given command to run at a time by running
+# it only if there are no other instances of this program already doing so.
+# Otherwise, evaluates the optional ADMIT1_DENIED expression, which can be
+# used for special handling such as sending a signal to the caller process.
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 regex=$( ps ho cmd $$ | sed 's/[\^.[$()|*+?{\\]/\\&/g' ) # see `man 7 regex`
 
-if [ $$ = "$( pgrep -u "$USER" -xf "$regex" )" ]; then
-  # SHELL_EVAL_EXPRESSION was given
-  test $# -eq 1 && set -- eval "$@"
+# if already running, don't admit
+test $$ = "$( pgrep -u "$USER" -xf "$regex" )" || set -- "$ADMIT1_DENIED"
 
-  # execute the given command line
-  "$@"
-fi
+# SHELL_EVAL_EXPRESSION was given
+test $# -eq 1 && set -- eval "$@"
+
+# execute the given command line
+"$@"
