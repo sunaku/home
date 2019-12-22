@@ -4,4 +4,4 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-exec ps wxfo pid,ppid,pcpu,pmem,etime,stat,args "$@"
+exec ps wxfo pid,ppid,pgid,sid,tty,etime,pcpu,pmem,stat,args "$@"
