@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Usage: falcon COMMAND [ARGUMENTS...]
+# Usage: falcon SHELL_EVAL_EXPRESSION
+#
+# Wraps pigeon(1) so that it isn't confused by admit1(1) inside the COMMAND,
+# since admit1(1) terminates with a zero exit status in two different cases:
+#
+#   1. Another instance of admit1(1) is already running COMMAND.
+#   2. COMMAND completed and terminated with a zero exit status.
+#
+# In the first case, this program will terminate with an exit status of 143.
+# Otherwise, this program will relay the underlying pigeon(1)'s exit status.
+#
+# Written in 2019 by Suraj N. Kurapati <https://github.com/sunaku>
+
+exec env ADMIT1_DENIED="kill $$" pigeon "$@"
