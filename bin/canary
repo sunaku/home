@@ -24,7 +24,7 @@ output=$(
 status=$?
 
 if [ $status -ne 0 ]; then
-  echo "canary: command '$*' exited with nonzero status: $status" >&2
+  echo "canary: command exited with nonzero exit status $status" >&2
   echo "$output" # propagate output of failed command back to caller
 fi
 
