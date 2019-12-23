@@ -16,7 +16,7 @@
 
 : ${PIGEON_STATUS_DIR:=${XDG_DATA_HOME:-$HOME/.local/share}/pigeon/status}
 mkdir -p "$PIGEON_STATUS_DIR" || exit $?
-storage="$PIGEON_STATUS_DIR/$(echo "$*" | sha1sum | cut -f 1 -d ' ')"
+storage="$PIGEON_STATUS_DIR/$(echo "$*" | sha1sum | cut -f1 -d' ')"
 previous=$(test -s "$storage" && cat "$storage" || echo undefined)
 
 output=$(
@@ -32,7 +32,7 @@ output=$(
 status=$?
 
 if [ $status != $previous ]; then
-  echo "pigeon: command '$*' exit status changed from $previous to $status" >&2
+  echo "pigeon: command exit status changed from $previous to $status" >&2
   echo $status > "$storage" # store exit status for next time
   echo "$output" # propagate output of command back to caller
 fi
