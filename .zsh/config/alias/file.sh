@@ -29,6 +29,11 @@ md() { # Make Dir and go in
   mkdir -p "$@" && cd "$@"
 }
 
+mov() { # rename & redirect
+  mv -vbi "$1" "$2" &&
+  ln -vsf "$2" "$1"
+}
+
 bam() { # backup with move
   for file; do
     file=${file%/}
