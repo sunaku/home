@@ -12,7 +12,7 @@ xterm -fg '#ecbcbc' -bg '#41363c' -sl 4096 +sb \
 -e 'tail -F /var/log/*.log ~/.xsession-errors' &
 
 # window manager
-while :; do startxfce4
+while :; do startlxqt
   xmessage 'INSERT COIN TO CONTINUE' \
   -buttons 'Insert Coin:0,Game Over' \
   -default 'Insert Coin' -timeout 10 \
