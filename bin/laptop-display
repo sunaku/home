@@ -6,57 +6,48 @@
 
 # detect and register active displays as variables in this script
 eval $(xrandr --verbose | awk '
-  $2 ~  /connected/ {
+  $2 ~ /connected/ {
     device=$1
     gsub("-", "", $1)
     display=$1
     print display "=" device
+    print display "_connected=" ($2 == "connected")
   }
-  $2 == "connected" {
-    print display "_connected=1"
-    preferred=""
-  }
-  /\+preferred/ || (!preferred && $1 ~ /^[[:digit:]]+x[[:digit:]]+$/) {
-    print display "_preferred_size=" $1
-    preferred=$1
-  }
-  /\*current/ {
-    print display "_active=1"
-    print display "_size=" $1
+  $1 ~ /^[[:digit:]]+x[[:digit:]]+/ {
+    if ($NF == "*current") {
+      print display "_active=1"
+      print display "_size=" $1
+    }
+    if ($NF == "+preferred") {
+      print display "_preferred_size=" $1
+    }
+    # override preferred_size with max resolution
+    if (!max_resolution[display]) {
+      max_resolution[display] = $1
+      print display "_preferred_size=" $1
+    }
   }
 ')
 
-if test -n "$DP22_connected" ; then
+if test "$DP22_connected" = 1; then
   # switch off internal display and use external one
-
-  test -n "$eDP1_active" &&
-    set -- "$@" --output "$eDP1" --off
-
-  test -z "$DP22_active" &&
-    set -- "$@" --output "$DP22" --auto
+  set -- "$@" --output "$eDP1" --off \
+              --output "$DP22" --auto
 
   test "$DP22_preferred_size" != "$DP22_size" &&
     set -- "$@" ';' xrandr --size "$DP22_preferred_size"
 
-elif test -n "$HDMI1_connected" ; then
+elif test "$HDMI1_connected" = 1; then
   # switch off internal display and use external one
-
-  test -n "$eDP1_active" &&
-    set -- "$@" --output "$eDP1" --off
-
-  test -z "$HDMI1_active" &&
-    set -- "$@" --output "$HDMI1" --auto
+  set -- "$@" --output "$eDP1" --off \
+              --output "$HDMI1" --auto
 
   test "$HDMI1_preferred_size" != "$HDMI1_size" &&
     set -- "$@" ';' xrandr --size "$HDMI1_preferred_size"
 
-elif test -n "$eDP1_connected" ; then
-  # external display not connected; use internal one
-
-  test -z "$eDP1_active" &&
-    set -- "$@" --output "$DP22" --off \
-                --output "$HDMI1" --off \
-                --output "$eDP1" --auto
+else
+  # no external displays connected; use internal one
+  set -- "$@" --auto
 
   test "$eDP1_preferred_size" != "$eDP1_size" &&
     set -- "$@" ';' xrandr --size "$eDP1_preferred_size"
