@@ -9,7 +9,7 @@
 if [ -n "$DISPLAY" ]; then
   # only affect the laptop's native keyboard; ignore externally attached ones
   if id=$(xinput list --id-only 'AT Translated Set 2 keyboard' 2>/dev/null)
-  then setxkbmap -device "$id" -model chromebook -option altwin:meta_alt "$@"
+  then setxkbmap "$@" -device "$id"
   else setxkbmap "$@"
   fi
 else

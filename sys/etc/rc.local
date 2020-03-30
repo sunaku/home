@@ -2,18 +2,3 @@
 #
 # This is run by runit in stage 2 before the services are executed
 # (see /etc/runit/2).
-
-#                        _        ____            ____         _
-#  _ __ ___   __ _  __ _(_) ___  / ___| _   _ ___|  _ \ __ _  | | _____ _   _
-# | '_ ` _ \ / _` |/ _` | |/ __| \___ \| | | / __| |_) / _` | | |/ / _ \ | | |
-# | | | | | | (_| | (_| | | (__   ___) | |_| \__ \  _ < (_| | |   <  __/ |_| |
-# |_| |_| |_|\__,_|\__, |_|\___| |____/ \__, |___/_| \_\__, | |_|\_\___|\__, |
-#                  |___/                |___/             |_|           |___/
-#
-# bind VolumeUp/F10 key at top-right corner of Chromebook keyboard as SysRq
-#
-# https://www.reddit.com/r/GalliumOS/comments/4eb81n
-# https://royal.pingdom.com/troubleshooting-sysrq/
-# https://www.kernel.org/doc/html/v4.10/admin-guide/sysrq.html
-#
-setkeycodes 44 99
