@@ -1,8 +1,5 @@
 #!/bin/sh -x
 
-# resolution
-xrandr --dpi 96
-
 # fonts
 xset +fp ~/.fonts/tamzen-font/bdf
 xset fp rehash
