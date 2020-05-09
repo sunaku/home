@@ -13,5 +13,5 @@ vim -u NONE -c "set $(tr '\n' ' ' <<SETTINGS)" -c 'colorscheme ron' "$@"
   cryptmethod=blowfish2
   foldmethod=marker
   foldlevel=0
-  background=$(cat ~/.theme)
+  background=$(cat ~/.themes/background)
 SETTINGS
