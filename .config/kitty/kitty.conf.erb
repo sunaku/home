@@ -5,6 +5,7 @@ disable_ligatures cursor
 font_family Cascadia Code PL
 font_size 10
 
+<% if ENV['THEME'] == 'dark' %>
 # Colors from "gruvbox" colorscheme for Vim
 # https://github.com/morhetz/gruvbox#palette
 color0     #504945
@@ -30,3 +31,26 @@ color15    #ebdbb2
 foreground #d5c4a1
 background #282828
 cursor     #fe8019
+<% else %>
+# Colors from "PaperColor" colorscheme for Vim
+# https://github.com/NLKNguyen/papercolor-theme
+color0     #1c1c1c
+color1     #af0000
+color2     #008700
+color3     #d75f00
+color4     #005faf
+color5     #d70087
+color6     #0087af
+color7     #e4e4e4
+color8     #1c1c1c
+color9     #af0000
+color10    #008700
+color11    #d75f00
+color12    #005faf
+color13    #d70087
+color14    #0087af
+color15    #e4e4e4
+foreground #444444
+background #eeeeee
+cursor     #005f87
+<% end %>
