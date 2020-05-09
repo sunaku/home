@@ -367,18 +367,9 @@ bind-key -n M-Y choose-buffer 'run-shell "tmux save-buffer -b \"%%%\" - | yank >
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-capture-pane-contents on
 
-set -g @plugin 'Morantron/tmux-fingers'
-set -g @fingers-key '-n M-U'
-set -g @fingers-compact-hints 1
-set -g @fingers-hint-format '#[fg=yellow,bold,reverse]%s'
-set -g @fingers-hint-labels ' \
-  a o e u i d h t n s         \
-        p y f g c r l         \
-    q j k x b m w v z         \
-  A O E U I D H T N S         \
-        P Y F G C R L         \
-    Q J K X B M W V Z         \
-'
+set -g @plugin 'fcsonline/tmux-thumbs'
+set -g @thumbs-key '-n M-U'
+set -g @thumbs-alphabet dvorak-homerow
 
 set -g @plugin 'sunaku/tmux-navigate'
 set -g @navigate-back  '-n M-d'
