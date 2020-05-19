@@ -115,14 +115,27 @@ _zsh_prompt_async_vcs_info_job() {
   print $vcs_info_msg_0_
 }
 
+_zsh_prompt_async_vcs_info_start() {
+  async_start_worker vcs_info
+  async_register_callback vcs_info _zsh_prompt_async_vcs_info_done
+}
+
+_zsh_prompt_async_vcs_info_stop() {
+  async_unregister_callback vcs_info
+  async_stop_worker vcs_info
+}
+
 _zsh_prompt_async_vcs_info_done() {
-  vcs_info_msg_0_=$3 # stdout
-  zle reset-prompt
+  if [ $2 -eq 0 ]; then
+    vcs_info_msg_0_=$3 # stdout
+    zle reset-prompt
+  else
+    _zsh_prompt_async_vcs_info_stop
+    _zsh_prompt_async_vcs_info_start
+  fi
 }
 
 # https://github.com/mafredri/zsh-async
 async_init
-async_start_worker vcs_info
-async_register_callback vcs_info _zsh_prompt_async_vcs_info_done
-
+_zsh_prompt_async_vcs_info_start
 add-zsh-hook precmd _zsh_prompt_async_vcs_info
