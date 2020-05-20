@@ -31,29 +31,18 @@ eval $(xrandr --verbose | awk '
 
 if test "$DP22_connected" = 1; then
   # switch off internal display and use external one
-  set -- "$@" --output "$eDP1" --off \
-              --output "$DP22" --auto
-
-  test "$DP22_preferred_size" != "$DP22_size" &&
-    set -- "$@" ';' xrandr --size "$DP22_preferred_size"
+  xrandr "$@" --output "$eDP1" --off \
+              --output "$DP22" --mode "$DP22_preferred_size"
 
 elif test "$HDMI1_connected" = 1; then
   # switch off internal display and use external one
-  set -- "$@" --output "$eDP1" --off \
-              --output "$HDMI1" --auto
-
-  test "$HDMI1_preferred_size" != "$HDMI1_size" &&
-    set -- "$@" ';' xrandr --size "$HDMI1_preferred_size"
+  xrandr "$@" --output "$eDP1" --off \
+              --output "$HDMI1" --mode "$HDMI1_preferred_size"
 
 else
   # no external displays connected; use internal one
-  set -- "$@" --auto
+  xrandr "$@" --auto
 
-  test "$eDP1_preferred_size" != "$eDP1_size" &&
-    set -- "$@" ';' xrandr --size "$eDP1_preferred_size"
-
-  # reduce brightness of internal display
+  # reduce brightness of internal display backlight
   xbacklight | grep -q '^100' && xbacklight = 15
 fi
-
-test $# -gt 0 && eval xrandr "$@" ||:
