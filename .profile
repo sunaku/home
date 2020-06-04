@@ -1,17 +1,17 @@
 # search paths for locally installed apps
-export PATH=$HOME/bin:$HOME/opt/bin:$PATH
-export CPATH=$HOME/opt/include:$CPATH
+export PATH=$HOME/bin:$HOME/opt/bin:$HOME/opt/sbin:$PATH
+export LD_LIBRARY_PATH=$HOME/opt/lib:$HOME/opt/lib64:$LD_LIBRARY_PATH
 export MANPATH=$HOME/opt/share/man:$MANPATH
 export INFOPATH=$HOME/opt/share/info:$INFOPATH
-export LD_LIBRARY_PATH=$HOME/opt/lib:$LD_LIBRARY_PATH
-export PKG_CONFIG_PATH=$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # search paths for programming libraries
+export CPATH=$HOME/opt/include:$CPATH
 export GOPATH=$HOME/opt/install/GOPATH
 export GEM_HOME=$HOME/opt/install/GEM_HOME
 export GEM_PATH=$GEM_HOME:$GEM_PATH
 export NPM_CONFIG_PREFIX=$HOME/opt/install/NPM_CONFIG_PREFIX
 export NODE_PATH=$NPM_CONFIG_PREFIX/lib/node_modules:$NODE_PATH
+export PKG_CONFIG_PATH=$HOME/opt/lib/pkgconfig:$PKG_CONFIG_PATH
 
 # use all processors for fast, parallel make(1) builds
 export MAKEFLAGS=-j$(grep -c '^processor' /proc/cpuinfo)

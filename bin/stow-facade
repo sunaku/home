@@ -25,7 +25,7 @@ for DIRECTORY; do
   stowable=${DIRECTORY##*/}
 
   # expose standard directories
-  for folder in bin lib include share; do
+  for folder in bin sbin lib lib64 include share; do
     linkable=$DIRECTORY/$folder
     if test -d "$linkable"; then
       mkdir -vp "$stowable"
