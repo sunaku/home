@@ -1,0 +1,26 @@
+! Colors from "gruvbox-material" colorscheme
+! https://github.com/sainnhe/gruvbox-material
+
+#define Ansi_0_Color     #514036 /* mix light fg0 */
+#define Ansi_1_Color     #f2594b /* mix dark red */
+#define Ansi_2_Color     #b0b846 /* mix dark green */
+#define Ansi_3_Color     #e9b143 /* mix dark yellow */
+#define Ansi_4_Color     #80aa9e /* mix dark blue */
+#define Ansi_5_Color     #d3869b /* mix dark purple */
+#define Ansi_6_Color     #8bba7f /* mix dark aqua */
+#define Ansi_7_Color     #e2cca9 /* mix dark fg0 */
+#define Ansi_8_Color     #3c3836 /* original light fg0 */
+#define Ansi_9_Color     #fb4934 /* original dark red */
+#define Ansi_10_Color    #b8bb26 /* original dark green */
+#define Ansi_11_Color    #fabd2f /* original dark yellow */
+#define Ansi_12_Color    #83a598 /* original dark blue */
+#define Ansi_13_Color    #d3869b /* original dark purple */
+#define Ansi_14_Color    #8ec07c /* original dark aqua */
+#define Ansi_15_Color    #ebdbb2 /* original dark fg0 */
+#define Bold_Color       #d8a657 /* material dark yellow */
+#define Italic_Color     #d3869b /* material dark purple */
+#define Underline_Color  #a9b665 /* material dark aqua */
+#define Reverse_Color    #e78a4e /* material dark orange */
+#define Foreground_Color #d4be98 /* material dark fg0 */
+#define Background_Color #32302f /* soft dark bg0 */
+#define Cursor_Color     #f28534 /* mix dark orange */
