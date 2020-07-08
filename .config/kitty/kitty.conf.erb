@@ -5,52 +5,18 @@ disable_ligatures cursor
 font_family Liga Fantasque Sans Mono
 font_size 11
 
-<% if ENV['THEME'] == 'dark' %>
-# Colors from "gruvbox" colorscheme for Vim
-# https://github.com/morhetz/gruvbox#palette
-color0     #504945
-color1     #fb4934
-color2     #b8bb26
-color3     #fabd2f
-color4     #83a598
-color5     #d3869b
-color6     #8ec07c
-color7     #ebdbb2
-color8     #7c6f64
-color9     #fb4934
-color10    #b8bb26
-color11    #fabd2f
-color12    #83a598
-color13    #d3869b
-color14    #8ec07c
-color15    #ebdbb2
-#define Bold_Color       #fabd2f  #/*  yellow bright */
-#define Italic_Color     #d3869b  #/*  purple bright */
-#define Underline_Color  #8ec07c  #/*  aqua bright   */
-#define Reverse_Color    #d65d0e  #/*  orange        */
-foreground #d5c4a1
-background #282828
-cursor     #fe8019
-<% else %>
-# Colors from "PaperColor" colorscheme for Vim
-# https://github.com/NLKNguyen/papercolor-theme
-color0     #1c1c1c
-color1     #af0000
-color2     #008700
-color3     #d75f00
-color4     #005faf
-color5     #d70087
-color6     #0087af
-color7     #e4e4e4
-color8     #1c1c1c
-color9     #af0000
-color10    #008700
-color11    #d75f00
-color12    #005faf
-color13    #d70087
-color14    #0087af
-color15    #e4e4e4
-foreground #444444
-background #eeeeee
-cursor     #005f87
-<% end %>
+# use colorscheme from ~/.Xdefaults
+<%=
+  `xrdb -query`
+  .lines
+  .grep(/\b(color\d+|(?:fore|back)ground|cursorColor).*#\h+/)
+  .map{ |setting|
+    setting
+    .sub(/^.*[.*]/, '') # strip off "XTerm*" application namespace
+    .sub(/(?<=cursor)Color/, '') # rename "cursorColor" to "color"
+    .split(/[:\s]+/)
+  }
+  .uniq
+  .map { |a| a.join(" ") }
+  .join("\n")
+%>
