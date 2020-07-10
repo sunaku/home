@@ -134,8 +134,8 @@ alias gct='git commit --date'
 gctf() { file=$1 && shift && git commit --date="$(date -r "$file")" "$@" ;}
 
 # commit staged changes with the given version string as the message
-gcv() { git commit -m "Version $1" && git tag "v$1" ;}
-gcV() { git tag -f "v$1" ;}
+gcv() { git commit -m "Version $1" && git tag "$1" ;}
+gcV() { git tag -f "$1" ;}
 
 # commit staged changes to a temporary "squash" commit, to be rebased later
 alias gcq='git commit -m "squash! $(date)"'
