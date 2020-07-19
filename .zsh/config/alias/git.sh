@@ -254,6 +254,11 @@ grf() {
   gri --autosquash "$(glf | head -1)^"
 }
 
+# rebase interactively to squash fixup commits up to the furthest fixup target
+grF() {
+  gri --autosquash "$(glf | tail -1)^"
+}
+
 #-----------------------------------------------------------------------------
 # k = conflict
 #-----------------------------------------------------------------------------
