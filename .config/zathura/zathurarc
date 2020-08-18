@@ -1,5 +1,7 @@
 set font                    "Monospace 9"
 set guioptions              ""
+set pages-per-row           2
+set first-page-column       1:1
 set window-title-basename   true
 set window-title-page       true
 
