@@ -7,7 +7,6 @@ setopt ALIASES
 setopt CORRECT # CORRECT_IGNORE=
 setopt CORRECT_ALL
 CORRECT_IGNORE_FILE='.*' # ignore hidden files
-setopt DVORAK
 setopt NO_FLOW_CONTROL # this is for ZSH itself
 #
 # disable XON (^S) and XOFF (^Q) flow control keys

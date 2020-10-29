@@ -1,0 +1,39 @@
+partial alphanumeric_keys
+xkb_symbols "beakl15"
+{
+	include "us(basic)"
+
+	key <AD01> {[ q,          Q        ]};
+	key <AD02> {[ h,          H        ]};
+	key <AD03> {[ o,          O        ]};
+	key <AD04> {[ u,          U        ]};
+	key <AD05> {[ x,          X        ]};
+	key <AD06> {[ g,          G        ]};
+	key <AD07> {[ c,          C        ]};
+	key <AD08> {[ r,          R        ]};
+	key <AD09> {[ f,          F        ]};
+	key <AD10> {[ z,          Z        ]};
+
+	key <AC01> {[ y,          Y        ]};
+	key <AC02> {[ i,          I        ]};
+	key <AC03> {[ e,          E        ]};
+	key <AC04> {[ a,          A        ]};
+	key <AC05> {[ period,     greater  ]};
+	key <AC06> {[ d,          D        ]};
+	key <AC07> {[ s,          S        ]};
+	key <AC08> {[ t,          T        ]};
+	key <AC09> {[ n,          N        ]};
+	key <AC10> {[ b,          B        ]};
+	key <AC11> {[ semicolon,  colon    ]};
+
+	key <AB01> {[ j,          J        ]};
+	key <AB02> {[ slash,      question ]};
+	key <AB03> {[ comma,      less     ]};
+	key <AB04> {[ k,          K        ]};
+	key <AB05> {[ apostrophe, quotedbl ]};
+	key <AB06> {[ w,          W        ]};
+	key <AB07> {[ m,          M        ]};
+	key <AB08> {[ l,          L        ]};
+	key <AB09> {[ p,          P        ]};
+	key <AB10> {[ v,          V        ]};
+};

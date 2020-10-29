@@ -5,6 +5,28 @@
 #
 <% tmux_version = `tmux -V`.split.last %>
 <% light_theme = ENV['THEME'] == 'light' %>
+<%
+  # BEAKL-15 layout
+  navigate_back  = 'd'
+  navigate_left  = 's'
+  navigate_up    = 't'
+  navigate_down  = 'n'
+  navigate_right = 'b'
+
+  ## Dvorak layout
+  #navigate_back  = 'd'
+  #navigate_left  = 'h'
+  #navigate_up    = 't'
+  #navigate_down  = 'n'
+  #navigate_right = 's'
+
+  ## Qwerty layout
+  #navigate_back  = '\\'
+  #navigate_left  = 'h'
+  #navigate_up    = 'k'
+  #navigate_down  = 'j'
+  #navigate_right = 'l'
+%>
 
 bind-key R source ~/.tmux.conf \; display-message 'config reloaded!'
 
@@ -149,7 +171,7 @@ bind-key -n M-X break-pane
 # focus window
 bind-key -n M-, previous-window
 bind-key -n M-. next-window
-bind-key -n M-o last-window
+bind-key -n "M-'" last-window
 
 # focus by number
 set-option -g base-index 1
@@ -182,17 +204,17 @@ set-option -g visual-silence on
 set-option -g bell-on-alert on
 <% end %>
 
-bind-key -n M-k \
+bind-key -n M-z \
   set-window-option monitor-activity \;\
   display-message 'monitor-activity #{?monitor-activity,on,off}'
 
-bind-key -n M-K \
+bind-key -n M-Z \
   if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
     'set-window-option -g monitor-activity on' \
     'set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
-bind-key -n M-j \
+bind-key -n M-q \
   command-prompt -p 'monitor-silence (seconds):' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
@@ -213,22 +235,22 @@ bind-key C-l \
   set-option synchronize-panes off
 
 # create pane (below, above, left, right)
-bind-key -n M-c split-window -c '#{pane_current_path}'
-bind-key -n M-C split-window -c '#{pane_current_path}' -b
-bind-key -n M-R split-window -c '#{pane_current_path}' -b -h
-bind-key -n M-r split-window -c '#{pane_current_path}'    -h
+bind-key -n M-o split-window -c '#{pane_current_path}'
+bind-key -n M-O split-window -c '#{pane_current_path}' -b
+bind-key -n M-A split-window -c '#{pane_current_path}' -b -h
+bind-key -n M-a split-window -c '#{pane_current_path}'    -h
 
 # join pane (above, left, below, right)
-bind-key -n M-g move-pane    -t .-1 -s .    # join pane at bottom of prev pane
-bind-key -n M-l move-pane    -t .-1 -s . -h # join pane at right of prev pane
-bind-key -n M-G move-pane -d -s .+1 -t .    # join next pane at bottom
-bind-key -n M-L move-pane -d -s .+1 -t . -h # join next pane at right
+bind-key -n M-j move-pane -d -s .+1 -t . -h # join next pane at right
+bind-key -n M-J move-pane -d -s .+1 -t .    # join next pane at bottom
+bind-key -n M-k move-pane    -t .-1 -s . -h # join pane at right of prev pane
+bind-key -n M-K move-pane    -t .-1 -s .    # join pane at bottom of prev pane
 
 # resize pane
-bind-key -r H resize-pane -L 5
-bind-key -r T resize-pane -U 5
-bind-key -r N resize-pane -D 5
-bind-key -r S resize-pane -R 5
+bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
+bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
+bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
+bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
 
 # zoom pane
 bind-key -n M-m resize-pane -Z
@@ -236,11 +258,11 @@ bind-key -n M-m resize-pane -Z
 # swap pane
 bind-key -n M-- swap-pane -D
 bind-key -n M-_ swap-pane -U
-bind-key -n M-D run-shell 'tmux select-pane -l \; swap-pane -d -s #D'
-bind-key -n M-H run-shell 'tmux select-pane -L \; swap-pane -d -s #D'
-bind-key -n M-T run-shell 'tmux select-pane -U \; swap-pane -d -s #D'
-bind-key -n M-N run-shell 'tmux select-pane -D \; swap-pane -d -s #D'
-bind-key -n M-S run-shell 'tmux select-pane -R \; swap-pane -d -s #D'
+bind-key -n M-<%= navigate_back.upcase  %> run-shell 'tmux select-pane -l \; swap-pane -d -s #D'
+bind-key -n M-<%= navigate_left.upcase  %> run-shell 'tmux select-pane -L \; swap-pane -d -s #D'
+bind-key -n M-<%= navigate_up.upcase    %> run-shell 'tmux select-pane -U \; swap-pane -d -s #D'
+bind-key -n M-<%= navigate_down.upcase  %> run-shell 'tmux select-pane -D \; swap-pane -d -s #D'
+bind-key -n M-<%= navigate_right.upcase %> run-shell 'tmux select-pane -R \; swap-pane -d -s #D'
 
 # attach by number
 bind-key -n 'M-!' join-pane -t :1
@@ -262,19 +284,9 @@ bind-key -n M-Enter \
     'select-pane -t 1' \
     'last-pane; swap-pane -s 1'
 
-# rotate panes
-bind-key -n M-a rotate-window -D
-bind-key -n M-A rotate-window -U
-
 #-----------------------------------------------------------------------------
 # layouts
 #-----------------------------------------------------------------------------
-
-bind-key M-w select-layout main-horizontal
-bind-key M-W select-layout even-vertical
-bind-key M-v select-layout main-vertical
-bind-key M-V select-layout even-horizontal
-bind-key M-z select-layout tiled
 
 # half-screen tiling layouts (horizontal, vertical)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
@@ -289,7 +301,6 @@ bind-key -n M-w run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
 bind-key -n M-W run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
 bind-key -n M-v run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
 bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
-bind-key -n M-z select-layout tiled
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
@@ -369,13 +380,12 @@ set -g @resurrect-capture-pane-contents on
 
 set -g @plugin 'fcsonline/tmux-thumbs'
 set -g @thumbs-key '-n M-U'
-set -g @thumbs-alphabet dvorak-homerow
 
 set -g @plugin 'sunaku/tmux-navigate'
-set -g @navigate-back  '-n M-d'
-set -g @navigate-left  '-n M-h'
-set -g @navigate-up    '-n M-t'
-set -g @navigate-down  '-n M-n'
-set -g @navigate-right '-n M-s'
+set -g @navigate-back  '-n M-<%= navigate_back  %>'
+set -g @navigate-left  '-n M-<%= navigate_left  %>'
+set -g @navigate-up    '-n M-<%= navigate_up    %>'
+set -g @navigate-down  '-n M-<%= navigate_down  %>'
+set -g @navigate-right '-n M-<%= navigate_right %>'
 
 run-shell ~/.tmux/plugins/tpm/tpm
