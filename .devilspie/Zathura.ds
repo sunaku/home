@@ -1,0 +1,10 @@
+( if
+  ( begin
+    ( is ( window_class ) "org.pwmt.zathura" )
+  )
+  ( begin
+    ( maximize )
+    ( undecorate )
+    ( println "match" )
+  )
+)

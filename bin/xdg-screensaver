@@ -1,7 +1,0 @@
-#!/bin/sh -eu
-#
-# Locks the screen using slock(1), instead of delegating to xscreensaver(1).
-#
-# https://aur.archlinux.org/cgit/aur.git/tree/slock_support.diff?h=xdg-utils-slock
-
-test "$1" = lock && slock
