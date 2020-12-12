@@ -1,8 +1,18 @@
 #!/bin/sh -x
 
-# appearance
-. ~/.xprofile
-devilspie2 &
+# style
+unset QT_STYLE_OVERRIDE
+
+# fonts
+xset +fp ~/.fonts/tamzen-font/bdf
+xset fp rehash
+
+# resources
+xrdb -merge ~/.Xdefaults
+export FONT=$(xrdb -query | awk '$1 == "*font:" { print $2; exit }')
+
+# pointer
+xsetroot -cursor_name left_ptr
 
 # touchpad
 # https://wiki.archlinux.org/index.php/Touchpad_Synaptics#Using_syndaemon
@@ -13,4 +23,5 @@ pgrep -x syndaemon || syndaemon -i 1 -t -K -R -d
 kitty sh -c 'if tmux has-session; then tmux attach -d; else tmux; fi' &
 
 # window manager
-exec startlxqt
+devilspie -a &
+exec startxfce4

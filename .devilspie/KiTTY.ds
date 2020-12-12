@@ -1,0 +1,11 @@
+( if
+  ( begin
+    ( is ( window_class ) "kitty" )
+  )
+  ( begin
+    ( maximize )
+    ( undecorate )
+    ( below )
+    ( println "match" )
+  )
+)

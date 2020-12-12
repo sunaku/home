@@ -30,16 +30,6 @@ export XAUTHORITY=$HOME/.Xauthority
 test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
 
 #-----------------------------------------------------------------------------
-# desktop
-#-----------------------------------------------------------------------------
-
-# start X when logging into the first Virtual Terminal
-# https://wiki.archlinux.org/index.php/Start_X_at_Login
-# see also /etc/X11/xinit/xserverrc for $XDG_VTNR trick
-test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 &&
-exec env XDG_VTNR=1 startx > ~/.xsession-errors 2>&1
-
-#-----------------------------------------------------------------------------
 # console
 #-----------------------------------------------------------------------------
 
