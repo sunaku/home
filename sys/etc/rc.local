@@ -3,3 +3,16 @@
 # /etc/rc.local -- rc.local for Artix Linux
 #
 # Enter your custom commands here.
+
+#-----------------------------------------------------------------------------
+# powertop
+#-----------------------------------------------------------------------------
+
+# VM writeback timeout
+echo '1500' > '/proc/sys/vm/dirty_writeback_centisecs';
+
+# Runtime PM for PCI Device Advanced Micro Devices, Inc. [AMD/ATI] Renoir
+echo 'auto' > '/sys/bus/pci/devices/0000:07:00.0/power/control';
+
+# Runtime PM for PCI Device Advanced Micro Devices, Inc. [AMD] Renoir PCIe GPP Bridge
+echo 'auto' > '/sys/bus/pci/devices/0000:00:02.3/power/control';
