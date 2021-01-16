@@ -1,5 +1,7 @@
+// BEAKL-15p Keyboard Layout
+// https://github.com/sunaku/beakl15p
 partial alphanumeric_keys
-xkb_symbols "beakl15"
+xkb_symbols "beakl15p"
 {
 	include "us(basic)"
 
@@ -18,7 +20,7 @@ xkb_symbols "beakl15"
 	key <AC02> {[ i,          I        ]};
 	key <AC03> {[ e,          E        ]};
 	key <AC04> {[ a,          A        ]};
-	key <AC05> {[ period,     greater  ]};
+	key <AC05> {[ slash,      question ]};
 	key <AC06> {[ d,          D        ]};
 	key <AC07> {[ s,          S        ]};
 	key <AC08> {[ t,          T        ]};
@@ -27,8 +29,8 @@ xkb_symbols "beakl15"
 	key <AC11> {[ semicolon,  colon    ]};
 
 	key <AB01> {[ j,          J        ]};
-	key <AB02> {[ slash,      question ]};
-	key <AB03> {[ comma,      less     ]};
+	key <AB02> {[ comma,      less     ]};
+	key <AB03> {[ period,     greater  ]};
 	key <AB04> {[ k,          K        ]};
 	key <AB05> {[ apostrophe, quotedbl ]};
 	key <AB06> {[ w,          W        ]};
