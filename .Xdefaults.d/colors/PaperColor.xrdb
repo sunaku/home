@@ -19,5 +19,5 @@
 #define Ansi_13_Color    #d70087
 #define Ansi_6_Color     #0087af
 #define Ansi_14_Color    #0087af
-#define Ansi_7_Color     #e4e4e4
-#define Ansi_15_Color    #e4e4e4
+#define Ansi_7_Color     #bcbcbc
+#define Ansi_15_Color    #bcbcbc
