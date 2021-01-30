@@ -5,7 +5,7 @@ set first-page-column       1:1
 set window-title-basename   true
 set window-title-page       true
 
-set recolor false
+set recolor true
 set recolor-keephue true
 set recolor-darkcolor "#93A1A1"
 set recolor-lightcolor "#002B36"
