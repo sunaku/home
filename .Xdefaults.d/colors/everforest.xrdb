@@ -1,0 +1,24 @@
+! Colors from everforest theme for Vim:
+! https://github.com/sainnhe/everforest
+
+#define Foreground_Color #d3c6aa /* background=dark palette2=fg */
+#define Background_Color #2f383e /* softness=medium background=dark palette1=bg0 */
+#define Cursor_Color     #f57d26 /* background=light palette2=orange */
+
+#define Ansi_0_Color     #404c51 /* softness=medium background=dark palette1=bg2 */
+#define Ansi_1_Color     #e67e80 /* background=dark palette2=red */
+#define Ansi_2_Color     #a7c080 /* background=dark palette2=green */
+#define Ansi_3_Color     #dbbc7f /* background=dark palette2=yellow */
+#define Ansi_4_Color     #7fbbb3 /* background=dark palette2=blue */
+#define Ansi_5_Color     #d699b6 /* background=dark palette2=purple */
+#define Ansi_6_Color     #83c092 /* background=dark palette2=aqua */
+#define Ansi_7_Color     #dfdbc8 /* softness=medium background=light palette1=bg4 */
+
+#define Ansi_8_Color     #525c62 /* softness=medium background=dark palette1=bg4 */
+#define Ansi_9_Color     #f85552 /* background=light palette2=red */
+#define Ansi_10_Color    #8da101 /* background=light palette2=green */
+#define Ansi_11_Color    #dfa000 /* background=light palette2=yellow */
+#define Ansi_12_Color    #3a94c5 /* background=light palette2=blue */
+#define Ansi_13_Color    #df69ba /* background=light palette2=purple */
+#define Ansi_14_Color    #35a77c /* background=light palette2=aqua */
+#define Ansi_15_Color    #edead5 /* softness=medium background=light palette1=bg2 */
