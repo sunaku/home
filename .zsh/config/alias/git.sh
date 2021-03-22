@@ -113,7 +113,7 @@ alias gtX='git stash clear'
 #-----------------------------------------------------------------------------
 
 # commit staged changes
-alias gc='git commit'
+alias gci='git commit'
 
 # commit changes as a fixup of existing commit
 alias gcF='git commit --fixup'
