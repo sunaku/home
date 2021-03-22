@@ -244,10 +244,8 @@ bind-key -n M-A split-window -c '#{pane_current_path}' -b -h
 bind-key -n M-a split-window -c '#{pane_current_path}'    -h
 
 # join pane (above, left, below, right)
-bind-key -n M-j move-pane -d -s .+1 -t . -h # join next pane at right
-bind-key -n M-J move-pane -d -s .+1 -t .    # join next pane at bottom
 bind-key -n M-k move-pane    -t .-1 -s . -h # join pane at right of prev pane
-bind-key -n M-K move-pane    -t .-1 -s .    # join pane at bottom of prev pane
+bind-key -n M-j move-pane    -t .-1 -s .    # join pane at bottom of prev pane
 
 # resize pane
 bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
@@ -290,6 +288,10 @@ bind-key -n M-Enter \
 #-----------------------------------------------------------------------------
 # layouts
 #-----------------------------------------------------------------------------
+
+bind-key -n 'M-"' select-layout tiled
+bind-key -n M-J   select-layout even-vertical
+bind-key -n M-K   select-layout even-horizontal
 
 # half-screen tiling layouts (horizontal, vertical)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
