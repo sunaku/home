@@ -6,12 +6,12 @@
 <% tmux_version = `tmux -V`.split.last %>
 <% light_theme = ENV['THEME'] == 'light' %>
 <%
-  # BEAKL-15 layout
-  navigate_back  = 'd'
-  navigate_left  = 's'
+  # Engram 2.0 layout - https://engram.dev
+  navigate_back  = 'q'
+  navigate_left  = 'h'
   navigate_up    = 't'
-  navigate_down  = 'n'
-  navigate_right = 'b'
+  navigate_down  = 's'
+  navigate_right = 'n'
 
   ## Dvorak layout
   #navigate_back  = 'd'
