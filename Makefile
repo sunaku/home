@@ -25,6 +25,7 @@ define RENDER_TEMPLATE_TASK =
 $(1): $(1).erb $(THEME_FILE)
 	env THEME=`cat $(THEME_FILE)` \
 		erb $(1).erb > $(1)
+	test -s $(1) || rm $(1)
 endef
 
 $(foreach t,$(TEMPLATED_FILES),$(eval $(call RENDER_TEMPLATE_TASK,$(t))))
@@ -59,3 +60,7 @@ theme-tmux: .tmux.conf .tmux/plugins/tpm
 
 .tmux/plugins/tpm:
 	git clone https://github.com/tmux-plugins/tpm $@
+
+.PHONY: clean
+clean:
+	find $(TEMPLATED_FILES) -size 0 -exec rm -v {} \;
