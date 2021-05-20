@@ -41,7 +41,10 @@ set-option -g mouse on
 set-option -g set-titles on
 
 # enable 256-color support for pretty colorschemes in Vim
-set-option -g default-terminal 'screen-256color'
+# or if using KiTTY, enable its enhanced terminal profile
+if-shell 'test "$TERM" = "xterm-kitty"' \
+  'set-option -g default-terminal "xterm-kitty"' \
+  'set-option -g default-terminal "screen-256color"'
 
 # allow Vim to receive focus events from terminal window
 set-option -g focus-events on
