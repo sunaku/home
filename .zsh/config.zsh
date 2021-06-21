@@ -1,25 +1,19 @@
-source_if_exist() {
-  test -s $1 && source $1
-}
-source_bundles() {
-  for bundle; do
-    test -d $bundle || continue
+source ~/.zsh/bundle/zsh-snap/znap.zsh
 
-    # load the bundle itself
-    source_if_exist $bundle/${bundle##*/}.plugin.zsh ||
-    source_if_exist $bundle/${bundle##*/}.zsh ||
-    source_if_exist $bundle/init.zsh
-
-    # load bundle configuration
-    source_if_exist $bundle.zsh ||:
-  done
-}
 source_configs() {
   for config; do
     source $config
   done
 }
 
-source_bundles ~/.zsh/bundle/before/*
+znap source mafredri/zsh-async # for prompt.zsh
 source_configs ~/.zsh/config/**/*sh
-source_bundles ~/.zsh/bundle/after/*
+
+znap source hlissner/zsh-autopair
+znap source zsh-users/zsh-syntax-highlighting
+znap source zdharma/history-search-multi-word
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-history-substring-search
+znap source agkozak/zsh-z
+
+source_configs ~/.zsh/bundle/*.zsh
