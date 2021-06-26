@@ -28,9 +28,6 @@ put() {
   printf "$esc"
 }
 
-put "\033]52;c;!\a" # KiTTY always appends to the clipboard, so clear it first
-#https://sw.kovidgoyal.net/kitty/protocol-extensions.html#pasting-to-clipboard
-
 # copy via OSC 52
 buf=$( cat "$@" )
 len=$( printf %s "$buf" | wc -c ) max=74994
