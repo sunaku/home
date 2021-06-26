@@ -4,7 +4,6 @@
 # http://zsh.sourceforge.net/Doc/Release/Options.html#History
 #
 setopt SHARE_HISTORY
-setopt INC_APPEND_HISTORY
 setopt HIST_SAVE_BY_COPY
 setopt HIST_FCNTL_LOCK
 
