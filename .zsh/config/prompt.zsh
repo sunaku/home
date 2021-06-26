@@ -9,7 +9,8 @@ autoload -Uz add-zsh-hook
 
 setopt PROMPT_SUBST
 
-PROMPT='%(?..%B%F{red}exit %?%f%b'$'\n'')'\
+PROMPT=\
+'%(?..%B%F{red}exit %?%f%b'$'\n'')'\
 '${SSH_TTY:+%F{cyan\}%n@%m%f }'\
 '${vcs_info_msg_0_}'\
 '%(!.%F{red}.%F{green})%~%f'\
@@ -54,7 +55,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-re
 # Make sure you have added staged to your 'formats':  %c
 function +vi-git-untracked(){
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
-        git status --porcelain | fgrep '??' &> /dev/null ; then
+        git status --porcelain | grep -q '^?? ' 2> /dev/null ; then
         # This will show the marker if there are any untracked files in repo.
         # If instead you want to show the marker only if there are untracked
         # files in $PWD, use:
@@ -69,14 +70,17 @@ function +vi-git-aheadbehind() {
     local ahead behind
     local -a gitstatus
 
-    # for git prior to 1.7
-    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
-    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | tr -d ' ')
-    (( $ahead )) && gitstatus+=( "%B%F{blue}+${ahead}%f%b" )
+    # Exit early in case the worktree is on a detached HEAD
+    git rev-parse ${hook_com[branch]}@{upstream} >/dev/null 2>&1 || return 0
 
-    # for git prior to 1.7
-    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
-    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l | tr -d ' ')
+    local -a ahead_and_behind=(
+        $(git rev-list --left-right --count HEAD...${hook_com[branch]}@{upstream} 2>/dev/null)
+    )
+
+    ahead=${ahead_and_behind[1]}
+    behind=${ahead_and_behind[2]}
+
+    (( $ahead )) && gitstatus+=( "%B%F{blue}+${ahead}%f%b" )
     (( $behind )) && gitstatus+=( "%B%F{red}-${behind}%f%b" )
 
     hook_com[misc]+=${(j::)gitstatus}
