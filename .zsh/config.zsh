@@ -13,7 +13,7 @@ znap source hlissner/zsh-autopair
 znap source zsh-users/zsh-syntax-highlighting
 znap source zdharma/history-search-multi-word
 znap source zsh-users/zsh-autosuggestions
-znap source zsh-users/zsh-history-substring-search
+znap source marlonrichert/zsh-autocomplete
 znap source agkozak/zsh-z
 
 source_configs ~/.zsh/bundle/*.zsh
