@@ -16,4 +16,7 @@ znap source zsh-users/zsh-autosuggestions
 znap source marlonrichert/zsh-autocomplete
 znap source agkozak/zsh-z
 
+znap source marlonrichert/zcolors
+znap eval zcolors "zcolors ${(q)LS_COLORS}"
+
 source_configs ~/.zsh/bundle/*.zsh

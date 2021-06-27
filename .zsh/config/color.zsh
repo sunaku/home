@@ -1,5 +1,3 @@
-unset LS_COLORS
-
 # add color to man pages using less(1)
 # https://unix.stackexchange.com/a/147
 export LESS_TERMCAP_mb=$(tput bold; tput setaf 5) # start blink
