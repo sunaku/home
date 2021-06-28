@@ -1,13 +1,20 @@
-source ~/.zsh/bundle/zsh-snap/znap.zsh
+#
+# configs
+#
 
-source_configs() {
-  for config; do
-    source $config
+multisource() {
+  for each; do
+    source $each
   done
 }
 
-znap source mafredri/zsh-async # for prompt.zsh
-source_configs ~/.zsh/config/**/*sh
+multisource ~/.zsh/config/**/*sh
+
+#
+# plugins
+#
+
+source ~/.zsh/bundle/zsh-snap/znap.zsh
 
 znap source hlissner/zsh-autopair
 znap source zsh-users/zsh-syntax-highlighting
@@ -19,4 +26,7 @@ znap source agkozak/zsh-z
 znap source marlonrichert/zcolors
 znap eval zcolors "zcolors ${(q)LS_COLORS}"
 
-source_configs ~/.zsh/bundle/*.zsh
+znap source mafredri/zsh-async # for prompt.zsh
+source ~/.zsh/prompt.zsh
+
+multisource ~/.zsh/bundle/*.zsh
