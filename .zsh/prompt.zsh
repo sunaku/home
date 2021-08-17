@@ -100,7 +100,7 @@ function +vi-git-remotebranch() {
     # differs from the local one.
     #if [[ -n ${remote} ]] ; then
     if [[ -n ${remote} && ${remote#*/} != ${hook_com[branch]} ]] ; then
-        hook_com[branch]="${hook_com[branch]}%F{yellow}<=>%f%F{blue}${remote}%f"
+        hook_com[branch]="${hook_com[branch]}%F{yellow}~>%f%F{blue}${remote}%f"
     fi
 }
 
