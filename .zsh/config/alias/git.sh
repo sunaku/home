@@ -263,6 +263,15 @@ grF() {
 # k = conflict
 #-----------------------------------------------------------------------------
 
+git_dir() {
+  git rev-parse --git-dir "$@"
+}
+
+git_merge_conflict() (
+  cd "$(git_dir)" &&
+  test -s MERGE_HEAD -a ! -s SQUASH_MSG
+)
+
 # list all conflicted files
 alias gkl='git ls-files --unmerged | cut -f2 | uniq'
 
@@ -273,13 +282,13 @@ alias gka='git add $(gkl)'
 alias gke='vim +"set hlsearch" +"/^[<=>]\{7\}/\( \|$\)" $(gkl)'
 
 # use local version of the given files
-alias gko='git checkout --$(test -f .git/MERGE_HEAD && echo ours || echo theirs) --'
+alias gko='git checkout --$(git_merge_conflict && echo ours || echo theirs) --'
 
 # use local version of all conflicted files
 alias gkO='gko $(gkl)'
 
 # use upstream version of the given files
-alias gkt='git checkout --$(test -f .git/MERGE_HEAD && echo theirs || echo ours) --'
+alias gkt='git checkout --$(git_merge_conflict && echo theirs || echo ours) --'
 
 # use upstream version of all conflicted files
 alias gkT='gkt $(gkl)'
