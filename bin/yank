@@ -24,20 +24,26 @@
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 # Also documented at https://sunaku.github.io/tmux-yank-osc52.html
 
+buf=$( cat "$@" )
+
+# copy to tmux
+test -n "$TMUX" &&
+command -v tmux >/dev/null &&
+printf %s "$buf" | tmux load-buffer -
+
+# copy via X11
+test -n "$DISPLAY" &&
+printf %s "$buf" | {
+  command -v xsel >/dev/null && xsel -i -b ||
+  command -v xclip >/dev/null && xclip -sel c
+}
+
+# copy via OSC 52
 put() {
   esc=$1
   test -n "$TMUX" -o -z "${TERM##screen*}" && esc="\033Ptmux;\033$esc\033\\"
   printf "$esc"
 }
-
-# copy via OSC 52
-buf=$( cat "$@" )
 len=$( printf %s "$buf" | wc -c ) max=74994
 test $len -gt $max && echo "$0: input is $(( len - max )) bytes too long" >&2
 put "\033]52;c;$( printf %s "$buf" | head -c $max | base64 | tr -d '\r\n' )\a"
-
-# also copy to tmux
-test -n "$TMUX" && tmux set-buffer "$buf" ||:
-
-# also copy via X11
-test -n "$DISPLAY" && printf %s "$buf" | { xsel -i -b || xclip -sel c ;} ||:
