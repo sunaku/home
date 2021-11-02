@@ -6,6 +6,5 @@
     ( maximize )
     ( undecorate )
     ( below )
-    ( println "match" )
   )
 )

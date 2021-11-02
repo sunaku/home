@@ -23,5 +23,5 @@ pgrep -x syndaemon || syndaemon -i 1 -t -K -R -d
 kitty sh -c 'if tmux has-session; then tmux attach -d; else tmux; fi' &
 
 # window manager
-devilspie -a &
+devilspie -a -d &
 exec startxfce4
