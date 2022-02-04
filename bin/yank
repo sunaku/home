@@ -32,7 +32,7 @@ test -n "$TMUX" &&
   command -v tmux >/dev/null && input | tmux load-buffer -
 
 # copy via X11
-test -n "$DISPLAY" && {
+test -n "$DISPLAY" && xhost >/dev/null 2>&1 && {
   command -v xsel >/dev/null && input | xsel -i -b ||
   command -v xclip >/dev/null && input | xclip -sel c
 }
