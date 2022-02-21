@@ -40,6 +40,15 @@ export XAUTHORITY=$HOME/.Xauthority
 test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
 
 #-----------------------------------------------------------------------------
+# desktop
+#-----------------------------------------------------------------------------
+
+if test -n "$DISPLAY" && xhost >/dev/null; then
+  xset +fp ~/.fonts/tamzen-font/bdf && xset fp rehash
+  unset QT_STYLE_OVERRIDE
+fi
+
+#-----------------------------------------------------------------------------
 # console
 #-----------------------------------------------------------------------------
 
