@@ -90,6 +90,7 @@ set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
 # https://github.com/morhetz/gruvbox/blob/master/autoload/airline/themes/gruvbox.vim
 <%
   if light_theme
+    # Colors from Lucius theme https://github.com/NLKNguyen/papercolor-theme
     status_style                = 'fg=colour238,bg=colour253' # lucius normal airline_c
     window_status_current_style = 'fg=colour231,bg=colour67'  # lucius visual airline_a
     pane_border_style           = 'fg=colour253'              # lucius normal airline_c
@@ -109,6 +110,11 @@ set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
     window_status_current_style = 'bg=#2f383e,fg=#a7c080'     # everforest TabLineSel (reverse)
     pane_border_style           = 'fg=#4a555b'                # everforest TabLine
     pane_active_border_style    = 'fg=#a7c080'                # everforest TabLineSel
+    # Colors from gruvbox-material theme https://github.com/sainnhe/gruvbox-material
+    status_style                = 'fg=colour246,bg=colour237' # gruvbox normal airline_c
+    window_status_current_style = 'fg=colour214,bg=colour239' # gruvbox bright_yellow dark2
+    pane_border_style           = 'fg=colour239'              # gruvbox normal airline_b
+    pane_active_border_style    = 'fg=colour208'              # gruvbox visual airline_c
     status_ruler_style          = window_status_current_style
     status_login_style          = window_status_current_style + ',bold,reverse'
   end
