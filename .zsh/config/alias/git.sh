@@ -44,10 +44,10 @@ alias gox='git rm -r --ignore-unmatch'
 alias gou='git status --porcelain | sed -n "s/^?? *//p"'
 
 # list unknown files in working copy that can be deleted
-alias goc='git clean -n'
+alias glc='git clean -n'
 
 # delete unknown files from working copy
-alias goC='git clean -f'
+alias goc='git clean -i'
 
 #-----------------------------------------------------------------------------
 # i = index / stage
