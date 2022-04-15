@@ -28,3 +28,6 @@ znap source mafredri/zsh-async # for prompt.zsh
 source ~/.zsh/prompt.zsh
 
 multisource ~/.zsh/bundle/*.zsh
+
+# undo any config overrides performed by plugins
+multisource ~/.zsh/config/**/*sh
