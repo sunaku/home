@@ -1,13 +1,10 @@
 # navigate
-alias i='cd'
-alias o='cd -'
-alias O='dirs -v'
-u() { # go up $1 directories
-  i=0
-  while test $i -lt ${1:-1}; do
-    i=$(( i + 1 ))
-    cd ..
-  done
+alias -- -='cd -'
+alias -- --='dirs -v'
+alias ..='ud'
+
+ud() { # go Up a Dir $1 times
+  cd $(seq ${1:-1} | sed 's,.*,../,' | tr -d '\n')
 }
 
 # inspect
