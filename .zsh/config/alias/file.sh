@@ -1,10 +1,17 @@
 # navigate
 alias -- -='cd -'
 alias -- --='dirs -v'
-alias ..='ud'
 
-ud() { # go Up a Dir $1 times
+u() { # go Up a directory $1 times (default: 1)
   cd $(seq ${1:-1} | sed 's,.*,../,' | tr -d '\n')
+}
+
+i() { # go Into directory stack $1 times (default: 1)
+  cd +${1:-1}
+}
+
+o() { # go Out of directory stack $1 times (default: 1)
+  cd -${1:-1}
 }
 
 # inspect
