@@ -136,10 +136,10 @@ set-window-option -g window-status-activity-style 'bg=#8a1f11,fg=#fbe3e4' # erro
 #-----------------------------------------------------------------------------
 
 # toggle status bar visibility
-bind-key -n M-` set-option -g status
+bind-key -n M-b set-option -g status
 
 # toggle status bar position
-bind-key -n M-~ \
+bind-key -n M-B \
   if-shell 'tmux show-option -g status-position | grep -q top$' \
     'set-option -g status-position bottom' \
     'set-option -g status-position top'
@@ -216,17 +216,23 @@ set-option -g visual-silence on
 set-option -g bell-on-alert on
 <% end %>
 
-bind-key -n M-z \
+bind-key -n M-f \
   set-window-option monitor-activity \;\
   display-message 'monitor-activity #{?monitor-activity,on,off}'
 
-bind-key -n M-Z \
+bind-key -n M-F \
   if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
     'set-window-option -g monitor-activity on' \
     'set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
-bind-key -n M-q \
+bind-key -n M-p \
+  if-shell 'tmux show-window-option -v monitor-silence | grep -q ^[^0]' \
+    'set-window-option monitor-silence 0' \
+    'set-window-option monitor-silence 60' \;\
+  display-message 'monitor-silence #{?monitor-silence,#{monitor-silence},off}'
+
+bind-key -n M-P \
   command-prompt -p 'monitor-silence (seconds):' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
@@ -253,8 +259,8 @@ bind-key -n M-A split-window -c '#{pane_current_path}' -b -h
 bind-key -n M-a split-window -c '#{pane_current_path}'    -h
 
 # join pane (above, left, below, right)
-bind-key -n M-k move-pane    -t .-1 -s . -h # join pane at right of prev pane
-bind-key -n M-j move-pane    -t .-1 -s .    # join pane at bottom of prev pane
+bind-key -n M-K move-pane    -t .-1 -s . -h # join pane at right of prev pane
+bind-key -n M-J move-pane    -t .-1 -s .    # join pane at bottom of prev pane
 
 # resize pane
 bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
@@ -262,34 +268,38 @@ bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
 bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
 bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
 
+# find pane
+bind-key -n M-r choose-tree
+
 # zoom pane
 bind-key -n M-m resize-pane -Z
 
 # swap pane
-bind-key -n M-- swap-pane -D
-bind-key -n M-_ swap-pane -U
+bind-key -n M-j swap-pane -D
+bind-key -n M-k swap-pane -U
 bind-key -n M-<%= navigate_back.upcase  %> run-shell 'tmux select-pane -l \; swap-pane -d -s #D'
 bind-key -n M-<%= navigate_left.upcase  %> run-shell 'tmux select-pane -L \; swap-pane -d -s #D'
 bind-key -n M-<%= navigate_up.upcase    %> run-shell 'tmux select-pane -U \; swap-pane -d -s #D'
 bind-key -n M-<%= navigate_down.upcase  %> run-shell 'tmux select-pane -D \; swap-pane -d -s #D'
 bind-key -n M-<%= navigate_right.upcase %> run-shell 'tmux select-pane -R \; swap-pane -d -s #D'
 
-# attach by number
-bind-key -n 'M-!' join-pane -t :1
-bind-key -n 'M-@' join-pane -t :2
-bind-key -n 'M-#' join-pane -t :3
-bind-key -n 'M-$' join-pane -t :4
-bind-key -n 'M-%' join-pane -t :5
-bind-key -n 'M-^' join-pane -t :6
-bind-key -n 'M-&' join-pane -t :7
-bind-key -n 'M-*' join-pane -t :8
-bind-key -n 'M-(' run-shell 'tmux select-window -t :1 \;\
-                                  select-window -t :-1 \;\
-                                  join-pane -s "#{pane_id}"'
-bind-key -n 'M-)' choose-window 'join-pane -t "%%%"'
+# move pane to another window
+bind-key M-1 join-pane -t :1
+bind-key M-2 join-pane -t :2
+bind-key M-3 join-pane -t :3
+bind-key M-4 join-pane -t :4
+bind-key M-5 join-pane -t :5
+bind-key M-6 join-pane -t :6
+bind-key M-7 join-pane -t :7
+bind-key M-8 join-pane -t :8
+bind-key M-9 run-shell 'tmux select-window -t :1 \;\
+                               select-window -t :-1 \;\
+                               join-pane -s "#{pane_id}"'
+bind-key M-0 choose-window 'join-pane -t "%%%"'
+bind-key -n M-R choose-tree 'join-pane -t "%%%"'
 
 # promote pane (toggle)
-bind-key -n M-Enter \
+bind-key -n M-M \
   if-shell 'test #P -ne 1' \
     'select-pane -t 1' \
     'last-pane; swap-pane -s 1'
@@ -298,16 +308,16 @@ bind-key -n M-Enter \
 # layouts
 #-----------------------------------------------------------------------------
 
-bind-key -n 'M-"' select-layout tiled
-bind-key -n M-J   select-layout even-vertical
-bind-key -n M-K   select-layout even-horizontal
+bind-key -n M-z select-layout tiled
+bind-key -n M-l select-layout even-vertical
+bind-key -n M-d select-layout even-horizontal
 
-# half-screen tiling layouts (horizontal, vertical)
+# half-screen tiling layouts (vertical, horizontal)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
-bind-key -n M-w select-layout main-horizontal \;\
-  run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
-bind-key -n M-v select-layout main-vertical   \;\
+bind-key -n M-L select-layout main-vertical   \;\
   run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
+bind-key -n M-D select-layout main-horizontal \;\
+  run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
 
 # binary space partitioned layouts (dwindle, spiral)
 # https://sunaku.github.io/tmux-layout-dwindle.html
@@ -329,7 +339,7 @@ bind-key -n M-/ copy-mode \;\
     -i 'send-keys -X search-backward-incremental "%%%"'
 
 # search buffer using Vim or less
-bind-key -n M-|                               \
+bind-key -n M-G                               \
   capture-pane -J -S - \;                     \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
@@ -342,7 +352,7 @@ bind-key -n M-|                               \
   run-shell 'tmux send-keys G \?'
 
 # search colored buffer using less
-bind-key -n M-?                           \
+bind-key -n M-g                           \
   capture-pane -e -J -S - \;              \
   new-window -n '#S:#I.#P' -a '           \
     tmux save-buffer - \; delete-buffer | \
@@ -353,10 +363,11 @@ bind-key -n M-?                           \
 # scroll buffer
 # NOTE: set "URxvt.saveLines: 0" in ~/.Xdefaults to make Shift+PageUp bindable
 # NOTE: see http://aperiodic.net/screen/interface for doing the same in XTerm
-bind-key -n S-PPage copy-mode -u
+bind-key -n S-PPage copy-mode -eu
 
 # copy text from buffer
-bind-key -n M-u copy-mode
+bind-key -n M-c copy-mode
+bind-key -n M-C copy-mode -eu
 set-window-option -g mode-keys vi
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi y send-keys -X copy-selection
