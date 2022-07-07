@@ -53,7 +53,8 @@ set-option -g focus-events on
 set-window-option -g xterm-keys on
 
 # prevent tmux from catching modifier keys meant for Vim
-set-option -s escape-time 0
+# (set > 0: https://github.com/microsoft/WSL/issues/5931)
+set-option -s escape-time 1
 
 # enable 24-bit true color RGB escape sequences under st
 # https://sunaku.github.io/tmux-24bit-color.html
