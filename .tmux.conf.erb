@@ -82,6 +82,11 @@ set-option -ga terminal-overrides ',xterm-kitty:Ms=\E]52;c;!\007\E]52;c;%p2%s\00
 # http://comments.gmane.org/gmane.comp.terminal-emulators.tmux.user/1927
 set-option -ga terminal-overrides ',rxvt-unicode*:sitm@'
 
+<% if tmux_version >= '3.3' %>
+# pass "Ptmux;" escape sequences through to the terminal
+set-window-option -g allow-passthrough on
+<% end %>
+
 #-----------------------------------------------------------------------------
 # appearance
 #-----------------------------------------------------------------------------
