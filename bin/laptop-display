@@ -29,20 +29,19 @@ eval $(xrandr --verbose | awk '
   }
 ')
 
-if test "$DP22_connected" = 1; then
+if test "$DisplayPort0_connected" = 1; then
   # switch off internal display and use external one
-  xrandr "$@" --output "$eDP1" --off \
-              --output "$DP22" --mode "$DP22_preferred_size"
+  xrandr "$@" --output "$eDP" --off \
+              --output "$DisplayPort0" --mode "$DisplayPort0_preferred_size"
 
-elif test "$HDMI1_connected" = 1; then
-  # switch off internal display and use external one
-  xrandr "$@" --output "$eDP1" --off \
-              --output "$HDMI1" --mode "$HDMI1_preferred_size"
+  gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.4
 
 else
   # no external displays connected; use internal one
   xrandr "$@" --auto
 
   # reduce brightness of internal display backlight
-  xbacklight | grep -q '^100' && xbacklight = 15
+  xbacklight | grep -q -x 100 && xbacklight = 15
+
+  gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.25
 fi
