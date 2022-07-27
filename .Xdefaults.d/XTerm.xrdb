@@ -5,7 +5,7 @@ XTerm*vt100.bellIsUrgent        : True
 
 ! appearance
 XTerm*termName                  : xterm-256color
-XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
+XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
 XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
 XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
 XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
@@ -18,6 +18,7 @@ XTerm*vt100.colorULMode         : True
 XTerm*vt100.colorRVMode         : False
 XTerm*vt100.internalBorder      : 0
 XTerm*vt100.pointerMode         : 2 /* hide the mouse pointer while typing */
+XTerm*vt100.scrollBar           : False
 
 ! prevent Alt+Enter keys from toggling fullscreen mode
 XTerm*fullscreen                : never
