@@ -3,23 +3,6 @@ XTerm*vt100.metaSendsEscape     : True
 XTerm*vt100.eightBitInput       : False
 XTerm*vt100.bellIsUrgent        : True
 
-! appearance
-XTerm*termName                  : xterm-256color
-XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
-XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
-XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
-XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
-XTerm*font4                     : -*-lucidatypewriter-medium-*-*-*-20-*-*-*-*-*-*-*
-XTerm*font5                     : -*-lucidatypewriter-medium-*-*-*-26-*-*-*-*-*-*-*
-XTerm*font6                     : -*-lucidatypewriter-medium-*-*-*-34-*-*-*-*-*-*-*
-XTerm*vt100.colorMode           : True
-XTerm*vt100.colorBDMode         : True
-XTerm*vt100.colorULMode         : True
-XTerm*vt100.colorRVMode         : False
-XTerm*vt100.internalBorder      : 0
-XTerm*vt100.pointerMode         : 2 /* hide the mouse pointer while typing */
-XTerm*vt100.scrollBar           : False
-
 ! prevent Alt+Enter keys from toggling fullscreen mode
 XTerm*fullscreen                : never
 XTerm.omitTranslation           : fullscreen
@@ -37,3 +20,51 @@ XTerm.vt100.translations        : #override \n\
 
 ! allow SetSelection so that we can use OSC-52 to yank text to the clipboard
 XTerm*vt100.disallowedWindowOps : RestoreWin,MinimizeWin,SetWinPosition,SetWinSizePixels,RaiseWin,LowerWin,RefreshWin,SetWinSizeChars,MaximizeWin,FullscreenWin,GetWinState,GetWinPosition,GetWinSizePixels,GetWinSizeChars,GetScreenSizeChars,GetIconTitle,GetWinTitle,PushTitle,PopTitle,GetSelection,/*SetSelection,*/SetWinLines,SetXprop
+
+! appearance
+XTerm*termName                  : xterm-256color
+XTerm*font                      : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
+XTerm*font1                     : -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
+XTerm*font2                     : -*-tamzenforpowerline-medium-*-*-*-16-*-*-*-*-*-*-*
+XTerm*font3                     : -*-tamzenforpowerline-medium-*-*-*-20-*-*-*-*-*-*-*
+XTerm*font4                     : -*-lucidatypewriter-medium-*-*-*-20-*-*-*-*-*-*-*
+XTerm*font5                     : -*-lucidatypewriter-medium-*-*-*-26-*-*-*-*-*-*-*
+XTerm*font6                     : -*-lucidatypewriter-medium-*-*-*-34-*-*-*-*-*-*-*
+XTerm*vt100.colorMode           : True
+XTerm*vt100.colorBDMode         : True
+XTerm*vt100.colorULMode         : True
+XTerm*vt100.colorRVMode         : False
+XTerm*vt100.internalBorder      : 0
+XTerm*vt100.pointerMode         : 2 /* hide the mouse pointer while typing */
+XTerm*vt100.scrollBar           : False
+
+! colorscheme
+XTerm*color0      : Ansi_0_Color/*  normal black   */
+XTerm*color1      : Ansi_1_Color/*  normal red     */
+XTerm*color2      : Ansi_2_Color/*  normal green   */
+XTerm*color3      : Ansi_3_Color/*  normal yellow  */
+XTerm*color4      : Ansi_4_Color/*  normal blue    */
+XTerm*color5      : Ansi_5_Color/*  normal magenta */
+XTerm*color6      : Ansi_6_Color/*  normal cyan    */
+XTerm*color7      : Ansi_7_Color/*  normal white   */
+XTerm*color8      : Ansi_8_Color/*  bright black   */
+XTerm*color9      : Ansi_9_Color/*  bright red     */
+XTerm*color10     : Ansi_10_Color/* bright green   */
+XTerm*color11     : Ansi_11_Color/* bright yellow  */
+XTerm*color12     : Ansi_12_Color/* bright blue    */
+XTerm*color13     : Ansi_13_Color/* bright magenta */
+XTerm*color14     : Ansi_14_Color/* bright cyan    */
+XTerm*color15     : Ansi_15_Color/* bright white   */
+XTerm*color16     : Ansi_16_Color/* extra colors   */
+XTerm*color17     : Ansi_17_Color/* extra colors   */
+XTerm*color18     : Ansi_18_Color/* extra colors   */
+XTerm*color19     : Ansi_19_Color/* extra colors   */
+XTerm*color20     : Ansi_20_Color/* extra colors   */
+XTerm*color21     : Ansi_21_Color/* extra colors   */
+XTerm*colorBD     : Bold_Color
+XTerm*colorIT     : Italic_Color
+XTerm*colorUL     : Underline_Color
+XTerm*colorRV     : Reverse_Color
+XTerm*foreground  : Foreground_Color
+XTerm*background  : Background_Color
+XTerm*cursorColor : Cursor_Color

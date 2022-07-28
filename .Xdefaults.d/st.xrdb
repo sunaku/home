@@ -1,0 +1,21 @@
+st.font           : -misc-tamzenforpowerline-medium-r-normal--20-116-100-100-c-80-iso8859-1
+st.color0         : Ansi_0_Color/*  normal black   */
+st.color1         : Ansi_1_Color/*  normal red     */
+st.color2         : Ansi_2_Color/*  normal green   */
+st.color3         : Ansi_3_Color/*  normal yellow  */
+st.color4         : Ansi_4_Color/*  normal blue    */
+st.color5         : Ansi_5_Color/*  normal magenta */
+st.color6         : Ansi_6_Color/*  normal cyan    */
+st.color7         : Ansi_7_Color/*  normal white   */
+st.color8         : Ansi_8_Color/*  bright black   */
+st.color9         : Ansi_9_Color/*  bright red     */
+st.color10        : Ansi_10_Color/* bright green   */
+st.color11        : Ansi_11_Color/* bright yellow  */
+st.color12        : Ansi_12_Color/* bright blue    */
+st.color13        : Ansi_13_Color/* bright magenta */
+st.color14        : Ansi_14_Color/* bright cyan    */
+st.color15        : Ansi_15_Color/* bright white   */
+st.foreground     : Foreground_Color
+st.background     : Background_Color
+st.cursorColor    : Cursor_Color
+st.reverse-cursor : Reverse_Color

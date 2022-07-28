@@ -1,0 +1,9 @@
+( if
+  ( begin
+    ( is ( application_name ) "st" )
+  )
+  ( begin
+    ( maximize )
+    ( undecorate )
+  )
+)
