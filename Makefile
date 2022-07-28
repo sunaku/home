@@ -54,6 +54,7 @@ theme: theme-xrdb theme-tmux $(TEMPLATED_FILES)
 theme-xrdb: .Xdefaults
 	if test -n "$$DISPLAY"; then xrdb -merge $<; fi
 .config/kitty/kitty.conf: .Xdefaults
+.Xdefaults: .Xdefaults.d/*.xrdb .Xdefaults.d/*/*.xrdb
 
 .PHONY: theme-tmux
 theme-tmux: .tmux.conf .tmux/plugins/tpm
