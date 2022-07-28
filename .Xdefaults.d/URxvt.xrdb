@@ -1,3 +1,8 @@
+! extensions
+URxvt.perl-ext-common         : default,-searchable-scrollback,matcher
+URxvt.urlLauncher             : /usr/bin/xdg-open
+URxvt.matcher.button          : 2
+
 ! interaction
 URxvt.saveLines               : 0
 URxvt.iso14755                : False
@@ -78,7 +83,33 @@ URxvt.scrollBar_right         : True
 URxvt.scrollBar_floating      : True
 URxvt.scrollstyle             : plain
 
-! extensions
-URxvt.perl-ext-common         : default,-searchable-scrollback,matcher
-URxvt.urlLauncher             : /usr/bin/xdg-open
-URxvt.matcher.button          : 2
+! colorscheme
+Rxvt*color0                   : Ansi_0_Color/* normal black */
+Rxvt*color1                   : Ansi_1_Color/* normal red */
+Rxvt*color2                   : Ansi_2_Color/* normal green */
+Rxvt*color3                   : Ansi_3_Color/* normal yellow */
+Rxvt*color4                   : Ansi_4_Color/* normal blue */
+Rxvt*color5                   : Ansi_5_Color/* normal magenta */
+Rxvt*color6                   : Ansi_6_Color/* normal cyan */
+Rxvt*color7                   : Ansi_7_Color/* normal white */
+Rxvt*color8                   : Ansi_8_Color/* bright black */
+Rxvt*color9                   : Ansi_9_Color/* bright red */
+Rxvt*color10                  : Ansi_10_Color/* bright green */
+Rxvt*color11                  : Ansi_11_Color/* bright yellow */
+Rxvt*color12                  : Ansi_12_Color/* bright blue */
+Rxvt*color13                  : Ansi_13_Color/* bright magenta */
+Rxvt*color14                  : Ansi_14_Color/* bright cyan */
+Rxvt*color15                  : Ansi_15_Color/* bright white */
+Rxvt*color16                  : Ansi_16_Color/* extra colors */
+Rxvt*color17                  : Ansi_17_Color/* extra colors */
+Rxvt*color18                  : Ansi_18_Color/* extra colors */
+Rxvt*color19                  : Ansi_19_Color/* extra colors */
+Rxvt*color20                  : Ansi_20_Color/* extra colors */
+Rxvt*color21                  : Ansi_21_Color/* extra colors */
+Rxvt*colorBD                  : Bold_Color
+Rxvt*colorIT                  : Italic_Color
+Rxvt*colorUL                  : Underline_Color
+Rxvt*colorRV                  : Reverse_Color
+Rxvt*foreground               : Foreground_Color
+Rxvt*background               : Background_Color
+Rxvt*cursorColor              : Cursor_Color

@@ -1,14 +1,11 @@
 ! vim:filetype=xdefaults:
 <% light_theme = ENV['THEME'] == 'light' %>
 
+! appearance
 *font: -*-tamzen-medium-r-*-*-16-*-*-*-*-*-*-*
-
-! enable colors in native X applications
-#ifdef COLOR
 *customization: -color
-#endif
 
-! choose color scheme to use in terminals
+! colorscheme
 <% if light_theme %>
 ! #include ".Xdefaults.d/colors/LuciusLight.xrdb"
 ! LCD colors from "Daedalus Touch" iPad app
@@ -37,6 +34,7 @@
 <% end %>
 #include ".Xdefaults.d/colors.xrdb"
 
-! configure terminal emulators
+! applications
+#include ".Xdefaults.d/st.xrdb"
 #include ".Xdefaults.d/URxvt.xrdb"
 #include ".Xdefaults.d/XTerm.xrdb"
