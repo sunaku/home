@@ -53,6 +53,7 @@ theme: theme-xrdb theme-tmux $(TEMPLATED_FILES)
 .PHONY: theme-xrdb
 theme-xrdb: .Xdefaults
 	if test -n "$$DISPLAY"; then xrdb -merge $<; fi
+	-killall -USR1 st
 .config/kitty/kitty.conf: .Xdefaults
 .Xdefaults: .Xdefaults.d/*.xrdb .Xdefaults.d/*/*.xrdb
 
