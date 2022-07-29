@@ -17,8 +17,8 @@ multisource ~/.zsh/config/**/*sh
 source ~/.zsh/bundle/zsh-snap/znap.zsh
 
 znap source hlissner/zsh-autopair
-znap source zdharma/fast-syntax-highlighting
-znap source zdharma/history-search-multi-word
+znap source z-shell/F-Sy-H
+znap source z-shell/H-S-MW
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-history-substring-search
 znap source Tarrasch/zsh-bd
