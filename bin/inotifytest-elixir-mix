@@ -43,8 +43,14 @@ while read -r changed_file; do {
     done
   )
 
-  mix test "$@" $changed_file_test $compiled_file_tests
+  mix test "$@" $changed_file_test
   test_exit_status=$?
+
+  if test $test_exit_status -eq 0 -a -n "$compiled_file_tests"; then
+    # also test compile-dependent code
+    mix test "$@" $compiled_file_tests
+    test_exit_status=$?
+  fi
 
 } </dev/null
 done
