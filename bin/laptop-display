@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -eu
 #
 # Uses external display if connected; or internal display otherwise.
 #
@@ -7,11 +7,12 @@
 # detect and register active displays as variables in this script
 eval $(xrandr --verbose | awk '
   $2 ~ /connected/ {
-    device=$1
+    device = $1
     gsub("-", "", $1)
-    display=$1
+    display = $1
     print display "=" device
     print display "_connected=" ($2 == "connected")
+    all_displays = display " " all_displays
   }
   $1 ~ /^[[:digit:]]+x[[:digit:]]+/ {
     if ($NF == "*current") {
@@ -27,21 +28,41 @@ eval $(xrandr --verbose | awk '
       print display "_preferred_size=" $1
     }
   }
+  END {
+    print "all_displays=\"" all_displays "\""
+  }
 ')
 
-if test "$DisplayPort0_connected" = 1; then
-  # switch off internal display and use external one
-  xrandr "$@" --output "$eDP" --off \
-              --output "$DisplayPort0" --mode "$DisplayPort0_preferred_size"
+try_switching_to_external_display() {
+  display=$1
+  shift
 
-  gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.4
+  eval "connected=\$${display}_connected"
 
-else
-  # no external displays connected; use internal one
-  xrandr "$@" --auto
+  if test "$connected" = 1; then
+    eval "device=\$${display}"
+    eval "preferred_size=\$${display}_preferred_size"
+
+    # switch off internal display and use external one
+    xrandr "$@" --output "$eDP" --off \
+      --output "$device" --mode "$preferred_size"
+  else
+    false
+  fi
+}
+
+for display in $all_displays; do
+  if try_switching_to_external_display $display "$@"; then
+    break
+  fi
+done
+
+if test $display = eDP; then # no external displays
+  gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.25
 
   # reduce brightness of internal display backlight
   xbacklight | grep -q -x 100 && xbacklight = 15
 
-  gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.25
+else # successfully connected to an external display
+  gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.4
 fi
