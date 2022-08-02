@@ -11,19 +11,29 @@
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
 map_file_to_test() { file=$1
-  case "$file" in
-    (lib/*.ex|lib/*.exs) test=test${file#lib}
+  case "$file" in # support for umbrella applications
+    (apps/*/lib/*)  leaf=lib/${file#apps/*/lib/}   ;;
+    (apps/*/test/*) leaf=test/${file#apps/*/test/} ;;
+    (*)             leaf=$file                     ;;
+  esac
+  stem=${file%$leaf}
+
+  case "$leaf" in
+    (lib/*.ex|lib/*.exs) test=test${leaf#lib}
                          test=${test%.*}_test.exs ;; # perform the mapping
-    (test/*test.exs)     test=$file               ;; # file is test itself
+    (test/*test.exs)     test=$leaf               ;; # file is test itself
     (test/*.exs)         test=                    ;; # file is test helper
     (*)                  return 1                 ;; # file not recognized
   esac
+  test=$stem$test
+
   test -n "$test" -a -f "$test" && echo "$test" || : # print only if exist
 }
 
 test_exit_status=0
-inotifywait -rqme close_write --format '%w%f' lib/ test/ |
-while read -r changed_file; do {
+inotifywait -rqme close_write --format '%w%f' $(
+  ls -d apps/*/lib/ apps/*/test/ lib/ test/ 2>/dev/null
+) | while read -r changed_file; do {
 
   changed_file_test=$(map_file_to_test "$changed_file") || continue
 
@@ -33,8 +43,14 @@ while read -r changed_file; do {
 
   compiled_files=$(
     MIX_ENV=test mix compile --verbose | tee /dev/tty |
-    awk '/^Compiled .+\.ex$/ { $1=""; print }
-         /^==/ { error=1 } END { exit error }'
+    awk '/^==> / {
+           subdir = "apps/" $2 "/"
+           if (system("test -e " subdir) != 0) {
+             subdir = ""
+           }
+         }
+         /^Compiled .+\.ex$/ { print subdir $2 }
+         /^== / { error = 1 } END { exit error }'
   ) || continue
 
   compiled_file_tests=$(
