@@ -16,7 +16,7 @@ PROMPT=\
 '%(!.%F{red}.%F{green})%~%f'\
 '%(!.#.>) '
 
-RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%p}%f'
+RPROMPT='%F{magenta}#%F{cyan}%D{%-e%b}%F{yellow}%D{%-l:%M%P}%f'
 
 #-----------------------------------------------------------------------------
 # VI keybindings: indicate VI/EMACS mode using cursor styles (DECSCUSR, VT520)
