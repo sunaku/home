@@ -142,10 +142,10 @@ set-window-option -g window-status-activity-style 'bg=#8a1f11,fg=#fbe3e4' # erro
 #-----------------------------------------------------------------------------
 
 # toggle status bar visibility
-bind-key -n M-b set-option -g status
+bind-key -n M-: set-option -g status
 
 # toggle status bar position
-bind-key -n M-B \
+bind-key -n M-\; \
   if-shell 'tmux show-option -g status-position | grep -q top$' \
     'set-option -g status-position bottom' \
     'set-option -g status-position top'
@@ -181,10 +181,10 @@ set-window-option -g automatic-rename off
 <% end %>
 
 # break off pane to a new window
-bind-key -n M-x \
+bind-key -n M-u \
   command-prompt -p 'break-pane:' -I '#W' \
     'break-pane ; rename-window "%%%"'
-bind-key -n M-X break-pane
+bind-key -n M-U break-pane
 
 # focus window
 bind-key -n M-, previous-window
@@ -222,23 +222,23 @@ set-option -g visual-silence on
 set-option -g bell-on-alert on
 <% end %>
 
-bind-key -n M-f \
+bind-key -n M-g \
   set-window-option monitor-activity \;\
   display-message 'monitor-activity #{?monitor-activity,on,off}'
 
-bind-key -n M-F \
+bind-key -n M-G \
   if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
     'set-window-option -g monitor-activity on' \
     'set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
-bind-key -n M-p \
+bind-key -n M-x \
   if-shell 'tmux show-window-option -v monitor-silence | grep -q ^[^0]' \
     'set-window-option monitor-silence 0' \
     'set-window-option monitor-silence 60' \;\
   display-message 'monitor-silence #{?monitor-silence,#{monitor-silence},off}'
 
-bind-key -n M-P \
+bind-key -n M-X \
   command-prompt -p 'monitor-silence (seconds):' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
@@ -345,7 +345,7 @@ bind-key -n M-/ copy-mode \;\
     -i 'send-keys -X search-backward-incremental "%%%"'
 
 # search buffer using Vim or less
-bind-key -n M-G                               \
+bind-key -n M-P                               \
   capture-pane -J -S - \;                     \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
@@ -358,7 +358,7 @@ bind-key -n M-G                               \
   run-shell 'tmux send-keys G \?'
 
 # search colored buffer using less
-bind-key -n M-g                           \
+bind-key -n M-p                           \
   capture-pane -e -J -S - \;              \
   new-window -n '#S:#I.#P' -a '           \
     tmux save-buffer - \; delete-buffer | \
