@@ -10,6 +10,8 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
+notice() { printf '\033[34m%s\033[0m\n' "$@" ;}
+
 map_file_to_test() { file=$1
   case "$file" in # support for umbrella applications
     (apps/*/lib/*)  leaf=lib/${file#apps/*/lib/}   ;;
@@ -30,6 +32,7 @@ map_file_to_test() { file=$1
   test -n "$test" -a -f "$test" && echo "$test" || : # print only if exist
 }
 
+notice "Ready to test...  (Save a file to test it!)"
 test_exit_status=0
 inotifywait -rqme close_write --format '%w%f' $(
   ls -d apps/*/lib/ apps/*/test/ lib/ test/ 2>/dev/null
@@ -41,6 +44,7 @@ inotifywait -rqme close_write --format '%w%f' $(
   printf '\033[33m%s -> \033[36m%s\033[0m\n' \
     "$(date -r "$changed_file" '+%X')" "$changed_file"
 
+  notice 'Building ...'
   compiled_files=$(
     MIX_ENV=test mix compile --verbose | tee /dev/tty |
     awk '/^==> / {
@@ -59,13 +63,20 @@ inotifywait -rqme close_write --format '%w%f' $(
     done
   )
 
+  notice 'Testing...'
   mix test "$@" $changed_file_test
   test_exit_status=$?
 
   if test $test_exit_status -eq 0 -a -n "$compiled_file_tests"; then
-    # also test compile-dependent code
+    notice 'Testing dependent files...'
     mix test "$@" $compiled_file_tests
     test_exit_status=$?
+  fi
+
+  if test $test_exit_status -eq 0; then
+    notice 'Passed (^_^) Good work!'
+  else
+    notice 'Failed (e_e) Try again!'
   fi
 
 } </dev/null
