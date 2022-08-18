@@ -4,7 +4,6 @@
 #     YOUR CHANGES WILL BE OVERWRITTEN
 #
 <% tmux_version = `tmux -V`.split.last %>
-<% light_theme = ENV['THEME'] == 'light' %>
 <%
   # Engram 2.0 layout - https://engram.dev
   navigate_back  = 'q'
@@ -95,7 +94,15 @@ set-window-option -g allow-passthrough on
 # https://github.com/bling/vim-airline/blob/master/autoload/airline/themes/lucius.vim
 # https://github.com/morhetz/gruvbox/blob/master/autoload/airline/themes/gruvbox.vim
 <%
-  if light_theme
+  colorscheme =
+    if ENV['THEME'] == 'light'
+      :PaperColor
+    else
+      :everforest
+    end
+
+  case colorscheme
+  when :lucius
     # Colors from Lucius theme https://github.com/NLKNguyen/papercolor-theme
     status_style                = 'fg=colour238,bg=colour253' # lucius normal airline_c
     window_status_current_style = 'fg=colour231,bg=colour67'  # lucius visual airline_a
@@ -103,12 +110,13 @@ set-window-option -g allow-passthrough on
     pane_active_border_style    = 'fg=colour204'
     status_ruler_style          = 'fg=colour231,bg=colour244'
     status_login_style          = 'fg=colour231,bg=colour204'
+  when :PaperColor
     # Colors from PaperColor theme https://github.com/NLKNguyen/papercolor-theme
     status_style                = 'fg=colour238,bg=colour254' # PaperColor TabLineSel
     window_status_current_style = 'fg=colour255,bg=colour31'  # PaperColor TabLine
     pane_border_style           = 'fg=colour252'              # PaperColor StatusLineNC
     status_ruler_style          = 'fg=colour255,bg=colour31'  # PaperColor TabLine
-  else
+  when :everforest
     # Colors from everforest theme https://github.com/sainnhe/everforest
     status_style                = 'fg=#868d80,bg=#374247'     # everforest StatusLine
     window_status_current_style = 'fg=#999f93,bg=#4a555b'     # everforest TabLine
@@ -116,6 +124,9 @@ set-window-option -g allow-passthrough on
     window_status_current_style = 'bg=#2f383e,fg=#a7c080'     # everforest TabLineSel (reverse)
     pane_border_style           = 'fg=#4a555b'                # everforest TabLine
     pane_active_border_style    = 'fg=#a7c080'                # everforest TabLineSel
+    status_ruler_style          = window_status_current_style
+    status_login_style          = window_status_current_style + ',bold,reverse'
+  when :gruvbox_material
     # Colors from gruvbox-material theme https://github.com/sainnhe/gruvbox-material
     status_style                = 'fg=colour246,bg=colour237' # gruvbox normal airline_c
     window_status_current_style = 'fg=colour214,bg=colour239' # gruvbox bright_yellow dark2
