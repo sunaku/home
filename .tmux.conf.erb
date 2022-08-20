@@ -326,14 +326,14 @@ bind-key -n M-M \
 #-----------------------------------------------------------------------------
 
 bind-key -n M-z select-layout tiled
-bind-key -n M-l select-layout even-vertical
-bind-key -n M-d select-layout even-horizontal
+bind-key -n M-L select-layout even-vertical
+bind-key -n M-D select-layout even-horizontal
 
 # half-screen tiling layouts (vertical, horizontal)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
-bind-key -n M-L select-layout main-vertical   \;\
+bind-key -n M-l select-layout main-vertical   \;\
   run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
-bind-key -n M-D select-layout main-horizontal \;\
+bind-key -n M-d select-layout main-horizontal \;\
   run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
 
 # binary space partitioned layouts (dwindle, spiral)
