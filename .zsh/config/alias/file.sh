@@ -8,13 +8,19 @@ u() { # go Up a directory $1 times (default: 1)
 
 # inspect
 alias ls='ls -h --color=auto'
-alias .,='ls-summary'
 alias ,='ls -Altr'
 alias ,.='ls -ld'
+alias .,='ls-summary'
 alias ,.,='ls-lineage'
 alias ,..='ls-sizetime -Ahtr'
 alias ,,='tree -d'
 alias ,,,='tree'
+if command -v exa >/dev/null; then
+  alias ,='exa -l -snew'
+  alias ,.='exa -ld'
+  alias ,,='exa -lTD'
+  alias ,,,='exa -lT'
+fi
 
 # modify
 alias cp='cp -i'
