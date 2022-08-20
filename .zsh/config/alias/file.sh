@@ -21,8 +21,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-md() { # Make Dir and go in
-  mkdir -p "$@" && cd "$@"
+mkdir() { # Make Dir and go in
+  command mkdir -p "$@" && cd "$@"
 }
 
 mov() { # rename & redirect
