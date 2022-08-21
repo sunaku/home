@@ -332,7 +332,7 @@ alias gl1='git --no-pager log -1 --decorate --name-status --find-copies'
 alias gll='git log --decorate --graph --oneline'
 
 # show log with diffs
-alias gld='LESS="-R +/^commit [[:xdigit:]]{40}$" git log --patch-with-stat'
+alias gld='LESS="-R +/commit [[:xdigit:]]{40}$" git log --patch-with-stat'
 
 # ... while showing changes within a line
 alias glD="$intra_line_less gld $intra_line_diff"

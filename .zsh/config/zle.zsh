@@ -38,7 +38,7 @@ function _run_with_sudo {
   zle accept-line
 }
 zle -N _run_with_sudo
-bindkey '^XR' _run_with_sudo
+bindkey '^Xs' _run_with_sudo
 
 # replace command with pager
 function _run_with_pager {
@@ -48,7 +48,7 @@ function _run_with_pager {
   zle accept-line
 }
 zle -N _run_with_pager
-bindkey '^Xr' _run_with_pager
+bindkey '^XP' _run_with_pager
 
 # pipe command to pager
 function _pipe_to_pager {
@@ -56,7 +56,7 @@ function _pipe_to_pager {
   zle -U " | $PAGER"
 }
 zle -N _pipe_to_pager
-bindkey '^Xs' _pipe_to_pager
+bindkey '^Xp' _pipe_to_pager
 
 # peek while piping to pager
 function _peek_to_pager {
@@ -64,7 +64,7 @@ function _peek_to_pager {
   zle -U " | tee /dev/tty | $PAGER"
 }
 zle -N _peek_to_pager
-bindkey '^XS' _peek_to_pager
+bindkey '^Xt' _peek_to_pager
 
 # insert /dev/null
 function _insert_dev_null {
