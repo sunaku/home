@@ -326,22 +326,22 @@ bind-key -n M-M \
 #-----------------------------------------------------------------------------
 
 bind-key -n M-z select-layout tiled
-bind-key -n M-L select-layout even-vertical
-bind-key -n M-D select-layout even-horizontal
+bind-key M-v select-layout even-vertical
+bind-key M-w select-layout even-horizontal
 
 # half-screen tiling layouts (vertical, horizontal)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
-bind-key -n M-l select-layout main-vertical   \;\
+bind-key -n M-v select-layout main-vertical   \;\
   run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
-bind-key -n M-d select-layout main-horizontal \;\
+bind-key -n M-w select-layout main-horizontal \;\
   run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
 
 # binary space partitioned layouts (dwindle, spiral)
 # https://sunaku.github.io/tmux-layout-dwindle.html
-bind-key -n M-w run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
-bind-key -n M-W run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
-bind-key -n M-v run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
-bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
+bind-key -n M-W run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
+#bind-key -n M-W run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
+bind-key -n M-V run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
+#bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
