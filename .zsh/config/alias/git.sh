@@ -25,11 +25,11 @@ alias god='git diff'
 # ... while showing changes within a line
 alias goD="$intra_line_less git diff $intra_line_diff"
 
-# reset working copy to current index
-alias gor='git reset --soft'
+# reset working copy to current commit interactively
+alias gor='git checkout -p'
 
 # reset working copy to upstream state
-alias gorh='git reset --soft @{u}'
+alias gorh='git checkout -p @{u}'
 
 # reset working copy to current commit
 alias goR='git reset --hard'
@@ -43,21 +43,15 @@ alias gox='git rm -r --ignore-unmatch'
 # list unknown files in working copy
 alias gou='git status --porcelain | sed -n "s/^?? *//p"'
 
-# list unknown files in working copy that can be deleted
-alias glc='git clean -n'
-
-# delete unknown files from working copy
-alias goc='git clean -i'
-
 #-----------------------------------------------------------------------------
 # i = index / stage
 #-----------------------------------------------------------------------------
 
 # stage changes interactively (like Darcs!)
-alias gi='git add -p'
+alias gia='git add -p'
 
 # stage all changes in target
-alias gia='git add'
+alias giA='git add'
 
 # stage all changes in working copy
 alias giu='git add -u'
@@ -68,11 +62,11 @@ alias gid='git diff --cached'
 # ... while showing changes within a line
 alias giD="$intra_line_less gid $intra_line_diff"
 
-# unstage changes from index but keep them in working copy
-alias gir='git reset'
+# unstage changes interactively
+alias gir='git reset -p'
 
-# unstage changes from both index and working copy
-alias giR='git reset --mixed'
+# unstage changes from index but keep them in working copy
+alias giR='git reset'
 
 # stage deletion without changing working copy
 alias gix='git rm -r --cached --ignore-unmatch'
@@ -112,20 +106,19 @@ alias gtX='git stash clear'
 # c = commit
 #-----------------------------------------------------------------------------
 
-# commit staged changes
-alias gci='git commit'
+# commit staged changes (optionally with the given message)
+gci() {
+  if test $# -gt 0 && ! test -f "$1"; then
+    set -- -m "$*"
+  fi
+  git commit "$@"
+}
 
 # commit changes as a fixup of existing commit
 alias gcF='git commit --fixup'
 
 # commit changes as a fixup of existing commit chosen from menu
 alias gcf='git commit --fixup $(gl0)'
-
-# commit staged changes with the given message
-gcm() { git commit -m "$*" ;}
-
-# commit staged changes with the default message
-alias gcM='git commit --no-edit'
 
 # commit staged changes as if on the given date
 alias gct='git commit --date'
@@ -146,8 +139,8 @@ alias gca='git commit --amend'
 # amend current commit but reuse its message
 alias gcA='git commit --amend --reuse-message=HEAD'
 
-# commit an inverse commit to revert changes from the given commit
-alias gcr='git revert'
+# revert changes from current commit interactively
+alias gcr='gcR -p'
 
 # delete current commit but keep its changes in working copy
 alias gcR='git reset "HEAD^"'
@@ -230,6 +223,7 @@ alias gmm='git merge --no-ff'
 alias gmc='git merge --continue'
 alias gma='git merge --abort'
 alias gms='git merge --skip'
+alias gmh='git merge @{u}'
 
 #-----------------------------------------------------------------------------
 # r = rebase
@@ -241,6 +235,7 @@ alias grm='git rebase --preserve-merges'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
+alias grh='git rebase @{u}'
 
 # rebase interactively
 gri() {
@@ -464,3 +459,13 @@ alias guR='git submodule update'
 
 # register new URLs for submodules
 alias gug='git submodule sync'
+
+#-----------------------------------------------------------------------------
+# x = clean
+#-----------------------------------------------------------------------------
+
+# delete unknown files from working copy
+alias gxi='git clean -i'
+
+# list unknown files in working copy that can be deleted
+alias gxl='git clean -n'
