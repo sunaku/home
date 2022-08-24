@@ -301,18 +301,18 @@ bind-key -n M-<%= navigate_down.upcase  %> run-shell 'tmux select-pane -D \; swa
 bind-key -n M-<%= navigate_right.upcase %> run-shell 'tmux select-pane -R \; swap-pane -d -s #D'
 
 # move pane to another window
-bind-key M-1 join-pane -t :1
-bind-key M-2 join-pane -t :2
-bind-key M-3 join-pane -t :3
-bind-key M-4 join-pane -t :4
-bind-key M-5 join-pane -t :5
-bind-key M-6 join-pane -t :6
-bind-key M-7 join-pane -t :7
-bind-key M-8 join-pane -t :8
-bind-key M-9 run-shell 'tmux select-window -t :1 \;\
-                               select-window -t :-1 \;\
-                               join-pane -s "#{pane_id}"'
-bind-key M-0 choose-window 'join-pane -t "%%%"'
+bind-key -n 'M-!' join-pane -t :1
+bind-key -n 'M-@' join-pane -t :2
+bind-key -n 'M-#' join-pane -t :3
+bind-key -n 'M-$' join-pane -t :4
+bind-key -n 'M-%' join-pane -t :5
+bind-key -n 'M-^' join-pane -t :6
+bind-key -n 'M-&' join-pane -t :7
+bind-key -n 'M-*' join-pane -t :8
+bind-key -n 'M-(' run-shell 'tmux select-window -t :1 \;\
+                                  select-window -t :-1 \;\
+                                  join-pane -s "#{pane_id}"'
+bind-key -n 'M-)' choose-window 'join-pane -t "%%%"'
 bind-key -n M-R choose-tree 'join-pane -t "%%%"'
 
 # promote pane (toggle)
