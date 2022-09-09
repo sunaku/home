@@ -2,7 +2,7 @@
 ! https://github.com/sainnhe/everforest
 
 #define Foreground_Color #d3c6aa /* background=dark palette2=fg */
-#define Background_Color #2f383e /* softness=medium background=dark palette1=bg0 */
+#define Background_Color #323d43 /* softness=soft background=dark palette1=bg0 */
 #define Cursor_Color     #f57d26 /* background=light palette2=orange */
 
 #define Ansi_0_Color     #404c51 /* softness=medium background=dark palette1=bg2 */
