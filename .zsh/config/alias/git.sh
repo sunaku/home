@@ -10,14 +10,24 @@ alias gnd='git diff --no-index --'
 alias gnD='git diff --no-index --word-diff=color --'
 
 #-----------------------------------------------------------------------------
-# o = working copy
+# s = status
 #-----------------------------------------------------------------------------
 
 # show status of working copy
-alias go='git status'
+alias gs='git status'
 
 # show status of files in working copy
-alias gol='git status --short'
+alias gS='git status --short'
+
+#-----------------------------------------------------------------------------
+# o = working copy
+#-----------------------------------------------------------------------------
+
+# check out changes from current commit
+alias go='git checkout'
+
+# update working copy to current commit
+alias gO='git checkout HEAD --'
 
 # diff working copy against current commit
 alias god='git diff'
@@ -107,7 +117,7 @@ alias gtX='git stash clear'
 #-----------------------------------------------------------------------------
 
 # commit staged changes (optionally with the given message)
-gci() {
+gc() {
   if test $# -gt 0 && ! test -f "$1"; then
     set -- -m "$*"
   fi
@@ -121,10 +131,10 @@ alias gcF='git commit --fixup'
 alias gcf='git commit --fixup $(gl0)'
 
 # commit staged changes as if on the given date
-alias gct='git commit --date'
+alias gcT='git commit --date'
 
 # commit staged changes as if on the modification date of the given file
-gctf() { file=$1 && shift && git commit --date="$(date -r "$file")" "$@" ;}
+gct() { file=$1 && shift && git commit --date="$(date -r "$file")" "$@" ;}
 
 # commit staged changes with the given version string as the message
 gcv() { git commit -m "Version $1" && git tag "$1" ;}
@@ -144,12 +154,6 @@ alias gcr='gcR -p'
 
 # delete current commit but keep its changes in working copy
 alias gcR='git reset "HEAD^"'
-
-# check out changes from current commit
-alias gco='git checkout'
-
-# update working copy to current commit
-alias gcO='git checkout HEAD --'
 
 # show current commit in detail
 alias gcd='git show'
