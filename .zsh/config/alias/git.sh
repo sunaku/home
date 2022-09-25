@@ -465,7 +465,7 @@ alias gug='git submodule sync'
 #-----------------------------------------------------------------------------
 
 # delete unknown files from working copy
-alias gxi='git clean -i'
+alias gx='git clean -id'
 
 # list unknown files in working copy that can be deleted
 alias gxl='git clean -n'
