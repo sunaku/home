@@ -284,6 +284,8 @@ bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
 bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
 bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
 bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
+bind-key -n M-L resize-pane -y '100%'
+bind-key -n M-D resize-pane -x '100%'
 
 # find pane
 bind-key -n M-r choose-tree
@@ -338,9 +340,9 @@ bind-key -n M-d select-layout main-horizontal \;\
 
 # binary space partitioned layouts (dwindle, spiral)
 # https://sunaku.github.io/tmux-layout-dwindle.html
-bind-key -n M-D run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
+bind-key M-d run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
 #bind-key -n M-W run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
-bind-key -n M-L run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
+bind-key M-l run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
 #bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
 
 #-----------------------------------------------------------------------------
