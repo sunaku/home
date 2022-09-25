@@ -316,9 +316,9 @@ bind-key -n 'M-)' choose-window 'join-pane -t "%%%"'
 bind-key -n M-R choose-tree 'join-pane -t "%%%"'
 
 # promote pane (toggle)
-bind-key -n M-M \
+bind-key -n M-Enter \
   if-shell 'test #P -ne 1' \
-    'select-pane -t 1' \
+    'swap-pane -t 1; last-pane' \
     'last-pane; swap-pane -s 1'
 
 #-----------------------------------------------------------------------------
