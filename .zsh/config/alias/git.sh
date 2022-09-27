@@ -23,12 +23,6 @@ alias gS='git status --short'
 # o = working copy
 #-----------------------------------------------------------------------------
 
-# check out changes from current commit
-alias go='git checkout'
-
-# update working copy to current commit
-alias gO='git checkout HEAD --'
-
 # diff working copy against current commit
 alias god='git diff'
 
@@ -116,8 +110,14 @@ alias gtX='git stash clear'
 # c = commit
 #-----------------------------------------------------------------------------
 
+# check out changes
+alias gco='git checkout'
+
+# update working copy to current commit
+alias gcO='git checkout HEAD --'
+
 # commit staged changes (optionally with the given message)
-gc() {
+gci() {
   if test $# -gt 0 && ! test -f "$1"; then
     set -- -m "$*"
   fi
