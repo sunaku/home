@@ -28,7 +28,10 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 mkdir() { # Make Dir and go in
-  command mkdir -p "$@" && cd "$@"
+  for dir; do
+    command mkdir -vp "$dir"
+  done
+  test $# -eq 1 && cd "$1" ||:
 }
 
 mov() { # rename & redirect
