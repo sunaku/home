@@ -46,6 +46,7 @@ test -s /etc/crouton/name && export CROUTON=$(cat /etc/crouton/name)
 if test -n "$DISPLAY" && xhost >/dev/null; then
   xset +fp ~/.fonts/tamzen-font/bdf && xset fp rehash
   unset QT_STYLE_OVERRIDE
+  export QT_QPA_PLATFORMTHEME=qt5ct
 fi
 
 #-----------------------------------------------------------------------------
