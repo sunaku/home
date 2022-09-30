@@ -65,4 +65,8 @@ if test $display = eDP; then # no external displays
 
 else # successfully connected to an external display
   gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.4
+
+  # reduce brightness of external display backlight
+  # (similar to HDMI Black Level monitor adjustment)
+  xgamma -gamma 0.75
 fi
