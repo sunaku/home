@@ -62,6 +62,7 @@ if test $display = eDP; then # no external displays
 
   # reduce brightness of internal display backlight
   xbacklight | grep -q -x 100 && xbacklight = 15
+  xgamma -gamma 0.85
 
 else # successfully connected to an external display
   gsettings set org.cinnamon.desktop.interface text-scaling-factor 1.4
