@@ -44,15 +44,14 @@ mov() { # rename & redirect
 bam() { # backup with move
   for file; do
     file=${file%/}
-    mv -v $file{,.bak}
+    mv -v "$file" "$file"~
   done
 }
 
 bum() { # undo backup move
   for file; do
     file=${file%/}
-    test "${file%.bak}" = "$file" && file="$file.bak"
-    mv -v "$file" "${file%.bak}"
+    mv -vT "$file" "${file%\~}"
   done
 }
 
