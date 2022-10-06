@@ -27,11 +27,11 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-mkdir() { # Make Dir and go in
-  for dir; do
-    command mkdir -vp "$dir"
-  done
-  test $# -eq 1 && cd "$1" ||:
+mkd() { # Make Dir and go in
+  mkdir -vp "$@"
+  if test $# -eq 1; then
+    cd "$1"
+  fi
 }
 
 mov() { # rename & redirect
