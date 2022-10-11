@@ -1,0 +1,33 @@
+#!/bin/sh -eu
+#
+# Usage: nvchad [COMMAND_LINE_OPTIONS_AND_ARGUMENTS_FOR_NEOVIM...]
+#
+# Runs NeoVim with NvChad configuration in a bubblewrap container.
+#
+# * https://github.com/NvChad/NvChad
+# * https://github.com/containers/bubblewrap
+#
+# This helps you gradually transition to NvChad, as you can still
+# start NeoVim with your original configuration by running `nvim`.
+# Similarly, you can start NeoVim with NvChad by running `nvchad`.
+#
+# Written in 2022 by Suraj N. Kurapati <https://github.com/sunaku>
+
+test -e ~/.config/nvchad ||
+git clone https://github.com/NvChad/NvChad ~/.config/nvchad --depth 1
+
+bind() { from=$1 onto=$2
+  test -L "$onto" && onto=$(readlink -f "$onto")
+  mkdir -p "$from"
+  echo --bind "$from" "$onto"
+}
+
+bwrap \
+  --bind / /   \
+  --dev  /dev  \
+  --proc /proc \
+  $(bind ~/.config/nvchad      ~/.config/nvim      ) \
+  $(bind ~/.local/share/nvchad ~/.local/share/nvim ) \
+  $(bind ~/.cache/nvchad       ~/.cache/nvim       ) \
+  -- \
+nvim "$@"
