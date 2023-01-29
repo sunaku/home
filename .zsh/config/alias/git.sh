@@ -235,7 +235,7 @@ alias gmh='git merge @{u}'
 
 alias gr='git rebase'
 alias grr='git rebase --fork-point'
-alias grm='git rebase --preserve-merges'
+alias grm='git rebase --rebase-merges'
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias grs='git rebase --skip'
