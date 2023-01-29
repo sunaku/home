@@ -24,7 +24,7 @@ alias gS='git status --short'
 #-----------------------------------------------------------------------------
 
 # diff working copy against current commit
-alias god='git diff'
+alias god='git diff --patch-with-stat'
 
 # ... while showing changes within a line
 alias goD="$intra_line_less git diff $intra_line_diff"
