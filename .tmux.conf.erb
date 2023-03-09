@@ -387,7 +387,6 @@ bind-key -n S-NPage send-keys -X page-down
 
 # copy text from buffer
 bind-key -n M-c copy-mode
-bind-key -n M-C copy-mode -eu
 set-window-option -g mode-keys vi
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 bind-key -T copy-mode-vi y send-keys -X copy-selection
@@ -423,7 +422,8 @@ bind-key -n M-Y choose-buffer 'run-shell "tmux save-buffer -b \"%%%\" - | yank >
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-capture-pane-contents on
 
-set -g @plugin 'laktak/extrakto'
+set -g @plugin 'fcsonline/tmux-thumbs'
+bind-key -n M-C run-shell -b ~/.tmux/plugins/tmux-thumbs/tmux-thumbs.sh
 
 set -g @plugin 'sunaku/tmux-navigate'
 set -g @navigate-back  '-n M-<%= navigate_back  %>'
