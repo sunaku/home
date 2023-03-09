@@ -51,7 +51,7 @@ return {
     background = "#323d43", -- softness=soft background=dark palette1=bg0
     cursor_border = "#f57d26", -- background=light palette2=orange
     cursor_bg = "#f57d26", -- background=light palette2=orange
-    cursor_fg = "#2f383e", -- bright black (taken from below)
+    cursor_fg = "#edead5", -- bright white (taken from below)
     selection_bg = "#573e4c", -- Visual
     selection_fg = "#edead5", -- bright white (taken from below)
     ansi = {
@@ -65,14 +65,22 @@ return {
       "#dfdbc8", -- softness=medium background=light palette1=bg4
     },
     brights = {
-      "#525c62", -- softness=medium background=dark palette1=bg4
-      "#f85552", -- background=light palette2=red
-      "#8da101", -- background=light palette2=green
-      "#dfa000", -- background=light palette2=yellow
-      "#3a94c5", -- background=light palette2=blue
-      "#df69ba", -- background=light palette2=purple
-      "#35a77c", -- background=light palette2=aqua
-      "#edead5", -- softness=medium background=light palette1=bg2
+      "#404c51", -- softness=medium background=dark palette1=bg2
+      "#e67e80", -- background=dark palette2=red
+      "#a7c080", -- background=dark palette2=green
+      "#dbbc7f", -- background=dark palette2=yellow
+      "#7fbbb3", -- background=dark palette2=blue
+      "#d699b6", -- background=dark palette2=purple
+      "#83c092", -- background=dark palette2=aqua
+      "#dfdbc8", -- softness=medium background=light palette1=bg4
+      -- "#525c62", -- softness=medium background=dark palette1=bg4
+      -- "#f85552", -- background=light palette2=red
+      -- "#8da101", -- background=light palette2=green
+      -- "#dfa000", -- background=light palette2=yellow
+      -- "#3a94c5", -- background=light palette2=blue
+      -- "#df69ba", -- background=light palette2=purple
+      -- "#35a77c", -- background=light palette2=aqua
+      -- "#edead5", -- softness=medium background=light palette1=bg2
     },
   },
 
