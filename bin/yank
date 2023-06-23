@@ -17,6 +17,11 @@
 # by copying directly to the X11 clipboard if a $DISPLAY server is available;
 # otherwise, it emits a warning (on stderr) about the number of bytes dropped.
 #
+# For this script to work properly, allow it to bypass tmux (using the Ptmux;
+# escape sequence) by enabling allow-passthrough in your tmux.conf:
+#
+#   set-window-option -g allow-passthrough on
+#
 # See http://en.wikipedia.org/wiki/Base64 for the 4*ceil(n/3) length formula.
 # See http://sourceforge.net/p/tmux/mailman/message/32221257 for copy limits.
 # See http://sourceforge.net/p/tmux/tmux-code/ci/a0295b4c2f6 for DCS in tmux.
