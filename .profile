@@ -49,6 +49,12 @@ if test -n "$DISPLAY" && xhost >/dev/null; then
   export QT_QPA_PLATFORMTHEME=qt5ct
 fi
 
+# start X when logging into the first Virtual Terminal
+# https://wiki.archlinux.org/index.php/Start_X_at_Login
+# see also /etc/X11/xinit/xserverrc for $XDG_VTNR trick
+test -z "$DISPLAY" -a "$(tty)" = /dev/tty1 &&
+exec env XDG_VTNR=1 startx > ~/.xsession-errors 2>&1
+
 #-----------------------------------------------------------------------------
 # console
 #-----------------------------------------------------------------------------
