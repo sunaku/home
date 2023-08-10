@@ -24,6 +24,11 @@ symlink() {
 for DIRECTORY; do
   stowable=${DIRECTORY##*/}
 
+  # extracted AppImage squashfs
+  if test -x "$DIRECTORY"/AppRun -a -d "$DIRECTORY"/usr; then
+    DIRECTORY=$DIRECTORY/usr
+  fi
+
   # expose standard directories
   for folder in bin sbin lib lib64 include share; do
     linkable=$DIRECTORY/$folder
