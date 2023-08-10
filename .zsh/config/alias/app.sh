@@ -23,7 +23,7 @@ export SUDO_ASKPASS=/usr/libexec/ssh-askpass
 test -e $SUDO_ASKPASS || unset SUDO_ASKPASS
 
 alias open='xdg-open'
-alias scp='rsync --archive --update --compress --verbose'
+alias scp='rsync --archive --update --compress --verbose --mkpath'
 alias sloc='cloc --by-file-by-lang --exclude-dir .git'
 alias tree='tree -ACF'
 
