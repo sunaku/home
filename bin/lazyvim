@@ -1,0 +1,34 @@
+#!/bin/sh -eu
+#
+# Usage: lazyvim [COMMAND_LINE_OPTIONS_AND_ARGUMENTS_FOR_NEOVIM...]
+#
+# Runs NeoVim with LazyVim configuration in a bubblewrap container.
+#
+# * https://www.lazyvim.org
+# * https://github.com/LazyVim
+# * https://github.com/containers/bubblewrap
+#
+# This helps you gradually transition to LazyVim, as you can still
+# start NeoVim with your original configuration by running `nvim`.
+# Similarly, you can start NeoVim with LazyVim by running `lazyvim`.
+#
+# Written in 2023 by Suraj N. Kurapati <https://github.com/sunaku>
+
+test -e ~/.config/lazyvim ||
+git clone https://github.com/LazyVim/starter ~/.config/lazyvim
+
+bind() { from=$1 onto=$2
+  test -L "$onto" && onto=$(readlink -f "$onto")
+  mkdir -p "$from"
+  echo --bind "$from" "$onto"
+}
+
+bwrap \
+  --bind / /   \
+  --dev  /dev  \
+  --proc /proc \
+  $(bind ~/.config/lazyvim      ~/.config/nvim      ) \
+  $(bind ~/.local/share/lazyvim ~/.local/share/nvim ) \
+  $(bind ~/.cache/lazyvim       ~/.cache/nvim       ) \
+  -- \
+nvim "$@"
