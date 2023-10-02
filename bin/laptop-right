@@ -1,0 +1,8 @@
+#!/bin/sh -eu
+#
+# Orients the laptop display for use on its right side.
+#
+# Written in 2023 by Suraj N. Kurapati <https://github.com/sunaku>
+
+xrandr -o left
+laptop-scaling 1.6

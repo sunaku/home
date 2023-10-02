@@ -1,0 +1,11 @@
+#!/bin/sh -eu
+#
+# Usage: laptop-scaling FACTOR [OPTIONS_FOR_GSETTINGS_SET...]
+#
+# Sets the user interface scaling factor in GNOME and Cinnamon desktops.
+#
+# Written in 2022 by Suraj N. Kurapati <https://github.com/sunaku>
+
+for desktop in gnome cinnamon; do
+  gsettings set org.$desktop.desktop.interface text-scaling-factor "$@"
+done
