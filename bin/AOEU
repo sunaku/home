@@ -1,7 +1,0 @@
-#!/bin/sh
-#
-# Switches to QWERTY keyboard layout in all available X displays.
-#
-# Written in 2018 by Suraj N. Kurapati <https://github.com/sunaku>
-
-pgrep -f 'xinit.*:[0-9]' -a | awk '{print $NF}' | xargs -rI% env DISPLAY=% aoeu
