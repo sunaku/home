@@ -22,10 +22,9 @@ eval $(xrandr --verbose | awk '
     if ($NF == "+preferred") {
       print display "_preferred_size=" $1
     }
-    # override preferred_size with max resolution
     if (!max_resolution[display]) {
       max_resolution[display] = $1
-      print display "_preferred_size=" $1
+      print display "_max_resolution=" $1
     }
   }
   END {
@@ -41,11 +40,11 @@ try_switching_to_external_display() {
 
   if test "$connected" = 1; then
     eval "device=\$${display}"
-    eval "preferred_size=\$${display}_preferred_size"
+    eval "max_resolution=\$${display}_max_resolution"
 
     # switch off internal display and use external one
     xrandr "$@" --output "$eDP" --off \
-      --output "$device" --mode "$preferred_size"
+      --output "$device" --mode "$max_resolution"
   else
     false
   fi
@@ -62,12 +61,7 @@ if test $display = eDP; then # no external displays
 
   # reduce brightness of internal display backlight
   xbacklight | grep -q -x 100 && xbacklight = 15
-  xgamma -gamma 0.85
 
 else # successfully connected to an external display
   laptop-scaling 1.4
-
-  # reduce brightness of external display backlight
-  # (similar to HDMI Black Level monitor adjustment)
-  xgamma -gamma 0.75
 fi
