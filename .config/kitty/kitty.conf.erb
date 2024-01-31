@@ -3,8 +3,31 @@ cursor_blink_interval 0
 disable_ligatures cursor
 hide_window_decorations yes
 
-font_family Liga Fantasque Sans Mono NoLoopK
-font_size 10
+# step by a single point (default is 2 points)
+map ctrl+shift+plus  change_font_size all +1.0
+map ctrl+shift+minus change_font_size all -1.0
+
+font_family TamzenForPowerline
+bold_font TamzenForPowerline Bold
+font_size 11
+font_features none
+
+# font_family Fantasque Sans Mono
+# font_size 9.5
+# modify_font cell_height 2px
+# modify_font cell_width 1px
+
+# font_family Liga Fantasque Sans Mono NoLoopK
+# font_size 9.5
+# modify_font cell_height 2px
+# modify_font cell_width 1px
+
+# font_family LigaSrc Pro
+# font_size 9
+# modify_font cell_height -1px
+
+# font_family Rec Mono Casual
+# font_size 9
 
 # use colorscheme from ~/.Xdefaults
 <%=
