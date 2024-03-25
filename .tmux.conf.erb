@@ -284,8 +284,9 @@ bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
 bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
 bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
 bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
-bind-key -n M-L resize-pane -y '100%'
-bind-key -n M-D resize-pane -x '100%'
+bind-key -n M-z resize-pane -y '25%' -x '25%'
+bind-key -n M-v resize-pane -y '100%'
+bind-key -n M-w resize-pane -x '100%'
 
 # find pane
 bind-key -n M-r choose-tree
@@ -327,23 +328,23 @@ bind-key -n M-Enter \
 # layouts
 #-----------------------------------------------------------------------------
 
-bind-key -n M-z select-layout tiled
-bind-key -n M-v select-layout even-vertical
-bind-key -n M-w select-layout even-horizontal
+bind-key -n M-Z select-layout tiled
+bind-key -n M-V select-layout even-vertical
+bind-key -n M-W select-layout even-horizontal
 
 # half-screen tiling layouts (vertical, horizontal)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
-bind-key -n M-l select-layout main-vertical   \;\
+bind-key -n M-L select-layout main-vertical   \;\
   run-shell 'tmux resize-pane -t 1 -x $(( #{window_width}  / 2 ))'
-bind-key -n M-d select-layout main-horizontal \;\
+bind-key -n M-D select-layout main-horizontal \;\
   run-shell 'tmux resize-pane -t 1 -y $(( #{window_height} / 2 ))'
 
 # binary space partitioned layouts (dwindle, spiral)
 # https://sunaku.github.io/tmux-layout-dwindle.html
-bind-key M-d run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
-#bind-key -n M-W run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
-bind-key M-l run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
-#bind-key -n M-V run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
+bind-key -n M-d run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
+bind-key    M-d run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
+bind-key -n M-l run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
+bind-key    M-l run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
