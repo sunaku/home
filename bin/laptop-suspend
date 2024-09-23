@@ -1,3 +1,3 @@
 #!/bin/sh
-# Puts laptop to sleep.
-exec sudo zzz
+# Locks the screen and puts the laptop to sleep.
+laptop-locker systemctl suspend -i

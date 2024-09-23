@@ -5,145 +5,166 @@
 XF86Display
 	laptop-display
 
+Print
+	flameshot gui
+
+# reverse video (invert colors)
+super + Print
+	xcalib -invert -alter
+
 XF86ApplicationRight
 	xcalib -invert -alter
 
-XF86MonBrightnessUp
-	xbacklight + 7
+XF86MonBrightness{Up,Down}
+	xbacklight {+,-} 5
 
-shift + XF86MonBrightnessUp
-	xbacklight + 21
+shift + XF86MonBrightness{Up,Down}
+	xbacklight {+,-} 20
 
-ctrl + XF86MonBrightnessUp
-	xbacklight = 100
-
-XF86MonBrightnessDown
-	xbacklight - 7
-
-shift + XF86MonBrightnessDown
-	xbacklight - 21
-
-ctrl + XF86MonBrightnessDown
-	xbacklight = 0
-
-XF86AudioRaiseVolume
-	ponymix increase 5
-
-shift + XF86AudioRaiseVolume
-	ponymix increase 15
-
-ctrl + XF86AudioRaiseVolume
-	ponymix set-volume 100
-
-XF86AudioLowerVolume
-	ponymix decrease 5
-
-shift + XF86AudioLowerVolume
-	ponymix decrease 15
-
-ctrl + XF86AudioLowerVolume
-	ponymix set-volume 0
+ctrl + XF86MonBrightness{Up,Down}
+	xbacklight = {100,0}
 
 XF86AudioMute
-	ponymix toggle
+	amixer -q -D pulse sset Master toggle
 
-XF86PowerOff
+XF86Audio{Lower,Raise}Volume
+	amixer -q -D pulse sset Master 5%{-,+} unmute
+
+XF86ScreenSaver
 	laptop-locker
 
-ctrl + XF86PowerOff
+super + l
+	laptop-locker
+
+super + period
+	~/.local/bin/rofimoji
+
+XF86Sleep
 	laptop-suspend
+
+XF86PowerOff
+	xmessage "FIXME: this doesn't intercept the shutdown!"
 
 # terminal emulator
 alt + ctrl + x
-	st
+	kitty
 
-alt + ctrl + {_,shift + }k
-	chromium {_,--incognito}
-
+# file browser
 alt + ctrl + j
 	pcmanfm
 
+# web browser
+alt + ctrl + k
+	firefox
+
+XF86WWW
+	firefox
+
 # program launcher
 alt + ctrl + e
+	rofi -show drun
+
+alt + ctrl + shift + e
 	rofi -show run
 
 alt + ctrl + a
 	rofi -show window
 
 # swap PRIMARY and CLIPBOARD selection
-alt + ctrl + y
+alt + ctrl + u # TODO: obsolete?
 	xsel -po | xsel -si && \
 	xsel -bo | xsel -pi && \
 	xsel -so | xsel -bi
 
 # make sxhkd reload its configuration files:
-alt + ctrl + Escape
-	killall -USR1 sxhkd polybar
+super + Escape
+	laptop-display; killall -USR1 sxhkd #polybar
 
 #
 # bspwm hotkeys
 #
 
-# quit bspwm normally
-alt + ctrl + shift + Escape
-	bspc wm -d > "$BSPWM_STATE" && bspc quit
+# quit/restart bspwm
+super + alt + ctrl + shift + q
+	xmessage 'INSERT COIN TO CONTINUE' \
+	-buttons 'Insert Coin:0,Game Over' \
+	-default 'Insert Coin' -timeout 10 \
+	-center || bspc quit
+super + alt + ctrl + shift + r
+	bspc wm -r
 
 # close and kill
-alt + ctrl + {_,shift + }q
+super + alt + ctrl + shift + {w,d}
+	bspc node -{c,k}
+
+alt + {_,shift + }F4
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
 alt + ctrl + m
 	bspc desktop -l next
 
-# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-alt + ctrl + y
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+# send the newest marked node to the newest preselected node
+alt + ctrl + shift + y
+	bspc node newest.marked.local -n newest.!automatic.local
 
-# swap the current node and the biggest node
-alt + ctrl + Return
-	bspc node -s biggest
+# swap the current node and the biggest window
+alt + ctrl + r
+	bspc node -s biggest.window.local
+
+alt + ctrl + shift + period
+	bspc node -s last.local
+
+alt + ctrl + q
+	bspc node -B
+
+alt + ctrl + paren{left,right}
+	bspc node -C {backward,forward}
 
 #
 # state/flags
 #
 
 # set the window state
-alt + ctrl + {w,v,z,b}
+alt + ctrl + {p,shift + p,f,shift + f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-alt + ctrl + {l,c,r}
-	bspc node -g {locked,sticky,private}
+alt + ctrl + {y,b,c,g}
+	bspc node -g {marked,locked,sticky,private}
 
 #
 # focus/swap
 #
 
 # focus the node in the given direction
-alt + ctrl + {_,shift + }{h,n,t,s}
+alt + ctrl + {_,shift + }{h,s,t,n}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
-# alt + ctrl + {f,g,comma,period}
-alt + ctrl + {f,g,bracketleft,bracketright}
+alt + ctrl + {d,w,shift + d, shift + w}
 	bspc node -f @{parent,brother,first,second}
 
-# focus the next/previous node
-alt + ctrl + {_,shift + }minus
-	bspc node -f {next,prev}
+# focus the next/previous window in the current desktop
+alt + ctrl + {v,l}
+	bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop
-# alt + ctrl + bracket{left,right}
-alt + ctrl + {comma,period}
-	bspc desktop -f {prev,next}
+alt + ctrl + bracket{left,right}
+	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
-alt + ctrl + {d,o}
-	bspc {node,desktop} -f last
+alt + ctrl + comma
+	bspc desktop -f last
+
+alt + ctrl + period
+	bspc node -f last.local
+
+alt + Tab
+	bspc node -f last
 
 # focus the older or newer node in the focus history
-alt + ctrl + {u,i}
+alt + ctrl + {o,i}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
@@ -157,49 +178,49 @@ alt + ctrl + {_,shift + }{1-9,0}
 #
 
 # preselect the direction
-alt + ctrl + shift + {h,n,t,s}
+super + alt + ctrl + {h,s,t,n}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-alt + ctrl + shift + {1-9}
+super + alt + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-alt + ctrl + shift + d
+super + alt + ctrl + Escape
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
-alt + ctrl + shift + o
+super + alt + ctrl + shift + Escape
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
-# resize tiled/floating
+# move/resize
 #
 
-# expand the tiled space in the given direction
+# expand a window by moving one of its side outward
 alt + ctrl + {Left,Down,Up,Right}
-	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
-# contract the tiled space in the given direction
+# contract a window by moving one of its side inward
 alt + ctrl + shift + {Left,Down,Up,Right}
-	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-alt + ctrl + super + {Left,Down,Up,Right}
-	xdo move {-x -20,-y +20,-y -20,-x +20}
+super + alt + ctrl + shift + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 #
-# pointer focus/move/resize
+# layouts
 #
 
-# focus
-~button1
-	bspc pointer -g focus
+super + {_,shift + }h
+	bsp-layout once {_,r}grid
 
-# start move/resize
-alt + button{1-3}
-	; bspc pointer -g {move,resize_side,resize_corner}
+super + {_,shift + }t
+	bsp-layout once {_,r}tall
 
-# end move/resize
-alt + @button{1-3}
-	bspc pointer -u
+super + {_,shift + }s
+	bsp-layout once {_,r}wide
+
+super + {_,shift + }n
+	bsp-layout once {even,tiled}

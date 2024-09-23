@@ -1,11 +1,13 @@
 #!/bin/sh
+run() { pgrep -x "$1" >/dev/null || "$@" & }
 
-pkill -x sxhkd
-sxhkd -m -1 & # the `-m -1` handles newly connected keyboards
+run sxhkd -m -1 & # monitor for new keyboards
+
+bspc monitor -d I II III IV V VI VII VIII IX X
 
 bspc config border_width               1
 bspc config window_gap                 0
-
+bspc config top_padding                25
 bspc config split_ratio                0.50
 bspc config borderless_monocle         true
 bspc config gapless_monocle            true
@@ -17,16 +19,25 @@ bspc config remove_disabled_monitors   true
 bspc config remove_unplugged_monitors  true
 bspc config merge_overlapping_monitors true
 
+# move/resize floating windows with mouse
+# https://github.com/baskerville/bspwm/issues/678
+bspc config pointer_modifier mod1
+bspc config pointer_action1  move
+bspc config pointer_action2  resize_side
+bspc config pointer_action3  resize_corner
+
 # colors from Vim's gruvbox colorscheme
-bspc config normal_border_color '#504945'
-bspc config active_border_color '#fe8019'
-bspc config focused_border_color '#fabd2f'
+bspc config normal_border_color   '#504945'
+bspc config active_border_color   '#fe8019'
+bspc config focused_border_color  '#fabd2f'
 bspc config presel_feedback_color '#b8bb26'
 
-bspc monitor -d I II III IV V VI VII VIII IX X
-
-bspc rule -a Claws-mail desktop=^3
-bspc rule -a rdesktop desktop=^4 state=floating
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+bspc rule -a rdesktop desktop='^4' state=floating
 bspc rule -a Nitrogen state=pseudo_tiled
 bspc rule -a Blueman-manager state=floating
 bspc rule -a Lxappearance state=floating
@@ -34,14 +45,10 @@ bspc rule -a 'Page Unresponsive' state=floating
 bspc rule -a Pavucontrol state=floating
 bspc rule -a Xmessage state=floating
 
-# re-parent existing windows into the current session
-if [ -e "$BSPWM_STATE" ]; then
-	bspc wm -l "$BSPWM_STATE"
-	rm "$BSPWM_STATE"
-else
-	bspc wm --adopt-orphans
-fi
-
-# reposition the panel when screen resolution changes
-{ echo ignition; bspc subscribe monitor_geometry; } |
-while read -r event; do bspwm-panel & done &
+~/.fehbg &         # desktop wallpaper
+run polybar        # status bar + system tray
+run flameshot      # screenshot + annotation
+run redshift-gtk   # blue light protection
+run blueman-applet # bluetooth connections
+run nm-applet      # network connections
+run /usr/lib/notification-daemon/notification-daemon

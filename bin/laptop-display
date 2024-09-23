@@ -42,31 +42,39 @@ try_switching_to_external_display() {
     eval "device=\$${display}"
     eval "max_resolution=\$${display}_max_resolution"
 
-    # switch off internal display and use external one
-    xrandr "$@" --output "$eDP" --off \
-      --output "$device" --mode "$max_resolution"
-  else
-    false
+    if test "$display" != "$eDP"; then
+      # switch off internal display and use external one
+      xrandr "$@" --output "$eDP" --off \
+        --output "$device" --mode "$max_resolution"
+
+      return 0
+    fi
   fi
+
+  return 1
 }
 
+found_external_display=false
 for display in $all_displays; do
   if try_switching_to_external_display $display "$@"; then
+    found_external_display=true
     break
   fi
 done
 
-if test $display = eDP; then # no external displays
-  laptop-scaling 1.25
-
-  # reduce brightness of internal display backlight
-  xbacklight | grep -q -x 100 && xbacklight = 15
-  xgamma -gamma 0.85
-
-else # successfully connected to an external display
+if $found_external_display; then
   laptop-scaling 1.375
 
   # reduce brightness of external display backlight
   # (similar to HDMI Black Level monitor adjustment)
   xgamma -gamma 0.75
+else
+  xrandr --auto # turn on the internal display
+
+  laptop-scaling 1.25
+  xrandr -s 1920x1080 # emulate scaling for bspwm
+
+  # reduce brightness of internal display backlight
+  xbacklight | grep -q -x 100 && xbacklight = 15
+  xgamma -gamma 0.85
 fi

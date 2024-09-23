@@ -4,6 +4,7 @@
 #
 # Written in 2014 by Suraj N. Kurapati <https://github.com/sunaku>
 
-xrandr --auto & # enable all displays
-slock           # lock all displays
-laptop-display  # readjust displays
+xrandr --auto       # show all displays
+XSECURELOCK_PASSWORD_PROMPT=asterisks \
+xsecurelock -- "$@" # lock all displays
+laptop-display      # readjust displays
