@@ -6,7 +6,7 @@
 <% tmux_version = `tmux -V`.split.last %>
 <%
   # Engram 2.0 layout - https://engram.dev
-  navigate_back  = 'q'
+  navigate_back  = '.'
   navigate_left  = 'h'
   navigate_up    = 't'
   navigate_down  = 's'
@@ -198,9 +198,9 @@ bind-key -n M-u \
 bind-key -n M-U break-pane
 
 # focus window
-bind-key -n M-, previous-window
-bind-key -n M-. next-window
-bind-key -n "M-'" last-window
+bind-key -n 'M-[' previous-window
+bind-key -n 'M-]' next-window
+bind-key -n M-, last-window
 
 # focus by number
 set-option -g base-index 1
@@ -219,11 +219,11 @@ bind-key -n M-9 select-window -t :1 \; select-window -t :-1
 
 # swap window
 <% if tmux_version >= '3.0' %>
-bind-key -n M-< swap-window -t :-1 \; select-window -t :-1
-bind-key -n M-> swap-window -t :+1 \; select-window -t :+1
+bind-key -n 'M-{' swap-window -t :-1 \; select-window -t :-1
+bind-key -n 'M-}' swap-window -t :+1 \; select-window -t :+1
 <% else %>
-bind-key -n M-< swap-window -t :-1
-bind-key -n M-> swap-window -t :+1
+bind-key -n 'M-{' swap-window -t :-1
+bind-key -n 'M-}' swap-window -t :+1
 <% end %>
 
 # monitor window
@@ -297,11 +297,20 @@ bind-key -n M-m resize-pane -Z
 # swap pane
 bind-key -n M-j swap-pane -D
 bind-key -n M-k swap-pane -U
-bind-key -n M-<%= navigate_back.upcase  %> run-shell 'tmux select-pane -l \; swap-pane -d -s #D'
-bind-key -n M-<%= navigate_left.upcase  %> run-shell 'tmux select-pane -L \; swap-pane -d -s #D'
-bind-key -n M-<%= navigate_up.upcase    %> run-shell 'tmux select-pane -U \; swap-pane -d -s #D'
-bind-key -n M-<%= navigate_down.upcase  %> run-shell 'tmux select-pane -D \; swap-pane -d -s #D'
-bind-key -n M-<%= navigate_right.upcase %> run-shell 'tmux select-pane -R \; swap-pane -d -s #D'
+<%
+  shift = lambda do |char|
+    case char
+    when ',' then '<'
+    when '.' then '>'
+    else char.upcase
+    end
+  end
+%>
+bind-key -n 'M-<%= shift.(navigate_back)  %>' run-shell 'tmux select-pane -l \; swap-pane -d -s #D'
+bind-key -n 'M-<%= shift.(navigate_left)  %>' run-shell 'tmux select-pane -L \; swap-pane -d -s #D'
+bind-key -n 'M-<%= shift.(navigate_up)    %>' run-shell 'tmux select-pane -U \; swap-pane -d -s #D'
+bind-key -n 'M-<%= shift.(navigate_down)  %>' run-shell 'tmux select-pane -D \; swap-pane -d -s #D'
+bind-key -n 'M-<%= shift.(navigate_right) %>' run-shell 'tmux select-pane -R \; swap-pane -d -s #D'
 
 # move pane to another window
 bind-key -n 'M-!' join-pane -t :1
