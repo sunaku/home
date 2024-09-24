@@ -26,7 +26,7 @@ export ERL_AFLAGS='-kernel shell_history enabled'
 
 # raise soft limits to hard limits
 ulimit $(
-  diff <(ulimit -Ha) <(ulimit -Sa) |
+  bash -c 'diff <(ulimit -Ha) <(ulimit -Sa)' |
   sed -n 's/^<.*\(-\w\).*\s/\1 /p'
 ) >/dev/null
 
