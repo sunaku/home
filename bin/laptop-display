@@ -42,10 +42,15 @@ try_switching_to_external_display() {
     eval "device=\$${display}"
     eval "max_resolution=\$${display}_max_resolution"
 
-    if test "$display" != "$eDP"; then
+    if test -n "${display#eDP*}"; then
       # switch off internal display and use external one
-      xrandr "$@" --output "$eDP" --off \
-        --output "$device" --mode "$max_resolution"
+      xrandr "$@" $(
+        for internal_display in $all_displays; do
+          case "$internal_display" in (eDP*)
+            eval "echo --output \$$internal_display --off" ;;
+          esac
+        done
+      ) --output "$device" --mode "$max_resolution"
 
       return 0
     fi
