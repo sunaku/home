@@ -69,10 +69,6 @@ done
 
 if $found_external_display; then
   laptop-scaling 1.375
-
-  # reduce brightness of external display backlight
-  # (similar to HDMI Black Level monitor adjustment)
-  xgamma -gamma 0.75
 else
   xrandr --auto # turn on the internal display
 
@@ -81,5 +77,8 @@ else
 
   # reduce brightness of internal display backlight
   xbacklight | grep -q -x 100 && xbacklight = 15
-  xgamma -gamma 0.85
 fi
+
+# reduce ambient brightness of LED-backlit display
+# (similar to HDMI Black Level monitor adjustment)
+xgamma -gamma 0.85
