@@ -7,5 +7,7 @@
 # Written in 2022 by Suraj N. Kurapati <https://github.com/sunaku>
 
 for desktop in gnome cinnamon; do
-  gsettings set org.$desktop.desktop.interface text-scaling-factor "$@"
+  if gsettings get org.$desktop.desktop.interface text-scaling-factor >/dev/null; then
+    gsettings set org.$desktop.desktop.interface text-scaling-factor "$@"
+  fi
 done
