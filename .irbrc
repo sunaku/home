@@ -13,6 +13,8 @@ if RUBY_VERSION < '1.9'
   rescue LoadError
     warn '### RubyGems is not available!'
   end
+elsif RUBY_VERSION >= '3.0'
+  return
 end
 
 #-----------------------------------------------------------------------------
