@@ -5,12 +5,19 @@
 #
 <% tmux_version = `tmux -V`.split.last %>
 <%
-  # Engram 2.0 layout - https://engram.dev
-  navigate_back  = '.'
+  # Enthium layout - https://github.com/sunaku/enthium
+  navigate_back  = 'z'
   navigate_left  = 'h'
   navigate_up    = 't'
-  navigate_down  = 's'
-  navigate_right = 'n'
+  navigate_down  = 'n'
+  navigate_right = 's'
+
+  ## Engram 2.0 layout - https://engram.dev
+  #navigate_back  = '.'
+  #navigate_left  = 'h'
+  #navigate_up    = 't'
+  #navigate_down  = 's'
+  #navigate_right = 'n'
 
   ## Dvorak layout
   #navigate_back  = 'd'
@@ -284,15 +291,15 @@ bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
 bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
 bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
 bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
-bind-key -n M-z resize-pane -y '25%' -x '25%'
 bind-key -n M-v resize-pane -y '100%'
 bind-key -n M-w resize-pane -x '100%'
 
 # find pane
-bind-key -n M-r choose-tree
+bind-key -n M-f choose-tree
 
 # zoom pane
 bind-key -n M-m resize-pane -Z
+bind-key -n M-M resize-pane -x '100%' -y '100%'
 
 # swap pane
 bind-key -n M-j swap-pane -D
@@ -325,7 +332,7 @@ bind-key -n 'M-(' run-shell 'tmux select-window -t :1 \;\
                                   select-window -t :-1 \;\
                                   join-pane -s "#{pane_id}"'
 bind-key -n 'M-)' choose-window 'join-pane -t "%%%"'
-bind-key -n M-R choose-tree 'join-pane -t "%%%"'
+bind-key -n M-F choose-tree 'join-pane -t "%%%"'
 
 # promote pane (toggle)
 bind-key -n M-Enter \
