@@ -12,7 +12,7 @@ cat <<HTML
     <title>$*</title>
   </head>
   <body class="container readme">
-    <article class="markdown-body">$(cmark "$@")</article>
+    <article class="markdown-body">$(cmark-gfm -e table -e autolink "$@")</article>
     <style>$(
       test -s "$0.css" || wget -O "$0.css" -N \
         https://github.com/sindresorhus/github-markdown-css/raw/main/github-markdown.css
