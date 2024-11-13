@@ -20,6 +20,10 @@ export MAKEFLAGS=-j$(grep -c '^processor' /proc/cpuinfo)
 # https://hexdocs.pm/iex/IEx.html#module-shell-history
 export ERL_AFLAGS='-kernel shell_history enabled'
 
+# use GTK+3 theme for Java applications
+# https://wiki.archlinux.org/title/Java
+export JDK_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Djdk.gtk.version=3'
+
 #-----------------------------------------------------------------------------
 # session
 #-----------------------------------------------------------------------------
