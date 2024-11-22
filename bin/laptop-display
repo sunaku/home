@@ -77,8 +77,8 @@ else
 
   # reduce brightness of internal display backlight
   xbacklight | grep -q -x 100 && xbacklight = 15
-fi
 
-# reduce ambient brightness of LED-backlit display
-# (similar to HDMI Black Level monitor adjustment)
-xgamma -gamma 0.85
+  # reduce ambient brightness of LED-backlit display
+  # (similar to HDMI Black Level monitor adjustment)
+  xgamma -gamma 0.85
+fi
