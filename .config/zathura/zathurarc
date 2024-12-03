@@ -7,10 +7,10 @@ set window-title-page       true
 
 set recolor true
 set recolor-keephue true
-# Colors from everforest theme for Vim:
-# https://github.com/sainnhe/everforest
-set recolor-darkcolor  "#d3c6aa" # background=dark palette2=fg
-set recolor-lightcolor "#323d43" # softness=soft background=dark palette1=bg0
+# Colors from Solarized theme for Vim:
+# https://ethanschoonover.com/solarized/
+set recolor-darkcolor  "#93a1a1" # Base1
+set recolor-lightcolor "#073642" # Base02
 
 map <C-Home>    goto     top
 map <Home>      scroll   page-top
