@@ -30,7 +30,7 @@ export JDK_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -D
 
 # raise soft limits to hard limits
 ulimit $(
-  bash -c 'diff <(ulimit -Ha) <(ulimit -Sa)' |
+  bash --noprofile --norc -c 'diff <(ulimit -Ha) <(ulimit -Sa)' |
   sed -n 's/^<.*\(-\w\).*\s/\1 /p'
 ) >/dev/null
 
