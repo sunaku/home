@@ -52,3 +52,5 @@ test -n "$TMUX" && maybe tmux load-buffer -
 test -n "$DISPLAY" && alive xhost && {
   maybe xsel -i -b || maybe xclip -sel c
 }
+
+exit 0
