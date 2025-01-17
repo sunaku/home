@@ -6,7 +6,7 @@
 <% tmux_version = `tmux -V`.split.last %>
 <%
   # Enthium layout - https://github.com/sunaku/enthium
-  navigate_back  = 'q'
+  navigate_back  = 'v'
   navigate_left  = 'h'
   navigate_up    = 't'
   navigate_down  = 'n'
@@ -291,7 +291,7 @@ bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
 bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
 bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
 bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
-bind-key -n M-v resize-pane -y '100%'
+bind-key -n M-z resize-pane -y '100%'
 bind-key -n M-w resize-pane -x '100%'
 
 # find pane
@@ -344,8 +344,8 @@ bind-key -n M-Enter \
 # layouts
 #-----------------------------------------------------------------------------
 
-bind-key -n M-Z select-layout tiled
-bind-key -n M-V select-layout even-vertical
+bind-key -n M-V select-layout tiled
+bind-key -n M-Z select-layout even-vertical
 bind-key -n M-W select-layout even-horizontal
 
 # half-screen tiling layouts (vertical, horizontal)
