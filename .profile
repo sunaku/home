@@ -51,6 +51,7 @@ if test -n "$DISPLAY" && xhost >/dev/null; then
   xset +fp ~/.fonts/tamzen-font/bdf && xset fp rehash
   unset QT_STYLE_OVERRIDE
   export QT_QPA_PLATFORMTHEME=qt5ct
+  export GTK_THEME=Nordic:dark
 fi
 
 # start X when logging into the first Virtual Terminal
