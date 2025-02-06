@@ -80,5 +80,6 @@ else
 
   # reduce ambient brightness of LED-backlit display
   # (similar to HDMI Black Level monitor adjustment)
-  xgamma -gamma 0.85
+  # NOTE: don't need this for IPS monitor :)
+  # xgamma -gamma 0.85
 fi
