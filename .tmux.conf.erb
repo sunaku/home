@@ -246,8 +246,10 @@ bind-key -n "M-'" \
 
 bind-key -n 'M-"' \
   if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
-    'set-window-option -g monitor-activity on' \
-    'set-window-option -g monitor-activity off' \;\
+    'set-window-option    monitor-activity on;
+     set-window-option -g monitor-activity on' \
+    'set-window-option    monitor-activity off;
+     set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
 bind-key -n "M-|" \
