@@ -160,10 +160,10 @@ set-window-option -g window-status-activity-style 'bg=#8a1f11,fg=#fbe3e4' # erro
 #-----------------------------------------------------------------------------
 
 # toggle status bar visibility
-bind-key -n M-: set-option -g status
+bind-key -n 'M-`' set-option -g status
 
 # toggle status bar position
-bind-key -n M-\; \
+bind-key -n 'M-~' \
   if-shell 'tmux show-option -g status-position | grep -q top$' \
     'set-option -g status-position bottom' \
     'set-option -g status-position top'
@@ -205,9 +205,9 @@ bind-key -n M-u \
 bind-key -n M-U break-pane
 
 # focus window
-bind-key -n 'M-[' previous-window
-bind-key -n 'M-]' next-window
-bind-key -n M-, last-window
+bind-key -n M-, previous-window
+bind-key -n M-. next-window
+bind-key -n M-- last-window
 
 # focus by number
 set-option -g base-index 1
@@ -226,11 +226,11 @@ bind-key -n M-9 select-window -t :1 \; select-window -t :-1
 
 # swap window
 <% if tmux_version >= '3.0' %>
-bind-key -n 'M-{' swap-window -t :-1 \; select-window -t :-1
-bind-key -n 'M-}' swap-window -t :+1 \; select-window -t :+1
+bind-key -n 'M-<' swap-window -t :-1 \; select-window -t :-1
+bind-key -n 'M->' swap-window -t :+1 \; select-window -t :+1
 <% else %>
-bind-key -n 'M-{' swap-window -t :-1
-bind-key -n 'M-}' swap-window -t :+1
+bind-key -n 'M-<' swap-window -t :-1
+bind-key -n 'M->' swap-window -t :+1
 <% end %>
 
 # monitor window
@@ -240,23 +240,23 @@ set-option -g visual-silence on
 set-option -g bell-on-alert on
 <% end %>
 
-bind-key -n M-g \
+bind-key -n "M-'" \
   set-window-option monitor-activity \;\
   display-message 'monitor-activity #{?monitor-activity,on,off}'
 
-bind-key -n M-G \
+bind-key -n 'M-"' \
   if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
     'set-window-option -g monitor-activity on' \
     'set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
-bind-key -n M-x \
-  if-shell 'tmux show-window-option -v monitor-silence | grep -q ^[^0]' \
-    'set-window-option monitor-silence 0' \
-    'set-window-option monitor-silence 60' \;\
+bind-key -n "M-|" \
+  if-shell 'tmux show-window-option -v monitor-silence | awk "{exit(\$NF>0)}"' \
+    'set-window-option monitor-silence 60' \
+    'set-window-option monitor-silence 0' \;\
   display-message 'monitor-silence #{?monitor-silence,#{monitor-silence},off}'
 
-bind-key -n M-X \
+bind-key -n "M-\\" \
   command-prompt -p 'monitor-silence (seconds):' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
