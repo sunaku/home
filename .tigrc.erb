@@ -6,6 +6,10 @@ color title-blur black blue
 color title-focus black blue
 <% end %>
 
+# use author date (not commit date) in main view
+# https://github.com/jonas/tig/issues/294
+set main-view = date:default,use-author=yes author:full commit-title:yes,graph,refs=yes,overflow=yes
+
 # http://who-t.blogspot.com/2009/04/git-format-patch-for-single-commit.html
 bind generic P !git format-patch -1 %(commit)
 
