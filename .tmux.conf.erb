@@ -160,10 +160,10 @@ set-window-option -g window-status-activity-style 'bg=#8a1f11,fg=#fbe3e4' # erro
 #-----------------------------------------------------------------------------
 
 # toggle status bar visibility
-bind-key -n 'M-`' set-option -g status
+bind-key -n 'M--' set-option -g status
 
 # toggle status bar position
-bind-key -n 'M-~' \
+bind-key -n 'M-_' \
   if-shell 'tmux show-option -g status-position | grep -q top$' \
     'set-option -g status-position bottom' \
     'set-option -g status-position top'
@@ -205,9 +205,9 @@ bind-key -n M-u \
 bind-key -n M-U break-pane
 
 # focus window
-bind-key -n M-, previous-window
-bind-key -n M-. next-window
-bind-key -n M-- last-window
+bind-key -n 'M-,' previous-window
+bind-key -n 'M-;' next-window
+bind-key -n 'M-.' last-window
 
 # focus by number
 set-option -g base-index 1
@@ -227,10 +227,10 @@ bind-key -n M-9 select-window -t :1 \; select-window -t :-1
 # swap window
 <% if tmux_version >= '3.0' %>
 bind-key -n 'M-<' swap-window -t :-1 \; select-window -t :-1
-bind-key -n 'M->' swap-window -t :+1 \; select-window -t :+1
+bind-key -n 'M-:' swap-window -t :+1 \; select-window -t :+1
 <% else %>
 bind-key -n 'M-<' swap-window -t :-1
-bind-key -n 'M->' swap-window -t :+1
+bind-key -n 'M-:' swap-window -t :+1
 <% end %>
 
 # monitor window
