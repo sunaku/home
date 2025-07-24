@@ -6,7 +6,7 @@
 <% tmux_version = `tmux -V`.split.last %>
 <%
   # Enthium layout - https://github.com/sunaku/enthium
-  navigate_back  = 'v'
+  navigate_back  = 'f'
   navigate_left  = 'h'
   navigate_up    = 't'
   navigate_down  = 'n'
@@ -160,10 +160,10 @@ set-window-option -g window-status-activity-style 'bg=#8a1f11,fg=#fbe3e4' # erro
 #-----------------------------------------------------------------------------
 
 # toggle status bar visibility
-bind-key -n 'M--' set-option -g status
+bind-key -n 'M-`' set-option -g status
 
 # toggle status bar position
-bind-key -n 'M-_' \
+bind-key -n 'M-~' \
   if-shell 'tmux show-option -g status-position | grep -q top$' \
     'set-option -g status-position bottom' \
     'set-option -g status-position top'
@@ -205,8 +205,8 @@ bind-key -n M-u \
 bind-key -n M-U break-pane
 
 # focus window
-bind-key -n 'M-,' previous-window
-bind-key -n 'M-;' next-window
+bind-key -n 'M--' previous-window
+bind-key -n 'M-=' next-window
 bind-key -n 'M-.' last-window
 
 # focus by number
@@ -226,11 +226,11 @@ bind-key -n M-9 select-window -t :1 \; select-window -t :-1
 
 # swap window
 <% if tmux_version >= '3.0' %>
-bind-key -n 'M-<' swap-window -t :-1 \; select-window -t :-1
-bind-key -n 'M-:' swap-window -t :+1 \; select-window -t :+1
+bind-key -n 'M-_' swap-window -t :-1 \; select-window -t :-1
+bind-key -n 'M-+' swap-window -t :+1 \; select-window -t :+1
 <% else %>
-bind-key -n 'M-<' swap-window -t :-1
-bind-key -n 'M-:' swap-window -t :+1
+bind-key -n 'M-_' swap-window -t :-1
+bind-key -n 'M-+' swap-window -t :+1
 <% end %>
 
 # monitor window
@@ -240,11 +240,11 @@ set-option -g visual-silence on
 set-option -g bell-on-alert on
 <% end %>
 
-bind-key -n "M-'" \
+bind-key -n M-p \
   set-window-option monitor-activity \;\
   display-message 'monitor-activity #{?monitor-activity,on,off}'
 
-bind-key -n 'M-"' \
+bind-key -n M-P \
   if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
     'set-window-option    monitor-activity on;
      set-window-option -g monitor-activity on' \
@@ -252,13 +252,13 @@ bind-key -n 'M-"' \
      set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
-bind-key -n "M-|" \
+bind-key -n M-x \
   if-shell 'tmux show-window-option -v monitor-silence | awk "{exit(\$NF>0)}"' \
     'set-window-option monitor-silence 60' \
     'set-window-option monitor-silence 0' \;\
   display-message 'monitor-silence #{?monitor-silence,#{monitor-silence},off}'
 
-bind-key -n "M-\\" \
+bind-key -n M-X \
   command-prompt -p 'monitor-silence (seconds):' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
@@ -293,11 +293,12 @@ bind-key -r <%= navigate_left.upcase  %> resize-pane -L 5
 bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
 bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
 bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
-bind-key -n M-z resize-pane -y '100%'
-bind-key -n M-w resize-pane -x '100%'
+bind-key -n M-g resize-pane -x '50%' -y '50%'
+bind-key -n M-b resize-pane -x '100%'
+bind-key -n M-v resize-pane -y '100%'
 
 # find pane
-bind-key -n M-f choose-tree
+bind-key -n "M-'" choose-tree
 
 # zoom pane
 bind-key -n M-m resize-pane -Z
@@ -334,7 +335,7 @@ bind-key -n 'M-(' run-shell 'tmux select-window -t :1 \;\
                                   select-window -t :-1 \;\
                                   join-pane -s "#{pane_id}"'
 bind-key -n 'M-)' choose-window 'join-pane -t "%%%"'
-bind-key -n M-F choose-tree 'join-pane -t "%%%"'
+bind-key -n 'M-"' choose-tree 'join-pane -t "%%%"'
 
 # promote pane (toggle)
 bind-key -n M-Enter \
@@ -346,9 +347,9 @@ bind-key -n M-Enter \
 # layouts
 #-----------------------------------------------------------------------------
 
-bind-key -n M-V select-layout tiled
-bind-key -n M-Z select-layout even-vertical
-bind-key -n M-W select-layout even-horizontal
+bind-key -n M-G select-layout tiled
+bind-key -n M-B select-layout even-horizontal
+bind-key -n M-V select-layout even-vertical
 
 # half-screen tiling layouts (vertical, horizontal)
 # https://sunaku.github.io/tmux-half-screen-tiling-layouts.html
@@ -377,7 +378,7 @@ bind-key -n M-/ copy-mode \;\
     -i 'send-keys -X search-backward-incremental "%%%"'
 
 # search buffer using Vim or less
-bind-key -n M-P                               \
+bind-key -n 'M-<'                             \
   capture-pane -J -S - \;                     \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
@@ -390,11 +391,11 @@ bind-key -n M-P                               \
   run-shell 'tmux send-keys G \?'
 
 # search colored buffer using less
-bind-key -n M-p                           \
+bind-key -n 'M-,'                         \
   capture-pane -e -J -S - \;              \
   new-window -n '#S:#I.#P' -a '           \
     tmux save-buffer - \; delete-buffer | \
-    less -R                               \
+    less -R +G                            \
   ' \;                                    \
   run-shell 'tmux send-keys G \?'
 
