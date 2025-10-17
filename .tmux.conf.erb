@@ -390,14 +390,18 @@ bind-key -n 'M-"'                             \
   ' \;                                        \
   run-shell 'tmux send-keys G \?'
 
-# search colored buffer using less
-bind-key -n "M-'"                         \
-  capture-pane -e -J -S - \;              \
-  new-window -n '#S:#I.#P' -a '           \
-    tmux save-buffer - \; delete-buffer | \
-    less -R +G                            \
-  ' \;                                    \
-  run-shell 'tmux send-keys G \?'
+# search colored buffer using fzf or less
+bind-key -n "M-'"                             \
+  capture-pane -e -J -S - \;                  \
+  new-window -n '#S:#I.#P' -a '               \
+    tmux save-buffer - \; delete-buffer | {   \
+      if command -v fzf;                      \
+      then fzf --ansi --no-sort --tac;        \
+      else tmux send-keys G "?" &             \
+           less -R +G;                        \
+      fi;                                     \
+    };                                        \
+  '
 
 # scroll buffer
 # NOTE: set "URxvt.saveLines: 0" in ~/.Xdefaults to make Shift+PageUp bindable
