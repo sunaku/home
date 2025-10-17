@@ -205,9 +205,9 @@ bind-key -n M-u \
 bind-key -n M-U break-pane
 
 # focus window
-bind-key -n 'M--' previous-window
-bind-key -n 'M-=' next-window
-bind-key -n 'M-.' last-window
+bind-key -n 'M-,' previous-window
+bind-key -n 'M-.' next-window
+bind-key -n 'M--' last-window
 
 # focus by number
 set-option -g base-index 1
@@ -226,11 +226,11 @@ bind-key -n M-9 select-window -t :1 \; select-window -t :-1
 
 # swap window
 <% if tmux_version >= '3.0' %>
-bind-key -n 'M-_' swap-window -t :-1 \; select-window -t :-1
-bind-key -n 'M-+' swap-window -t :+1 \; select-window -t :+1
+bind-key -n 'M-<' swap-window -t :-1 \; select-window -t :-1
+bind-key -n 'M->' swap-window -t :+1 \; select-window -t :+1
 <% else %>
-bind-key -n 'M-_' swap-window -t :-1
-bind-key -n 'M-+' swap-window -t :+1
+bind-key -n 'M-<' swap-window -t :-1
+bind-key -n 'M->' swap-window -t :+1
 <% end %>
 
 # monitor window
@@ -240,11 +240,11 @@ set-option -g visual-silence on
 set-option -g bell-on-alert on
 <% end %>
 
-bind-key -n M-p \
+bind-key -n 'M-=' \
   set-window-option monitor-activity \;\
   display-message 'monitor-activity #{?monitor-activity,on,off}'
 
-bind-key -n M-P \
+bind-key -n 'M-+' \
   if-shell 'tmux show-window-option -g monitor-activity | grep -q off$' \
     'set-window-option    monitor-activity on;
      set-window-option -g monitor-activity on' \
@@ -252,13 +252,13 @@ bind-key -n M-P \
      set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
-bind-key -n M-x \
+bind-key -n 'M-;' \
   if-shell 'tmux show-window-option -v monitor-silence | awk "{exit(\$NF>0)}"' \
     'set-window-option monitor-silence 60' \
     'set-window-option monitor-silence 0' \;\
   display-message 'monitor-silence #{?monitor-silence,#{monitor-silence},off}'
 
-bind-key -n M-X \
+bind-key -n 'M-:' \
   command-prompt -p 'monitor-silence (seconds):' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
@@ -298,7 +298,7 @@ bind-key -n M-b resize-pane -x '100%'
 bind-key -n M-v resize-pane -y '100%'
 
 # find pane
-bind-key -n "M-'" choose-tree
+bind-key -n M-_ choose-tree
 
 # zoom pane
 bind-key -n M-m resize-pane -Z
@@ -361,9 +361,9 @@ bind-key -n M-D select-layout main-horizontal \;\
 # binary space partitioned layouts (dwindle, spiral)
 # https://sunaku.github.io/tmux-layout-dwindle.html
 bind-key -n M-d run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
-bind-key    M-d run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
+bind-key -n M-p run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
 bind-key -n M-l run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
-bind-key    M-l run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
+bind-key -n M-x run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
@@ -378,7 +378,7 @@ bind-key -n M-/ copy-mode \;\
     -i 'send-keys -X search-backward-incremental "%%%"'
 
 # search buffer using Vim or less
-bind-key -n 'M-<'                             \
+bind-key -n 'M-"'                             \
   capture-pane -J -S - \;                     \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
@@ -391,7 +391,7 @@ bind-key -n 'M-<'                             \
   run-shell 'tmux send-keys G \?'
 
 # search colored buffer using less
-bind-key -n 'M-,'                         \
+bind-key -n "M-'"                         \
   capture-pane -e -J -S - \;              \
   new-window -n '#S:#I.#P' -a '           \
     tmux save-buffer - \; delete-buffer | \
