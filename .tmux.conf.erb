@@ -391,12 +391,14 @@ bind-key -n 'M-"'                             \
   run-shell 'tmux send-keys G \?'
 
 # search colored buffer using fzf or less
+# and copy the selected line if using fzf
 bind-key -n "M-'"                             \
   capture-pane -e -J -S - \;                  \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
       if command -v fzf;                      \
-      then fzf --ansi --no-sort --tac;        \
+      then fzf --ansi --no-sort --tac |       \
+           tmux load-buffer -;                \
       else tmux send-keys G "?" &             \
            less -R +G;                        \
       fi;                                     \
