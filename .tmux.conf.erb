@@ -207,7 +207,7 @@ bind-key -n M-U break-pane
 # focus window
 bind-key -n 'M-,' previous-window
 bind-key -n 'M-.' next-window
-bind-key -n 'M--' last-window
+bind-key -n "M-'" last-window
 
 # focus by number
 set-option -g base-index 1
@@ -252,13 +252,13 @@ bind-key -n 'M-+' \
      set-window-option -g monitor-activity off' \;\
   display-message 'monitor-activity #{?monitor-activity,on,off} (global)'
 
-bind-key -n 'M-;' \
+bind-key -n 'M--' \
   if-shell 'tmux show-window-option -v monitor-silence | awk "{exit(\$NF>0)}"' \
     'set-window-option monitor-silence 60' \
     'set-window-option monitor-silence 0' \;\
   display-message 'monitor-silence #{?monitor-silence,#{monitor-silence},off}'
 
-bind-key -n 'M-:' \
+bind-key -n 'M-_' \
   command-prompt -p 'monitor-silence (seconds):' -I '#{monitor-silence}' \
     'set-window-option monitor-silence %% ;\
       display-message "monitor-silence #{?monitor-silence,on,off}"'
@@ -298,7 +298,7 @@ bind-key -n M-b resize-pane -x '100%'
 bind-key -n M-v resize-pane -y '100%'
 
 # find pane
-bind-key -n M-_ choose-tree
+bind-key -n 'M-"' choose-tree
 
 # zoom pane
 bind-key -n M-m resize-pane -Z
@@ -335,7 +335,7 @@ bind-key -n 'M-(' run-shell 'tmux select-window -t :1 \;\
                                   select-window -t :-1 \;\
                                   join-pane -s "#{pane_id}"'
 bind-key -n 'M-)' choose-window 'join-pane -t "%%%"'
-bind-key -n 'M-"' choose-tree 'join-pane -t "%%%"'
+bind-key -n 'M-|' choose-tree 'join-pane -t "%%%"'
 
 # promote pane (toggle)
 bind-key -n M-Enter \
@@ -378,7 +378,7 @@ bind-key -n M-/ copy-mode \;\
     -i 'send-keys -X search-backward-incremental "%%%"'
 
 # search buffer using Vim or less
-bind-key -n 'M-"'                             \
+bind-key -n 'M-:'                             \
   capture-pane -J -S - \;                     \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
@@ -392,7 +392,7 @@ bind-key -n 'M-"'                             \
 
 # search colored buffer using fzf or less
 # and copy the selected line if using fzf
-bind-key -n "M-'"                             \
+bind-key -n "M-;"                             \
   capture-pane -e -J -S - \;                  \
   new-window -n '#S:#I.#P' -a '               \
     tmux save-buffer - \; delete-buffer | {   \
