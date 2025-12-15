@@ -19,6 +19,10 @@ xsetroot -cursor_name left_ptr
 # synclient TapButton1=1 TapButton2=3 TapButton3=2 HorizTwoFingerScroll=1 PalmDetect=1
 pgrep -x syndaemon || syndaemon -i 1 -t -K -R -d
 
+# keyboard
+setxkbmap -layout us,us -variant enthium,basic -option grp:win_space_toggle \
+  -device $(xinput list --id-only 'AT Translated Set 2 keyboard') # laptop's built-in
+
 # terminal
 kitty sh -c 'if tmux has-session; then tmux attach -d; else tmux; fi' &
 
