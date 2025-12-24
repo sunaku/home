@@ -6,7 +6,7 @@
 <% tmux_version = `tmux -V`.split.last %>
 <%
   # Enthium layout - https://github.com/sunaku/enthium
-  navigate_back  = 'f'
+  navigate_back  = 'w'
   navigate_left  = 'h'
   navigate_up    = 't'
   navigate_down  = 'n'
@@ -294,7 +294,7 @@ bind-key -r <%= navigate_up.upcase    %> resize-pane -U 5
 bind-key -r <%= navigate_down.upcase  %> resize-pane -D 5
 bind-key -r <%= navigate_right.upcase %> resize-pane -R 5
 bind-key -n M-g resize-pane -x '50%' -y '50%'
-bind-key -n M-b resize-pane -x '100%'
+bind-key -n M-f resize-pane -x '100%'
 bind-key -n M-v resize-pane -y '100%'
 
 # find pane
@@ -348,7 +348,7 @@ bind-key -n M-Enter \
 #-----------------------------------------------------------------------------
 
 bind-key -n M-G select-layout tiled
-bind-key -n M-B select-layout even-horizontal
+bind-key -n M-F select-layout even-horizontal
 bind-key -n M-V select-layout even-vertical
 
 # half-screen tiling layouts (vertical, horizontal)
@@ -363,7 +363,7 @@ bind-key -n M-D select-layout main-horizontal \;\
 bind-key -n M-d run-shell 'tmux-layout-dwindle brhc && tmux-redraw-vim'
 bind-key -n M-p run-shell 'tmux-layout-dwindle trhc && tmux-redraw-vim'
 bind-key -n M-l run-shell 'tmux-layout-dwindle brvc && tmux-redraw-vim'
-bind-key -n M-x run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
+bind-key -n M-z run-shell 'tmux-layout-dwindle blvc && tmux-redraw-vim'
 
 #-----------------------------------------------------------------------------
 # scrollback buffer
