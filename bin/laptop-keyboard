@@ -1,0 +1,8 @@
+#!/bin/sh -eu
+#
+# Applies custom layout (toggle with Win+Space) to laptop keyboard.
+#
+# Written in 2025 by Suraj N. Kurapati <https://github.com/sunaku>
+
+setxkbmap -layout us,us -variant enthium,basic -option grp:win_space_toggle \
+  -device $(xinput list --id-only 'AT Translated Set 2 keyboard')
