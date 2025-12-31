@@ -189,6 +189,9 @@ set-option -g status-right '#{=32:pane_title} \
 # windows
 #-----------------------------------------------------------------------------
 
+# create popup
+bind-key -n M-u display-popup -EE
+
 # create window
 bind-key -n M-e new-window
 
@@ -199,10 +202,10 @@ set-window-option -g automatic-rename off
 <% end %>
 
 # break off pane to a new window
-bind-key -n M-u \
+bind-key -n M-q \
   command-prompt -p 'break-pane:' -I '#W' \
     'break-pane ; rename-window "%%%"'
-bind-key -n M-U break-pane
+bind-key -n M-Q break-pane
 
 # focus window
 bind-key -n 'M-,' previous-window
