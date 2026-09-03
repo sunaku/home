@@ -221,9 +221,9 @@ gbH() {
 # m = merge
 #-----------------------------------------------------------------------------
 
-alias gm='git merge'
-alias gM='git merge --no-edit'
-alias gmm='git merge --no-ff'
+alias gm='git merge --no-ff'
+alias gM='git merge --no-ff --no-edit'
+alias gmf='git merge --ff'
 alias gmc='git merge --continue'
 alias gma='git merge --abort'
 alias gms='git merge --skip'
