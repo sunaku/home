@@ -62,6 +62,9 @@ set-window-option -g xterm-keys on
 # (set > 0: https://github.com/microsoft/WSL/issues/5931)
 set-option -s escape-time 1
 
+# allow selection to copy to system clipboard via OSC 52
+set-option -s set-clipboard on
+
 # enable 24-bit true color RGB escape sequences under st
 # https://sunaku.github.io/tmux-24bit-color.html
 set-option -ga terminal-overrides ',st-256color:Tc'
